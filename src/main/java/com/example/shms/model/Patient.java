@@ -6,14 +6,16 @@ public class Patient extends Person implements Comparable<Patient>{
     private String gender;
     private String phone;
     private int priority;
+    private String department;
 
-    public Patient(int ID, String name, String email, String password, String role, int age, String gender, String phone, int priority) {
+    public Patient(int ID, String name, String email, String password, String role, int age, String gender, String phone, int priority, String department) {
         super(ID, name, email, password, role);
         this.patientID=ID;
         this.age=age;
         this.gender=gender;
         this.phone=phone;
         this.priority=priority;
+        this.department=department;
     }
     public Patient(){
         super();
@@ -21,7 +23,7 @@ public class Patient extends Person implements Comparable<Patient>{
 
     @Override
     public String getDetails(){
-        return "Patient ID: "+patientID+"\nName: "+getName()+ "\nAge: "+age+"\nGender: "+gender+"\nPhone: "+phone;
+        return "Patient ID: "+patientID+"\nName: "+getName()+ "\nAge: "+age+"\nGender: "+gender+"\nPhone: "+phone+"\nDepartment: "+department;
     }
     @Override
     public String toString() {
@@ -70,5 +72,13 @@ public class Patient extends Person implements Comparable<Patient>{
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

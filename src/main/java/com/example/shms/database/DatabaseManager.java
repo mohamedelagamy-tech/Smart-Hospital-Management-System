@@ -105,7 +105,8 @@ public class DatabaseManager {
                     "gender TEXT NOT NULL,"+
                     "phone TEXT NOT NULL,"+
                     "address TEXT NOT NULL,"+
-                    "bloodType TEXT NOT NULL)");
+                    "bloodType TEXT NOT NULL,"+
+                    "department TEXT)");
 
             st.execute("CREATE TABLE IF NOT EXISTS departments ("+
                     "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -177,8 +178,8 @@ public class DatabaseManager {
         }
         return instance;
     }
-    public void addPatient(String name,int age, String gender,String phone,String address,String bloodType){
-        String sql="INSERT INTO patients(name,age,gender,phone,address,bloodType) VALUES(?,?,?,?,?,?)";
+    public void addPatient(String name,int age, String gender,String phone,String address,String bloodType,String department){
+        String sql="INSERT INTO patients(name,age,gender,phone,address,bloodType,department) VALUES(?,?,?,?,?,?,?)";
         try(PreparedStatement ps=connection.prepareStatement(sql)){
             ps.setString(1,name);
             ps.setInt(2,age);
@@ -186,14 +187,15 @@ public class DatabaseManager {
             ps.setString(4,phone);
             ps.setString(5,address);
             ps.setString(6,bloodType);
+            ps.setString(7,department);
             ps.executeUpdate();
             System.out.println("Patient added successfully!");
         } catch (SQLException e) {
             System.out.println("Error adding patient "+e.getMessage());
         }
     }
-    public void editPatient(int id,String name,int age,String gender,String phone,String address,String bloodType){
-        String sql="UPDATE patients SET name=?,age=?,gender=?,phone=?,address=?,bloodType=? WHERE id=?";
+    public void editPatient(int id,String name,int age,String gender,String phone,String address,String bloodType,String department){
+        String sql="UPDATE patients SET name=?,age=?,gender=?,phone=?,address=?,bloodType=?,department=? WHERE id=?";
         try(PreparedStatement ps=connection.prepareStatement(sql)){
             ps.setString(1,name);
             ps.setInt(2,age);
@@ -201,7 +203,8 @@ public class DatabaseManager {
             ps.setString(4,phone);
             ps.setString(5,address);
             ps.setString(6,bloodType);
-            ps.setInt(7,id);
+            ps.setString(7,department);
+            ps.setInt(8,id);
             ps.executeUpdate();
             System.out.println("Patient edited successfully!");
         }catch (SQLException e) {
@@ -253,10 +256,7 @@ public class DatabaseManager {
         }
     }
     public ResultSet getPatientByDepartment(String department){
-        String sql="SELECT p.* FROM patients p "+
-                "JOIN appointments ap ON p.id=ap.patientID "+
-                "JOIN doctors d ON ap.doctorID=d.id "+
-                "WHERE d.specialization=?";
+        String sql="SELECT * FROM patients WHERE department=?";
         try{
             PreparedStatement ps=connection.prepareStatement(sql);
             ps.setString(1,department);
