@@ -178,7 +178,7 @@ public class DatabaseManager {
         return instance;
     }
     public void addPatient(String name,int age, String gender,String phone,String address,String bloodType){
-        String sql="INSERT INTO patients(name,age,gender,phone,address,bloodType)";
+        String sql="INSERT INTO patients(name,age,gender,phone,address,bloodType) VALUES(?,?,?,?,?,?)";
         try(PreparedStatement ps=connection.prepareStatement(sql)){
             ps.setString(1,name);
             ps.setInt(2,age);
@@ -219,11 +219,12 @@ public class DatabaseManager {
         }
     }
     public ResultSet selectPatient(String keyword){
-        String sql="SELECT * FROM patients WHERE patientName LIKE ? OR phone LIKE? OR id LIKE?";
+        String sql="SELECT * FROM patients WHERE name LIKE ? OR phone LIKE ? OR id LIKE ?";
         try{
             PreparedStatement ps=connection.prepareStatement(sql);
             ps.setString(1,"%"+keyword+"%");
             ps.setString(2,"%"+keyword+"%");
+            ps.setString(3,"%"+keyword+"%");
             return ps.executeQuery();
         }catch (SQLException e) {
             System.out.println("Error selecting patient "+e.getMessage());
@@ -240,8 +241,8 @@ public class DatabaseManager {
             return null;
         }
     }
-    public void UpdateStatus(int id,String status){
-        String sql="UPDATE patients SET status=? WHERE patientID=?";
+    public void updateStatus(int id,String status){
+        String sql="UPDATE appointments SET status=? WHERE patientID=?";
         try(PreparedStatement ps=connection.prepareStatement(sql)){
             ps.setString(1,status);
             ps.setInt(2, id);
@@ -249,6 +250,20 @@ public class DatabaseManager {
             System.out.println("Patient updated successfully!");
         } catch (SQLException e) {
             System.out.println("Error updating patient "+e.getMessage());
+        }
+    }
+    public ResultSet getPatientByDepartment(String department){
+        String sql="SELECT p.* FROM patients p "+
+                "JOIN appointments ap ON p.id=ap.patientID "+
+                "JOIN doctors d ON ap.doctorID=d.id "+
+                "WHERE d.specialization=?";
+        try{
+            PreparedStatement ps=connection.prepareStatement(sql);
+            ps.setString(1,department);
+            return ps.executeQuery();
+        }catch (SQLException e) {
+            System.out.println("Error selecting patient by department "+e.getMessage());
+            return null;
         }
     }
 }
