@@ -44,6 +44,37 @@ public class DatabaseManager {
                     "phone TEXT NOT NULL"+
                     "address TEXT NOT NULL"+
                     "bloodType TEXT NOT NULL)");
+            st.execute("CREATE TABLE IF NOT EXISTS bills ("+
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    "billId INTEGER NOT NULL UNIQUE,"+
+                    "patientID INTEGER NOT NULL,"+
+                    "patientName TEXT NOT NULL,"+
+                    "doctorName TEXT NOT NULL,"+
+                    "treatment TEXT NOT NULL,"+
+                    "amount REAL NOT NULL,"+
+                    "payementStatus TEXT NOT NULL,"+
+                    "payementMethod TEXT NOT NULL)");
+            st.execute("CREATE TABLE IF NOT EXISTS appointments ("+
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    "appointmentID INTEGER NOT NULL UNIQUE,"+
+                    "patientID INTEGER NOT NULL,"+
+                    "patientName TEXT NOT NULL,"+
+                    "doctorID INTEGER NOT NULL,"+
+                    "doctorName TEXT NOT NULL,"+
+                    "appointmentDate TEXT NOT NULL,"+
+                    "appointmentTime TEXT NOT NULL,"+
+                    "status TEXT NOT NULL,"+
+                    "priority TEXT NOT NULL)");
+            st.execute("CREATE TABLE IF NOT EXISTS prescriptions ("+
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    "prescriptionID INTEGER NOT NULL UNIQUE,"+
+                    "patientID INTEGER NOT NULL,"+
+                    "doctorID INTEGER NOT NULL,"+
+                    "medicineName TEXT NOT NULL,"+
+                    "dosage TEXT NOT NULL,"+
+                    "instructions TEXT NOT NULL,"+
+                    "duration TEXT NOT NULL,"+
+                    "dateIssued TEXT NOT NULL)");
         }catch (SQLException e) {
             System.out.println("Table creation failed: "+e.getMessage());
         }
