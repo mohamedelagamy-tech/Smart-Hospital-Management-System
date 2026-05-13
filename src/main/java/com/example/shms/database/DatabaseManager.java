@@ -54,19 +54,19 @@ public class DatabaseManager {
             st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Yasmine Farid','Radiologist','Female','Mon-Wed-Sat','Busy')");
             st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Mahmoud Gamal','General Surgeon','Male','Tue-Thu-Sat','Available')");
 
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Sara Mohamed',34,'Female','01098765432','Cairo','A+')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Omar Ali',25,'Male','01012345678','Giza','B+')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Nour Hassan',45,'Female','01112223344','Alexandria','O+')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Karim Adel',30,'Male','01234567890','Cairo','AB+')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Layla Mahmoud',28,'Female','01098001122','Cairo','A-')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Youssef Tarek',52,'Male','01156789012','Giza','B-')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Dina Mostafa',38,'Female','01234509876','Cairo','O-')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Hassan Nabil',61,'Male','01198765432','Alexandria','A+')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Rania Khaled',29,'Female','01067890123','Cairo','AB-')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Amr Saeed',44,'Male','01145678901','Giza','B+')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Adam Khaled',7,'Male','01067890123','Cairo','AB-')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Lina Hassan',4,'Female','01145678901','Giza','B+')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Yara Samir',11,'Female','01198765432','Alexandria','A+')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Sara Mohamed',34,'Female','01098765432','Cairo','A+','Cardiology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Omar Ali',25,'Male','01012345678','Giza','B+','Orthopedics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Nour Hassan',45,'Female','01112223344','Alexandria','O+','Neurology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Karim Adel',30,'Male','01234567890','Cairo','AB+','Emergency')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Layla Mahmoud',28,'Female','01098001122','Cairo','A-','Dermatology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Youssef Tarek',52,'Male','01156789012','Giza','B-','Oncology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Dina Mostafa',38,'Female','01234509876','Cairo','O-','Radiology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Hassan Nabil',61,'Male','01198765432','Alexandria','A+','Cardiology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Rania Khaled',29,'Female','01067890123','Cairo','AB-','Neurology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Amr Saeed',44,'Male','01145678901','Giza','B+','Orthopedics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Adam Khaled',7,'Male','01067890123','Cairo','AB-','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Lina Hassan',4,'Female','01145678901','Giza','B+','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Yara Samir',11,'Female','01198765432','Alexandria','A+','Pediatrics')");
 
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('101','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('102','Occupied')");
@@ -109,7 +109,7 @@ public class DatabaseManager {
                     "phone TEXT NOT NULL,"+
                     "address TEXT NOT NULL,"+
                     "bloodType TEXT NOT NULL,"+
-                    "department TEXT)");
+                    "department TEXT NOT NULL)");
 
             st.execute("CREATE TABLE IF NOT EXISTS departments ("+
                     "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
