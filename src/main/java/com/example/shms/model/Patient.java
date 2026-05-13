@@ -8,8 +8,13 @@ public class Patient extends Person implements Comparable<Patient>{
     private String phone;
     private int priority;
 
-    public Patient(int ID, String name, String email, String password, String role) {
+    public Patient(int ID, String name, String email, String password, String role, int age, String gender, String phone, int priority) {
         super(ID, name, email, password, role);
+        this.patientID=ID;
+        this.age=age;
+        this.gender=gender;
+        this.phone=phone;
+        this.priority=priority;
     }
 
     @Override
