@@ -14,6 +14,7 @@ public abstract class Person {
         this.password=password;
         this.role=role;
     }
+    public Person(){}
 
     public abstract String getDetails();
 

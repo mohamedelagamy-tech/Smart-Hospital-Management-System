@@ -1,5 +1,4 @@
 package com.example.shms.model;
-//p
 
 public class Patient extends Person implements Comparable<Patient>{
     private int patientID;
@@ -15,6 +14,9 @@ public class Patient extends Person implements Comparable<Patient>{
         this.gender=gender;
         this.phone=phone;
         this.priority=priority;
+    }
+    public Patient(){
+        super();
     }
 
     @Override
