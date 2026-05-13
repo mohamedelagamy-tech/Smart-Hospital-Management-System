@@ -16,6 +16,9 @@ public class Patient extends Person implements Comparable<Patient>{
         this.phone=phone;
         this.priority=priority;
     }
+    public Patient(){
+        super();
+    }
 
     @Override
     public String getDetails(){
