@@ -8,9 +8,9 @@ public class Hospital {
     private String hotline;
 
     private Hospital(){
-        this.hospitalName="Undecided";
+        this.hospitalName="SHMS";
         this.address="Alexandria, Egypt";
-        this.hotline="+20 ";
+        this.hotline="+20 123 456 7890 ";
     }
 
     public static Hospital getInstance(){
