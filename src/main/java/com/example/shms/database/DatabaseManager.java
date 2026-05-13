@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-//hi
+import java.sql.PreparedStatement;
 
 public class DatabaseManager {
     private static DatabaseManager instance;
@@ -162,7 +162,6 @@ public class DatabaseManager {
             System.out.println("Table creation failed: "+e.getMessage());
         }
     }
-
     public Connection getConnection(){
         return connection;
     }
@@ -177,5 +176,79 @@ public class DatabaseManager {
             instance=new DatabaseManager();
         }
         return instance;
+    }
+    public void addPatient(String name,int age, String gender,String phone,String address,String bloodType){
+        String sql="INSERT INTO patients(name,age,gender,phone,address,bloodType)";
+        try(PreparedStatement ps=connection.prepareStatement(sql)){
+            ps.setString(1,name);
+            ps.setInt(2,age);
+            ps.setString(3,gender);
+            ps.setString(4,phone);
+            ps.setString(5,address);
+            ps.setString(6,bloodType);
+            ps.executeUpdate();
+            System.out.println("Patient added successfully!");
+        } catch (SQLException e) {
+            System.out.println("Error adding patient "+e.getMessage());
+        }
+    }
+    public void editPatient(int id,String name,int age,String gender,String phone,String address,String bloodType){
+        String sql="UPDATE patients SET name=?,age=?,gender=?,phone=?,address=?,bloodType=? WHERE id=?";
+        try(PreparedStatement ps=connection.prepareStatement(sql)){
+            ps.setString(1,name);
+            ps.setInt(2,age);
+            ps.setString(3,gender);
+            ps.setString(4,phone);
+            ps.setString(5,address);
+            ps.setString(6,bloodType);
+            ps.setInt(7,id);
+            ps.executeUpdate();
+            System.out.println("Patient edited successfully!");
+        }catch (SQLException e) {
+            System.out.println("Error editing patient "+e.getMessage());
+        }
+    }
+    public void deletePatient(int id){
+        String sql="DELETE FROM patients WHERE id=?";
+        try(PreparedStatement ps=connection.prepareStatement(sql)){
+            ps.setInt(1,id);
+            ps.executeUpdate();
+            System.out.println("Patient deleted successfully!");
+        } catch (SQLException e) {
+            System.out.println("Error deleting patient "+e.getMessage());
+        }
+    }
+    public ResultSet selectPatient(String keyword){
+        String sql="SELECT * FROM patients WHERE patientName LIKE ? OR phone LIKE? OR id LIKE?";
+        try{
+            PreparedStatement ps=connection.prepareStatement(sql);
+            ps.setString(1,"%"+keyword+"%");
+            ps.setString(2,"%"+keyword+"%");
+            return ps.executeQuery();
+        }catch (SQLException e) {
+            System.out.println("Error selecting patient "+e.getMessage());
+            return null;
+        }
+    }
+    public ResultSet getAllPatients(){
+        String sql="SELECT * FROM patients";
+        try{
+            Statement st=connection.createStatement();
+            return st.executeQuery(sql);
+        }catch (SQLException e) {
+            System.out.println("Error selecting patients "+e.getMessage());
+            return null;
+        }
+    }
+    public void UpdateStatus(int id,String status){
+        String sql="UPDATE patients SET status=? WHERE patientID=?";
+        try(PreparedStatement ps=connection.prepareStatement(sql)){
+            ps.setString(1,status);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            System.out.println("Patient updated successfully!");
+        } catch (SQLException e) {
+            System.out.println("Error updating patient "+e.getMessage());
+        }
     }
 }
