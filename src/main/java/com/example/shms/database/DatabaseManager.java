@@ -64,6 +64,9 @@ public class DatabaseManager {
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Hassan Nabil',61,'Male','01198765432','Alexandria','A+')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Rania Khaled',29,'Female','01067890123','Cairo','AB-')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Amr Saeed',44,'Male','01145678901','Giza','B+')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Adam Khaled',7,'Male','01067890123','Cairo','AB-')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Lina Hassan',4,'Female','01145678901','Giza','B+')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType) VALUES ('Yara Samir',11,'Female','01198765432','Alexandria','A+')");
 
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('101','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('102','Occupied')");
