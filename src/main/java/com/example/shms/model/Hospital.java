@@ -20,24 +20,24 @@ public class Hospital {
         return instance;
     }
 
-    public String getHospitalName() {
+    public String getHospitalName(){
         return hospitalName;
     }
     public void setHospitalName(String hospitalName) {
         this.hospitalName = hospitalName;
     }
 
-    public String getAddress() {
+    public String getAddress(){
         return address;
     }
-    public void setAddress(String address) {
+    public void setAddress(String address){
         this.address = address;
     }
 
-    public String getHotline() {
+    public String getHotline(){
         return hotline;
     }
-    public void setHotline(String hotline) {
+    public void setHotline(String hotline){
         this.hotline = hotline;
     }
     @Override

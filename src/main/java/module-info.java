@@ -1,6 +1,7 @@
 module com.example.shms {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.shms to javafx.fxml;
