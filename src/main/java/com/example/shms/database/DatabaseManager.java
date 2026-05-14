@@ -63,12 +63,21 @@ public class DatabaseManager {
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Layla Mahmoud',28,'Female','01098001122','Cairo','A-','Dermatology')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Youssef Tarek',52,'Male','01156789012','Giza','B-','Oncology')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Dina Mostafa',38,'Female','01234509876','Cairo','O-','Radiology')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Hassan Nabil',61,'Male','01198765432','Alexandria','A+','Cardiology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Mohamed Fawzy',28,'Male','01116341931','Alexandria','A+','Cardiology')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Rania Khaled',29,'Female','01067890123','Cairo','AB-','Neurology')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Amr Saeed',44,'Male','01145678901','Giza','B+','Orthopedics')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Adam Khaled',7,'Male','01067890123','Cairo','AB-','Pediatrics')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Lina Hassan',4,'Female','01145678901','Giza','B+','Pediatrics')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Yara Samir',11,'Female','01198765432','Alexandria','A+','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Adam Khaled',7,'Male','01023456789','Cairo','AB-','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Lina Hassan',4,'Female','01034567890','Giza','B+','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Yara Samir',11,'Female','01045678901','Alexandria','A+','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Mona Adel',55,'Female','01056789012','Cairo','O+','Cardiology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Tarek Nabil',40,'Male','01067891234','Giza','B-','Emergency')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Hana Sherif',22,'Female','01078901234','Alexandria','A-','Dermatology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Mahmoud Farid',67,'Male','01089012345','Cairo','AB+','Oncology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Salma Ibrahim',33,'Female','01090123456','Giza','O-','Radiology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Khaled Mostafa',48,'Male','01001234567','Cairo','A+','Neurology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Nadia Gamal',36,'Female','01011234567','Alexandria','B+','Orthopedics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Fares Mahmoud',9,'Male','01021234567','Cairo','O+','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Rana Tarek',27,'Female','01031234567','Giza','AB-','Dermatology')");
 
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('101','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('102','Occupied')");
