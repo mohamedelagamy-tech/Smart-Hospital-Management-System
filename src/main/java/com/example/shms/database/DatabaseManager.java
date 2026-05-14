@@ -1,31 +1,33 @@
 package com.example.shms.database;
 
+import com.example.shms.model.Appointment;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-
+import java.util.List;
+import java.util.ArrayList;
 public class DatabaseManager {
     private static DatabaseManager instance;
     private Connection connection;
-    private static final String db_URL="jdbc:sqlite:hospital.db";
+    private static final String db_URL = "jdbc:sqlite:hospital.db";
 
-    private void connect(){
-        try{
-            connection=DriverManager.getConnection(db_URL);
+    private void connect() {
+        try {
+            connection = DriverManager.getConnection(db_URL);
             System.out.println("Database connected!");
-        }catch(SQLException e){
-            System.out.println("Failed to connect"+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Failed to connect" + e.getMessage());
         }
     }
 
-    private void insertData(){
-        try (Statement st=connection.createStatement()) {
+    private void insertData() {
+        try (Statement st = connection.createStatement()) {
 
             ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM users");
-            if (rs.getInt(1) > 0){
+            if (rs.getInt(1) > 0) {
                 return;
             }
 
@@ -61,12 +63,21 @@ public class DatabaseManager {
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Layla Mahmoud',28,'Female','01098001122','Cairo','A-','Dermatology')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Youssef Tarek',52,'Male','01156789012','Giza','B-','Oncology')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Dina Mostafa',38,'Female','01234509876','Cairo','O-','Radiology')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Hassan Nabil',61,'Male','01198765432','Alexandria','A+','Cardiology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Mohamed Fawzy',28,'Male','01116341931','Alexandria','A+','Cardiology')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Rania Khaled',29,'Female','01067890123','Cairo','AB-','Neurology')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Amr Saeed',44,'Male','01145678901','Giza','B+','Orthopedics')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Adam Khaled',7,'Male','01067890123','Cairo','AB-','Pediatrics')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Lina Hassan',4,'Female','01145678901','Giza','B+','Pediatrics')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Yara Samir',11,'Female','01198765432','Alexandria','A+','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Adam Khaled',7,'Male','01023456789','Cairo','AB-','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Lina Hassan',4,'Female','01034567890','Giza','B+','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Yara Samir',11,'Female','01045678901','Alexandria','A+','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Mona Adel',55,'Female','01056789012','Cairo','O+','Cardiology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Tarek Nabil',40,'Male','01067891234','Giza','B-','Emergency')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Hana Sherif',22,'Female','01078901234','Alexandria','A-','Dermatology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Mahmoud Farid',67,'Male','01089012345','Cairo','AB+','Oncology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Salma Ibrahim',33,'Female','01090123456','Giza','O-','Radiology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Khaled Mostafa',48,'Male','01001234567','Cairo','A+','Neurology')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Nadia Gamal',36,'Female','01011234567','Alexandria','B+','Orthopedics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Fares Mahmoud',9,'Male','01021234567','Cairo','O+','Pediatrics')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department) VALUES ('Rana Tarek',27,'Female','01031234567','Giza','AB-','Dermatology')");
 
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('101','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('102','Occupied')");
@@ -79,17 +90,17 @@ public class DatabaseManager {
 
             System.out.println("Data inserted!");
 
-        }catch (SQLException e){
-            System.out.println("Data insertion failed: "+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Data insertion failed: " + e.getMessage());
         }
     }
 
-    private void createTables(){
-        try(Statement st=connection.createStatement()){
-            st.execute("CREATE TABLE IF NOT EXISTS users ("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "username TEXT NOT NULL UNIQUE,"+
-                    "password TEXT NOT NULL,"+
+    private void createTables() {
+        try (Statement st = connection.createStatement()) {
+            st.execute("CREATE TABLE IF NOT EXISTS users (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "username TEXT NOT NULL UNIQUE," +
+                    "password TEXT NOT NULL," +
                     "role TEXT NOT NULL)");
 
             st.execute("CREATE TABLE IF NOT EXISTS doctors (" +
@@ -101,24 +112,24 @@ public class DatabaseManager {
                     "status TEXT DEFAULT 'Available'," +
                     "rating REAL DEFAULT 0.0)");
 
-            st.execute("CREATE TABLE IF NOT EXISTS patients ("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "name TEXT NOT NULL UNIQUE,"+
-                    "age INTEGER NOT NULL,"+
-                    "gender TEXT NOT NULL,"+
-                    "phone TEXT NOT NULL,"+
-                    "address TEXT NOT NULL,"+
-                    "bloodType TEXT NOT NULL,"+
+            st.execute("CREATE TABLE IF NOT EXISTS patients (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "name TEXT NOT NULL UNIQUE," +
+                    "age INTEGER NOT NULL," +
+                    "gender TEXT NOT NULL," +
+                    "phone TEXT NOT NULL," +
+                    "address TEXT NOT NULL," +
+                    "bloodType TEXT NOT NULL," +
                     "department TEXT NOT NULL)");
 
-            st.execute("CREATE TABLE IF NOT EXISTS departments ("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            st.execute("CREATE TABLE IF NOT EXISTS departments (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "depName TEXT NOT NULL UNIQUE)");
 
-            st.execute("CREATE TABLE IF NOT EXISTS rooms ("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "roomNumber TEXT NOT NULL,"+
-                    "status TEXT DEFAULT 'Available',"+
+            st.execute("CREATE TABLE IF NOT EXISTS rooms (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "roomNumber TEXT NOT NULL," +
+                    "status TEXT DEFAULT 'Available'," +
                     "assignedPatientID INTEGER)");
 
             st.execute("CREATE TABLE IF NOT EXISTS auditLog (" +
@@ -128,145 +139,230 @@ public class DatabaseManager {
                     "status TEXT," +
                     "timestamp TEXT)");
 
-            st.execute("CREATE TABLE IF NOT EXISTS bills ("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "patientID INTEGER NOT NULL,"+
-                    "patientName TEXT NOT NULL,"+
-                    "doctorName TEXT NOT NULL,"+
-                    "treatment TEXT NOT NULL,"+
-                    "amount REAL NOT NULL,"+
-                    "paymentStatus TEXT NOT NULL,"+
+            st.execute("CREATE TABLE IF NOT EXISTS bills (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "patientID INTEGER NOT NULL," +
+                    "patientName TEXT NOT NULL," +
+                    "doctorName TEXT NOT NULL," +
+                    "treatment TEXT NOT NULL," +
+                    "amount REAL NOT NULL," +
+                    "paymentStatus TEXT NOT NULL," +
                     "paymentMethod TEXT NOT NULL)");
 
-            st.execute("CREATE TABLE IF NOT EXISTS appointments ("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "patientID INTEGER NOT NULL,"+
-                    "patientName TEXT NOT NULL,"+
-                    "doctorID INTEGER NOT NULL,"+
-                    "doctorName TEXT NOT NULL,"+
-                    "appointmentDate TEXT NOT NULL,"+
-                    "appointmentTime TEXT NOT NULL,"+
-                    "status TEXT NOT NULL,"+
+            st.execute("CREATE TABLE IF NOT EXISTS appointments (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "patientID INTEGER NOT NULL," +
+                    "patientName TEXT NOT NULL," +
+                    "doctorID INTEGER NOT NULL," +
+                    "doctorName TEXT NOT NULL," +
+                    "appointmentDate TEXT NOT NULL," +
+                    "appointmentTime TEXT NOT NULL," +
+                    "status TEXT NOT NULL," +
                     "priority TEXT NOT NULL)");
 
-            st.execute("CREATE TABLE IF NOT EXISTS prescriptions ("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "patientID INTEGER NOT NULL,"+
-                    "doctorID INTEGER NOT NULL,"+
-                    "medicineName TEXT NOT NULL,"+
-                    "dosage TEXT NOT NULL,"+
-                    "instructions TEXT NOT NULL,"+
-                    "duration TEXT NOT NULL,"+
+            st.execute("CREATE TABLE IF NOT EXISTS prescriptions (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "patientID INTEGER NOT NULL," +
+                    "doctorID INTEGER NOT NULL," +
+                    "medicineName TEXT NOT NULL," +
+                    "dosage TEXT NOT NULL," +
+                    "instructions TEXT NOT NULL," +
+                    "duration TEXT NOT NULL," +
                     "dateIssued TEXT NOT NULL)");
 
             System.out.println("All tables created successfully!");
             insertData();
 
-        }catch (SQLException e) {
-            System.out.println("Table creation failed: "+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Table creation failed: " + e.getMessage());
         }
     }
-    public Connection getConnection(){
+
+    public Connection getConnection() {
         return connection;
     }
 
-    private DatabaseManager(){
+    private DatabaseManager() {
         connect();
         createTables();
     }
 
-    public static DatabaseManager getInstance(){
-        if(instance==null){
-            instance=new DatabaseManager();
+    public static DatabaseManager getInstance() {
+        if (instance == null) {
+            instance = new DatabaseManager();
         }
         return instance;
     }
-    public void addPatient(String name,int age, String gender,String phone,String address,String bloodType,String department){
-        String sql="INSERT INTO patients(name,age,gender,phone,address,bloodType,department) VALUES(?,?,?,?,?,?,?)";
-        try(PreparedStatement ps=connection.prepareStatement(sql)){
-            ps.setString(1,name);
-            ps.setInt(2,age);
-            ps.setString(3,gender);
-            ps.setString(4,phone);
-            ps.setString(5,address);
-            ps.setString(6,bloodType);
-            ps.setString(7,department);
+
+    public void addPatient(String name, int age, String gender, String phone, String address, String bloodType, String department) {
+        String sql = "INSERT INTO patients(name,age,gender,phone,address,bloodType,department) VALUES(?,?,?,?,?,?,?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setInt(2, age);
+            ps.setString(3, gender);
+            ps.setString(4, phone);
+            ps.setString(5, address);
+            ps.setString(6, bloodType);
+            ps.setString(7, department);
             ps.executeUpdate();
             System.out.println("Patient added successfully!");
         } catch (SQLException e) {
-            System.out.println("Error adding patient "+e.getMessage());
+            System.out.println("Error adding patient " + e.getMessage());
         }
     }
-    public void editPatient(int id,String name,int age,String gender,String phone,String address,String bloodType,String department){
-        String sql="UPDATE patients SET name=?,age=?,gender=?,phone=?,address=?,bloodType=?,department=? WHERE id=?";
-        try(PreparedStatement ps=connection.prepareStatement(sql)){
-            ps.setString(1,name);
-            ps.setInt(2,age);
-            ps.setString(3,gender);
-            ps.setString(4,phone);
-            ps.setString(5,address);
-            ps.setString(6,bloodType);
-            ps.setString(7,department);
-            ps.setInt(8,id);
+
+    public void editPatient(int id, String name, int age, String gender, String phone, String address, String bloodType, String department) {
+        String sql = "UPDATE patients SET name=?,age=?,gender=?,phone=?,address=?,bloodType=?,department=? WHERE id=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setInt(2, age);
+            ps.setString(3, gender);
+            ps.setString(4, phone);
+            ps.setString(5, address);
+            ps.setString(6, bloodType);
+            ps.setString(7, department);
+            ps.setInt(8, id);
             ps.executeUpdate();
             System.out.println("Patient edited successfully!");
-        }catch (SQLException e) {
-            System.out.println("Error editing patient "+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error editing patient " + e.getMessage());
         }
     }
-    public void deletePatient(int id){
-        String sql="DELETE FROM patients WHERE id=?";
-        try(PreparedStatement ps=connection.prepareStatement(sql)){
-            ps.setInt(1,id);
+
+    public void deletePatient(int id) {
+        String sql = "DELETE FROM patients WHERE id=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Patient deleted successfully!");
         } catch (SQLException e) {
-            System.out.println("Error deleting patient "+e.getMessage());
+            System.out.println("Error deleting patient " + e.getMessage());
         }
     }
-    public ResultSet selectPatient(String keyword){
-        String sql="SELECT * FROM patients WHERE name LIKE ? OR phone LIKE ? OR id LIKE ?";
-        try{
-            PreparedStatement ps=connection.prepareStatement(sql);
-            ps.setString(1,"%"+keyword+"%");
-            ps.setString(2,"%"+keyword+"%");
-            ps.setString(3,"%"+keyword+"%");
+
+    public ResultSet selectPatient(String keyword) {
+        String sql = "SELECT * FROM patients WHERE name LIKE ? OR phone LIKE ? OR id LIKE ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + keyword + "%");
+            ps.setString(2, "%" + keyword + "%");
+            ps.setString(3, "%" + keyword + "%");
             return ps.executeQuery();
-        }catch (SQLException e) {
-            System.out.println("Error selecting patient "+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error selecting patient " + e.getMessage());
             return null;
         }
     }
-    public ResultSet getAllPatients(){
-        String sql="SELECT * FROM patients";
-        try{
-            Statement st=connection.createStatement();
+    public ResultSet getAllPatients() {
+        String sql = "SELECT * FROM patients";
+        try {
+            Statement st = connection.createStatement();
             return st.executeQuery(sql);
-        }catch (SQLException e) {
-            System.out.println("Error selecting patients "+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error selecting patients " + e.getMessage());
             return null;
         }
     }
-    public void updateStatus(int id,String status){
-        String sql="UPDATE appointments SET status=? WHERE patientID=?";
-        try(PreparedStatement ps=connection.prepareStatement(sql)){
-            ps.setString(1,status);
+    public void updateStatus(int id, String status) {
+        String sql = "UPDATE appointments SET status=? WHERE patientID=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, status);
             ps.setInt(2, id);
             ps.executeUpdate();
             System.out.println("Patient updated successfully!");
         } catch (SQLException e) {
-            System.out.println("Error updating patient "+e.getMessage());
+            System.out.println("Error updating patient " + e.getMessage());
         }
     }
-    public ResultSet getPatientByDepartment(String department){
-        String sql="SELECT * FROM patients WHERE department=?";
-        try{
-            PreparedStatement ps=connection.prepareStatement(sql);
-            ps.setString(1,department);
+    public ResultSet getPatientByDepartment(String department) {
+        String sql = "SELECT * FROM patients WHERE department=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, department);
             return ps.executeQuery();
-        }catch (SQLException e) {
-            System.out.println("Error selecting patient by department "+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error selecting patient by department " + e.getMessage());
             return null;
         }
+    }
+    public void addAppointment(Appointment appt) {
+        String sql = "INSERT INTO appointments (patientId,doctorId,date,time,status,notes) VALUES (?,?,?,?,?,?)";
+        try (java.sql.PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, appt.getPatientId());
+            ps.setInt(2, appt.getDoctorId());
+            ps.setString(3, appt.getDate().toString());
+            ps.setString(4, appt.getTime().toString());
+            ps.setString(5, appt.getStatus());
+            ps.setString(6, appt.getNotes());
+            ps.executeUpdate();
+        } catch (java.sql.SQLException e) {
+            System.out.println("addAppointment error: " + e.getMessage());
+        }
+    }
+    public void cancelAppointment(int id) {
+        try (java.sql.PreparedStatement ps = connection.prepareStatement(
+                "UPDATE appointments SET status='Cancelled' WHERE appointmentId=?")) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (java.sql.SQLException e) {
+            System.out.println("cancelAppointment error: " + e.getMessage());
+        }
+    }
+    public void markComplete(int id) {
+        try (java.sql.PreparedStatement ps = connection.prepareStatement(
+                "UPDATE appointments SET status='Completed' WHERE appointmentId=?")) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (java.sql.SQLException e) {
+            System.out.println("markComplete error: " + e.getMessage());
+        }
+    }
+    public List<Appointment> getAppointmentsByPatient(int patientId) {
+        List<Appointment> list = new ArrayList<>();
+        try (java.sql.PreparedStatement ps = connection.prepareStatement(
+                "SELECT * FROM appointments WHERE patientId=? ORDER BY date,time")) {
+            ps.setInt(1, patientId);
+            java.sql.ResultSet rs = ps.executeQuery();
+            while (rs.next()) list.add(mapAppointment(rs));
+        } catch (java.sql.SQLException e) {
+            System.out.println("getByPatient error: " + e.getMessage());
+        }
+        return list;
+    }
+    public List<Appointment> getAppointmentsByDoctor(int doctorId) {
+        List<Appointment> list = new ArrayList<>();
+        try (java.sql.PreparedStatement ps = connection.prepareStatement(
+                "SELECT * FROM appointments WHERE doctorId=? ORDER BY date,time")) {
+            ps.setInt(1, doctorId);
+            java.sql.ResultSet rs = ps.executeQuery();
+            while (rs.next()) list.add(mapAppointment(rs));
+        } catch (java.sql.SQLException e) {
+            System.out.println("getByDoctor error: " + e.getMessage());
+        }
+        return list;
+    }
+    public boolean hasConflict(int doctorId, java.time.LocalDate date, java.time.LocalTime time) {
+        try (java.sql.PreparedStatement ps = connection.prepareStatement(
+                "SELECT COUNT(*) FROM appointments WHERE doctorId=? AND date=? AND time=? AND status!='Cancelled'")) {
+            ps.setInt(1, doctorId);
+            ps.setString(2, date.toString());
+            ps.setString(3, time.toString());
+            java.sql.ResultSet rs = ps.executeQuery();
+            if (rs.next()) return rs.getInt(1) > 0;
+        } catch (java.sql.SQLException e) {
+            System.out.println("hasConflict error: " + e.getMessage());
+        }
+        return false;
+    }
+    private Appointment mapAppointment(java.sql.ResultSet rs) throws java.sql.SQLException {
+        return new Appointment(
+                rs.getInt("appointmentId"),
+                rs.getInt("patientId"),
+                rs.getInt("doctorId"),
+                java.time.LocalDate.parse(rs.getString("date")),
+                java.time.LocalTime.parse(rs.getString("time")),
+                rs.getString("status"),
+                rs.getString("notes")
+        );
     }
 }
