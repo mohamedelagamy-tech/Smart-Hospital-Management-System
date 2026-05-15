@@ -1,4 +1,4 @@
-import com.example.shms.model.Person;
+package com.example.shms.model;
 
 public class Receptionist extends Person{
     private String shift;
@@ -6,7 +6,7 @@ public class Receptionist extends Person{
     private String status;
 
     public Receptionist(int ID, String name, String email, String password, String shift, String deskNumber, String status){
-        super(ID, name, email, password,"Receptionist");
+        super(ID, name, email, password,"com.example.shms.model.Receptionist");
         this.shift=shift;
         this.deskNumber=deskNumber;
         this.status=status;
@@ -14,7 +14,7 @@ public class Receptionist extends Person{
 
     @Override
     public String getDetails() {
-        return "Receptionist ID: "+ getID()
+        return "com.example.shms.model.Receptionist ID: "+ getID()
                 + ", Name: "+ getName()
                 + ",Email: "+ getEmail()
                 + ", Shift: "+ shift
@@ -48,7 +48,7 @@ public class Receptionist extends Person{
 
     @Override
     public String toString() {
-        return "Receptionist ID: "+ getID()
+        return "com.example.shms.model.Receptionist ID: "+ getID()
                 + ", Name: "+ getName()
                 + ",Role: "+ getRole()
                 + ", Shift: "+ shift
