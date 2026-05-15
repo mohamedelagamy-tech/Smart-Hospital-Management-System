@@ -19,8 +19,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-        navigateTo("login.fxml", 800, 500);
-        stage.setTitle("SHMS - Smart Hospital Management System");
+        navigateTo("login.fxml",800,500);
+        stage.setTitle("Hospital Mangement System");
         stage.show();
     }
 
@@ -28,10 +28,10 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/com/example/shms/fxml/" + fxmlFile));
             Pane root = loader.load();
-            Scene scene = new Scene(root, width, height);
+            Scene scene = new Scene(root,width,height);
             primaryStage.setScene(scene);
         } catch (IOException e) {
-            System.out.println("Navigation failed: " + e.getMessage());
+            System.out.println("Navigation failed: "+e.getMessage());
         }
     }
 }
