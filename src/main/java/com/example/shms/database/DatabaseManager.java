@@ -1,6 +1,10 @@
 package com.example.shms.database;
 
 import com.example.shms.model.Appointment;
+import com.example.shms.model.Bill;
+import com.example.shms.model.Prescription;
+import com.example.shms.model.Room;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,6 +14,9 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.ArrayList;
 public class DatabaseManager {
+    private List<Bill> bills = new ArrayList<>();
+    private List<Prescription> prescriptions = new ArrayList<>();
+    private List<Room> rooms = new ArrayList<>();
     private static DatabaseManager instance;
     private Connection connection;
     private static final String db_URL = "jdbc:sqlite:hospital.db";
@@ -372,5 +379,56 @@ public class DatabaseManager {
                 rs.getString("status"),
                 rs.getString("notes")
         );
+    }
+
+    public void addBill(Bill bill) {
+        bills.add(bill);
+    }
+    public void updateBillStatus(int billId, String newStatus) {
+        for (Bill b : bills) {
+            if (b.getBillNumber() == billId) b.setStatus(newStatus);
+        }
+    }
+    public List<Bill> getBillsByPatient(int patientId) {
+        List<Bill> result = new ArrayList<>();
+        for (Bill b : bills) {
+            if (b.getPatientId() == patientId) result.add(b);
+        }
+        return result;
+    }
+    public List<Bill> getAllBills() { return bills; }
+
+    public void addPrescription(Prescription p) { prescriptions.add(p); }
+    public List<Prescription> getPrescriptionsByPatient(int patientId) {
+        List<Prescription> result = new ArrayList<>();
+        for (Prescription p : prescriptions) {
+            if (p.getPatientId() == patientId) result.add(p);
+        }
+        return result;
+    }
+
+    public void assignRoom(int roomId, int patientId) {
+        for (Room r : rooms) {
+            if (r.getId() == roomId) {
+                r.setStatus("Occupied");
+                r.setAssignedPatientId(patientId);
+            }
+        }
+    }
+    public void releaseRoom(int roomId) {
+        for (Room r : rooms) {
+            if (r.getId() == roomId) {
+                r.setStatus("Available");
+                r.setAssignedPatientId(0);
+            }
+        }
+    }
+    public List<Room> getAllRooms() { return rooms; }
+    public List<Room> getAvailableRooms() {
+        List<Room> result = new ArrayList<>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Available")) result.add(r);
+        }
+        return result;
     }
 }

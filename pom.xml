@@ -64,7 +64,7 @@
                 <executions>
                     <execution>
                         <!-- Default configuration for running with: mvn clean javafx:run -->
-                        <id>default-cli</id>
+                        <billNumber>default-cli</billNumber>
                         <configuration>
                             <mainClass>com.example.shms/com.example.shms.HelloApplication</mainClass>
                             <launcher>app</launcher>

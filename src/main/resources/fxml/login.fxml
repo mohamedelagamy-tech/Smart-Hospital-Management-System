@@ -29,20 +29,20 @@
                         <VBox maxWidth="300" spacing="5">
                             <children>
                                 <Label style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #555555;" text="USERNAME" />
-                                <TextField fx:id="usernameField" promptText="Enter your username" style="-fx-pref-height: 40px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #DDDDDD; -fx-background-color: #FAFAFA; -fx-font-size: 13px; -fx-pref-width: 300px;" />
+                                <TextField fx:billNumber="usernameField" promptText="Enter your username" style="-fx-pref-height: 40px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #DDDDDD; -fx-background-color: #FAFAFA; -fx-font-size: 13px; -fx-pref-width: 300px;" />
                             </children>
                         </VBox>
 
                         <VBox maxWidth="300" spacing="5">
                             <children>
                                 <Label style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #555555;" text="PASSWORD" />
-                                <PasswordField fx:id="passwordField" promptText="Enter your password" style="-fx-pref-height: 40px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #DDDDDD; -fx-background-color: #FAFAFA; -fx-font-size: 13px; -fx-pref-width: 300px;" />
+                                <PasswordField fx:billNumber="passwordField" promptText="Enter your password" style="-fx-pref-height: 40px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #DDDDDD; -fx-background-color: #FAFAFA; -fx-font-size: 13px; -fx-pref-width: 300px;" />
                             </children>
                         </VBox>
 
-                        <Label fx:id="errorLabel" style="-fx-font-size: 11px; -fx-pref-width: 300px; -fx-max-width: 300px;" text="" wrapText="true" />
+                        <Label fx:billNumber="errorLabel" style="-fx-font-size: 11px; -fx-pref-width: 300px; -fx-max-width: 300px;" text="" wrapText="true" />
 
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 42px; -fx-pref-width: 300px; -fx-background-radius: 6; -fx-cursor: hand;" text="Sign In" />
+                        <Button fx:billNumber="loginButton" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 42px; -fx-pref-width: 300px; -fx-background-radius: 6; -fx-cursor: hand;" text="Sign In" />
                     </children>
                 </VBox>
 
