@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
@@ -32,6 +33,31 @@ public class EmergencyQueueController {
     @FXML
     private void initialize() {
         calledListView.setItems(calledItems);
+        waitingListView.setCellFactory(list->new ListCell<String>(){
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if(empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                }else if(item.contains("Emergency")) {
+                    setText(item);
+                    setStyle("-fx-text-fill: #DC2626; -fx-font-weight: bold; " +
+                            "-fx-background-color: #FEE2E2; -fx-background-radius: 8; " +
+                            "-fx-padding: 10;");
+                }else if(item.contains("Urgent")) {
+                    setText(item);
+                    setStyle("-fx-text-fill: #B45309; -fx-font-weight: bold; " +
+                            "-fx-background-color: #FEF3C7; -fx-background-radius: 8; " +
+                            "-fx-padding: 10;");
+                }else if(item.contains("Normal")) {
+                    setText(item);
+                    setStyle("-fx-text-fill: #166534; -fx-font-weight: bold; " +
+                            "-fx-background-color: #DCFCE7; -fx-background-radius: 8; " +
+                            "-fx-padding: 10;");
+                }
+            }
+        });
         loadQueueFromDB();
         refreshAll();
     }
