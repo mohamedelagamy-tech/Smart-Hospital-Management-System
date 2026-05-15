@@ -15,7 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 
-public class BillingScreen extends Application {
+public class BillingScreen {
 
     private TableView<Bill> billingTable;
     private ObservableList<Bill> allBills;
@@ -32,7 +32,7 @@ public class BillingScreen extends Application {
         searchField.setPrefHeight(40);
         searchField.setStyle(
                 "-fx-background-color: white"+ "-fx-border-color: #cccccc" +
-                "-fx-border-radius: 6;" + "-fx-background-radius: 6;"+"-fx-padding: 0 12;"
+                "-fx-border-radius: 6;" + "-fx-background-radius: 6;"+"-fx-padding: 0 12;"+
                 "-fx-font-size: 13px;");
         searchField.textProperty().addListener((obs,oldVal,newVal)-> applyFilters());
 
