@@ -5,7 +5,7 @@ public class Nurse extends Person {
     private String shift;
     private String status;
 
-    public Nurse(int ID, String name, String email, String password, String department,String Status,String status){
+    public Nurse(int ID, String name, String email, String password, String department,String shift,String status){
         super(ID,name,email,password,"Nurse");
         this.department=department;
         this.shift=shift;

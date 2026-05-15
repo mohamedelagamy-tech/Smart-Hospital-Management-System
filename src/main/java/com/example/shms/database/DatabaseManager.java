@@ -87,6 +87,11 @@ public class DatabaseManager {
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('301','Occupied')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('302','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('401','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('402','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('303','Occupied')");
+            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('304','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('501','Occupied')");
+
 
             System.out.println("Data inserted!");
 

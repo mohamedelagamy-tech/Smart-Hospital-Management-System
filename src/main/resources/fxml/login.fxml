@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.LoginController">
+    <children>
+        <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <children>
+
+                <VBox alignment="CENTER" prefWidth="360" spacing="10" style="-fx-background-color: #1F4E79; -fx-padding: 40;">
+                    <children>
+                        <StackPane prefWidth="80" prefHeight="80" maxWidth="80" maxHeight="80" style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 40; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 40; -fx-border-width: 2;">
+                            <children>
+                                <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;" text="SH" />
+                            </children>
+                        </StackPane>
+                        <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;" text="SHMS" />
+                        <Label style="-fx-font-size: 13px; -fx-text-fill: rgba(255,255,255,0.6); -fx-text-alignment: center; -fx-wrap-text: true;" text="Every patient matters, every moment counts" wrapText="true" />
+                        <Separator prefWidth="40" style="-fx-background-color: rgba(255,255,255,0.2);" />
+                    </children>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="14" style="-fx-background-color: white; -fx-padding: 40;" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Welcome back!" />
+                        <Label style="-fx-font-size: 12px; -fx-text-fill: #888888;" text="Sign in to your account to continue" />
+
+                        <VBox maxWidth="300" spacing="5">
+                            <children>
+                                <Label style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #555555;" text="USERNAME" />
+                                <TextField fx:id="usernameField" promptText="Enter your username" style="-fx-pref-height: 40px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #DDDDDD; -fx-background-color: #FAFAFA; -fx-font-size: 13px; -fx-pref-width: 300px;" />
+                            </children>
+                        </VBox>
+
+                        <VBox maxWidth="300" spacing="5">
+                            <children>
+                                <Label style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #555555;" text="PASSWORD" />
+                                <PasswordField fx:id="passwordField" promptText="Enter your password" style="-fx-pref-height: 40px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #DDDDDD; -fx-background-color: #FAFAFA; -fx-font-size: 13px; -fx-pref-width: 300px;" />
+                            </children>
+                        </VBox>
+
+                        <Label fx:id="errorLabel" style="-fx-font-size: 11px; -fx-pref-width: 300px; -fx-max-width: 300px;" text="" wrapText="true" />
+
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 42px; -fx-pref-width: 300px; -fx-background-radius: 6; -fx-cursor: hand;" text="Sign In" />
+                    </children>
+                </VBox>
+
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
