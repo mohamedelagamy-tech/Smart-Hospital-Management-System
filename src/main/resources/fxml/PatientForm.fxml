@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="420.0" prefWidth="650.0" spacing="15.0" style="-fx-background-color: #1E3A5F; -fx-padding: 25;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PatientFormController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Label fx:id="formTitle" text="Add Patient" textFill="SNOW">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="clearBtn" mnemonicParsing="false" onAction="#handleClear" style="-fx-background-color: #95a5a6; -fx-border-radius: 8;" text="Clear" textFill="WHITE" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#handleSave" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="Save" textFill="WHITE" />
+            <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: transparent; -fx-border-color: #fffafa; -fx-border-radius: 8;" text="Cancel" textFill="SNOW" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Full Name" textFill="SNOW">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameField" promptText="Enter full name" style="-fx-background-radius: 8;" />
+                  <Label fx:id="nameError" text="" textFill="RED">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="160.0" spacing="5.0">
+               <children>
+                  <Label text="Age" textFill="WHITE">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="ageField" promptText="Age" style="-fx-background-radius: 8;" />
+                  <Label fx:id="ageError" text="" textFill="RED">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="150.0" spacing="5.0">
+               <children>
+                  <Label text="Gender" textFill="SNOW">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="genderCombo" prefWidth="150.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Phone" textFill="SNOW">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="phoneField" promptText="Phone number" style="-fx-background-radius: 8;" />
+                  <Label fx:id="phoneError" text="" textFill="RED">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Address" textFill="SNOW">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="addressField" promptText="Address" style="-fx-background-radius: 8;" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="150.0" spacing="5.0">
+               <children>
+                  <Label text="Blood Type" textFill="SNOW">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="bloodTypeCombo" prefWidth="150.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="180.0" spacing="5.0">
+               <children>
+                  <Label text="Department" textFill="SNOW">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="departmentCombo" prefWidth="180.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <Label text="Priority" textFill="SNOW">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+                     <children>
+                        <Button fx:id="emergencyPriorityBtn" mnemonicParsing="false" onAction="#handleEmergencyPriority" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-radius: 6;" text="●" textFill="#ff0000">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="urgentPriorityBtn" mnemonicParsing="false" onAction="#handleUrgentPriority" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-radius: 6;" text="●" textFill="#ff8d00">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Button>
+                        <Button fx:id="normalPriorityBtn" mnemonicParsing="false" onAction="#handleNormalPriority" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-radius: 6;" text="●" textFill="#30ff00">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

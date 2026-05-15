@@ -10,12 +10,14 @@ import javafx.stage.Stage;
 public class PatientFormController {
     @FXML private Label formTitle;
     @FXML private TextField nameField,ageField,phoneField,addressField;
-    @FXML private ComboBox<String> genderCombo, bloodTypeCombo,departmentCombo,priorityCombo;
+    @FXML private ComboBox<String> genderCombo, bloodTypeCombo,departmentCombo;
     @FXML private Label nameError,ageError,phoneError;
     @FXML private Button saveBtn,cancelBtn;
+    @FXML private Button emergencyPriorityBtn,urgentPriorityBtn,normalPriorityBtn,clearBtn;
     private final DatabaseManager db=DatabaseManager.getInstance();
     private PatientController patientController;
     private Patient editingPatient=null;
+    private int selectedPriority=3;
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;
     }
@@ -23,7 +25,6 @@ public class PatientFormController {
         genderCombo.setItems(FXCollections.observableArrayList("Male","Female"));
         bloodTypeCombo.setItems(FXCollections.observableArrayList("A+","A-","B+","B-","AB+","AB-","O+","O-"));
         departmentCombo.setItems(FXCollections.observableArrayList("Cardiology","Pediatrics","Emergency","Neurology","Orthopedics","Dermatology","Oncology","Radiology"));
-        priorityCombo.setItems(FXCollections.observableArrayList("1-Emergency","2-Urgent","3-Normal"));
     }
     public void setPatient(Patient patient) {
         this.editingPatient = patient;
@@ -35,7 +36,12 @@ public class PatientFormController {
         genderCombo.setValue(patient.getGender());
         bloodTypeCombo.setValue(patient.getBloodType());
         departmentCombo.setValue(patient.getDepartment());
-        priorityCombo.setValue(patient.getPriority()+"-"+getPriorityLabel(patient.getPriority()));
+        selectedPriority=patient.getPriority();
+        switch(selectedPriority){
+            case 1->handleEmergencyPriority();
+            case 2->handleUrgentPriority();
+            case 3->handleNormalPriority();
+        };
     }
     private String getPriorityLabel(int p){
         return switch (p){
@@ -55,11 +61,11 @@ public class PatientFormController {
         String address=addressField.getText().trim();
         String bloodType=bloodTypeCombo.getValue();
         String department=departmentCombo.getValue();
-        int priority=Integer.parseInt(priorityCombo.getValue().substring(0,1));
+        int priority=selectedPriority;
         if(editingPatient==null)
-            db.addPatient(name,age,gender,phone,address,bloodType,department);
+            db.addPatient(name,age,gender,phone,address,bloodType,department,selectedPriority);
         else
-            db.editPatient(editingPatient.getPatientID(),name,age,gender,phone,address,bloodType,department);
+            db.editPatient(editingPatient.getPatientID(),name,age,gender,phone,address,bloodType,department,selectedPriority);
         patientController.loadPatients();
         closeForm();
     }
@@ -102,10 +108,6 @@ public class PatientFormController {
             showAlert("Please select a department");
             valid=false;
         }
-        if (priorityCombo.getValue()==null) {
-            showAlert("Please select a priority");
-            valid=false;
-        }
         return valid;
     }
     private void showAlert(String message){
@@ -121,5 +123,37 @@ public class PatientFormController {
     private void closeForm(){
         Stage stage=(Stage)cancelBtn.getScene().getWindow();
         stage.close();
+    }
+    @FXML private void handleEmergencyPriority(){
+        selectedPriority=1;
+        emergencyPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: red; -fx-border-color: red; -fx-border-radius: 6; -fx-font-size: 18;");
+        urgentPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #ef9f27; -fx-border-color: transparent; -fx-font-size: 18;");
+        normalPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #63991e; -fx-border-color: transparent; -fx-font-size: 18;");
+    }
+    @FXML private void handleUrgentPriority(){
+        selectedPriority=2;
+        emergencyPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: red; -fx-border-color: transparent; -fx-font-size: 18;");
+        urgentPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #ef9f27; -fx-border-color: #ef9f27 ;-fx-border-radius: 6; -fx-font-size: 18;");
+        normalPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #63991e; -fx-border-color: transparent; -fx-font-size: 18;");
+    }
+    @FXML private void handleNormalPriority(){
+         selectedPriority=3;
+        emergencyPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: red; -fx-border-color: transparent; -fx-font-size: 18;");
+        urgentPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #ef9f27; -fx-border-color: transparent; -fx-font-size: 18;");
+        normalPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #63991e; -fx-border-color:#63991e; -fx-border-radius: 6;-fx-font-size: 18;");
+
+    }
+    @FXML private void handleClear(){
+        nameField.clear();
+        ageField.clear();
+        phoneField.clear();
+        addressField.clear();
+        genderCombo.setValue(null);
+        bloodTypeCombo.setValue(null);
+        departmentCombo.setValue(null);
+        selectedPriority=3;
+        nameError.setText("");
+        ageError.setText("");
+        phoneError.setText("");
     }
 }

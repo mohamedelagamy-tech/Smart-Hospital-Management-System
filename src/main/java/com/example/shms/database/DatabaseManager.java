@@ -125,7 +125,8 @@ public class DatabaseManager {
                     "phone TEXT NOT NULL," +
                     "address TEXT NOT NULL," +
                     "bloodType TEXT NOT NULL," +
-                    "department TEXT NOT NULL)");
+                    "department TEXT NOT NULL," +
+                    "priority INTEGER DEFAULT 3)");
 
             st.execute("CREATE TABLE IF NOT EXISTS departments (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -199,8 +200,8 @@ public class DatabaseManager {
         return instance;
     }
 
-    public void addPatient(String name, int age, String gender, String phone, String address, String bloodType, String department) {
-        String sql = "INSERT INTO patients(name,age,gender,phone,address,bloodType,department) VALUES(?,?,?,?,?,?,?)";
+    public void addPatient(String name, int age, String gender, String phone, String address, String bloodType, String department, int priority) {
+        String sql = "INSERT INTO patients(name,age,gender,phone,address,bloodType,department,priority) VALUES(?,?,?,?,?,?,?,?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, name);
             ps.setInt(2, age);
@@ -209,6 +210,7 @@ public class DatabaseManager {
             ps.setString(5, address);
             ps.setString(6, bloodType);
             ps.setString(7, department);
+            ps.setInt(8, priority);
             ps.executeUpdate();
             System.out.println("Patient added successfully!");
         } catch (SQLException e) {
@@ -216,8 +218,8 @@ public class DatabaseManager {
         }
     }
 
-    public void editPatient(int id, String name, int age, String gender, String phone, String address, String bloodType, String department) {
-        String sql = "UPDATE patients SET name=?,age=?,gender=?,phone=?,address=?,bloodType=?,department=? WHERE id=?";
+    public void editPatient(int id, String name, int age, String gender, String phone, String address, String bloodType, String department, int priority) {
+        String sql = "UPDATE patients SET name=?,age=?,gender=?,phone=?,address=?,bloodType=?,department=?,priority=? WHERE id=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, name);
             ps.setInt(2, age);
@@ -226,7 +228,8 @@ public class DatabaseManager {
             ps.setString(5, address);
             ps.setString(6, bloodType);
             ps.setString(7, department);
-            ps.setInt(8, id);
+            ps.setInt(8, priority);
+            ps.setInt(9, id);
             ps.executeUpdate();
             System.out.println("Patient edited successfully!");
         } catch (SQLException e) {
