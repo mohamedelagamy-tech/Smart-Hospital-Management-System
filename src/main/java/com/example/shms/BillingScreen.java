@@ -90,5 +90,37 @@ public class BillingScreen extends Application {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colStatus.setPrefWidth(100);
 
-    }
+        colStatus.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(String status, boolean empty) {
+                super.updateItem(status, empty);
+                if (empty || status == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    Label badge = new Label(status);
+                    badge.setPadding(new Insets(4, 12, 4, 12));
+                    badge.setFont(Font.font("System", FontWeight.BOLD, 12));
+                    badge.setStyle("-fx-background-radius: 20;");
+                    switch (status) {
+                        case "Paid":
+                            badge.setTextFill(Color.WHITE);
+                            badge.setStyle("-fx-background-color: #27ae60; -fx-background-radius: 20");
+                            break;
+                        case "Pending":
+                            badge.setTextFill(Color.WHITE);
+                            badge.setStyle("-fx-background-color: #e67e22; -fx-background-radius: 20;");
+                            break;
+                        case "Overdue":
+                            badge.setTextFill(Color.WHITE);
+                            badge.setStyle("-fx-background-color: #e74c3c; -fx-background-radius: 20;");
+                            break;
+                    }
+                    setGraphic(badge);
+                    setText(null);
+                    setAlignment(Pos.CENTER_LEFT);
+                }
+            }
+        });
+
 }
