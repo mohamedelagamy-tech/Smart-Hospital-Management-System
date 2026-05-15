@@ -75,7 +75,7 @@ public class PatientController {
         departmentFilter.setValue("All");
         departmentFilter.setOnAction(e->filterPatients());
     }
-    private void loadPatients() {
+    public void loadPatients() {
         patientList.clear();
         try {
             ResultSet rs = db.getAllPatients();
