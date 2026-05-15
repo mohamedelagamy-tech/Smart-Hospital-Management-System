@@ -41,6 +41,14 @@ public class BillingScreen extends Application {
                 "Date (Oldest First)", "Amount (High to Low)" , "Amount (Low to High");
         sortBox.setValue("Date (Newest First");
         sortBox.setPrefHeight(40);
-        sortBox.setStyle();
+        sortBox.setStyle(
+                "-fx-background-color: white;"+ "-fx-border-color: #cccccc;"+
+                 "-fx-border-radius: 6;" + "-fx-background-radius: 6;" + "-fx-font-size: 13px;");
+        Label sortLabel = new Label("sort By");
+        sortLabel.setStyle("-fx-font-size: 11px; -fx-textfill: #888888");
+        VBox sortBox2 = new VBox(2,sortLabel,sortBox);
+        sortBox.setOnAction(e -> applyFilters);
+
+
     }
 }
