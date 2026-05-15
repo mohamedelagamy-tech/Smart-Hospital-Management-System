@@ -109,6 +109,7 @@ public class PatientController {
                 p.setDepartment(rs.getString("department"));
                 p.setBloodType(rs.getString("bloodType"));
                 p.setAddress(rs.getString("address"));
+                p.setPriority(rs.getInt("priority"));
                 p.setStatus(rs.getString("status"));
                 patientList.add(p);
             }
@@ -134,7 +135,7 @@ public class PatientController {
             }
         }
         patientTable.setItems(filtered);
-        statusLabel.setText("Showing: " + filtered.size()+"of "+patientList.size()+" patients");
+        statusLabel.setText("Showing: " + filtered.size()+" of "+patientList.size()+" patients");
     }
     private String getPriorityNumber(String filter){
         return switch (filter){
