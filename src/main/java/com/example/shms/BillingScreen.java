@@ -122,5 +122,77 @@ public class BillingScreen extends Application {
                 }
             }
         });
+        billingTable = new TableViews<>();
+        billingTable.getColumns().addAll(colBillNum, colPatient, colService, colDate, colAmount, colStatus );
+        billingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        billingTable.setStyle("-fx-background-color: white;" + "-fx-border-color: #eOeOe0;" + "-fx-border-radius: 8;" +"-fx-background-radius: 8;" + "-fx-font-size: 13px; ");
+        billingTable.setFixedCellSize(52);
 
+        billingTable.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(Bill item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setStyle("-fx-background-color: white;");
+                } else if (getIndex() % 2 == 0) {
+                    setStyle("-fx-background-color: white;");
+                } else {
+                    setStyle("-fx-background-color: #fafafa;");
+                }
+            }
+        }
+        VBox layout = new VBox(16,title,topControls,filterBar,billingTable);
+        layout.setPadding(new Insets(32));
+        layout.setStyle("-fx-background-color: #f0f2f5; ");
+        VBox.setVgrow(billingTable,Priority.ALWAYS);
+
+        Scene scene = new Scene (Layout,1000,620);
+        stage.setTitle("Hospital- Billing Management");
+        stage.setScene(scene);
+        stage.show();
+
+        private ToggleButton makeFilterBtn(String text, ToggleGroup group){
+            ToggleButton btn = new ToggleButton(text);
+            btn.setToggleGroup(group);
+            btn.setPrefHeight(34);
+            btn.setPadding(new Insets(0,18,0,18));
+            btn.setStyle( "-fx-background-color: white;"+ "-fx-border-color: #cccccc;"+
+                    "-fx-border-radius: 20;" + "-fx-background-radius: 20;" + "-fx-font-size: 16px;");
+            btn.selectedProperty().addListener((obs, wasSelected, isSelected)->{
+                if (isSelected){
+                    btn.setStyle("-fx-background-color: #1a1a2e;" +"-fx-text-fill: white;" + "-fx-border-radius: 20;" + "-fx-background-radius: 20;" +
+                    "-fx-font-size: 13px;" + "-fx-cursor: hand;");}
+                else {
+                    btn.setStyle("-fx-background-color: white;" "-fx-border-color: #cccccc;" + "-fx-border-radius: 20;" + "-fx-background-radius: 20;" +
+                            "-fx-font-size: 13px;" + "-fx-cursor: hand;");
+                }
+            });
+            return btn;
+        }
+    private void applyFilters(){
+            String search = searchField.getText().toLowerCase();
+            String sort = sortBox.getValue();
+
+            ObservableList<Bill> result = FXCollections.observableArrayList();
+            for (Bill b : allBills){
+                boolean matchesSearch = b.getPatientName().toLowerCase().contains(search)
+                        || b.getBillNumber().toLowerCase().contains(search);
+                result.add(b);
+            }
+            result.removeIf(b ->
+                    !b.getPatientName().toLowerCase().contains(search) &&
+                            !b.getBillNumber().toLowerCase().contains(search)
+            );
+            switch (sort) {
+                case "Amount (High to Low)":
+                    result.sort((a, b) -> Double.compare(b.getAmount(), a.getAmount()));
+                    break;
+                case "Amount (Low to High)":
+                    result.sort((a, b) -> Double.compare(a.getAmount(), b.getAmount()));
+                    break;
+            }
+
+            billingTable.setItems(result);
+        }
+    }
 }
