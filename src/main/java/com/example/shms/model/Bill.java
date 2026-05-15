@@ -7,6 +7,9 @@ public class Bill implements Billable {
     private double amount;
     private String status; 
     private String date;
+    private String patientName;
+    private String service;
+
     public Bill(int billNumber, int patientId, int appointmentId, String date) {
         this.billNumber = billNumber;
         this.patientId = patientId;
@@ -20,7 +23,9 @@ public class Bill implements Billable {
     public double getAmount() { return amount; }
     public String getBillStatus() { return status; }
     public String getBILLDate() { return date; }
-
+    public String getPatientName() {return patientName;}
+    public String getService() {return service;}
+    public String getBillStatus() {return status;}
 
     public void setBillStatus(String status) { this.status = status; }
     public void setAmount(double amount) { this.amount = amount; }
