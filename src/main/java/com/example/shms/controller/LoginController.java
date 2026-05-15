@@ -1,9 +1,11 @@
 package com.example.shms.controller;
 
 import com.example.shms.database.DatabaseManager;
+import com.example.shms.utils.PasswordEncryption;
 import com.example.shms.utils.SessionManager;
 import com.example.shms.utils.Validator;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -18,6 +20,9 @@ public class LoginController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;
+    @FXML private TextField passwordVisible;
+    @FXML private Button showPassword;
+    private boolean isPasswordVisible=false;
 
     private final SessionManager session=SessionManager.getInstance();
     private final DatabaseManager db=DatabaseManager.getInstance();
@@ -27,12 +32,12 @@ public class LoginController {
         String password=passwordField.getText().trim();
 
         if(Validator.checkEmpty(username,password)){
-            showError("Please fill in all fields.","orange");
+            showError("Please fill in all fields.","empty");
             return;
         }
 
         if(session.locked()){
-            showError("Too many failed attempts. Please restart the app.","red");
+            showError("Too many failed attempts. Please restart the app.","locked");
             return;
         }
 
@@ -40,30 +45,59 @@ public class LoginController {
             String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ps.setString(1,username);
-            ps.setString(2,password);
+            ps.setString(2, PasswordEncryption.hash(password));
             ResultSet rs=ps.executeQuery();
 
             if(rs.next()) {
                 String role =rs.getString("role");
                 session.login(username,role);
                 logAudit(username, role,"SUCCESS");
-                showError("Login successful!","green");
+                showError("Login successful!","success");
                 MainApp.navigateTo("dashboard.fxml", 1200, 700);
             } else {
                 session.addAttempts();
                 logAudit(username,"UNKNOWN","FAILED");
                 int remainingAttempts = 5 - session.getLoginAttempts();
-                showError("Invalid credentials. "+remainingAttempts+" attempts remainingAttempts.","red");
+                showError("Invalid credentials. "+remainingAttempts+" attempts remainingAttempts.","invalid");
             }
 
         } catch(SQLException e){
-            showError("Database error: "+e.getMessage(),"red");
+            showError("Database error: "+e.getMessage(),"dbError");
+        }
+    }
+    @FXML private void handleShowPassword(){
+        isPasswordVisible=!isPasswordVisible;
+        if(isPasswordVisible){
+            passwordVisible.setText(passwordField.getText());
+            passwordVisible.setVisible(true);
+            passwordVisible.setManaged(true);
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+            showPassword.setText("\uD83D\uDD76");
+        }else{
+            passwordVisible.setText(passwordField.getText());
+            passwordVisible.setVisible(false);
+            passwordVisible.setManaged(false);
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+            showPassword.setText("\uD83D\uDC41");
         }
     }
 
-    private void showError(String message,String color){
+    private void showError(String message,String type){
         errorLabel.setText(message);
-        errorLabel.setStyle("-fx-text-fill: "+color+";");
+        switch(type){
+            case "empty": errorLabel.setStyle("-fx-text-fill: orange;-fx-font-size: 11;");
+            break;
+            case "invalid": errorLabel.setStyle("-fx-text-fill: #A32D2D;-fx-background-color: #FCEBEB;-fx-background-radius:4;-fx-padding: 6 10;-fx-font-size: 11; ");
+            break;
+            case "locked": errorLabel.setStyle("-fx-text-fill: #7B0000;-fx-background-color: #FFD0D0;-fx-background-radius:4;-fx-padding: 6 10;-fx-font-size: 11; ");
+            break;
+            case "success": errorLabel.setStyle("-fx-text-fill: #1D6A2E;-fx-background-color: #D6F0DC;-fx-background-radius:4;-fx-padding: 6 10;-fx-font-size: 11; ");
+            break;
+            case "dbError": errorLabel.setStyle("-fx-text-fill: #555555;-fx-background-color: #F0F0F0;-fx-background-radius:4;-fx-padding: 6 10;-fx-font-size: 11; ");
+            break;
+        }
     }
 
     private void logAudit(String username, String role, String status){

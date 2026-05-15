@@ -4,6 +4,7 @@ import com.example.shms.model.Appointment;
 import com.example.shms.model.Bill;
 import com.example.shms.model.Prescription;
 import com.example.shms.model.Room;
+import com.example.shms.utils.PasswordEncryption;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,11 +39,11 @@ public class DatabaseManager {
                 return;
             }
 
-            st.execute("INSERT INTO users (username,password,role) VALUES ('Zeina','admin123','ADMIN')");
-            st.execute("INSERT INTO users (username,password,role) VALUES ('mariam','doctor123','DOCTOR')");
-            st.execute("INSERT INTO users (username,password,role) VALUES ('SalmaK','nurse123','NURSE')");
-            st.execute("INSERT INTO users (username,password,role) VALUES ('salmaA','recep123','RECEPTIONIST')");
-            st.execute("INSERT INTO users (username,password,role) VALUES ('Mohamed','patient123','PATIENT')");
+            st.execute("INSERT INTO users (username,password,role) VALUES ('Zeina','"+PasswordEncryption.hash("admin123")+"','ADMIN')");
+            st.execute("INSERT INTO users (username,password,role) VALUES ('Mariam','"+PasswordEncryption.hash("doctor123")+"','DOCTOR')");
+            st.execute("INSERT INTO users (username,password,role) VALUES ('SalmaK','"+PasswordEncryption.hash("nurse123")+"','NURSE')");
+            st.execute("INSERT INTO users (username,password,role) VALUES ('SalmaA','"+PasswordEncryption.hash("recep123")+"','RECEPTIONIST')");
+            st.execute("INSERT INTO users (username,password,role) VALUES ('Mohamed','"+PasswordEncryption.hash("patient123")+"','PATIENT')");
 
             st.execute("INSERT INTO departments (depName) VALUES ('Cardiology')");
             st.execute("INSERT INTO departments (depName) VALUES ('Pediatrics')");
