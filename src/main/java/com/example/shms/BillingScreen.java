@@ -1,6 +1,5 @@
 package com.example.shms;
 import com.example.shms.model.Bill;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -21,6 +20,7 @@ public class BillingScreen {
     private ObservableList<Bill> allBills;
     private TextField searchField;
     private ComboBox<String> sortBox;
+    private ToggleGroup filterGroup;
 
     public void show(Stage stage){
         Label title = new Label("Billing Management");
@@ -47,7 +47,7 @@ public class BillingScreen {
         Label sortLabel = new Label("sort By");
         sortLabel.setStyle("-fx-font-size: 11px; -fx-textfill: #888888");
         VBox sortBox2 = new VBox(2,sortLabel,sortBox);
-        sortBox.setOnAction(e -> applyFilters);
+        sortBox.setOnAction(e -> applyFilters());
 
         ToggleGroup filterGroup = new ToggleGroup();
         ToggleButton btnAll = makeFilterBtn("All",      filterGroup);
@@ -122,7 +122,7 @@ public class BillingScreen {
                 }
             }
         });
-        billingTable = new TableViews<>();
+        billingTable = new TableView<>();
         billingTable.getColumns().addAll(colBillNum, colPatient, colService, colDate, colAmount, colStatus );
         billingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         billingTable.setStyle("-fx-background-color: white;" + "-fx-border-color: #eOeOe0;" + "-fx-border-radius: 8;" +"-fx-background-radius: 8;" + "-fx-font-size: 13px; ");
@@ -140,18 +140,18 @@ public class BillingScreen {
                     setStyle("-fx-background-color: #fafafa;");
                 }
             }
-        }
-        VBox layout = new VBox(16,title,topControls,filterBar,billingTable);
+        });
+        VBox  layout = new VBox(16,title,topControls,filterBar,billingTable);
         layout.setPadding(new Insets(32));
         layout.setStyle("-fx-background-color: #f0f2f5; ");
         VBox.setVgrow(billingTable,Priority.ALWAYS);
 
-        Scene scene = new Scene (Layout,1000,620);
+        Scene scene = new Scene (layout,1000,620);
         stage.setTitle("Hospital- Billing Management");
         stage.setScene(scene);
         stage.show();
-
-        private ToggleButton makeFilterBtn(String text, ToggleGroup group){
+    }
+    private ToggleButton makeFilterBtn (String text, ToggleGroup group){
             ToggleButton btn = new ToggleButton(text);
             btn.setToggleGroup(group);
             btn.setPrefHeight(34);
@@ -163,7 +163,7 @@ public class BillingScreen {
                     btn.setStyle("-fx-background-color: #1a1a2e;" +"-fx-text-fill: white;" + "-fx-border-radius: 20;" + "-fx-background-radius: 20;" +
                     "-fx-font-size: 13px;" + "-fx-cursor: hand;");}
                 else {
-                    btn.setStyle("-fx-background-color: white;" "-fx-border-color: #cccccc;" + "-fx-border-radius: 20;" + "-fx-background-radius: 20;" +
+                    btn.setStyle("-fx-background-color: white;" +"-fx-border-color: #cccccc;" + "-fx-border-radius: 20;" + "-fx-background-radius: 20;" +
                             "-fx-font-size: 13px;" + "-fx-cursor: hand;");
                 }
             });
@@ -194,5 +194,6 @@ public class BillingScreen {
 
             billingTable.setItems(result);
         }
-    }
+
+
 }
