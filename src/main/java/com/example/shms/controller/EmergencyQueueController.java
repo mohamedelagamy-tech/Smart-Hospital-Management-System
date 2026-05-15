@@ -10,28 +10,36 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.Media;
 
-import java.sql.ResultSet;
 
 public class EmergencyQueueController {
-    @FXML private ListView<String> emergencyList;
-    @FXML private ListView<String> urgentList;
-    @FXML private ListView<String> normalList;
     @FXML private Label messageLabel;
     @FXML private Label nextPatient;
     @FXML private Button callNextBtn;
+    @FXML private Label emergencyCountLabel;
+    @FXML private Label urgentCountLabel;
+    @FXML private Label normalCountLabel;
+    @FXML private Label queueCountLabel;
+    @FXML private Label calledHeading;
+    @FXML private Label calledEmptyLabel;
+    @FXML private ListView<String>waitingListView;
+    @FXML private ListView<String>calledListView;
     private final EmergencyQueue queue = new EmergencyQueue();
     private final DatabaseManager db=DatabaseManager.getInstance();
+    private final ObservableList<String> calledItems=FXCollections.observableArrayList();
     @FXML
     private void initialize() {
+        calledListView.setItems(calledItems);
         loadQueueFromDB();
-        refreshLists();
+        refreshAll();
     }
     private void loadQueueFromDB() {
         try {
             var rs=db.getAllPatients();
             while (rs.next()){
-                Patient p=new Patient();
+                Patient p= new Patient();
                 p.setPatientID(rs.getInt("id"));
                 p.setName(rs.getString("name"));
                 p.setAge(rs.getInt("age"));
@@ -41,36 +49,50 @@ public class EmergencyQueueController {
                 p.setBloodType(rs.getString("bloodType"));
                 p.setAddress(rs.getString("address"));
                 p.setPriority(rs.getInt("priority"));
-                queue.addPatient(p);
+                try{
+                    queue.addPatient(p);
+                }catch(Exception ex){
+                    System.out.println("Skipping duplicate patient"+ex.getMessage());
+                }
             }
         } catch (Exception e) {
             System.out.println("Error loading queue"+e.getMessage());
         }
     }
-    private void refreshLists() {
-        ObservableList<String> emergency= FXCollections.observableArrayList();
-        ObservableList<String> urgent= FXCollections.observableArrayList();
-        ObservableList<String> normal= FXCollections.observableArrayList();
+    private void refreshAll() {
+        refreshSummaryCards();
+        refreshWaitingList();
+        refreshNextPatientLabel();
+    }
+    private void refreshSummaryCards(){
+        int e=queue.getEmergencyQueue().size();
+        int u=queue.getUrgentQueue().size();
+        int n=queue.getNormalQueue().size();
+        emergencyCountLabel.setText(e+"");
+        urgentCountLabel.setText(u+"");
+        normalCountLabel.setText(n+"");
+        queueCountLabel.setText("Waiting Queue ("+(e+u+n)+") ");
+    }
+    private void refreshWaitingList(){
+        ObservableList<String> items=FXCollections.observableArrayList();
         for(Patient p:queue.getEmergencyQueue()){
-            emergency.add(p.getName()+"-"+p.getDepartment());
+            items.add(p.getName()+" Age: "+p.getAge()+" Blood: "+p.getBloodType()+" Emergency");
         }
         for(Patient p:queue.getUrgentQueue()){
-            urgent.add(p.getName()+"-"+p.getDepartment());
+            items.add(p.getName()+" Age: "+p.getAge()+" Blood: "+p.getBloodType()+ " Urgent");
         }
-        for(Patient p:queue.getNormalQueue()){
-            normal.add(p.getName()+"-"+p.getDepartment());
+        for (Patient p:queue.getNormalQueue()){
+            items.add(p.getName()+ " Age: "+p.getAge()+" Blood: "+p.getBloodType()+ " Normal");
         }
-        emergencyList.setItems(emergency);
-        urgentList.setItems(urgent);
-        normalList.setItems(normal);
+        waitingListView.setItems(items);
+    }
+    private void refreshNextPatientLabel(){
         Patient next=queue.peekNext();
-        if(next!=null)
-            nextPatient.setText("Next: "+next.getName());
-        else
-            nextPatient.setText("No next patient");
+        nextPatient.setText(next!=null? "Next: "+next.getName():"Next: None");
     }
     @FXML
     private void handleCallNext(){
+        playDing();
         Patient next=queue.getNext();
         if(next==null){
             nextPatient.setText("No next patient");
@@ -78,9 +100,21 @@ public class EmergencyQueueController {
         }
         String room=getAvailableRoom();
         db.updateStatus(next.getPatientID(),"With Doctor");
-        messageLabel.setStyle("-fx-text-fill: #27ae60; -fx-font-size: 14; -fx-font-weight: bold;");
-        messageLabel.setText(next.getName()+" please proceed to "+room);
-        refreshLists();
+        calledItems.add(next.getName()+"  →  " + room);
+        calledHeading.setText("Called ("+calledItems.size()+")");
+        calledEmptyLabel.setVisible(false);
+        messageLabel.setText(next.getName()+" please proceed to room "+room);
+        refreshAll();
+    }
+    @FXML
+    private void handleReset(){
+        queue.clear();
+        calledItems.clear();
+        calledHeading.setText("Called (0)");
+        calledEmptyLabel.setVisible(true);
+        messageLabel.setText("");
+        loadQueueFromDB();
+        refreshAll();
     }
     private String getAvailableRoom(){
         try{
@@ -92,5 +126,18 @@ public class EmergencyQueueController {
             System.out.println("Error getting available rooms"+e.getMessage());
         }
         return "Room 1";
+    }
+    private void playDing(){
+        try {
+            var url=getClass().getResource("/com/example/shms/sounds/ding.mp3");
+            if(url==null){
+                return;
+            }
+            Media sound=new Media(url.toString());
+            MediaPlayer player=new MediaPlayer(sound);
+            player.play();
+        } catch (Exception e) {
+            System.out.println("Error playing sound "+e.getMessage());
+        }
     }
 }
