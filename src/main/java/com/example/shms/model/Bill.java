@@ -26,4 +26,5 @@ public class Bill implements Billable {
 
     public void setStatus(String status) { this.status = status; }
     public void setAmount(double amount) { this.amount = amount; }
+
 }
