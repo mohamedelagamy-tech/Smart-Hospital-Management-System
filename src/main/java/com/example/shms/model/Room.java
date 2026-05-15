@@ -14,7 +14,7 @@ public class Room {
         this.id = id;
         this.number = number;
         this.roomStatus = roomStatus;
-        this.type = type;
+        this.roomtype = roomtype;
     }
 
     public int getAssignedPatientId() {
