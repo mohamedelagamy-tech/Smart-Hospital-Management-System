@@ -432,4 +432,14 @@ public class DatabaseManager {
         }
         return result;
     }
+    public ResultSet getAvailableRoom(){
+        String sql = "SELECT * FROM rooms WHERE status='Available' LIMIT 1";
+        try{
+            Statement st=connection.createStatement();
+            return st.executeQuery(sql);
+        } catch (SQLException e) {
+            System.out.println("Error getting room: " + e.getMessage());
+            return null;
+        }
+    }
 }

@@ -14,6 +14,15 @@ public class EmergencyQueue {
         urgentQueue = new LinkedList<>();
         normalQueue = new LinkedList<>();
     }
+    public Queue<Patient> getEmergencyQueue() {
+        return emergencyQueue;
+    }
+    public Queue<Patient> getUrgentQueue() {
+        return urgentQueue;
+    }
+    public Queue<Patient> getNormalQueue() {
+        return normalQueue;
+    }
     public void addPatient(Patient patient) throws DuplicationPatientException{
         if(isDuplicate(patient)){
             throw new DuplicationPatientException(patient.getName());
