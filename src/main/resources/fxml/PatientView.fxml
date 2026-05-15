@@ -40,6 +40,7 @@
                         <TableColumn fx:id="ageCol" prefWidth="60.0" text="Age" />
                         <TableColumn fx:id="bloodTypeCol" prefWidth="90.0" text="Blood Type" />
                         <TableColumn fx:id="priorityCol" prefWidth="100.0" text="Priority" />
+                        <TableColumn fx:id="statusCol" prefWidth="130.0" text="Status" />
                         <TableColumn fx:id="actionsCol" prefWidth="120.0" text="Actions" />
                     </columns>
                 </TableView>
