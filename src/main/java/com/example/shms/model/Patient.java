@@ -7,8 +7,10 @@ public class Patient extends Person implements Comparable<Patient>{
     private String phone;
     private int priority;
     private String department;
+    private String bloodType;
+    private String address;
 
-    public Patient(int ID, String name, String email, String password, String role, int age, String gender, String phone, int priority, String department) {
+    public Patient(int ID, String name, String email, String password, String role, int age, String gender, String phone, int priority, String department, String bloodType, String address) {
         super(ID, name, email, password, role);
         this.patientID=ID;
         this.age=age;
@@ -16,6 +18,8 @@ public class Patient extends Person implements Comparable<Patient>{
         this.phone=phone;
         this.priority=priority;
         this.department=department;
+        this.bloodType=bloodType;
+        this.address=address;
     }
     public Patient(){
         super();
@@ -81,4 +85,21 @@ public class Patient extends Person implements Comparable<Patient>{
     public void setDepartment(String department) {
         this.department = department;
     }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
+
