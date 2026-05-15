@@ -6,63 +6,63 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PatientController">
-   <center>
-      <VBox prefHeight="249.0" prefWidth="880.0" spacing="10.0" style="-fx-background-color: white; -fx-border-color: #D6DEE8; -fx-border-radius: 12;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="40.0" prefWidth="879.0" spacing="10.0">
-               <children>
-                  <TextField fx:billNumber="searchField" promptText="Search by name or ID..." style="-fx-background-radius: 8;" />
-                  <ComboBox fx:billNumber="departmentFilter" prefWidth="150.0" promptText="Filter by Department" />
-                  <Button fx:billNumber="allBtn" mnemonicParsing="false" prefWidth="60.0" text="All" onAction="#handleAll"/>
-                   <Button fx:billNumber="emergencyBtn" prefWidth="90.0" style="-fx-background-color: red;" text="Emergency" textFill="#fafafa" onAction="#handleEmergency">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-                   <Button fx:billNumber="urgentBtn" prefWidth="70.0" style="-fx-background-color: orange;" text="Urgent" textFill="WHITE" onAction="#handleUrgent">
-                     <font>
-                        <Font name="System Bold Italic" size="12.0" />
-                     </font></Button>
-                   <Button fx:billNumber="normalBtn" prefWidth="70.0" style="-fx-background-color: green;" text="Normal" textFill="WHITE" onAction="#handleNormal">
-                     <font>
-                        <Font name="System Bold Italic" size="12.0" />
-                     </font></Button>
-                  <Button fx:billNumber="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="+ Add Patient" textAlignment="CENTER" textFill="WHITE" onAction="#handleAddPatient" />
-                   <Button fx:billNumber="resetBtn" prefWidth="60.0" text="Reset" onAction="#handleReset"/>
-               </children>
-            </HBox>
-            <TableView fx:billNumber="patientTable" prefHeight="390.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10;" tableMenuButtonVisible="true">
-              <columns>
-                  <TableColumn fx:billNumber="idCol" prefWidth="60.0" text="ID" />
-                  <TableColumn fx:billNumber="nameCol" prefWidth="160.0" text="Name" />
-                  <TableColumn fx:billNumber="ageCol" prefWidth="60.0" text="Age" />
-                  <TableColumn fx:billNumber="bloodTypeCol" prefWidth="90.0" text="Blood Type" />
-                  <TableColumn fx:billNumber="priorityCol" prefWidth="100.0" text="Priority" />
-                  <TableColumn fx:billNumber="actionsCol" prefWidth="120.0" text="Actions" />
-              </columns>
-            </TableView>
-         </children>
-      </VBox>
-   </center>
-   <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Patient Management" textFill="#fffafa" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font name="Arial Bold" size="24.0" />
-               </font>
-            </Label>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" />
-         </children>
-      </HBox>
-   </top>
-   <bottom>
-      <HBox prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: #F4F7FA;" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:billNumber="statusLabel" alignment="BOTTOM_RIGHT" text="Total Patients: 0" textFill="#374151" />
-         </children>
-      </HBox>
-   </bottom>
+    <center>
+        <VBox prefHeight="249.0" prefWidth="880.0" spacing="10.0" style="-fx-background-color: white; -fx-border-color: #D6DEE8; -fx-border-radius: 12;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <children>
+                <HBox prefHeight="40.0" prefWidth="879.0" spacing="10.0">
+                    <children>
+                        <TextField fx:id="searchField" promptText="Search by name or ID..." style="-fx-background-radius: 8;" />
+                        <ComboBox fx:id="departmentFilter" prefWidth="150.0" promptText="Filter by Department" />
+                        <Button fx:id="allBtn" mnemonicParsing="false" prefWidth="60.0" text="All" onAction="#handleAll"/>
+                        <Button fx:id="emergencyBtn" prefWidth="90.0" style="-fx-background-color: red;" text="Emergency" textFill="#fafafa" onAction="#handleEmergency">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font></Button>
+                        <Button fx:id="urgentBtn" prefWidth="70.0" style="-fx-background-color: orange;" text="Urgent" textFill="WHITE" onAction="#handleUrgent">
+                            <font>
+                                <Font name="System Bold Italic" size="12.0" />
+                            </font></Button>
+                        <Button fx:id="normalBtn" prefWidth="70.0" style="-fx-background-color: green;" text="Normal" textFill="WHITE" onAction="#handleNormal">
+                            <font>
+                                <Font name="System Bold Italic" size="12.0" />
+                            </font></Button>
+                        <Button fx:id="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="+ Add Patient" textAlignment="CENTER" textFill="WHITE" onAction="#handleAddPatient" />
+                        <Button fx:id="resetBtn" prefWidth="60.0" text="Reset" onAction="#handleReset"/>
+                    </children>
+                </HBox>
+                <TableView fx:id="patientTable" prefHeight="390.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10;" tableMenuButtonVisible="true">
+                    <columns>
+                        <TableColumn fx:id="idCol" prefWidth="60.0" text="ID" />
+                        <TableColumn fx:id="nameCol" prefWidth="160.0" text="Name" />
+                        <TableColumn fx:id="ageCol" prefWidth="60.0" text="Age" />
+                        <TableColumn fx:id="bloodTypeCol" prefWidth="90.0" text="Blood Type" />
+                        <TableColumn fx:id="priorityCol" prefWidth="100.0" text="Priority" />
+                        <TableColumn fx:id="actionsCol" prefWidth="120.0" text="Actions" />
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+    <top>
+        <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Patient Management" textFill="#fffafa" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font name="Arial Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" />
+            </children>
+        </HBox>
+    </top>
+    <bottom>
+        <HBox prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: #F4F7FA;" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="statusLabel" alignment="BOTTOM_RIGHT" text="Total Patients: 0" textFill="#374151" />
+            </children>
+        </HBox>
+    </bottom>
 </BorderPane>
