@@ -19,7 +19,7 @@ public class Bill implements Billable {
     public int getAppointmentId() { return appointmentId; }
     public double getAmount() { return amount; }
     public String getStatus() { return status; }
-    public String getDate() { return date; }
+    public String getBILLDate() { return date; }
 
     public void setStatus(String status) { this.status = status; }
     public void setAmount(double amount) { this.amount = amount; }
