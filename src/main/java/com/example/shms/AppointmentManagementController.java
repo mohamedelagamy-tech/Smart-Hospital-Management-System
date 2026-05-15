@@ -32,10 +32,12 @@ public class AppointmentManagementController {
       colNotes.setCellValueFactory(d->new SimpleStringProperty(d.getValue().getNotes()));
       loadAppointments();
     }
-private loadAppointments(){
-        appointmentTable.setItems( FXCollections.observableArrayList(db.getAppointmentsByDoctor(0)));
+private void loadAppointments() {
+    java.util.List<Appointment> all = db.getAppointmentsByDoctor(0);
+    appointmentTable.setItems(FXCollections.observableArrayList(all));
 }
-private void handleCancel(){
+@FXML
+        private void handleCancel(){
         Appointment selected = appointmentTable.getSelectionModel().getSelectedItem();
         if (selected==null){
             new Alert(Alert.AlertType.WARNING,"Please select an appointment ").showAndWait();
@@ -46,8 +48,7 @@ private void handleCancel(){
                     if (r == ButtonType.OK)
                         db.cancelAppointment(selected.getAppointmentId());
                     loadAppointments();
-                }
+
                 });
 }
 }
-;
