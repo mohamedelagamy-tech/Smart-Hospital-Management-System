@@ -4,11 +4,15 @@ import com.example.shms.database.DatabaseManager;
 import com.example.shms.utils.PasswordEncryption;
 import com.example.shms.utils.SessionManager;
 import com.example.shms.utils.Validator;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.util.Duration;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,12 +57,29 @@ public class LoginController {
                 session.login(username,role);
                 logAudit(username, role,"SUCCESS");
                 showError("Login successful!","success");
-                MainApp.navigateTo("dashboard.fxml", 1200, 700);
+
+                session.startSessionTimer(new Runnable() {
+                    @Override
+                    public void run() {
+                        session.logout();
+                        MainApp.navigateTo("login.fxml",800,500);
+                    }
+                });
+
+                switch(role) {
+                    case "ADMIN":
+                    case "DOCTOR":
+                    case "NURSE":
+                    case "RECEPTIONIST":
+                    case "PATIENT":MainApp.navigateTo("dashboard.fxml",1200,700);
+                    break;
+                    default:showError("Unknown role detected.","error");
+                }
             } else {
                 session.addAttempts();
                 logAudit(username,"UNKNOWN","FAILED");
                 int remainingAttempts = 5 - session.getLoginAttempts();
-                showError("Invalid credentials. "+remainingAttempts+" attempts remainingAttempts.","invalid");
+                showError("Invalid credentials. "+remainingAttempts+" attempts.","invalid");
             }
 
         } catch(SQLException e){
@@ -111,5 +132,19 @@ public class LoginController {
         } catch(SQLException e){
             System.out.println("Audit log failed: "+e.getMessage());
         }
+    }
+
+    private void fadeToScene(String fxmlFile, int width, int height) {
+        FadeTransition fade = new FadeTransition(Duration.millis(500));
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+        fade.setNode(usernameField.getScene().getRoot());
+        fade.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                MainApp.navigateTo(fxmlFile, width, height);
+            }
+        });
+        fade.play();
     }
 }

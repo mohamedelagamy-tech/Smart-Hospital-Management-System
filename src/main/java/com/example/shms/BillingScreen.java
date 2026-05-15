@@ -15,7 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 
-public class BillingScreen extends Application {
+public class BillingScreen {
 
     private TableView<Bill> billingTable;
     private ObservableList<Bill> allBills;
@@ -32,7 +32,7 @@ public class BillingScreen extends Application {
         searchField.setPrefHeight(40);
         searchField.setStyle(
                 "-fx-background-color: white"+ "-fx-border-color: #cccccc" +
-                "-fx-border-radius: 6;" + "-fx-background-radius: 6;"+"-fx-padding: 0 12;"
+                "-fx-border-radius: 6;" + "-fx-background-radius: 6;"+"-fx-padding: 0 12;"+
                 "-fx-font-size: 13px;");
         searchField.textProperty().addListener((obs,oldVal,newVal)-> applyFilters());
 
@@ -90,5 +90,109 @@ public class BillingScreen extends Application {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colStatus.setPrefWidth(100);
 
+        colStatus.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(String status, boolean empty) {
+                super.updateItem(status, empty);
+                if (empty || status == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    Label badge = new Label(status);
+                    badge.setPadding(new Insets(4, 12, 4, 12));
+                    badge.setFont(Font.font("System", FontWeight.BOLD, 12));
+                    badge.setStyle("-fx-background-radius: 20;");
+                    switch (status) {
+                        case "Paid":
+                            badge.setTextFill(Color.WHITE);
+                            badge.setStyle("-fx-background-color: #27ae60; -fx-background-radius: 20");
+                            break;
+                        case "Pending":
+                            badge.setTextFill(Color.WHITE);
+                            badge.setStyle("-fx-background-color: #e67e22; -fx-background-radius: 20;");
+                            break;
+                        case "Overdue":
+                            badge.setTextFill(Color.WHITE);
+                            badge.setStyle("-fx-background-color: #e74c3c; -fx-background-radius: 20;");
+                            break;
+                    }
+                    setGraphic(badge);
+                    setText(null);
+                    setAlignment(Pos.CENTER_LEFT);
+                }
+            }
+        });
+        billingTable = new TableViews<>();
+        billingTable.getColumns().addAll(colBillNum, colPatient, colService, colDate, colAmount, colStatus );
+        billingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        billingTable.setStyle("-fx-background-color: white;" + "-fx-border-color: #eOeOe0;" + "-fx-border-radius: 8;" +"-fx-background-radius: 8;" + "-fx-font-size: 13px; ");
+        billingTable.setFixedCellSize(52);
+
+        billingTable.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(Bill item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setStyle("-fx-background-color: white;");
+                } else if (getIndex() % 2 == 0) {
+                    setStyle("-fx-background-color: white;");
+                } else {
+                    setStyle("-fx-background-color: #fafafa;");
+                }
+            }
+        }
+        VBox layout = new VBox(16,title,topControls,filterBar,billingTable);
+        layout.setPadding(new Insets(32));
+        layout.setStyle("-fx-background-color: #f0f2f5; ");
+        VBox.setVgrow(billingTable,Priority.ALWAYS);
+
+        Scene scene = new Scene (Layout,1000,620);
+        stage.setTitle("Hospital- Billing Management");
+        stage.setScene(scene);
+        stage.show();
+
+        private ToggleButton makeFilterBtn(String text, ToggleGroup group){
+            ToggleButton btn = new ToggleButton(text);
+            btn.setToggleGroup(group);
+            btn.setPrefHeight(34);
+            btn.setPadding(new Insets(0,18,0,18));
+            btn.setStyle( "-fx-background-color: white;"+ "-fx-border-color: #cccccc;"+
+                    "-fx-border-radius: 20;" + "-fx-background-radius: 20;" + "-fx-font-size: 16px;");
+            btn.selectedProperty().addListener((obs, wasSelected, isSelected)->{
+                if (isSelected){
+                    btn.setStyle("-fx-background-color: #1a1a2e;" +"-fx-text-fill: white;" + "-fx-border-radius: 20;" + "-fx-background-radius: 20;" +
+                    "-fx-font-size: 13px;" + "-fx-cursor: hand;");}
+                else {
+                    btn.setStyle("-fx-background-color: white;" "-fx-border-color: #cccccc;" + "-fx-border-radius: 20;" + "-fx-background-radius: 20;" +
+                            "-fx-font-size: 13px;" + "-fx-cursor: hand;");
+                }
+            });
+            return btn;
+        }
+    private void applyFilters(){
+            String search = searchField.getText().toLowerCase();
+            String sort = sortBox.getValue();
+
+            ObservableList<Bill> result = FXCollections.observableArrayList();
+            for (Bill b : allBills){
+                boolean matchesSearch = b.getPatientName().toLowerCase().contains(search)
+                        || b.getBillNumber().toLowerCase().contains(search);
+                result.add(b);
+            }
+            result.removeIf(b ->
+                    !b.getPatientName().toLowerCase().contains(search) &&
+                            !b.getBillNumber().toLowerCase().contains(search)
+            );
+            switch (sort) {
+                case "Amount (High to Low)":
+                    result.sort((a, b) -> Double.compare(b.getAmount(), a.getAmount()));
+                    break;
+                case "Amount (Low to High)":
+                    result.sort((a, b) -> Double.compare(a.getAmount(), b.getAmount()));
+                    break;
+            }
+
+            billingTable.setItems(result);
+        }
     }
 }

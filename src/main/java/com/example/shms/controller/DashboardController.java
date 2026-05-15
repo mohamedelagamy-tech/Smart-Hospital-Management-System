@@ -3,7 +3,6 @@ package com.example.shms.controller;
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.utils.SessionManager;
-import com.sun.tools.javac.Main;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -11,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -43,11 +44,11 @@ public class DashboardController implements Initializable {
     @FXML private Button btnDepartments;
     @FXML private Button btnAuditLog;
 
-    private final SessionManager session= SessionManager.getInstance();
-    private final DatabaseManager db= DatabaseManager.getInstance();
+    private final SessionManager session = SessionManager.getInstance();
+    private final DatabaseManager db = DatabaseManager.getInstance();
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url,ResourceBundle rb){
         setupUserInfo();
         setupClock();
         setupRoleBasedMenu();
@@ -55,18 +56,21 @@ public class DashboardController implements Initializable {
     }
 
     private void setupUserInfo(){
-        String user= session.getLoggedInUser();
-        String role= session.getLoggedInRole();
+        String user = session.getLoggedInUser();
+        String role = session.getLoggedInRole();
         userLabel.setText(user);
         roleLabel.setText(role);
-        welcomeLabel.setText("Good morning, "+user+"!");
+        welcomeLabel.setText("Good morning, " + user);
     }
 
     private void setupClock(){
-        Timeline clock = new Timeline(new KeyFrame(Duration.seconds(1),e -> {
-            String time = LocalDateTime.now()
-                    .format(DateTimeFormatter.ofPattern("EEE dd MMM  •  hh:mm a"));
-            clockLabel.setText(time);
+        Timeline clock = new Timeline(new KeyFrame(Duration.seconds(1),new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String time = LocalDateTime.now()
+                        .format(DateTimeFormatter.ofPattern("EEE dd MMM  •  hh:mm a"));
+                clockLabel.setText(time);
+            }
         }));
         clock.setCycleCount(Timeline.INDEFINITE);
         clock.play();
@@ -113,13 +117,13 @@ public class DashboardController implements Initializable {
         try (Statement st= db.getConnection().createStatement()) {
             ResultSet rs;
 
-            rs = st.executeQuery("SELECT COUNT(*) FROM patients");
+            rs= st.executeQuery("SELECT COUNT(*) FROM patients");
             statPatients.setText(String.valueOf(rs.getInt(1)));
 
-            rs = st.executeQuery("SELECT COUNT(*) FROM doctors");
+            rs= st.executeQuery("SELECT COUNT(*) FROM doctors");
             statDoctors.setText(String.valueOf(rs.getInt(1)));
 
-            rs = st.executeQuery("SELECT COUNT(*) FROM appointments");
+            rs= st.executeQuery("SELECT COUNT(*) FROM appointments");
             statAppointments.setText(String.valueOf(rs.getInt(1)));
 
             ResultSet available = st.executeQuery("SELECT COUNT(*) FROM rooms WHERE status = 'Available'");
@@ -127,13 +131,15 @@ public class DashboardController implements Initializable {
             statRooms.setText(available.getInt(1) + "/" + total.getInt(1));
 
         } catch (SQLException e) {
-            System.out.println("Stats load failed: " + e.getMessage());
+            System.out.println("Stats load failed: "+e.getMessage());
         }
     }
 
-    @FXML private void handleLogout() {
+    @FXML
+    private void handleLogout(){
+        session.stopSessionTimer();
         session.logout();
-        MainApp.navigateTo("login.fxml", 800, 500);
+        MainApp.navigateTo("login.fxml",800,500);
     }
 
     @FXML private void showDashboard() {}
