@@ -383,7 +383,7 @@ public class DatabaseManager {
     }
     public void updateBillStatus(int billId, String newStatus) {
         for (Bill b : bills) {
-            if (b.getId() == billId) b.setStatus(newStatus);
+            if (b.getBillNumber() == billId) b.setStatus(newStatus);
         }
     }
     public List<Bill> getBillsByPatient(int patientId) {
