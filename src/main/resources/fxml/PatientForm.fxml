@@ -127,15 +127,20 @@
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <tooltip><Tooltip text="Emergency" /></tooltip>
                         </Button>
                         <Button fx:id="urgentPriorityBtn" mnemonicParsing="false" onAction="#handleUrgentPriority" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-radius: 6;" text="●" textFill="#ff8d00">
                            <font>
                               <Font size="18.0" />
-                           </font></Button>
+                           </font>
+                           <tooltip><Tooltip text="Urgent" /></tooltip>
+                        </Button>
                         <Button fx:id="normalPriorityBtn" mnemonicParsing="false" onAction="#handleNormalPriority" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-radius: 6;" text="●" textFill="#30ff00">
                            <font>
                               <Font size="18.0" />
-                           </font></Button>
+                           </font>
+                           <tooltip><Tooltip text="Normal" /></tooltip>
+                        </Button>
                      </children>
                   </HBox>
                </children>
