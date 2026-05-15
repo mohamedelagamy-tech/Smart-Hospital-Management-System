@@ -65,4 +65,36 @@ public class SessionManager {
     public void setLoginAttempts(int loginAttempts){
         this.loginAttempts = loginAttempts;
     }
+
+    private Thread timeoutThread;
+    private Runnable onTimeout;
+    private static final int timeoutSeconds = 300;
+
+    public void startSessionTimer(Runnable onTimeout){
+        this.onTimeout = onTimeout;
+        stopSessionTimer();
+        timeoutThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(timeoutSeconds * 1000L);
+                    if (onTimeout != null) {
+                        javafx.application.Platform.runLater(onTimeout);
+                    }
+                } catch (InterruptedException e) {}
+            }
+        });
+        timeoutThread.setDaemon(true);
+        timeoutThread.start();
+    }
+
+    public void stopSessionTimer() {
+        if (timeoutThread != null && timeoutThread.isAlive()) {
+            timeoutThread.interrupt();
+        }
+    }
+
+    public void resetSessionTimer(Runnable onTimeout) {
+        startSessionTimer(onTimeout);
+    }
 }
