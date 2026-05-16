@@ -17,34 +17,28 @@ public class Room {
         this.roomtype = roomtype;
     }
 
+    public int getRoomNumber() {return roomNumber;}
     public int getAssignedPatientId() {
         return assignedPatientId;
     }
-
     public String getDepartment() {
         return department;
     }
-
     public int getId() {
         return id;
     }
-
     public int getRoomNumberNumber() {
         return roomNumber;
     }
-
     public String getRoomStatus() {
         return roomStatus;
     }
-
     public String getRoomtype() {
         return roomtype;
     }
-
     public void setAssignedPatientId(int assignedPatientId) {
         this.assignedPatientId = assignedPatientId;
     }
-
     public void setRoomStatus(String roomStatus) {
         this.roomStatus = roomStatus;
     }
