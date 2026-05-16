@@ -136,21 +136,52 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    private void showDashboard(){
+        MainApp.navigateTo("dashboard.fxml",1200,700);
+    }
+    @FXML
     private void handleLogout(){
         session.stopSessionTimer();
         session.logout();
         MainApp.navigateTo("login.fxml",800,500);
     }
-
-    @FXML private void showDashboard() {}
-    @FXML private void showPatients() {}
-    @FXML private void showDoctors() {}
-    @FXML private void showAppointments() {}
-    @FXML private void showRecords() {}
-    @FXML private void showPrescriptions() {}
-    @FXML private void showEmergency() {}
-    @FXML private void showBilling() {}
-    @FXML private void showRooms() {}
-    @FXML private void showDepartments() {}
-    @FXML private void showAuditLog() {}
+    @FXML
+    private void showPatients(){
+        MainApp.navigateTo("PatientView.fxml",1200,700);
+    }
+    @FXML
+    private void showDoctors(){
+        MainApp.navigateTo("DoctorView.fxml",1200,700);
+    }
+    @FXML
+    private void showAppointments(){
+        MainApp.navigateTo("AppointmentView.fxml", 1200,700);
+    }
+    @FXML
+    private void showRecords(){
+        MainApp.navigateTo("MedicalRecords.fxml",1200,700);
+    }
+    @FXML
+    private void showPrescriptions(){
+        MainApp.navigateTo("PrescriptionView.fxml",1200,700);
+    }
+    @FXML
+    private void showEmergency(){
+        MainApp.navigateTo("EmergencyQueue.fxml",1200,700);
+    }
+    @FXML
+    private void showBilling(){
+        MainApp.navigateTo("BillingView.fxml",1200,700);
+    }
+    @FXML
+    private void showRooms(){
+        MainApp.navigateTo("RoomView.fxml",1200,700);
+    }
+    @FXML
+    private void showDepartments(){
+        MainApp.navigateTo("DepartmentView.fxml",1200,700);
+    }
+    @FXML private void showAuditLog(){
+        MainApp.navigateTo("auditLog.fxml",1200,700);
+    }
 }
