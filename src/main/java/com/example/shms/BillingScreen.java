@@ -26,6 +26,20 @@ public class BillingScreen {
         Label title = new Label("Billing Management");
         title.setFont(Font.font("Georgia",FontWeight.BOLD,28));
 
+        Button newBillBtn = new Button("+ New Bill");
+        newBillBtn.setPrefHeight(40);
+        newBillBtn.setStyle( "-fx-background-color: #1a1a2e;" +
+                "-fx-text-fill: white;" +
+                "-fx-background-radius: 8;" +
+                "-fx-font-size: 13px;" +
+                "-fx-cursor: hand;");
+        newBillBtn.setOnAction(e -> openNewBillForm());
+        Region spacer = new Region();
+        HBox.setHgrow(spacer,Priority.ALWAYS);
+        HBox titlrBar = new HBox(title,spacer,newBillBtn);
+        titleBar.setAlignment(Pos.CENTER_LEFT);
+
+
         searchField=new TextField();
         searchField.setPromptText("search by patient neme , bill number ,date ...");
         searchField.setPrefWidth(280);
@@ -141,7 +155,7 @@ public class BillingScreen {
                 }
             }
         });
-        VBox  layout = new VBox(16,title,topControls,filterBar,billingTable);
+        VBox  layout = new VBox(16,titleBar,topControls,filterBar,billingTable);
         layout.setPadding(new Insets(32));
         layout.setStyle("-fx-background-color: #f0f2f5; ");
         VBox.setVgrow(billingTable,Priority.ALWAYS);
@@ -194,6 +208,83 @@ public class BillingScreen {
 
             billingTable.setItems(result);
         }
+    private void openNewBillForm(){
+        Stage formStage = new Stage();
+        formStage.setTitle("Generate New Bill");
+
+        Label patientLabel = new Label("patient name ");
+        ComboBox<String> patientBox = new ComboBox<>();
+        patientBox.getItems().addAll(
+                "...add patient names...",
+                "...add more..."
+        );
+        patientBox.setPromptText("select a patient");
+        patientBox.setPrefWidth(300);
+
+        Label serviceLabel = new Label("service");
+        TextField serviceField = new TextField();
+        serviceField.setPromptText("enter service type");
+        serviceField.setPrefWidth(300);
+
+        Label amountLabel = new Label("cost:");
+        TextField amountField = new TextField();
+        amountField.setPromptText("enter amount");
+        amountField.setPrefWidth(300);
+
+        Label statusLabel = new Label("status");
+        ComboBox<String> statusBox = new ComboBox<>();
+        statusBox.getItems().addAll("Pending","paid","overdue");
+        statusBox.setValue("Pending");
+        statusBox.setPrefWidth(300);
+
+        Button submitBtn = new Button("submit");
+        submitBtn.setPrefWidth(300);
+        submitBtn.setPrefHeight(40);
+        submitBtn.setStyle(submitBtn.setStyle("-fx-background-color: #0078D4;"+"-fx-text-fill: white;"+
+                "-fx-font-size: 14px;"+" -fx-background-radius: 5;");
+
+        submitBtn.setOnAction(e->{
+                String selectedPatient = patientBox.getValue();
+        String service         = serviceField.getText();
+        String amountText      = amountField.getText();
+        String status          = statusBox.getValue(););
+
+        if (selectedPatient == null || service.isEmpty () || amountText.isEmpty()){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("missing fields");
+        alert.setContentText("all fields are required");
+        alert.show();
+        return;  }
+            double amount;
+        try{ amount = Double.parseDouble(amountText);}
+        catch (NumberFormatException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("wrong amount");
+            alert.show();
+            return;}
+        String billNum = "INV-" + (allBills.size()+1);
+        String today = java.time.LocalDate.now().toString();
+        Bill newBill = new Bill(billNum,selectedPatient,service,today,amount,status);
+        allBills.add(newBill);
+        billingTable.setItems(allBills);
+        formStage.close();});
+
+        VBox formLayout = new VBox(12,
+                patientLabel,  patientBox,
+                serviceLabel,  serviceField,
+                amountLabel,   amountField,
+                statusLabel,   statusBox,
+                submitBtn
+        );
+        formLayout.setPadding(new Insets(30));
+        formLayout.setStyle("-fx-background-color: #FFFFFF;");
+
+        Scene formScene = new Scene(formLayout, 380, 480);
+        formStage.setScene(formScene);
+        formStage.show();
+    }
+
+    }
 
 
 }
