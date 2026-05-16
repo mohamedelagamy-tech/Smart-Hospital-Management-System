@@ -16,9 +16,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+
 public class BillingController implements Initializable {
     @FXML private TextField searchField;
     @FXML private ComboBox<String> sortBox;
