@@ -8,4 +8,5 @@ module com.example.shms {
     opens com.example.shms.controller to javafx.fxml;
     opens com.example.shms.model to javafx.fxml, javafx.base;
     exports com.example.shms;
+    exports com.example.shms.controller;
 }

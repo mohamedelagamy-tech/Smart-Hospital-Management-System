@@ -1,4 +1,5 @@
-package com.example.shms;
+package com.example.shms.controller;
+import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Appointment;
 import javafx.beans.property.SimpleIntegerProperty;
