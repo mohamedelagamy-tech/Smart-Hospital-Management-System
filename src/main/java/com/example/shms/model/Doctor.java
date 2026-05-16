@@ -2,13 +2,14 @@ package com.example.shms.model;
 
 import java.util.Comparator;
 
-public class Doctor extends Person implements Comparable<Doctor> {
+public class Doctor extends Person implements Comparable<Doctor>, Schedulable  {
      private String department;
      private String status;
+     private double salary;
+     private String workingDays;
+     private String workingHours;
      private double totalRating;
      private int ratingCount;
-     private double salary;
-
 
      public static final Comparator<Doctor> By_NAME =
              Comparator.comparing(Person::getName);
@@ -20,23 +21,27 @@ public class Doctor extends Person implements Comparable<Doctor> {
             Comparator.comparingDouble(Doctor::getSalary).reversed();
 
 
-     public Doctor(int ID, String name, String email, String password, String department, String status, double salary) {
+     public Doctor(int ID, String name, String email, String password, String department, String status, double salary,String workingDays, String workingHours) {
          super(ID, name, email, password, "Doctor");
          this.department = department;
          this.status = status;
          this.salary= salary;
+         this.workingDays = workingDays;
+         this.workingHours = workingHours;
          this.totalRating = 0;
          this.ratingCount = 0;
      }
 
      public Doctor(int ID, String name, String email, String password, String department, String status,
-                   double salary, double totalRating, int ratingCount) {
+                   double salary, String workingDays, String workingHours, double totalRating, int ratingCount) {
 
          super(ID, name, email, password, "Doctor");
 
          this.department = department;
          this.status = status;
          this.salary=salary;
+         this.workingDays = workingDays;
+         this.workingHours = workingHours;
          this.totalRating = totalRating;
          this.ratingCount = ratingCount;
      }
@@ -53,6 +58,9 @@ public class Doctor extends Person implements Comparable<Doctor> {
                  + ", Email: " + getEmail()
                  + ", Department: " + department
                  + ", Status: " + status
+                 + ", Salary: " + salary
+                 + ", Working Days: " + workingDays
+                 + ", Working Hours: " + workingHours
                  + ", Average Rating: " + getAverageRating();
      }
 
@@ -90,9 +98,27 @@ public class Doctor extends Person implements Comparable<Doctor> {
 
      public double getSalary(){ return salary; }
 
-     public void setSalary(){ this.salary=salary; }
+     public void setSalary(){ this.salary = salary; }
 
-     public double getTotalRating() {
+    @Override
+    public String getWorkingDays() {
+        return workingDays;
+    }
+
+    public void setWorkingDays(String workingDays) {
+        this.workingDays = workingDays;
+    }
+
+    @Override
+    public String getWorkingHours() {
+        return workingHours;
+    }
+
+    public void setWorkingHours(String workingHours) {
+        this.workingHours = workingHours;
+    }
+
+    public double getTotalRating() {
          return totalRating;
      }
 
@@ -116,6 +142,8 @@ public class Doctor extends Person implements Comparable<Doctor> {
                  + ", Department: " + department
                  + ", Status: " + status
                  + ", Salary: " + String.format("%.2f", salary)
+                 + ", Working Days: " + workingDays
+                 + ", Working Hours: " + workingHours
                  + ", Average Rating: " + String.format("%.2f", getAverageRating());
      }
  }
