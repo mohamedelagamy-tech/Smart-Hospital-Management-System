@@ -31,6 +31,7 @@ public class DashboardController implements Initializable {
     @FXML private Label statDoctors;
     @FXML private Label statAppointments;
     @FXML private Label statRooms;
+    @FXML private Label userInitials;
 
     @FXML private Button btnDashboard;
     @FXML private Button btnPatients;
@@ -82,9 +83,11 @@ public class DashboardController implements Initializable {
     private void setupUserInfo(){
         String user = session.getLoggedInUser();
         String role = session.getLoggedInRole();
+        String initials = user.substring(0, Math.min(2, user.length())).toUpperCase();
         userLabel.setText(user);
         roleLabel.setText(role);
         welcomeLabel.setText("Good morning, " + user);
+        userInitials.setText(initials);
     }
 
     private void setupClock(){
