@@ -36,7 +36,7 @@ public class BillingScreen {
         newBillBtn.setOnAction(e -> openNewBillForm());
         Region spacer = new Region();
         HBox.setHgrow(spacer,Priority.ALWAYS);
-        HBox titlrBar = new HBox(title,spacer,newBillBtn);
+        HBox titleBar = new HBox(title,spacer,newBillBtn);
         titleBar.setAlignment(Pos.CENTER_LEFT);
 
 
@@ -240,14 +240,14 @@ public class BillingScreen {
         Button submitBtn = new Button("submit");
         submitBtn.setPrefWidth(300);
         submitBtn.setPrefHeight(40);
-        submitBtn.setStyle(submitBtn.setStyle("-fx-background-color: #0078D4;"+"-fx-text-fill: white;"+
+        submitBtn.setStyle("-fx-background-color: #0078D4;"+"-fx-text-fill: white;"+
                 "-fx-font-size: 14px;"+" -fx-background-radius: 5;");
 
         submitBtn.setOnAction(e->{
                 String selectedPatient = patientBox.getValue();
         String service         = serviceField.getText();
         String amountText      = amountField.getText();
-        String status          = statusBox.getValue(););
+        String status          = statusBox.getValue();
 
         if (selectedPatient == null || service.isEmpty () || amountText.isEmpty()){
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -287,4 +287,3 @@ public class BillingScreen {
     }
 
 
-}
