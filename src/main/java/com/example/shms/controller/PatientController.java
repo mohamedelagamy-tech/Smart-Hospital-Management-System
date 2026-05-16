@@ -23,6 +23,7 @@ public class PatientController {
     @FXML private TableColumn<Patient, Integer> ageCol;
     @FXML private TableColumn<Patient, String> bloodTypeCol;
     @FXML private TableColumn<Patient, Integer> priorityCol;
+    @FXML private TableColumn<Patient, String> statusCol;
     @FXML private TableColumn<Patient, Void> actionsCol;
     @FXML private TextField searchField;
     @FXML private ComboBox<String> departmentFilter;
@@ -45,6 +46,25 @@ public class PatientController {
         ageCol.setCellValueFactory(new PropertyValueFactory<>("age"));
         bloodTypeCol.setCellValueFactory(new PropertyValueFactory<>("bloodType"));
         priorityCol.setCellValueFactory(new PropertyValueFactory<>("priority"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+        statusCol.setCellFactory(col->new  TableCell<Patient, String>() {
+            @Override
+            protected void updateItem(String status, boolean empty) {
+                super.updateItem(status, empty);
+                if(empty || status == null) {
+                    setText(null);
+                    setStyle("");
+                }else{
+                    setText(status);
+                    switch (status) {
+                        case "Waiting"->setStyle("-fx-text-fill: #B45309; -fx-font-weight: bold;");
+                        case "With Doctor"->setStyle("-fx-text-fill: #1D4ED8; -fx-font-weight: bold;");
+                        case "Discharged"->setStyle("-fx-text-fill: #166534; -fx-font-weight: bold;");
+                        default->setStyle("");
+                    };
+                }
+            }
+        });
     }
     private void setupActions() {
         actionsCol.setCellFactory(col->new TableCell<>(){
@@ -89,6 +109,8 @@ public class PatientController {
                 p.setDepartment(rs.getString("department"));
                 p.setBloodType(rs.getString("bloodType"));
                 p.setAddress(rs.getString("address"));
+                p.setPriority(rs.getInt("priority"));
+                p.setStatus(rs.getString("status"));
                 patientList.add(p);
             }
         } catch (SQLException e) {
@@ -113,7 +135,7 @@ public class PatientController {
             }
         }
         patientTable.setItems(filtered);
-        statusLabel.setText("Showing: " + filtered.size()+"of "+patientList.size()+" patients");
+        statusLabel.setText("Showing: " + filtered.size()+" of "+patientList.size()+" patients");
     }
     private String getPriorityNumber(String filter){
         return switch (filter){

@@ -1,7 +1,7 @@
 package com.example.shms.model;
 public class Bill implements Billable {
 
-    private final int billNumber;
+    private final String billNumber;
     private int patientId;
     private int appointmentId;
     private double amount;
@@ -17,7 +17,7 @@ public class Bill implements Billable {
         this.date = date;
     }
 
-    public int getBillNumber() { return billNumber; }
+    public String getBillNumber() { return billNumber; }
     public int getPatientId() { return patientId; }
     public int getAppointmentId() { return appointmentId; }
     public double getAmount() { return amount; }

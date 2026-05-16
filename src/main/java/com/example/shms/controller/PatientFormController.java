@@ -25,6 +25,7 @@ public class PatientFormController {
         genderCombo.setItems(FXCollections.observableArrayList("Male","Female"));
         bloodTypeCombo.setItems(FXCollections.observableArrayList("A+","A-","B+","B-","AB+","AB-","O+","O-"));
         departmentCombo.setItems(FXCollections.observableArrayList("Cardiology","Pediatrics","Emergency","Neurology","Orthopedics","Dermatology","Oncology","Radiology"));
+        handleNormalPriority();
     }
     public void setPatient(Patient patient) {
         this.editingPatient = patient;

@@ -134,7 +134,8 @@ public class DatabaseManager {
                     "address TEXT NOT NULL," +
                     "bloodType TEXT NOT NULL," +
                     "department TEXT NOT NULL," +
-                    "priority INTEGER DEFAULT 3)");
+                    "priority INTEGER DEFAULT 3," +
+                    "status TEXT DEFAULT 'Waiting')");
 
             st.execute("CREATE TABLE IF NOT EXISTS departments (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -280,7 +281,7 @@ public class DatabaseManager {
         }
     }
     public void updateStatus(int id, String status) {
-        String sql = "UPDATE appointments SET status=? WHERE patientID=?";
+        String sql = "UPDATE patients SET status=? WHERE patientID=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, status);
             ps.setInt(2, id);

@@ -82,4 +82,10 @@ public class EmergencyQueue {
         System.out.println("NORMAL");
         normalQueue.forEach(p-> System.out.println("- "+p.getName()));
     }
+
+    public void clear() {
+        emergencyQueue.clear();
+        urgentQueue.clear();
+        normalQueue.clear();
+    }
 }
