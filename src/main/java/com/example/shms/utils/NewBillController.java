@@ -1,5 +1,6 @@
 package com.example.shms;
 
+import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Bill;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -61,10 +62,10 @@ public class NewBillController implements Initializable {
         String billNum = "INV-" + (allBills.size() + 1);
         String today   = java.time.LocalDate.now().toString();
         Bill newBill   = new Bill(billNum, selectedPatient, service, today, amount, status);
-
+        private final DatabaseManager db = DatabaseManager.getInstance();
         allBills.add(newBill);
         billingTable.setItems(allBills);
-
+        db.addBill(newBill);
         ((Stage) serviceField.getScene().getWindow()).close();
     }
 

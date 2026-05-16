@@ -1,5 +1,6 @@
 package com.example.shms.utils;
 
+import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Bill;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,7 +39,7 @@ public class BillingController implements Initializable {
 
     private ObservableList<Bill> allBills = FXCollections.observableArrayList();
     private ToggleGroup filterGroup;
-
+    private final DatabaseManager db = DatabaseManager.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -103,6 +104,7 @@ public class BillingController implements Initializable {
 
         billingTable.setFixedCellSize(52);
         billingTable.setItems(allBills);
+        allBills.addAll(db.getAllBills());
     }
 
     @FXML

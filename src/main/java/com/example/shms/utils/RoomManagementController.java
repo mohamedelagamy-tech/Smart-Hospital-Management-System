@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -81,6 +82,22 @@ public class RoomManagementController implements Initializable {
         card.setPrefSize(220, 155);
         card.setPadding(new Insets(18));
         card.setUserData(room);
+
+        if (room.getRoomStatus().equalsIgnoreCase("Available")) {
+            Button assignBtn = new Button("Assign Patient");
+            assignBtn.setStyle("-fx-background-color: #1a1a2e; -fx-text-fill: white; " +
+                    "-fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand;");
+            assignBtn.setOnAction(e -> showAssignDialog(room));
+            card.getChildren().add(assignBtn);
+            if (room.getRoomStatus().equalsIgnoreCase("Occupied")) {
+                Button releaseBtn = new Button("Release Room");
+                releaseBtn.setStyle("-fx-background-color: #ef4444; -fx-text-fill: white; " +
+                        "-fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand;");
+                releaseBtn.setOnAction(e -> showReleaseDialog(room));
+                card.getChildren().add(releaseBtn);
+            }
+
+        }
         return card;
     }
 
