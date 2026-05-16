@@ -39,7 +39,7 @@ public class EmergencyQueue {
             case 3->normalQueue.add(patient);
             default -> System.out.println("Invalid Priority"+ patient.getPriority());
         }
-        System.out.println("Patient: "+patient.getName()+ "added to the queue");
+        System.out.println("Patient: "+patient.getName()+ " added to the queue");
     }
     public Patient getNext(){
         if(!emergencyQueue.isEmpty()){
