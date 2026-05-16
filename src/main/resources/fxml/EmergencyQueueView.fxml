@@ -104,8 +104,8 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Pane prefHeight="52.0" prefWidth="450.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="nextPatient" prefHeight="9.0" prefWidth="81.0" text="Next: None" textFill="#60a5fa" HBox.hgrow="ALWAYS">
+                  <Pane prefHeight="38.0" prefWidth="312.0" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="nextPatient" prefHeight="22.0" prefWidth="203.0" text="Next: None" textFill="#60a5fa" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
