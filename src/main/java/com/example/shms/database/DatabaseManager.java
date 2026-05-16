@@ -460,4 +460,138 @@ public class DatabaseManager {
         }
 
     }
+
+    public void addDoctor(String name, String email, String password, String department, String status, double salary,
+                          String workingDays, String workingHours){
+        String sql = "Insert INTO doctors(name,email,password,department,status,salary,workingDays,workingHours) VALUES(?,?,?,?,?,?,?,?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, password);
+            ps.setString(4, department);
+            ps.setString(5, status);
+            ps.setDouble(6, salary);
+            ps.setString(7, workingDays);
+            ps.setString(8, workingHours);
+            ps.executeUpdate();
+            System.out.println("Doctor added successfully!");
+        } catch (SQLException e) {
+            System.out.println("Error adding doctor: " + e.getMessage());
+        }
+    }
+
+    public void editDoctor(int id, String name, String email, String password, String department, String status, double salary,
+                           String workingDays, String workingHours){
+        String sql = "UPDATE doctors SET name=?,email=?,password=?,department=?,status=?,salary=?,workingDays=?,workingHours=? WHERE id=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, password);
+            ps.setString(4, department);
+            ps.setString(5, status);
+            ps.setDouble(6, salary);
+            ps.setString(7, workingDays);
+            ps.setString(8, workingHours);
+            ps.setInt(9, id);
+            ps.executeUpdate();
+            System.out.println("Doctor edited successfully!");
+        } catch (SQLException e) {
+            System.out.println("Error editing doctor: " + e.getMessage());
+        }
+    }
+
+    public void removeDoctor(int id){
+        String sql = "DELETE FROM doctors WHERE id=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            System.out.println("Doctor removed successfully!");
+        } catch (SQLException e) {
+            System.out.println("Error removing doctor: " + e.getMessage());
+        }
+    }
+
+    public ResultSet getAllDoctors(){
+        String sql = "SELECT * FROM doctors";
+        try{
+            Statement st = connection.createStatement();
+            return st.executeQuery(sql);
+        }
+        catch(SQLException e){
+            System.out.println("Error getting all doctors: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public ResultSet getDoctorsByDepartment(String department){
+        String sql = "SELECT * FROM doctors WHERE department=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, department);
+            return ps.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("Error getting doctors by department: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public void UpdateAvailability(int id, String status){
+        String sql = "UPDATE doctors SET status=? WHERE id=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, status);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            System.out.println("Doctor availability updated successfully!");
+        } catch (SQLException e) {
+            System.out.println("Error updating doctor availability: " + e.getMessage());
+        }
+    }
+
+    public void addRating(int id, double newRating) {
+        if (newRating < 1 || newRating > 5) {
+            System.out.println("Rating must be between 1 and 5");
+            return;
+        }
+        String selectSql = "SELECT totalRating, ratingCount FROM doctors WHERE id=?";
+        try (PreparedStatement ps = connection.prepareStatement(selectSql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                double totalRating = rs.getDouble("totalRating");
+                int ratingCount = rs.getInt("ratingCount");
+                double updatedTotal = totalRating + newRating;
+                int updatedCount = ratingCount + 1;
+
+                String updateSql = "UPDATE doctors SET totalRating=?, ratingCount=? WHERE id=?";
+                try (PreparedStatement ps2 = connection.prepareStatement(updateSql)) {
+                    ps2.setDouble(1, updatedTotal);
+                    ps2.setInt(2, updatedCount);
+                    ps2.setInt(3, id);
+                    ps2.executeUpdate();
+                    System.out.println("Rating added successfully!");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error adding rating: " + e.getMessage());
+        }
+    }
+    public double getAverageRating(int id) {
+        String sql = "SELECT totalRating, ratingCount FROM doctors WHERE id=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                double totalRating = rs.getDouble("totalRating");
+                int ratingCount = rs.getInt("ratingCount");
+                if (ratingCount == 0) return 0.0;
+                return totalRating / ratingCount;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting average rating: " + e.getMessage());
+        }
+        return 0.0;
+    }
+
 }
+
+

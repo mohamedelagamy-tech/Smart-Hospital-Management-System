@@ -98,7 +98,7 @@ public class Doctor extends Person implements Comparable<Doctor>, Schedulable  {
 
      public double getSalary(){ return salary; }
 
-     public void setSalary(){ this.salary = salary; }
+     public void setSalary(double salary){ this.salary = salary; }
 
     @Override
     public String getWorkingDays() {
