@@ -255,10 +255,16 @@ public class BillingScreen {
         alert.setContentText("all fields are required");
         alert.show();
         return;  }
-        double amount;
-        try{
-
-        }
+            double amount;
+        try{ amount = Double.parseDouble(amountText);}
+        catch (NumberFormatException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("wrong amount");
+            alert.show();
+            return;}
+        String billNum = "INV-" + (allBills.size()+1);
+        String today = java.time.LocalDate.now().toString();
+        Bill newBill = new Bill(billNum,selectedPatient,service,today,amount,status);
 
     }
 

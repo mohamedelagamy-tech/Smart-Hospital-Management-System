@@ -10,11 +10,24 @@ public class Bill implements Billable {
     private String patientName;
     private String service;
 
-    public Bill(String billNumber, int patientId, int appointmentId, String date) {
-        this.billNumber = billNumber;
-        this.patientId = patientId;
-        this.appointmentId = appointmentId;
+    public Bill(String billNumber,String patientName,String service, String date,int amount,String status) {
+        this.status = status;
+        this.service = service;
+        this.patientName = patientName;
         this.date = date;
+        this.billNumber = billNumber;
+        this.amount = amount;
+    }
+
+    public Bill(String status, String service, String patientName, int patientId, String date, String billNumber, int appointmentId, double amount) {
+        this.status = status;
+        this.service = service;
+        this.patientName = patientName;
+        this.patientId = patientId;
+        this.date = date;
+        this.billNumber = billNumber;
+        this.appointmentId = appointmentId;
+        this.amount = amount;
     }
 
     public String getBillNumber() { return billNumber; }
