@@ -283,7 +283,6 @@ public class BillingScreen {
         formStage.setScene(formScene);
         formStage.show();
     }
-
     }
 
 
