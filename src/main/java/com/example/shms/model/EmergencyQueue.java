@@ -6,13 +6,19 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class EmergencyQueue {
+    private static EmergencyQueue instance;
     private final Queue<Patient> emergencyQueue;
     private final Queue<Patient> urgentQueue;
     private final Queue<Patient> normalQueue;
-    public EmergencyQueue() {
+    private EmergencyQueue() {
         emergencyQueue = new LinkedList<>();
         urgentQueue = new LinkedList<>();
         normalQueue = new LinkedList<>();
+    }
+    public static EmergencyQueue getInstance() {
+        if(instance == null)
+            instance = new EmergencyQueue();
+        return instance;
     }
     public Queue<Patient> getEmergencyQueue() {
         return emergencyQueue;

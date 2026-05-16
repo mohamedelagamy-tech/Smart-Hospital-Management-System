@@ -3,7 +3,6 @@ package com.example.shms.controller;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.EmergencyQueue;
 import com.example.shms.model.Patient;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,7 +26,7 @@ public class EmergencyQueueController {
     @FXML private Label calledEmptyLabel;
     @FXML private ListView<String>waitingListView;
     @FXML private ListView<String>calledListView;
-    private final EmergencyQueue queue = new EmergencyQueue();
+    private final EmergencyQueue queue =EmergencyQueue.getInstance();
     private final DatabaseManager db=DatabaseManager.getInstance();
     private final ObservableList<String> calledItems=FXCollections.observableArrayList();
     @FXML
