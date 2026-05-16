@@ -443,6 +443,23 @@ public class DatabaseManager {
             return null;
         }
     }
+    public int getNextPatientId(){
+        try(Statement st= connection.createStatement()){
+            ResultSet rs= st.executeQuery("SELECT MAX(id) AS maxID FROM patients");
+            return rs.getInt("maxID")+1;
+        }catch(SQLException e){
+            return 1;
+        }
+    }
+    public int getNextDoctorId(){
+        try(Statement st= connection.createStatement()){
+            ResultSet rs= st.executeQuery("SELECT MAX(id) AS maxID FROM doctors");
+            return rs.getInt("maxID")+1;
+        }catch(SQLException e){
+            return 1;
+        }
+
+    }
 
     public void addDoctor(String name, String email, String password, String department, String status, double salary,
                           String workingDays, String workingHours){

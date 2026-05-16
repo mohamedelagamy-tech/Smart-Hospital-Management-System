@@ -53,6 +53,30 @@ public class DashboardController implements Initializable {
         setupClock();
         setupRoleBasedMenu();
         loadStats();
+        autoRefresh();
+    }
+
+    private void autoRefresh() {
+        Thread refreshThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(30000);
+                        javafx.application.Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                loadStats();
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        });
+        refreshThread.setDaemon(true);
+        refreshThread.start();
     }
 
     private void setupUserInfo(){
