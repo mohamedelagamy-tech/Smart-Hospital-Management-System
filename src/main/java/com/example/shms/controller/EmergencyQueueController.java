@@ -1,5 +1,6 @@
 package com.example.shms.controller;
 
+import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.EmergencyQueue;
 import com.example.shms.model.Patient;
@@ -164,5 +165,9 @@ public class EmergencyQueueController {
         } catch (Exception e) {
             System.out.println("Error playing sound "+e.getMessage());
         }
+    }
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
     }
 }

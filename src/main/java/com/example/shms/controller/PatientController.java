@@ -1,5 +1,6 @@
 package com.example.shms.controller;
 
+import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Patient;
 import javafx.collections.FXCollections;
@@ -176,7 +177,7 @@ public class PatientController {
     @FXML
     private void handleAddPatient(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/shms/fxml/PatientForm.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PatientForm.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Add Patient");
             stage.setScene(new Scene(loader.load()));
@@ -190,7 +191,7 @@ public class PatientController {
     }
     private void handleEditPatient(Patient p){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/shms/fxml/PatientForm.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PatientForm.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Edit Patient");
             stage.setScene(new Scene(loader.load()));
@@ -214,5 +215,9 @@ public class PatientController {
                 loadPatients();
             }
         });
+    }
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
     }
 }
