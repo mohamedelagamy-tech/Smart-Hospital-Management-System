@@ -6,16 +6,31 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
+    private static Stage primaryStage;
 
     public static void main(String[] args) {
         launch(args);
     }
+
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/shms/fxml/PatientView.fxml"));
-        Scene scene = new Scene(loader.load(),900,600);
+        primaryStage = stage;
         stage.setTitle("Hospital management system");
-        stage.setScene(scene);
+        navigateTo("login",900,600);
         stage.show();
+    }
+    public static void navigateTo(String fxmlFile, int width, int height) {
+        try{
+            if (primaryStage==null){
+                System.out.println("Stage is null");
+                return;
+            }
+            FXMLLoader loader=new FXMLLoader(MainApp.class.getResource("/fxml/"+fxmlFile +".fxml"));
+            Scene scene=new Scene(loader.load(),width,height);
+            primaryStage.setScene(scene);
+        }catch(Exception e){
+            System.out.println("Error navigating to "+fxmlFile+": "+e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
