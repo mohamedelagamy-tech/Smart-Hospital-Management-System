@@ -386,9 +386,10 @@ public class DatabaseManager {
     public void addBill(Bill bill) {
         bills.add(bill);
     }
-    public void updateBillStatus(int billId, String newStatus) {
+    public void updateBillStatus(String billId, String newStatus) {
         for (Bill b : bills) {
-            if (b.getBillNumber() == billId) b.setStatus(newStatus);
+            if (b.getBillNumber().equals(billId))
+                b.setBillStatus(newStatus);
         }
     }
     public List<Bill> getBillsByPatient(int patientId) {
@@ -412,7 +413,7 @@ public class DatabaseManager {
     public void assignRoom(int roomId, int patientId) {
         for (Room r : rooms) {
             if (r.getId() == roomId) {
-                r.setStatus("Occupied");
+                r.setRoomStatus("Occupied");
                 r.setAssignedPatientId(patientId);
             }
         }
@@ -420,7 +421,7 @@ public class DatabaseManager {
     public void releaseRoom(int roomId) {
         for (Room r : rooms) {
             if (r.getId() == roomId) {
-                r.setStatus("Available");
+                r.setRoomStatus("Available");
                 r.setAssignedPatientId(0);
             }
         }
@@ -429,7 +430,7 @@ public class DatabaseManager {
     public List<Room> getAvailableRooms() {
         List<Room> result = new ArrayList<>();
         for (Room r : rooms) {
-            if (r.getStatus().equals("Available")) result.add(r);
+            if (r.getRoomStatus().equals("Available")) result.add(r);
         }
         return result;
     }
