@@ -43,16 +43,16 @@
     <left>
         <VBox prefWidth="200" spacing="2" style="-fx-background-color: #F8FAFC; -fx-border-color: #EEEEEE; -fx-border-width: 0 1 0 0; -fx-padding: 14 8;">
             <children>
-                <Label style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 8 8 4 8;" text="MAIN" />
+                <Label fx:id="labelMain" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 8 8 4 8;" text="MAIN" />
                 <Button fx:id="btnDashboard" maxWidth="Infinity" onAction="#showDashboard" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;" text="🏠  Dashboard" />
                 <Button fx:id="btnPatients" maxWidth="Infinity" onAction="#showPatients" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="👥  Patients" />
                 <Button fx:id="btnDoctors" maxWidth="Infinity" onAction="#showDoctors" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="👨‍⚕️  Doctors" />
                 <Button fx:id="btnAppointments" maxWidth="Infinity" onAction="#showAppointments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📅  Appointments" />
-                <Label style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 12 8 4 8;" text="MEDICAL" />
+                <Label fx:id="labelMedical" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 12 8 4 8;" text="MEDICAL" />
                 <Button fx:id="btnRecords" maxWidth="Infinity" onAction="#showRecords" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📋  Medical Records" />
                 <Button fx:id="btnPrescriptions" maxWidth="Infinity" onAction="#showPrescriptions" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💊  Prescriptions" />
                 <Button fx:id="btnEmergency" maxWidth="Infinity" onAction="#showEmergency" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🚨  Emergency Queue" />
-                <Label style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 12 8 4 8;" text="ADMIN" />
+                <Label fx:id="labelAdmin" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 12 8 4 8;" text="ADMIN" />
                 <Button fx:id="btnBilling" maxWidth="Infinity" onAction="#showBilling" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💰  Billing" />
                 <Button fx:id="btnRooms" maxWidth="Infinity" onAction="#showRooms" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🛏  Rooms" />
                 <Button fx:id="btnDepartments" maxWidth="Infinity" onAction="#showDepartments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🏥  Departments" />
@@ -64,7 +64,6 @@
     <center>
         <VBox style="-fx-background-color: #F4F6F9; -fx-padding: 24;" spacing="20">
             <children>
-                <!-- Welcome Row -->
                 <HBox alignment="CENTER_LEFT">
                     <children>
                         <VBox spacing="3" HBox.hgrow="ALWAYS">
@@ -73,12 +72,6 @@
                                 <Label style="-fx-font-size: 12px; -fx-text-fill: #888888;" text="Here's what's happening at SHMS today" />
                             </children>
                         </VBox>
-                        <HBox spacing="8" alignment="CENTER_RIGHT">
-                            <children>
-                                <Button onAction="#showAppointments" style="-fx-background-color: white; -fx-text-fill: #1F4E79; -fx-font-size: 12px; -fx-background-radius: 8; -fx-border-color: #D0DFF0; -fx-border-radius: 8; -fx-border-width: 1; -fx-padding: 7 14; -fx-cursor: hand;" text="📅  Book Appointment" />
-                                <Button onAction="#showPatients" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-background-radius: 8; -fx-padding: 7 14; -fx-cursor: hand;" text="➕  Add Patient" />
-                            </children>
-                        </HBox>
                     </children>
                 </HBox>
 
@@ -141,4 +134,5 @@
             </children>
         </VBox>
     </center>
+
 </BorderPane>

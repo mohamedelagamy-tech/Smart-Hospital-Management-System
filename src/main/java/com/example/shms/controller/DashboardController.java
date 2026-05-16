@@ -32,6 +32,9 @@ public class DashboardController implements Initializable {
     @FXML private Label statAppointments;
     @FXML private Label statRooms;
     @FXML private Label userInitials;
+    @FXML private Label labelMain;
+    @FXML private Label labelMedical;
+    @FXML private Label labelAdmin;
 
     @FXML private Button btnDashboard;
     @FXML private Button btnPatients;
@@ -108,32 +111,61 @@ public class DashboardController implements Initializable {
         switch (role) {
             case "DOCTOR":
                 btnDoctors.setVisible(false);
+                btnDoctors.setManaged(false);
                 btnAuditLog.setVisible(false);
+                btnAuditLog.setManaged(false);
                 btnDepartments.setVisible(false);
+                btnDepartments.setManaged(false);
                 btnRooms.setVisible(false);
+                btnRooms.setManaged(false);
+                labelAdmin.setVisible(false);
+                labelAdmin.setManaged(false);
                 break;
             case "NURSE":
                 btnDoctors.setVisible(false);
+                btnDoctors.setManaged(false);
                 btnBilling.setVisible(false);
+                btnBilling.setManaged(false);
                 btnAuditLog.setVisible(false);
+                btnAuditLog.setManaged(false);
                 btnDepartments.setVisible(false);
+                btnDepartments.setManaged(false);
                 btnPrescriptions.setVisible(false);
+                btnPrescriptions.setManaged(false);
+                labelAdmin.setVisible(false);
+                labelAdmin.setManaged(false);
                 break;
             case "RECEPTIONIST":
                 btnDoctors.setVisible(false);
+                btnDoctors.setManaged(false);
                 btnRecords.setVisible(false);
+                btnRecords.setManaged(false);
                 btnPrescriptions.setVisible(false);
+                btnPrescriptions.setManaged(false);
                 btnAuditLog.setVisible(false);
+                btnAuditLog.setManaged(false);
                 btnDepartments.setVisible(false);
+                btnDepartments.setManaged(false);
                 break;
             case "PATIENT":
                 btnDoctors.setVisible(false);
+                btnDoctors.setManaged(false);
                 btnRecords.setVisible(false);
+                btnRecords.setManaged(false);
                 btnEmergency.setVisible(false);
+                btnEmergency.setManaged(false);
                 btnBilling.setVisible(false);
+                btnBilling.setManaged(false);
                 btnRooms.setVisible(false);
+                btnRooms.setManaged(false);
                 btnDepartments.setVisible(false);
+                btnDepartments.setManaged(false);
                 btnAuditLog.setVisible(false);
+                btnAuditLog.setManaged(false);
+                labelAdmin.setVisible(false);
+                labelAdmin.setManaged(false);
+                labelMedical.setVisible(false);
+                labelMedical.setManaged(false);
                 break;
             default:
                 break;
