@@ -592,8 +592,6 @@ public class DatabaseManager {
         return 0.0;
     }
 
-
-
 }
 
 
