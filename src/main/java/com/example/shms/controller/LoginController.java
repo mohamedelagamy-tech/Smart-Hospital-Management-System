@@ -62,7 +62,7 @@ public class LoginController {
                     @Override
                     public void run() {
                         session.logout();
-                        MainApp.navigateTo("login.fxml",800,500);
+                        MainApp.navigateTo("login",800,500);
                     }
                 });
 
@@ -71,8 +71,7 @@ public class LoginController {
                     case "DOCTOR":
                     case "NURSE":
                     case "RECEPTIONIST":
-                    case "PATIENT":MainApp.navigateTo("dashboard.fxml",1200,700);
-                    break;
+                    case "PATIENT":MainApp.navigateTo("dashboard",1200,700);break;
                     default:showError("Unknown role detected.","error");
                 }
             } else {

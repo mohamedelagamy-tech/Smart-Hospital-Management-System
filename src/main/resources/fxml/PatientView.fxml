@@ -16,21 +16,21 @@
                     <children>
                         <TextField fx:id="searchField" promptText="Search by name or ID..." style="-fx-background-radius: 8;" />
                         <ComboBox fx:id="departmentFilter" prefWidth="150.0" promptText="Filter by Department" />
-                        <Button fx:id="allBtn" mnemonicParsing="false" prefWidth="60.0" text="All" onAction="#handleAll"/>
-                        <Button fx:id="emergencyBtn" prefWidth="90.0" style="-fx-background-color: red;" text="Emergency" textFill="#fafafa" onAction="#handleEmergency">
+                        <Button fx:id="allBtn" mnemonicParsing="false" onAction="#handleAll" prefWidth="60.0" text="All" />
+                        <Button fx:id="emergencyBtn" onAction="#handleEmergency" prefWidth="90.0" style="-fx-background-color: red;" text="Emergency" textFill="#fafafa">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font></Button>
-                        <Button fx:id="urgentBtn" prefWidth="70.0" style="-fx-background-color: orange;" text="Urgent" textFill="WHITE" onAction="#handleUrgent">
+                        <Button fx:id="urgentBtn" onAction="#handleUrgent" prefWidth="70.0" style="-fx-background-color: orange;" text="Urgent" textFill="WHITE">
                             <font>
                                 <Font name="System Bold Italic" size="12.0" />
                             </font></Button>
-                        <Button fx:id="normalBtn" prefWidth="70.0" style="-fx-background-color: green;" text="Normal" textFill="WHITE" onAction="#handleNormal">
+                        <Button fx:id="normalBtn" onAction="#handleNormal" prefWidth="70.0" style="-fx-background-color: green;" text="Normal" textFill="WHITE">
                             <font>
                                 <Font name="System Bold Italic" size="12.0" />
                             </font></Button>
-                        <Button fx:id="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="+ Add Patient" textAlignment="CENTER" textFill="WHITE" onAction="#handleAddPatient" />
-                        <Button fx:id="resetBtn" prefWidth="60.0" text="Reset" onAction="#handleReset"/>
+                        <Button fx:id="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddPatient" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="+ Add Patient" textAlignment="CENTER" textFill="WHITE" />
+                        <Button fx:id="resetBtn" onAction="#handleReset" prefWidth="60.0" text="Reset" />
                     </children>
                 </HBox>
                 <TableView fx:id="patientTable" prefHeight="390.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10;" tableMenuButtonVisible="true">
@@ -50,6 +50,12 @@
     <top>
         <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
             <children>
+            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent;" text="← Back" textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                 <Label text="Patient Management" textFill="#fffafa" HBox.hgrow="ALWAYS">
                     <font>
                         <Font name="Arial Bold" size="24.0" />
