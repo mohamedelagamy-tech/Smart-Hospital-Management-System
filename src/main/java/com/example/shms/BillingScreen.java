@@ -265,6 +265,24 @@ public class BillingScreen {
         String billNum = "INV-" + (allBills.size()+1);
         String today = java.time.LocalDate.now().toString();
         Bill newBill = new Bill(billNum,selectedPatient,service,today,amount,status);
+        allBills.add(newBill);
+        billingTable.setItems(allBills);
+        formStage.close();});
+
+        VBox formLayout = new VBox(12,
+                patientLabel,  patientBox,
+                serviceLabel,  serviceField,
+                amountLabel,   amountField,
+                statusLabel,   statusBox,
+                submitBtn
+        );
+        formLayout.setPadding(new Insets(30));
+        formLayout.setStyle("-fx-background-color: #FFFFFF;");
+
+        Scene formScene = new Scene(formLayout, 380, 480);
+        formStage.setScene(formScene);
+        formStage.show();
+    }
 
     }
 
