@@ -1,31 +1,52 @@
 package com.example.shms.model;
 
- public class Doctor extends Person {
+import java.util.Comparator;
+
+public class Doctor extends Person implements Comparable<Doctor> {
      private String department;
      private String status;
      private double totalRating;
      private int ratingCount;
+     private double salary;
 
-     public Doctor(int ID, String name, String email, String password, String department, String status) {
+
+     public static final Comparator<Doctor> By_NAME =
+             Comparator.comparing(Person::getName);
+     public static final Comparator<Doctor> By_DEPARTMENT =
+            Comparator.comparing(Doctor::getDepartment);
+     public static final Comparator<Doctor> By_AVERAGE_RATING =
+            Comparator.comparingDouble(Doctor::getAverageRating).reversed();
+     public static final Comparator<Doctor> By_SALARY=
+            Comparator.comparingDouble(Doctor::getSalary).reversed();
+
+
+     public Doctor(int ID, String name, String email, String password, String department, String status, double salary) {
          super(ID, name, email, password, "Doctor");
          this.department = department;
          this.status = status;
+         this.salary= salary;
          this.totalRating = 0;
          this.ratingCount = 0;
      }
 
      public Doctor(int ID, String name, String email, String password, String department, String status,
-                   double totalRating, int ratingCount) {
+                   double salary, double totalRating, int ratingCount) {
 
          super(ID, name, email, password, "Doctor");
 
          this.department = department;
          this.status = status;
+         this.salary=salary;
          this.totalRating = totalRating;
          this.ratingCount = ratingCount;
      }
 
-     @Override
+    @Override
+    public int compareTo(Doctor other) {
+        return Double.compare(other.getAverageRating(), this.getAverageRating());
+    }
+
+    @Override
      public String getDetails() {
          return "Doctor ID: " + getID()
                  + ", Name: " + getName()
@@ -67,6 +88,10 @@ package com.example.shms.model;
          this.status = status;
      }
 
+     public double getSalary(){ return salary; }
+
+     public void setSalary(){ this.salary=salary; }
+
      public double getTotalRating() {
          return totalRating;
      }
@@ -83,13 +108,14 @@ package com.example.shms.model;
          this.ratingCount = ratingCount;
      }
 
-     @Override
+    @Override
      public String toString() {
          return "Doctor ID: " + getID()
                  + ", Name: " + getName()
                  + ", Role: " + getRole()
                  + ", Department: " + department
                  + ", Status: " + status
+                 + ", Salary: " + String.format("%.2f", salary)
                  + ", Average Rating: " + String.format("%.2f", getAverageRating());
      }
  }
