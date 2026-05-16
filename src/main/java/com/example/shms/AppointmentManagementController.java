@@ -52,18 +52,21 @@ private void loadAppointments() {
                 });
 }
 @FXML
-    private void handleBook(){
-        try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/bookAppointmentView.fxml"));
-            javafx.scene.Parent root = loader.load();
-            javafx.stage.Stage stage = new javafx.stage.Stage();
-            stage.setTitle("Book Appointment");
-            stage.setScene(new javafx.scene.Scene(root));
-            stage.showAndWait();
-            loadAppointments();
-        } catch (Exception e) {
-           System.out.println("Error opening booking from :"+ e.getMessage());
-        }
-
-        }
+    private void handleBook() {
+    try {
+        javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/bookAppointmentView.fxml"));
+        javafx.scene.Parent root = loader.load();
+        javafx.stage.Stage stage = new javafx.stage.Stage();
+        stage.setTitle("Book Appointment");
+        stage.setScene(new javafx.scene.Scene(root));
+        stage.showAndWait();
+        loadAppointments();
+    } catch (Exception e) {
+        System.out.println("Error opening booking from :" + e.getMessage());
+    }
+}
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
+    }
 }

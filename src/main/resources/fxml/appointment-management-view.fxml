@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox spacing="10" style="-fx-padding:20;"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.shms.AppointmentManagementController">
-    <Label text="Appointment Management"
-           style="-fx-font-size:12; -fx-font-weight:bold;"/>
+<?import javafx.scene.text.*?>
+
+<VBox spacing="10" style="-fx-padding:20;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.AppointmentManagementController">
+   <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent;" text="← Back">
+      <font>
+         <Font size="13.0" />
+      </font></Button>
+    <Label style="-fx-font-size:12; -fx-font-weight:bold;" text="Appointment Management" />
     <TableView fx:id="appointmentTable" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
-            <TableColumn fx:id="colPatient" text="Patient" prefWidth="80"/>
-            <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="80"/>
-            <TableColumn fx:id="colDate" text="Date" prefWidth="100"/>
-            <TableColumn fx:id="colTime" text="Time" prefWidth="80"/>
-            <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
-            <TableColumn fx:id="colNotes" text="Notes" prefWidth="150"/>
+            <TableColumn fx:id="colId" prefWidth="50" text="ID" />
+            <TableColumn fx:id="colPatient" prefWidth="80" text="Patient" />
+            <TableColumn fx:id="colDoctor" prefWidth="80" text="Doctor" />
+            <TableColumn fx:id="colDate" prefWidth="100" text="Date" />
+            <TableColumn fx:id="colTime" prefWidth="80" text="Time" />
+            <TableColumn fx:id="colStatus" prefWidth="100" text="Status" />
+            <TableColumn fx:id="colNotes" prefWidth="150" text="Notes" />
         </columns>
     </TableView>
     <HBox spacing="10">
-        <Button text="Book Appointment" onAction="#handleBook"/>
-        <Button text="Cancel Appointment" onAction="#handleCancel"/>
+        <Button onAction="#handleBook" text="Book Appointment" />
+        <Button onAction="#handleCancel" text="Cancel Appointment" />
         </HBox>
         </VBox>
