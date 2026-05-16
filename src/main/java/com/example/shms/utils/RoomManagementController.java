@@ -1,4 +1,4 @@
-package com.example.shms;
+package com.example.shms.utils;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
