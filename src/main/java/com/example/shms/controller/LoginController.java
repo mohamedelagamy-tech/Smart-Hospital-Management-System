@@ -4,6 +4,7 @@ import com.example.shms.database.DatabaseManager;
 import com.example.shms.utils.PasswordEncryption;
 import com.example.shms.utils.SessionManager;
 import com.example.shms.utils.Validator;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -83,7 +84,7 @@ public class LoginController {
                     @Override
                     public void run() {
                         session.logout();
-                        MainApp.navigateTo("login",800,500);
+                        Platform.runLater(()->MainApp.navigateTo("login",800,500));
                     }
                 });
 
