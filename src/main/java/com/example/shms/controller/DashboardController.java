@@ -52,6 +52,10 @@ public class DashboardController implements Initializable {
     @FXML private Button btnAuditLog;
     @FXML private ImageView logoView;
     @FXML private Button btnStatistics;
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
+    }
 
     private final SessionManager session = SessionManager.getInstance();
     private final DatabaseManager db = DatabaseManager.getInstance();
