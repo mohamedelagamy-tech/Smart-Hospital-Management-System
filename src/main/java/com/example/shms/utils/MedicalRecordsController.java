@@ -20,7 +20,6 @@ import java.util.ResourceBundle;
 
 public class MedicalRecordsController implements Initializable {
 
-    // ── Injected from FXML ───────────────────────────────────────────────────
     @FXML private TextField searchField;
 
     @FXML private TableView<MedicalRecord>              recordsTable;
@@ -111,25 +110,26 @@ public class MedicalRecordsController implements Initializable {
             recordsTable.setItems(allRecords);
             return;
         }
+
         ObservableList<MedicalRecord> filtered = FXCollections.observableArrayList();
         for (MedicalRecord r : allRecords) {
-            Patient p = db.getPatientById(r.getPatientId());
-            Doctor  d = db.getDoctorById(r.getDoctorId());
-            String patientName = p != null ? p.getName().toLowerCase() : "";
-            String doctorName  = d != null ? d.getName().toLowerCase() : "";
-
-            if (patientName.contains(query)
-                    || doctorName.contains(query)
+            String patientId = "p-" + r.getPatientId();
+            String doctorId = "dr. id: " + r.getDoctorId();
+            if (patientId.contains(query)
+                    || doctorId.contains(query)
                     || r.getDiagnosis().toLowerCase().contains(query)
                     || r.getTreatment().toLowerCase().contains(query)
                     || r.getStatus().toLowerCase().contains(query)
                     || r.getDate().contains(query)) {
                 filtered.add(r);
             }
-        }
-        recordsTable.setItems(filtered);
-    }
 
+        }
+
+
+        recordsTable.setItems(filtered);
+
+    }
     private void styleTableHeader() {
         recordsTable.widthProperty().addListener((obs, o, n) -> {
             javafx.scene.Node header = recordsTable.lookup("TableHeaderRow");
