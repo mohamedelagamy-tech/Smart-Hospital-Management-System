@@ -17,7 +17,7 @@
 
                 <VBox alignment="TOP_CENTER" style="-fx-background-color: #F0F4F8;" VBox.vgrow="ALWAYS">
                     <children>
-                        <VBox alignment="CENTER" maxWidth="340" spacing="14" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 32; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 4);" VBox.vgrow="NEVER">
+                        <VBox alignment="CENTER" maxWidth="360" prefWidth="360.0" spacing="14" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 32; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 4);" VBox.vgrow="NEVER">
                             <VBox.margin><Insets top="-40" /></VBox.margin>
                             <children>
                                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="SHMS" />
@@ -28,6 +28,7 @@
                                         <TextField fx:id="usernameField" promptText="Enter your username" style="-fx-pref-height: 38px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px; -fx-pref-width: 280px;" />
                                     </children>
                                 </VBox>
+
                                 <HBox maxWidth="280" spacing="0">
                                     <children>
                                         <PasswordField fx:id="passwordField" promptText="🔒Enter your password" style="-fx-pref-height: 38px; -fx-background-radius: 6 0 0 6; -fx-border-radius: 6 0 0 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px; -fx-pref-width: 242px;" />
