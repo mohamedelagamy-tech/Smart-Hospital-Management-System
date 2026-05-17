@@ -4,19 +4,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
-
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.LoginController" style="-fx-background-color: #1F4E79;">
     <children>
         <VBox alignment="TOP_CENTER" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
-                <!-- Navy top section -->
-                <VBox alignment="CENTER" prefHeight="160" style="-fx-background-color: #1F4E79;">
+                <VBox alignment="CENTER" prefHeight="120" style="-fx-background-color: #1F4E79;">
                     <children>
-                        <StackPane prefWidth="60" prefHeight="60" maxWidth="60" maxHeight="60" style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 30; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 30; -fx-border-width: 2;">
-                            <children>
-                                <Label text="SH" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" />
-                            </children>
-                        </StackPane>
+                        <ImageView fitWidth="80" fitHeight="80" preserveRatio="true">
+                            <image>
+                                <Image url="/images/logo.jpeg" />
+                            </image>
+                        </ImageView>
                     </children>
                 </VBox>
 

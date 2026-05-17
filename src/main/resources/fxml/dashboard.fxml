@@ -3,17 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
-
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import java.lang.String?>
 <BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DashboardController">
-
+    <stylesheets>
+        <String value="/css/style.css" />
+    </stylesheets>
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
             <children>
-                <StackPane prefWidth="34" prefHeight="34" maxWidth="34" maxHeight="34" style="-fx-background-color: white; -fx-background-radius: 8;">
-                    <children>
-                        <Label text="SH" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" />
-                    </children>
-                </StackPane>
+                <ImageView fitWidth="80" fitHeight="80" preserveRatio="true">
+                    <image>
+                        <Image url="/images/logo.jpeg" />
+                    </image>
+                </ImageView>
                 <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="SHMS" />
                 <Label style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 14px;" text="|" />
                 <Label style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.6);" text="Smart Hospital Management System" />
@@ -45,18 +49,18 @@
             <children>
                 <Label fx:id="labelMain" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 8 8 4 8;" text="MAIN" />
                 <Button fx:id="btnDashboard" maxWidth="Infinity" onAction="#showDashboard" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;" text="🏠  Dashboard" />
-                <Button fx:id="btnPatients" maxWidth="Infinity" onAction="#showPatients" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="👥  Patients" />
-                <Button fx:id="btnDoctors" maxWidth="Infinity" onAction="#showDoctors" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="👨‍⚕️  Doctors" />
-                <Button fx:id="btnAppointments" maxWidth="Infinity" onAction="#showAppointments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📅  Appointments" />
+                <Button fx:id="btnPatients" styleClass="nav-button" maxWidth="Infinity" onAction="#showPatients" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="👥  Patients" />
+                <Button fx:id="btnDoctors" styleClass="nav-button" maxWidth="Infinity" onAction="#showDoctors" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="👨‍⚕️  Doctors" />
+                <Button fx:id="btnAppointments" styleClass="nav-button" maxWidth="Infinity" onAction="#showAppointments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📅  Appointments" />
                 <Label fx:id="labelMedical" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 12 8 4 8;" text="MEDICAL" />
-                <Button fx:id="btnRecords" maxWidth="Infinity" onAction="#showRecords" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📋  Medical Records" />
-                <Button fx:id="btnPrescriptions" maxWidth="Infinity" onAction="#showPrescriptions" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💊  Prescriptions" />
-                <Button fx:id="btnEmergency" maxWidth="Infinity" onAction="#showEmergency" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🚨  Emergency Queue" />
+                <Button fx:id="btnRecords" styleClass="nav-button" maxWidth="Infinity" onAction="#showRecords" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📋  Medical Records" />
+                <Button fx:id="btnPrescriptions" styleClass="nav-button" maxWidth="Infinity" onAction="#showPrescriptions" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💊  Prescriptions" />
+                <Button fx:id="btnEmergency" styleClass="nav-button" maxWidth="Infinity" onAction="#showEmergency" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🚨  Emergency Queue" />
                 <Label fx:id="labelAdmin" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 12 8 4 8;" text="ADMIN" />
-                <Button fx:id="btnBilling" maxWidth="Infinity" onAction="#showBilling" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💰  Billing" />
-                <Button fx:id="btnRooms" maxWidth="Infinity" onAction="#showRooms" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🛏  Rooms" />
-                <Button fx:id="btnDepartments" maxWidth="Infinity" onAction="#showDepartments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🏥  Departments" />
-                <Button fx:id="btnAuditLog" maxWidth="Infinity" onAction="#showAuditLog" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📝  Audit Log" />
+                <Button fx:id="btnBilling" styleClass="nav-button" maxWidth="Infinity" onAction="#showBilling" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💰  Billing" />
+                <Button fx:id="btnRooms" styleClass="nav-button" maxWidth="Infinity" onAction="#showRooms" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🛏  Rooms" />
+                <Button fx:id="btnDepartments" styleClass="nav-button" maxWidth="Infinity" onAction="#showDepartments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🏥  Departments" />
+                <Button fx:id="btnAuditLog" styleClass="nav-button" maxWidth="Infinity" onAction="#showAuditLog" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📝  Audit Log" />
             </children>
         </VBox>
     </left>
