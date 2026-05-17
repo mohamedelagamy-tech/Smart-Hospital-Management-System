@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -47,12 +49,21 @@ public class DashboardController implements Initializable {
     @FXML private Button btnRooms;
     @FXML private Button btnDepartments;
     @FXML private Button btnAuditLog;
+    @FXML private ImageView logoView;
 
     private final SessionManager session = SessionManager.getInstance();
     private final DatabaseManager db = DatabaseManager.getInstance();
 
     @Override
     public void initialize(URL url,ResourceBundle rb){
+        try {
+            Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
+            logoView.setImage(logo);
+        } catch (Exception e) {
+            System.out.println("Logo load failed: " + e.getMessage());
+        }
+
+        setActiveButton(btnDashboard);
         setupUserInfo();
         setupClock();
         setupRoleBasedMenu();
