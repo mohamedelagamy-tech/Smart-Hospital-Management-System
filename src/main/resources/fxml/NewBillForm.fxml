@@ -4,8 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/21"
       fx:controller="com.example.shms.NewBillController"
       spacing="12"
       stylesheets="@billing.css"
