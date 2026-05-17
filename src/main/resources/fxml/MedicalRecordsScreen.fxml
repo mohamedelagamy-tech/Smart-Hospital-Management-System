@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.shms.controller.MedicalRecordsController"
+      spacing="20"
+      style="-fx-background-color: #f0f2f5;">
+
+    <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+    <!-- ── Title ── -->
+    <Label text="Medical Records"
+           style="-fx-font-family: Georgia; -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #1a6fba;"/>
+
+    <!-- ── Search Bar ── -->
+    <HBox alignment="CENTER_LEFT" spacing="10"
+          style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 16 10 16;">
+        <Label text="🔍" style="-fx-font-size: 15px; -fx-text-fill: #aaaaaa;"/>
+        <TextField fx:id="searchField"
+                   promptText="Search by patient, doctor, or diagnosis..."
+                   style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 13px;"
+                   HBox.hgrow="ALWAYS"
+                   onKeyReleased="#onSearch"/>
+    </HBox>
+
+    <!-- ── Table ── -->
+    <TableView fx:id="recordsTable"
+               style="-fx-background-color: white; -fx-border-color: #dde4ee; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 13px;"
+               columnResizePolicy="CONSTRAINED_RESIZE_POLICY"
+               VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colNumber"    text="#"           prefWidth="50"/>
+            <TableColumn fx:id="colPatient"   text="Patient"     prefWidth="160"/>
+            <TableColumn fx:id="colDoctor"    text="Doctor"      prefWidth="130"/>
+            <TableColumn fx:id="colDate"      text="Date"        prefWidth="100"/>
+            <TableColumn fx:id="colDiagnosis" text="Diagnosis"   prefWidth="150"/>
+            <TableColumn fx:id="colTreatment" text="Treatment"   prefWidth="200"/>
+            <TableColumn fx:id="colStatus"    text="Status"      prefWidth="100"/>
+        </columns>
+    </TableView>
+
+</VBox>
