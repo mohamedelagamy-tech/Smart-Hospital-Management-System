@@ -1,5 +1,6 @@
 package com.example.shms;
 
+import com.example.shms.utils.MedicineReminderUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ public class MainApp extends Application {
         stage.setTitle("Hospital management system");
         navigateTo("login",900,600);
         stage.show();
+        MedicineReminderUtil.showReminders();
     }
     public static void navigateTo(String fxmlFile, int width, int height) {
         try{
