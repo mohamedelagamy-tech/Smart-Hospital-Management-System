@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -47,12 +49,21 @@ public class DashboardController implements Initializable {
     @FXML private Button btnRooms;
     @FXML private Button btnDepartments;
     @FXML private Button btnAuditLog;
+    @FXML private ImageView logoView;
 
     private final SessionManager session = SessionManager.getInstance();
     private final DatabaseManager db = DatabaseManager.getInstance();
 
     @Override
     public void initialize(URL url,ResourceBundle rb){
+        try {
+            Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
+            logoView.setImage(logo);
+        } catch (Exception e) {
+            System.out.println("Logo load failed: " + e.getMessage());
+        }
+
+        setActiveButton(btnDashboard);
         setupUserInfo();
         setupClock();
         setupRoleBasedMenu();
@@ -194,8 +205,20 @@ public class DashboardController implements Initializable {
         }
     }
 
+    private void setActiveButton(Button active){
+        Button[] all = {btnDashboard,btnPatients,btnDoctors,btnAppointments,
+                btnRecords,btnPrescriptions,btnEmergency,btnBilling,
+                btnRooms,btnDepartments,btnAuditLog};
+        for(Button btn : all){
+            btn.getStyleClass().remove("nav-button-active");
+            btn.setStyle("-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;");
+        }
+        active.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;");
+    }
+
     @FXML
     private void showDashboard(){
+        setActiveButton(btnDashboard);
         MainApp.navigateTo("dashboard",1200,700);
     }
     @FXML
@@ -206,41 +229,51 @@ public class DashboardController implements Initializable {
     }
     @FXML
     private void showPatients(){
+        setActiveButton(btnPatients);
         MainApp.navigateTo("PatientView",1200,700);
     }
     @FXML
     private void showDoctors(){
+        setActiveButton(btnDoctors);
         MainApp.navigateTo("DoctorView",1200,700);
     }
     @FXML
     private void showAppointments(){
+        setActiveButton(btnAppointments);
         MainApp.navigateTo("appointment-management-view", 1200,700);
     }
     @FXML
     private void showRecords(){
+        setActiveButton(btnRecords);
         MainApp.navigateTo("MedicalRecords",1200,700);
     }
     @FXML
     private void showPrescriptions(){
+        setActiveButton(btnPrescriptions);
         MainApp.navigateTo("PrescriptionView",1200,700);
     }
     @FXML
     private void showEmergency(){
+        setActiveButton(btnEmergency);
         MainApp.navigateTo("EmergencyQueueView",1200,700);
     }
     @FXML
     private void showBilling(){
+        setActiveButton(btnBilling);
         MainApp.navigateTo("BillingView",1200,700);
     }
     @FXML
     private void showRooms(){
+        setActiveButton(btnRooms);
         MainApp.navigateTo("RoomView",1200,700);
     }
     @FXML
     private void showDepartments(){
+        setActiveButton(btnDepartments);
         MainApp.navigateTo("DepartmentView",1200,700);
     }
     @FXML private void showAuditLog(){
+        setActiveButton(btnAuditLog);
         MainApp.navigateTo("auditLog",1200,700);
     }
 }

@@ -12,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 import java.sql.PreparedStatement;
@@ -26,10 +28,21 @@ public class LoginController {
     @FXML private Label errorLabel;
     @FXML private TextField passwordVisible;
     @FXML private Button showPassword;
+    @FXML private ImageView logoView;
+
     private boolean isPasswordVisible=false;
 
     private final SessionManager session=SessionManager.getInstance();
     private final DatabaseManager db=DatabaseManager.getInstance();
+
+    @FXML public void initialize(){
+        try {
+            Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
+            logoView.setImage(logo);
+        } catch (Exception e) {
+            System.out.println("Failed to load logo: "+e.getMessage());
+        }
+    }
 
     @FXML private void handleLogin(){
         String username=usernameField.getText().trim();
