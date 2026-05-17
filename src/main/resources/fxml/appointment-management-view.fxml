@@ -10,29 +10,29 @@
       <HBox alignment ="CENTER_LEFT" spacing="16"
             style="-fx-background-color:#185FA5; -fx-padding: 14 20;
             -fx-background-radius:12 12 0 0;">
-      <Button text="< Back" onAction="#handleBack"
-              style="-fx-background-color:white; -fx-text-fill:#185FA5;-fx-font-weight:bold; -fx-background-radius:20;-fx-padding:6 16 -fx-cursor:hand; -fx-border-width:0;"/>
+      <Button text=" &lt; Back" onAction="#handleBack"
+              style="-fx-background-color:white; -fx-text-fill:#185FA5;-fx-font-weight:bold; -fx-background-radius:20;-fx-padding:6 16 ; -fx-cursor:hand; -fx-border-width:0;"/>
       <Label text="Appointment Management"
              style="-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:white;"/>
       </HBox>
        <HBox spacing="12" style="-fx-padding:16 20; -fx-background-color:#EEF2FF;">
        <VBox alignment="CENTER_LEFT" spacing="2"
-             style="-fx-background-color:white; -fx-background-radius:12; -fx-padding-14 16; -fx-border-color:#e0e0e0; -fx-border-radius:12; -fx-border-width:0.5;" HBox.hgrow="ALWAYS">
+             style="-fx-background-color:white; -fx-background-radius:12; -fx-padding:14 16; -fx-border-color:#e0e0e0; -fx-border-radius:12; -fx-border-width:0.5;" HBox.hgrow="ALWAYS">
            <Label text="Total" style="-fx-font-size:11; -fx-text-fill:#888;"/>
            <Label text="All Appointments" style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#185FA5;"/>
        </VBox>
        <VBox alignment="CENTER_LEFT" spacing="2"
-             style="-fx- background-color:#EEEDFE; -fx-background-radius:12; -fx-padding:14 16;" HBox.hgrow="ALWAYS">
+             style="-fx-background-color:#EEEDFE; -fx-background-radius:12; -fx-padding:14 16;" HBox.hgrow="ALWAYS">
            <Label text="Scheduled" style="-fx-font-size:11; -fx-text-fill:#534AB7;"/>
            <Label text="Upcoming" style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#3C3489;"/>
        </VBox>
        <VBox alignment="CENTER_LEFT" spacing="2"
-             style="-fx- background-color:#EAF3DE; -fx-background-radius:12; -fx-padding:14 16;" HBox.hgrow="ALWAYS">
+             style="-fx-background-color:#EAF3DE; -fx-background-radius:12; -fx-padding:14 16;" HBox.hgrow="ALWAYS">
            <Label text="Completed" style="-fx-font-size:11; -fx-text-fill:#3B6D11;"/>
            <Label text="Done" style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#27500A;"/>
        </VBox>
        <VBox alignment="CENTER_LEFT" spacing="2"
-             style="-fx- background-color:#FCEBEB; -fx-background-radius:12; -fx-padding:14 16;" HBox.hgrow="ALWAYS">
+             style="-fx-background-color:#FCEBEB; -fx-background-radius:12; -fx-padding:14 16;" HBox.hgrow="ALWAYS">
            <Label text="Cancelled" style="-fx-font-size:11; -fx-text-fill:#A32D2D;"/>
            <Label text="Cancelled" style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#791F1F;"/>
        </VBox>
@@ -50,7 +50,7 @@
     <Button text="Completed" onAction="#filterCompleted"
             style="-fx-background-color:white; -fx-text-fill:#27500A; -fx-background-radius:20; -fx-padding:8 16; -fx-border-color:#27500A; -fx-border-width:0.5;"/>
     <Button text="Cancelled" onAction="#filterCancelled"
-            style="-fx-background-color:white; -fx-text-fill:#791F1F; -fx-background-radius:20; -fx-padding:8 16; -fx-border-color:#791F1F-fx-border-width:0.5;"/>
+            style="-fx-background-color:white; -fx-text-fill:#791F1F; -fx-background-radius:20; -fx-padding:8 16; -fx-border-color:#791F1F;-fx-border-width:0.5;"/>
 </HBox>
     <VBox VBox.vgrow="ALWAYS" style="-fx-padding:0 20 16 20; -fx-background-color:#EEF2FF;">
         <TableView fx:id="appointmentTable" VBox.vgrow="ALWAYS"
