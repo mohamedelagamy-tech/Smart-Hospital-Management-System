@@ -149,11 +149,14 @@ public class BillingController implements Initializable {
         }
 
         if (sort != null) switch (sort) {
+            case "Date (Newest First)"->result.sort((a,b)->b.getBILLDate().compareTo(a.getBILLDate()));
+            case "Date (Oldest First)"->result.sort((a,b)->a.getBILLDate().compareTo(b.getBILLDate()));
             case "Amount (High to Low)" -> result.sort((a, b) -> Double.compare(b.getAmount(), a.getAmount()));
             case "Amount (Low to High)" -> result.sort((a, b) -> Double.compare(a.getAmount(), b.getAmount()));
         }
 
         billingTable.setItems(result);
+        billingTable.refresh();
     }
 
     private void styleFilterBtn(ToggleButton btn) {
@@ -169,5 +172,6 @@ public class BillingController implements Initializable {
         this.allBills = bills;
         billingTable.setItems(allBills);
     }
+
 }
 

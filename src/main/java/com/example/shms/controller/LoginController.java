@@ -29,6 +29,7 @@ public class LoginController {
     @FXML private TextField passwordVisible;
     @FXML private Button showPassword;
     @FXML private ImageView logoView;
+    @FXML private ImageView backgroundView;
 
     private boolean isPasswordVisible=false;
 
@@ -46,6 +47,9 @@ public class LoginController {
         });
         Image logo = new Image(getClass().getResourceAsStream("/images/logo.png"));
         logoView.setImage(logo);
+
+        Image bg = new Image(getClass().getResourceAsStream("/images/background.png"));
+        backgroundView.setImage(bg);
     }
 
     @FXML private void handleLogin(){

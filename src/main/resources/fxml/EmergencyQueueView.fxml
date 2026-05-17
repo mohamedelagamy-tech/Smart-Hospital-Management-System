@@ -29,14 +29,14 @@
          </children></HBox>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0" style="-fx-background-color: #F1F5F9;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="600.0" prefWidth="876.0" spacing="16.0" style="-fx-background-color: #F1F5F9;" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="12.0">
+            <HBox prefHeight="100.0" prefWidth="920.0" spacing="12.0">
                <children>
-                  <VBox prefHeight="100.0" prefWidth="250.0" spacing="10.0" style="-fx-background-color: #1E3A5F; -fx-border-color: #dc2626; -fx-background-radius: 14; -fx-border-radius: 14;" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="120.0" prefWidth="177.0" spacing="10.0" style="-fx-background-color: #FCEBEB; -fx-border-color: #dc2626; -fx-background-radius: 14; -fx-border-radius: 14;" HBox.hgrow="ALWAYS">
                      <padding>
                         <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
                      </padding>
@@ -46,14 +46,14 @@
                               <Font name="System Bold" size="30.0" />
                            </font>
                         </Label>
-                        <Label text="Emergency" textFill="#dc2626">
+                        <Label text="Emergency" textFill="#dc3c3c">
                            <font>
-                              <Font name="System Bold" size="24.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
                      </children>
                   </VBox>
-                   <VBox prefHeight="100.0" prefWidth="250.0" spacing="10.0" style="-fx-background-color: #1E3A5F; -fx-border-color: #F59E0B; -fx-background-radius: 14; -fx-border-radius: 14;" HBox.hgrow="ALWAYS">
+                   <VBox prefHeight="117.0" prefWidth="166.0" spacing="10.0" style="-fx-background-color: #FEF3C7#FEF3C7; -fx-border-color: #F59E0B; -fx-background-radius: 14; -fx-border-radius: 14;" HBox.hgrow="ALWAYS">
                        <padding>
                            <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
                        </padding>
@@ -65,12 +65,12 @@
                            </Label>
                            <Label text="Urgent" textFill="#F59E0B">
                                <font>
-                                   <Font name="System Bold" size="24.0" />
+                                   <Font name="System Bold" size="20.0" />
                                </font>
                            </Label>
                        </children>
                    </VBox>
-                   <VBox prefHeight="100.0" prefWidth="250.0" spacing="10.0" style="-fx-background-color: #1E3A5F; -fx-border-color: #10B981; -fx-background-radius: 14; -fx-border-radius: 14;" HBox.hgrow="ALWAYS">
+                   <VBox prefHeight="100.0" prefWidth="250.0" spacing="10.0" style="-fx-background-color: #EAF3DE; -fx-border-color: #10B981; -fx-background-radius: 14; -fx-border-radius: 14;" HBox.hgrow="ALWAYS">
                        <padding>
                            <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
                        </padding>
@@ -82,7 +82,7 @@
                            </Label>
                            <Label text="Normal" textFill="#10b981">
                                <font>
-                                   <Font name="System Bold" size="24.0" />
+                                   <Font name="System Bold" size="20.0" />
                                </font>
                            </Label>
                        </children>
