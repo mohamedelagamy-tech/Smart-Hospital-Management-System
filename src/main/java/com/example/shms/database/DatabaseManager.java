@@ -590,19 +590,7 @@ public class DatabaseManager {
         }
         return 0.0;
     }
-    public Patient getPatientById(int id) {
-        for (Patient p : getAllPatients()) {
-            if (p.getPatientID() == id) return p;
-        }
-        return null;
-    }
 
-    public Doctor getDoctorById(int id) {
-        for (Doctor d : getAllDoctors()) {
-            if (d.getID() == id) return d;
-        }
-        return null;
-    }
 
     public List<MedicalRecord> getAllMedicalRecords() {
         return medicalRecords;
