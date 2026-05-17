@@ -42,7 +42,7 @@
       style="-fx-padding:0 20 12 20; -fx-background-color:#EEF2FF;">
     <TextField fx:id="searchField" promptText="Search appointments..."
                style="-fx-border-radius:20; -fx-padding:8 14; -fx-border-width:0.5; -fx-font-size:13;"
-               HBox.hgrow="ALWAYS" onKeyReleased="handleSearch"/>
+               HBox.hgrow="ALWAYS" onAction="#handleSearch"/>
     <Button text="All" onAction="#filterAll"
             style="-fx-background-color:#185FA5; -fx-text-fill:white; -fx-background-radius:20; -fx-padding:8 16; -fx-border-width:0"/>
     <Button text="Scheduled" onAction="#filterScheduled"
@@ -52,7 +52,7 @@
     <Button text="Cancelled" onAction="#filterCancelled"
             style="-fx-background-color:white; -fx-text-fill:#791F1F; -fx-background-radius:20; -fx-padding:8 16; -fx-border-color:#791F1F;-fx-border-width:0.5;"/>
 </HBox>
-    <VBox VBox.vgrow="ALWAYS" style="-fx-padding:0 20 16 20; -fx-background-color:#EEF2FF;">
+    <VBox VBox.vgrow="ALWAYS" style="-fx-padding:10 20 16 20; -fx-background-color:#EEF2FF;">
         <TableView fx:id="appointmentTable" VBox.vgrow="ALWAYS"
                    style="-fx-background-color:white; -fx-background-radius:12; -fx-border-radius:12; -fx-border-color:#e0e0e0; -fx-boder-width:0.5;">
             <columnResizePolicy>
@@ -76,7 +76,7 @@
             style="-fx-background-color:#185FA5; -fx-text-fill:white; -fx-font-size:13; -fx-font-weight:bold;-fx-background-radius:20; -fx-padding:10 22; -fx-border-width:0"/>
     <Button text="x Cancel Appointment" onAction="#handleCancel"
             style="-fx-background-color:#A32D2D; -fx-text-fill:white; -fx-font-size:13; -fx-font-weight:bold;-fx-background-radius:20; -fx-padding:10 22; -fx-border-width:0"/>
-    <Button text="Refresh" onAction="#initialize"
+    <Button text="Refresh" onAction="#handleRefresh"
             style="-fx-background-color:#27500A; -fx-text-fill:white; -fx-font-size:13; -fx-font-weight:bold;-fx-background-radius:20; -fx-padding:10 22; -fx-border-width:0"/>
     </HBox>
 </VBox>
