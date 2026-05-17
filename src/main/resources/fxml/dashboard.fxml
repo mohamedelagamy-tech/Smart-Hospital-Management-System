@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import java.lang.String?>
+
 <BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DashboardController">
     <stylesheets>
         <String fx:value="/css/style.css" />
@@ -13,18 +12,16 @@
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
             <children>
-                <ImageView fx:id="logoView" fitWidth="120" fitHeight="120" preserveRatio="true" />
+                <ImageView fx:id="logoView" fitHeight="120" fitWidth="120" preserveRatio="true" />
                 <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="SHMS" />
-                <Label style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 14px;" text="|" />
-                <Label style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.6);" text="Smart Hospital Management System" />
                 <HBox HBox.hgrow="ALWAYS" />
                 <Label fx:id="clockLabel" style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.7);" text="10:42 AM" />
                 <Label style="-fx-text-fill: rgba(255,255,255,0.2);" text="|" />
                 <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-background-color: rgba(255,255,255,0.1); -fx-background-radius: 20; -fx-padding: 4 12 4 4;">
                     <children>
-                        <StackPane prefWidth="26" prefHeight="26" maxWidth="26" maxHeight="26" style="-fx-background-color: #2E75B6; -fx-background-radius: 13;">
+                        <StackPane maxHeight="26" maxWidth="26" prefHeight="26" prefWidth="26" style="-fx-background-color: #2E75B6; -fx-background-radius: 13;">
                             <children>
-                                <Label fx:id="userInitials" text="MO" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                                <Label fx:id="userInitials" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: white;" text="MO" />
                             </children>
                         </StackPane>
                         <VBox spacing="1">
@@ -45,24 +42,24 @@
             <children>
                 <Label fx:id="labelMain" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 8 8 4 8;" text="MAIN" />
                 <Button fx:id="btnDashboard" maxWidth="Infinity" onAction="#showDashboard" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;" text="🏠  Dashboard" />
-                <Button fx:id="btnPatients" styleClass="nav-button" maxWidth="Infinity" onAction="#showPatients" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="👥  Patients" />
-                <Button fx:id="btnDoctors" styleClass="nav-button" maxWidth="Infinity" onAction="#showDoctors" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="👨‍⚕️  Doctors" />
-                <Button fx:id="btnAppointments" styleClass="nav-button" maxWidth="Infinity" onAction="#showAppointments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📅  Appointments" />
+                <Button fx:id="btnPatients" maxWidth="Infinity" onAction="#showPatients" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="👥  Patients" />
+                <Button fx:id="btnDoctors" maxWidth="Infinity" onAction="#showDoctors" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="👨‍⚕️  Doctors" />
+                <Button fx:id="btnAppointments" maxWidth="Infinity" onAction="#showAppointments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="📅  Appointments" />
                 <Label fx:id="labelMedical" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 12 8 4 8;" text="MEDICAL" />
-                <Button fx:id="btnRecords" styleClass="nav-button" maxWidth="Infinity" onAction="#showRecords" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📋  Medical Records" />
-                <Button fx:id="btnPrescriptions" styleClass="nav-button" maxWidth="Infinity" onAction="#showPrescriptions" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💊  Prescriptions" />
-                <Button fx:id="btnEmergency" styleClass="nav-button" maxWidth="Infinity" onAction="#showEmergency" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🚨  Emergency Queue" />
+                <Button fx:id="btnRecords" maxWidth="Infinity" onAction="#showRecords" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="📋  Medical Records" />
+                <Button fx:id="btnPrescriptions" maxWidth="Infinity" onAction="#showPrescriptions" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="💊  Prescriptions" />
+                <Button fx:id="btnEmergency" maxWidth="Infinity" onAction="#showEmergency" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="🚨  Emergency Queue" />
                 <Label fx:id="labelAdmin" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 12 8 4 8;" text="ADMIN" />
-                <Button fx:id="btnBilling" styleClass="nav-button" maxWidth="Infinity" onAction="#showBilling" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💰  Billing" />
-                <Button fx:id="btnRooms" styleClass="nav-button" maxWidth="Infinity" onAction="#showRooms" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🛏  Rooms" />
-                <Button fx:id="btnDepartments" styleClass="nav-button" maxWidth="Infinity" onAction="#showDepartments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🏥  Departments" />
-                <Button fx:id="btnAuditLog" styleClass="nav-button" maxWidth="Infinity" onAction="#showAuditLog" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📝  Audit Log" />
+                <Button fx:id="btnBilling" maxWidth="Infinity" onAction="#showBilling" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="💰  Billing" />
+                <Button fx:id="btnRooms" maxWidth="Infinity" onAction="#showRooms" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="🛏  Rooms" />
+                <Button fx:id="btnDepartments" maxWidth="Infinity" onAction="#showDepartments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="🏥  Departments" />
+                <Button fx:id="btnAuditLog" maxWidth="Infinity" onAction="#showAuditLog" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" styleClass="nav-button" text="📝  Audit Log" />
             </children>
         </VBox>
     </left>
 
     <center>
-        <VBox style="-fx-background-color: #F4F6F9; -fx-padding: 24;" spacing="20">
+        <VBox spacing="20" style="-fx-background-color: #F4F6F9; -fx-padding: 24;">
             <children>
                 <HBox alignment="CENTER_LEFT">
                     <children>
@@ -77,10 +74,10 @@
 
                 <HBox spacing="12">
                     <children>
-                        <HBox prefWidth="210" prefHeight="86" spacing="14" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
+                        <HBox alignment="CENTER_LEFT" prefHeight="86" prefWidth="210" spacing="14" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
                             <children>
-                                <StackPane prefWidth="42" prefHeight="42" maxWidth="42" maxHeight="42" style="-fx-background-color: #E6F1FB; -fx-background-radius: 10;">
-                                    <children><Label text="👥" style="-fx-font-size: 18px;" /></children>
+                                <StackPane maxHeight="42" maxWidth="42" prefHeight="42" prefWidth="42" style="-fx-background-color: #E6F1FB; -fx-background-radius: 10;">
+                                    <children><Label style="-fx-font-size: 18px;" text="👥" /></children>
                                 </StackPane>
                                 <VBox spacing="3">
                                     <children>
@@ -90,10 +87,10 @@
                                 </VBox>
                             </children>
                         </HBox>
-                        <HBox prefWidth="210" prefHeight="86" spacing="14" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
+                        <HBox alignment="CENTER_LEFT" prefHeight="86" prefWidth="210" spacing="14" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
                             <children>
-                                <StackPane prefWidth="42" prefHeight="42" maxWidth="42" maxHeight="42" style="-fx-background-color: #E8F5E9; -fx-background-radius: 10;">
-                                    <children><Label text="👨‍⚕️" style="-fx-font-size: 18px;" /></children>
+                                <StackPane maxHeight="42" maxWidth="42" prefHeight="42" prefWidth="42" style="-fx-background-color: #E8F5E9; -fx-background-radius: 10;">
+                                    <children><Label style="-fx-font-size: 18px;" text="👨‍⚕️" /></children>
                                 </StackPane>
                                 <VBox spacing="3">
                                     <children>
@@ -103,10 +100,10 @@
                                 </VBox>
                             </children>
                         </HBox>
-                        <HBox prefWidth="210" prefHeight="86" spacing="14" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
+                        <HBox alignment="CENTER_LEFT" prefHeight="86" prefWidth="210" spacing="14" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
                             <children>
-                                <StackPane prefWidth="42" prefHeight="42" maxWidth="42" maxHeight="42" style="-fx-background-color: #FFF3E0; -fx-background-radius: 10;">
-                                    <children><Label text="📅" style="-fx-font-size: 18px;" /></children>
+                                <StackPane maxHeight="42" maxWidth="42" prefHeight="42" prefWidth="42" style="-fx-background-color: #FFF3E0; -fx-background-radius: 10;">
+                                    <children><Label style="-fx-font-size: 18px;" text="📅" /></children>
                                 </StackPane>
                                 <VBox spacing="3">
                                     <children>
@@ -116,10 +113,10 @@
                                 </VBox>
                             </children>
                         </HBox>
-                        <HBox prefWidth="210" prefHeight="86" spacing="14" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
+                        <HBox alignment="CENTER_LEFT" prefHeight="86" prefWidth="210" spacing="14" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
                             <children>
-                                <StackPane prefWidth="42" prefHeight="42" maxWidth="42" maxHeight="42" style="-fx-background-color: #EDE7F6; -fx-background-radius: 10;">
-                                    <children><Label text="🛏" style="-fx-font-size: 18px;" /></children>
+                                <StackPane maxHeight="42" maxWidth="42" prefHeight="42" prefWidth="42" style="-fx-background-color: #EDE7F6; -fx-background-radius: 10;">
+                                    <children><Label style="-fx-font-size: 18px;" text="🛏" /></children>
                                 </StackPane>
                                 <VBox spacing="3">
                                     <children>
