@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.List;
@@ -29,6 +31,10 @@ public class PrescriptionController implements Initializable {
     @FXML private TableColumn<Prescription, String>  colDosage;
     @FXML private TableColumn<Prescription, String>  colDuration;
     @FXML private TableColumn<Prescription, String>  colInstructions;
+
+    @FXML private VBox patientViewPane;
+    @FXML private TextField patientSearchField;
+    @FXML private VBox addFormPane;
 
     private final ObservableList<Prescription> allPrescriptions = FXCollections.observableArrayList();
     private final DatabaseManager db = DatabaseManager.getInstance();
@@ -137,5 +143,38 @@ public class PrescriptionController implements Initializable {
                         node.setStyle("-fx-text-fill: white; -fx-font-weight: bold;"));
             }
         });
+    }
+    @FXML
+    private void handlePatientSearch(KeyEvent event) {
+        String input = patientSearchField.getText().trim();
+        if (input.isEmpty()) {
+            prescriptionTable.setItems(allPrescriptions);
+            return;
+        }
+        try {
+            int patientId = Integer.parseInt(input);
+            ObservableList<Prescription> filtered = FXCollections.observableArrayList(
+                    db.getPrescriptionsByPatient(patientId)
+            );
+            prescriptionTable.setItems(filtered);
+        } catch (NumberFormatException e) {
+            prescriptionTable.setItems(FXCollections.emptyObservableList());
+        }
+    }
+    public void showPatientView() {
+        patientViewPane.setVisible(true);
+        patientViewPane.setManaged(true);
+        // hide the add form
+        addFormPane.setVisible(false);
+        addFormPane.setManaged(false);
+        prescriptionTable.setItems(FXCollections.emptyObservableList());
+    }
+
+    public void showDoctorView() {
+        patientViewPane.setVisible(false);
+        patientViewPane.setManaged(false);
+        addFormPane.setVisible(true);
+        addFormPane.setManaged(true);
+        prescriptionTable.setItems(allPrescriptions);
     }
 }
