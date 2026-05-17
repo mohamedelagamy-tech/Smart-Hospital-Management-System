@@ -44,7 +44,7 @@ public class LoginController {
                 }
             }
         });
-        Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
+        Image logo = new Image(getClass().getResourceAsStream("/images/logo.png"));
         logoView.setImage(logo);
     }
 
