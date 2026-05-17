@@ -2,7 +2,7 @@ package com.example.shms.model;
 
 public class Room {
     private int id;
-    private int number;
+    private int roomNumber;
     private String department;
     private String roomtype;
     private String roomStatus;
@@ -12,39 +12,33 @@ public class Room {
         this.assignedPatientId = assignedPatientId;
         this.department = department;
         this.id = id;
-        this.number = number;
+        this.roomNumber = number;
         this.roomStatus = roomStatus;
         this.roomtype = roomtype;
     }
 
+    public int getRoomNumber() {return roomNumber;}
     public int getAssignedPatientId() {
         return assignedPatientId;
     }
-
     public String getDepartment() {
         return department;
     }
-
     public int getId() {
         return id;
     }
-
-    public int getNumber() {
-        return number;
+    public int getRoomNumberNumber() {
+        return roomNumber;
     }
-
     public String getRoomStatus() {
         return roomStatus;
     }
-
     public String getRoomtype() {
         return roomtype;
     }
-
     public void setAssignedPatientId(int assignedPatientId) {
         this.assignedPatientId = assignedPatientId;
     }
-
     public void setRoomStatus(String roomStatus) {
         this.roomStatus = roomStatus;
     }

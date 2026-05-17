@@ -14,8 +14,8 @@
             <children>
                 <HBox prefHeight="40.0" prefWidth="879.0" spacing="10.0">
                     <children>
-                        <TextField fx:id="searchField" promptText="Search by name or ID..." style="-fx-background-radius: 8;" />
-                        <ComboBox fx:id="departmentFilter" prefWidth="150.0" promptText="Filter by Department" />
+                        <TextField fx:id="searchField" prefHeight="26.0" prefWidth="163.0" promptText="🔍 Search by name or ID..." style="-fx-background-radius: 8;" />
+                        <ComboBox fx:id="departmentFilter" prefHeight="26.0" prefWidth="157.0" promptText="Filter by Department" HBox.hgrow="ALWAYS" />
                         <Button fx:id="allBtn" mnemonicParsing="false" onAction="#handleAll" prefWidth="60.0" text="All" />
                         <Button fx:id="emergencyBtn" onAction="#handleEmergency" prefWidth="90.0" style="-fx-background-color: red;" text="Emergency" textFill="#fafafa">
                             <font>
@@ -29,11 +29,12 @@
                             <font>
                                 <Font name="System Bold Italic" size="12.0" />
                             </font></Button>
-                        <Button fx:id="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddPatient" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="+ Add Patient" textAlignment="CENTER" textFill="WHITE" />
+                  <ComboBox fx:id="sortCombo" prefHeight="26.0" prefWidth="112.0" />
                         <Button fx:id="resetBtn" onAction="#handleReset" prefWidth="60.0" text="Reset" />
                     </children>
                 </HBox>
-                <TableView fx:id="patientTable" prefHeight="390.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10;" tableMenuButtonVisible="true">
+                  <Button fx:id="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddPatient" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="+ Add Patient" textAlignment="CENTER" textFill="WHITE" />
+                <TableView fx:id="patientTable" prefHeight="425.0" prefWidth="878.0" style="-fx-background-color: white; -fx-background-radius: 10;" tableMenuButtonVisible="true">
                     <columns>
                         <TableColumn fx:id="idCol" prefWidth="60.0" text="ID" />
                         <TableColumn fx:id="nameCol" prefWidth="160.0" text="Name" />
@@ -66,9 +67,9 @@
         </HBox>
     </top>
     <bottom>
-        <HBox prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: #F4F7FA;" BorderPane.alignment="CENTER">
+        <HBox prefHeight="33.0" prefWidth="900.0" style="-fx-background-color: #F4F7FA;" BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="statusLabel" alignment="BOTTOM_RIGHT" text="Total Patients: 0" textFill="#374151" />
+                <Label fx:id="statusLabel" alignment="BOTTOM_RIGHT" prefHeight="18.0" prefWidth="93.0" text="Total Patients: 0" textFill="#374151" />
             </children>
         </HBox>
     </bottom>

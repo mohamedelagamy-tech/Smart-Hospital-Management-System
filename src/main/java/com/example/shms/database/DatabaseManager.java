@@ -1,9 +1,6 @@
 package com.example.shms.database;
 
-import com.example.shms.model.Appointment;
-import com.example.shms.model.Bill;
-import com.example.shms.model.Prescription;
-import com.example.shms.model.Room;
+import com.example.shms.model.*;
 import com.example.shms.utils.PasswordEncryption;
 
 import java.sql.Connection;
@@ -22,6 +19,7 @@ public class DatabaseManager {
     private Connection connection;
     private static final String db_URL = "jdbc:sqlite:hospital.db";
 
+    private List<MedicalRecord> medicalRecords = new ArrayList<>();
     private void connect() {
         try {
             connection = DriverManager.getConnection(db_URL);
@@ -591,6 +589,15 @@ public class DatabaseManager {
             System.out.println("Error getting average rating: " + e.getMessage());
         }
         return 0.0;
+    }
+
+
+    public List<MedicalRecord> getAllMedicalRecords() {
+        return medicalRecords;
+    }
+
+    public void addMedicalRecord(MedicalRecord record) {
+        medicalRecords.add(record);
     }
 
 }

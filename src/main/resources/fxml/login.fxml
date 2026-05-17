@@ -1,47 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.LoginController" style="-fx-background-color: #1F4E79;">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #1F4E79;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.LoginController">
     <children>
-        <VBox alignment="TOP_CENTER" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
-                <!-- Navy top section -->
-                <VBox alignment="CENTER" prefHeight="160" style="-fx-background-color: #1F4E79;">
+                <VBox alignment="CENTER" prefHeight="120" style="-fx-background-color: #1F4E79;">
                     <children>
-                        <StackPane prefWidth="60" prefHeight="60" maxWidth="60" maxHeight="60" style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 30; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 30; -fx-border-width: 2;">
-                            <children>
-                                <Label text="SH" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" />
-                            </children>
-                        </StackPane>
+                        <ImageView fx:id="logoView" fitHeight="120" fitWidth="120" preserveRatio="true" />
                     </children>
                 </VBox>
 
-                <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS" style="-fx-background-color: #F0F4F8;">
+                <VBox alignment="TOP_CENTER" style="-fx-background-color: #F0F4F8;" VBox.vgrow="ALWAYS">
                     <children>
-                        <VBox alignment="CENTER" spacing="14" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 32; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 4);" maxWidth="340" VBox.vgrow="NEVER">
+                        <VBox alignment="CENTER" maxWidth="340" spacing="14" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 32; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 4);" VBox.vgrow="NEVER">
                             <VBox.margin><Insets top="-40" /></VBox.margin>
                             <children>
-                                <Label text="SHMS" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" />
-                                <Label text="Every patient matters, every moment counts" style="-fx-font-size: 11px; -fx-text-fill: #888888; -fx-text-alignment: center;" wrapText="true" />
-                                <VBox spacing="5" maxWidth="280">
+                                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="SHMS" />
+                                <Label style="-fx-font-size: 11px; -fx-text-fill: #888888; -fx-text-alignment: center;" text="Every patient matters, every moment counts" wrapText="true" />
+                                <VBox maxWidth="280" spacing="5">
                                     <children>
-                                        <Label text="USERNAME" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #555555;" />
+                                        <Label style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #555555;" text="USERNAME" />
                                         <TextField fx:id="usernameField" promptText="Enter your username" style="-fx-pref-height: 38px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px; -fx-pref-width: 280px;" />
                                     </children>
                                 </VBox>
-                                <HBox spacing="0" maxWidth="280">
+                                <HBox maxWidth="280" spacing="0">
                                     <children>
-                                        <PasswordField fx:id="passwordField" promptText="Enter your password" style="-fx-pref-height: 38px; -fx-background-radius: 6 0 0 6; -fx-border-radius: 6 0 0 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px; -fx-pref-width: 242px;" />
-                                        <TextField fx:id="passwordVisible" promptText="Enter your password" visible="false" managed="false" style="-fx-pref-height: 38px; -fx-background-radius: 6 0 0 6; -fx-border-radius: 6 0 0 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px; -fx-pref-width: 242px;" />
-                                        <Button fx:id="showPassword" text="👁" onAction="#handleShowPassword" style="-fx-pref-height: 38px; -fx-pref-width: 38px; -fx-background-color: #F0F0F0; -fx-background-radius: 0 6 6 0; -fx-border-radius: 0 6 6 0; -fx-border-color: #E0E0E0; -fx-border-width: 1 1 1 0; -fx-cursor: hand; -fx-font-size: 14px;" />
+                                        <PasswordField fx:id="passwordField" promptText="🔒Enter your password" style="-fx-pref-height: 38px; -fx-background-radius: 6 0 0 6; -fx-border-radius: 6 0 0 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px; -fx-pref-width: 242px;" />
+                                        <TextField fx:id="passwordVisible" managed="false" promptText="Enter your password" style="-fx-pref-height: 38px; -fx-background-radius: 6 0 0 6; -fx-border-radius: 6 0 0 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px; -fx-pref-width: 242px;" visible="false" />
+                                        <Button fx:id="showPassword" onAction="#handleShowPassword" style="-fx-pref-height: 38px; -fx-pref-width: 38px; -fx-background-color: #F0F0F0; -fx-background-radius: 0 6 6 0; -fx-border-radius: 0 6 6 0; -fx-border-color: #E0E0E0; -fx-border-width: 1 1 1 0; -fx-cursor: hand; -fx-font-size: 14px;" text="👁" />
                                     </children>
                                 </HBox>
-                                <Label fx:id="errorLabel" text="" style="-fx-font-size: 11px; -fx-pref-width: 280px; -fx-max-width: 280px;" wrapText="true" />
-                                <Button fx:id="loginButton" text="Sign In" onAction="#handleLogin" mnemonicParsing="false" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 13px; -fx-pref-height: 40px; -fx-pref-width: 280px; -fx-background-radius: 6; -fx-cursor: hand;" />
+                                <Label fx:id="errorLabel" style="-fx-font-size: 11px; -fx-pref-width: 280px; -fx-max-width: 280px;" text="" wrapText="true" />
+                                <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 13px; -fx-pref-height: 40px; -fx-pref-width: 280px; -fx-background-radius: 6; -fx-cursor: hand;" text="Sign In" />
                             </children>
                         </VBox>
                     </children>

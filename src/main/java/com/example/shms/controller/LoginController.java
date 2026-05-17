@@ -12,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 import java.sql.PreparedStatement;
@@ -26,10 +28,25 @@ public class LoginController {
     @FXML private Label errorLabel;
     @FXML private TextField passwordVisible;
     @FXML private Button showPassword;
+    @FXML private ImageView logoView;
+
     private boolean isPasswordVisible=false;
 
     private final SessionManager session=SessionManager.getInstance();
     private final DatabaseManager db=DatabaseManager.getInstance();
+
+    @FXML public void initialize(){
+        passwordField.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>(){
+            @Override
+            public void handle(javafx.scene.input.KeyEvent event){
+                if(event.getCode()==javafx.scene.input.KeyCode.ENTER){
+                    handleLogin();
+                }
+            }
+        });
+        Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
+        logoView.setImage(logo);
+    }
 
     @FXML private void handleLogin(){
         String username=usernameField.getText().trim();
@@ -77,8 +94,9 @@ public class LoginController {
             } else {
                 session.addAttempts();
                 logAudit(username,"UNKNOWN","FAILED");
-                int remainingAttempts = 5 - session.getLoginAttempts();
+                int remainingAttempts = 5-session.getLoginAttempts();
                 showError("Invalid credentials. "+remainingAttempts+" attempts.","invalid");
+                shakeField(passwordField);
             }
 
         } catch(SQLException e){
@@ -118,6 +136,21 @@ public class LoginController {
             case "dbError": errorLabel.setStyle("-fx-text-fill: #555555;-fx-background-color: #F0F0F0;-fx-background-radius:4;-fx-padding: 6 10;-fx-font-size: 11; ");
             break;
         }
+    }
+
+    private void shakeField(javafx.scene.Node node){
+        javafx.animation.TranslateTransition shake= new javafx.animation.TranslateTransition(Duration.millis(80),node);
+        shake.setFromX(0);
+        shake.setByX(10);
+        shake.setCycleCount(5);
+        shake.setAutoReverse(true);
+        shake.setOnFinished(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                node.setTranslateX(0);
+            }
+        });
+        shake.play();
     }
 
     private void logAudit(String username, String role, String status){

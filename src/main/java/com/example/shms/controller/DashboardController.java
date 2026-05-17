@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,6 +33,10 @@ public class DashboardController implements Initializable {
     @FXML private Label statDoctors;
     @FXML private Label statAppointments;
     @FXML private Label statRooms;
+    @FXML private Label userInitials;
+    @FXML private Label labelMain;
+    @FXML private Label labelMedical;
+    @FXML private Label labelAdmin;
 
     @FXML private Button btnDashboard;
     @FXML private Button btnPatients;
@@ -43,12 +49,17 @@ public class DashboardController implements Initializable {
     @FXML private Button btnRooms;
     @FXML private Button btnDepartments;
     @FXML private Button btnAuditLog;
+    @FXML private ImageView logoView;
 
     private final SessionManager session = SessionManager.getInstance();
     private final DatabaseManager db = DatabaseManager.getInstance();
 
     @Override
     public void initialize(URL url,ResourceBundle rb){
+        Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
+        logoView.setImage(logo);
+
+        setActiveButton(btnDashboard);
         setupUserInfo();
         setupClock();
         setupRoleBasedMenu();
@@ -82,9 +93,20 @@ public class DashboardController implements Initializable {
     private void setupUserInfo(){
         String user = session.getLoggedInUser();
         String role = session.getLoggedInRole();
+        String initials = user.substring(0, Math.min(2, user.length())).toUpperCase();
         userLabel.setText(user);
         roleLabel.setText(role);
-        welcomeLabel.setText("Good morning, " + user);
+        int hour=LocalDateTime.now().getHour();
+        String greeting;
+        if(hour<12){
+            greeting="Good morning";
+        }else if(hour<17){
+            greeting="Good afternoon";
+        }else{
+            greeting="Good evening";
+        }
+        welcomeLabel.setText(greeting+", "+user+" 👋");
+        userInitials.setText(initials);
     }
 
     private void setupClock(){
@@ -105,32 +127,61 @@ public class DashboardController implements Initializable {
         switch (role) {
             case "DOCTOR":
                 btnDoctors.setVisible(false);
+                btnDoctors.setManaged(false);
                 btnAuditLog.setVisible(false);
+                btnAuditLog.setManaged(false);
                 btnDepartments.setVisible(false);
+                btnDepartments.setManaged(false);
                 btnRooms.setVisible(false);
+                btnRooms.setManaged(false);
+                labelAdmin.setVisible(false);
+                labelAdmin.setManaged(false);
                 break;
             case "NURSE":
                 btnDoctors.setVisible(false);
+                btnDoctors.setManaged(false);
                 btnBilling.setVisible(false);
+                btnBilling.setManaged(false);
                 btnAuditLog.setVisible(false);
+                btnAuditLog.setManaged(false);
                 btnDepartments.setVisible(false);
+                btnDepartments.setManaged(false);
                 btnPrescriptions.setVisible(false);
+                btnPrescriptions.setManaged(false);
+                labelAdmin.setVisible(false);
+                labelAdmin.setManaged(false);
                 break;
             case "RECEPTIONIST":
                 btnDoctors.setVisible(false);
+                btnDoctors.setManaged(false);
                 btnRecords.setVisible(false);
+                btnRecords.setManaged(false);
                 btnPrescriptions.setVisible(false);
+                btnPrescriptions.setManaged(false);
                 btnAuditLog.setVisible(false);
+                btnAuditLog.setManaged(false);
                 btnDepartments.setVisible(false);
+                btnDepartments.setManaged(false);
                 break;
             case "PATIENT":
                 btnDoctors.setVisible(false);
+                btnDoctors.setManaged(false);
                 btnRecords.setVisible(false);
+                btnRecords.setManaged(false);
                 btnEmergency.setVisible(false);
+                btnEmergency.setManaged(false);
                 btnBilling.setVisible(false);
+                btnBilling.setManaged(false);
                 btnRooms.setVisible(false);
+                btnRooms.setManaged(false);
                 btnDepartments.setVisible(false);
+                btnDepartments.setManaged(false);
                 btnAuditLog.setVisible(false);
+                btnAuditLog.setManaged(false);
+                labelAdmin.setVisible(false);
+                labelAdmin.setManaged(false);
+                labelMedical.setVisible(false);
+                labelMedical.setManaged(false);
                 break;
             default:
                 break;
@@ -159,8 +210,20 @@ public class DashboardController implements Initializable {
         }
     }
 
+    private void setActiveButton(Button active){
+        Button[] all = {btnDashboard,btnPatients,btnDoctors,btnAppointments,
+                btnRecords,btnPrescriptions,btnEmergency,btnBilling,
+                btnRooms,btnDepartments,btnAuditLog};
+        for(Button btn : all){
+            btn.getStyleClass().remove("nav-button-active");
+            btn.setStyle("-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;");
+        }
+        active.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;");
+    }
+
     @FXML
     private void showDashboard(){
+        setActiveButton(btnDashboard);
         MainApp.navigateTo("dashboard",1200,700);
     }
     @FXML
@@ -171,41 +234,51 @@ public class DashboardController implements Initializable {
     }
     @FXML
     private void showPatients(){
+        setActiveButton(btnPatients);
         MainApp.navigateTo("PatientView",1200,700);
     }
     @FXML
     private void showDoctors(){
+        setActiveButton(btnDoctors);
         MainApp.navigateTo("DoctorView",1200,700);
     }
     @FXML
     private void showAppointments(){
+        setActiveButton(btnAppointments);
         MainApp.navigateTo("appointment-management-view", 1200,700);
     }
     @FXML
     private void showRecords(){
+        setActiveButton(btnRecords);
         MainApp.navigateTo("MedicalRecords",1200,700);
     }
     @FXML
     private void showPrescriptions(){
+        setActiveButton(btnPrescriptions);
         MainApp.navigateTo("PrescriptionView",1200,700);
     }
     @FXML
     private void showEmergency(){
+        setActiveButton(btnEmergency);
         MainApp.navigateTo("EmergencyQueueView",1200,700);
     }
     @FXML
     private void showBilling(){
+        setActiveButton(btnBilling);
         MainApp.navigateTo("BillingView",1200,700);
     }
     @FXML
     private void showRooms(){
+        setActiveButton(btnRooms);
         MainApp.navigateTo("RoomView",1200,700);
     }
     @FXML
     private void showDepartments(){
+        setActiveButton(btnDepartments);
         MainApp.navigateTo("DepartmentView",1200,700);
     }
     @FXML private void showAuditLog(){
+        setActiveButton(btnAuditLog);
         MainApp.navigateTo("auditLog",1200,700);
     }
 }
