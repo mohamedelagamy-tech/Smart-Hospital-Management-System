@@ -1,4 +1,4 @@
-package com.example.shms;
+package com.example.shms.utils;
 
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Bill;
@@ -62,7 +62,7 @@ public class NewBillController implements Initializable {
         String billNum = "INV-" + (allBills.size() + 1);
         String today   = java.time.LocalDate.now().toString();
         Bill newBill   = new Bill(billNum, selectedPatient, service, today, amount, status);
-        private final DatabaseManager db = DatabaseManager.getInstance();
+        final DatabaseManager db = DatabaseManager.getInstance();
         allBills.add(newBill);
         billingTable.setItems(allBills);
         db.addBill(newBill);
