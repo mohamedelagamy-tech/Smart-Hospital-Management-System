@@ -5,6 +5,7 @@ import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Patient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class PatientController {
     @FXML private TableView<Patient> patientTable;
@@ -28,6 +31,7 @@ public class PatientController {
     @FXML private TableColumn<Patient, Void> actionsCol;
     @FXML private TextField searchField;
     @FXML private ComboBox<String> departmentFilter;
+    @FXML private ComboBox<String> sortCombo;
     @FXML private Button allBtn,emergencyBtn,urgentBtn,normalBtn,resetBtn,addBtn;
     @FXML private Label statusLabel;
     private final DatabaseManager db= DatabaseManager.getInstance();
@@ -40,6 +44,9 @@ public class PatientController {
         setupDepartmentFilter();
         loadPatients();
         setupSearch();
+        sortCombo.getItems().addAll("ID","Name","Age","Priority","Status");
+        sortCombo.setValue("ID");
+        sortCombo.setOnAction(e->sortBy(sortCombo.getValue()));
     }
     private void setupColumns() {
         idCol.setCellValueFactory(new PropertyValueFactory<>("patientID"));
@@ -148,8 +155,8 @@ public class PatientController {
         } catch (SQLException e) {
             System.out.println("error in loading patient" + e.getMessage());
         }
-        patientTable.setItems(patientList);
-        statusLabel.setText("Total patients: " + patientList.size());
+        Collections.sort(patientList);
+        filterPatients();
     }
     private void setupSearch(){
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filterPatients());
@@ -202,8 +209,9 @@ public class PatientController {
         searchField.clear();
         departmentFilter.setValue("All");
         currentPriorityFilter="all";
-        patientTable.setItems(patientList);
-        statusLabel.setText("Total patients: " + patientList.size());
+        sortCombo.setValue("ID");
+        Collections.sort(patientList);
+        filterPatients();
     }
     @FXML
     private void handleAddPatient(){
@@ -246,6 +254,16 @@ public class PatientController {
                 loadPatients();
             }
         });
+    }
+    private void sortBy(String mode){
+        switch(mode){
+            case "ID"->Collections.sort(patientList);
+            case "Name"->patientList.sort(Comparator.comparing(Patient::getName));
+            case "Age"->patientList.sort(Comparator.comparingInt(Patient::getAge));
+            case "Priority"->patientList.sort(Comparator.comparingInt(Patient::getPriority));
+            case "Status"->patientList.sort(Comparator.comparing(Patient::getStatus));
+        }
+        filterPatients();
     }
     @FXML
     private void handleBack() {
