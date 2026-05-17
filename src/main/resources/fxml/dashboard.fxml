@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import java.lang.String?>
 <BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DashboardController">
     <stylesheets>
@@ -13,11 +13,7 @@
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
             <children>
-                <ImageView fx:id="logoView" fitWidth="36" fitHeight="36" preserveRatio="true">
-                    <image>
-                        <Image url="/images/logo.jpeg" />
-                    </image>
-                </ImageView>
+                <ImageView fx:id="logoView" fitWidth="120" fitHeight="120" preserveRatio="true" />
                 <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="SHMS" />
                 <Label style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 14px;" text="|" />
                 <Label style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.6);" text="Smart Hospital Management System" />

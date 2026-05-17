@@ -1,4 +1,4 @@
-package com.example.shms.utils;
+package com.example.shms.controller;
 
 import com.example.shms.NewBillController;
 import com.example.shms.database.DatabaseManager;
