@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,6 +51,7 @@ public class DashboardController implements Initializable {
     @FXML private Button btnDepartments;
     @FXML private Button btnAuditLog;
     @FXML private ImageView logoView;
+    @FXML private Button btnStatistics;
 
     private final SessionManager session = SessionManager.getInstance();
     private final DatabaseManager db = DatabaseManager.getInstance();
@@ -66,6 +68,9 @@ public class DashboardController implements Initializable {
         loadStats();
         autoRefresh();
     }
+
+
+
 
     private void autoRefresh() {
         Thread refreshThread = new Thread(new Runnable() {
@@ -182,6 +187,8 @@ public class DashboardController implements Initializable {
                 labelAdmin.setManaged(false);
                 labelMedical.setVisible(false);
                 labelMedical.setManaged(false);
+                btnStatistics.setVisible(false);
+                btnStatistics.setManaged(false);
                 break;
             default:
                 break;
@@ -213,7 +220,9 @@ public class DashboardController implements Initializable {
     private void setActiveButton(Button active){
         Button[] all = {btnDashboard,btnPatients,btnDoctors,btnAppointments,
                 btnRecords,btnPrescriptions,btnEmergency,btnBilling,
-                btnRooms,btnDepartments,btnAuditLog};
+                btnRooms,btnDepartments,btnAuditLog, btnStatistics};
+
+
         for(Button btn : all){
             btn.getStyleClass().remove("nav-button-active");
             btn.setStyle("-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;");
@@ -226,6 +235,7 @@ public class DashboardController implements Initializable {
         setActiveButton(btnDashboard);
         MainApp.navigateTo("dashboard",1200,700);
     }
+
 
     @FXML
     private void handleLogout(){
@@ -281,5 +291,10 @@ public class DashboardController implements Initializable {
     @FXML private void showAuditLog(){
         setActiveButton(btnAuditLog);
         MainApp.navigateTo("auditLog",1200,700);
+    }
+    @FXML
+    private void showStatistics() {
+        setActiveButton(btnStatistics);
+        MainApp.navigateTo("StatisticsDashboard", 1200, 700);
     }
 }

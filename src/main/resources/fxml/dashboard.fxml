@@ -57,6 +57,13 @@
                 <Button fx:id="btnRooms" styleClass="nav-button" maxWidth="Infinity" onAction="#showRooms" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🛏  Rooms" />
                 <Button fx:id="btnDepartments" styleClass="nav-button" maxWidth="Infinity" onAction="#showDepartments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🏥  Departments" />
                 <Button fx:id="btnAuditLog" styleClass="nav-button" maxWidth="Infinity" onAction="#showAuditLog" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📝  Audit Log" />
+
+                <Button fx:id="btnStatistics" styleClass="nav-button" maxWidth="Infinity"
+                        onAction="#showStatistics"
+                        style="-fx-background-color: transparent; -fx-text-fill: #555555;
+               -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12;"
+                        text="📊  Statistics"/>
+
             </children>
         </VBox>
     </left>

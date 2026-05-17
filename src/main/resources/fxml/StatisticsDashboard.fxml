@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.shms.controller.StatisticsController"
+      spacing="24"
+      style="-fx-background-color: #f4f6f9;">
+
+    <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+    <!-- ── Title ── -->
+    <Label text="Statistics Dashboard"
+           style="-fx-font-family: Georgia; -fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
+
+    <!-- ── Row 1: Appointments + Room Occupancy ── -->
+    <HBox spacing="20">
+
+        <!-- Chart 1: Appointments per day (Bar) -->
+        <VBox spacing="8" HBox.hgrow="ALWAYS"
+              style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
+            <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+            <Label text="📅  Appointments Per Day"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
+            <BarChart fx:id="appointmentsChart"
+                      prefHeight="260" prefWidth="480"
+                      style="-fx-background-color: transparent;"
+                      animated="true">
+                <xAxis><CategoryAxis label="Day"/></xAxis>
+                <yAxis><NumberAxis label="Count"/></yAxis>
+            </BarChart>
+        </VBox>
+
+        <!-- Chart 2: Room Occupancy (Pie) -->
+        <VBox spacing="8" HBox.hgrow="ALWAYS"
+              style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
+            <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+            <Label text="🏥  Room Occupancy Rate"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
+            <PieChart fx:id="occupancyChart"
+                      prefHeight="260"
+                      animated="true"
+                      style="-fx-background-color: transparent;"/>
+        </VBox>
+
+    </HBox>
+
+    <!-- ── Row 2: Revenue + Top Doctors ── -->
+    <HBox spacing="20">
+
+        <!-- Chart 3: Revenue over time (Line) -->
+        <VBox spacing="8" HBox.hgrow="ALWAYS"
+              style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
+            <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+            <Label text="💰  Revenue Over Time"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
+            <LineChart fx:id="revenueChart"
+                       prefHeight="260" prefWidth="480"
+                       animated="true"
+                       style="-fx-background-color: transparent;">
+                <xAxis><CategoryAxis label="Month"/></xAxis>
+                <yAxis><NumberAxis label="Revenue ($)"/></yAxis>
+            </LineChart>
+        </VBox>
+
+        <!-- Chart 4: Top Rated Doctors (Bar) -->
+        <VBox spacing="8" HBox.hgrow="ALWAYS"
+              style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
+            <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+            <Label text="⭐  Top Rated Doctors"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
+            <BarChart fx:id="doctorsChart"
+                      prefHeight="260" prefWidth="480"
+                      animated="true"
+                      style="-fx-background-color: transparent;">
+                <xAxis><CategoryAxis label="Doctor"/></xAxis>
+                <yAxis><NumberAxis label="Rating" lowerBound="0" upperBound="5"/></yAxis>
+            </BarChart>
+        </VBox>
+
+    </HBox>
+
+    <!-- ── Notifications Panel ── -->
+    <VBox spacing="10"
+          style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
+        <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="🔔  Live Notifications"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="notifStatusLabel"
+                   style="-fx-font-size: 11px; -fx-text-fill: #22c55e;"/>
+        </HBox>
+
+        <ListView fx:id="notificationsList"
+                  prefHeight="120"
+                  style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-radius: 6; -fx-font-size: 13px;"/>
+
+    </VBox>
+
+</VBox>
