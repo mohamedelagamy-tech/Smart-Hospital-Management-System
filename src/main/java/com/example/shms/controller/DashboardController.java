@@ -226,6 +226,7 @@ public class DashboardController implements Initializable {
         setActiveButton(btnDashboard);
         MainApp.navigateTo("dashboard",1200,700);
     }
+
     @FXML
     private void handleLogout(){
         session.stopSessionTimer();
