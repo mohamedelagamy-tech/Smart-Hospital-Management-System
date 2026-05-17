@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -149,5 +146,34 @@ public class RoomManagementController implements Initializable {
             case "cleaning"  -> base + "-fx-background-color: #f97316;";
             default          -> base + "-fx-background-color: #9aa5b4;";
         };
+    }
+    private void showAssignDialog(Room room) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Assign Room");
+        dialog.setHeaderText("Assign Room " + room.getRoomNumber());
+        dialog.setContentText("Enter Patient ID:");
+        dialog.showAndWait().ifPresent(input -> {
+            try {
+                int patientId = Integer.parseInt(input.trim());
+                db.assignRoom(room.getId(), patientId);
+                loadRoomsFromDatabase();
+                buildAllCards();
+            } catch (NumberFormatException e) {
+                new Alert(Alert.AlertType.ERROR, "Invalid Patient ID").show();
+            }
+        });
+    }
+
+    private void showReleaseDialog(Room room) {
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "Release Room " + room.getRoomNumber() + "?");
+        confirm.setTitle("Release Room");
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                db.releaseRoom(room.getId());
+                loadRoomsFromDatabase();
+                buildAllCards();
+            }
+        });
     }
 }
