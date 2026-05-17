@@ -122,8 +122,9 @@ public class PatientController {
             }
             protected void updateItem(Void item, boolean empty){
                 super.updateItem(item, empty);
-                setGraphic(null);
-                if(empty||getIndex()>=0 && getIndex()<getTableView().getItems().size())
+                if(empty||getIndex()>=getTableView().getItems().size())
+                    setGraphic(null);
+                else
                     setGraphic(buttons);
             }
         });
@@ -174,6 +175,7 @@ public class PatientController {
             }
         }
         patientTable.setItems(filtered);
+        patientTable.refresh();
         statusLabel.setText("Showing: " + filtered.size()+" of "+patientList.size()+" patients");
     }
     private String getPriorityNumber(String filter){
