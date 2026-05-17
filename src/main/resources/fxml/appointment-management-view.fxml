@@ -76,7 +76,7 @@
             style="-fx-background-color:#185FA5; -fx-text-fill:white; -fx-font-size:13; -fx-font-weight:bold;-fx-background-radius:20; -fx-padding:10 22; -fx-border-width:0"/>
     <Button text="x Cancel Appointment" onAction="#handleCancel"
             style="-fx-background-color:#A32D2D; -fx-text-fill:white; -fx-font-size:13; -fx-font-weight:bold;-fx-background-radius:20; -fx-padding:10 22; -fx-border-width:0"/>
-    <Button text="Refresh" onAction="#initialize"
+    <Button text="Refresh" onAction="#handleRefresh"
             style="-fx-background-color:#27500A; -fx-text-fill:white; -fx-font-size:13; -fx-font-weight:bold;-fx-background-radius:20; -fx-padding:10 22; -fx-border-width:0"/>
     </HBox>
 </VBox>

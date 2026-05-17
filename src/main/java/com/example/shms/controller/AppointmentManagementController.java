@@ -122,4 +122,7 @@ public class AppointmentManagementController {
     private void handleBack() {
         MainApp.navigateTo("dashboard", 1200, 700);
     }
+    @FXML private void handleRefresh(){
+        loadAppointments();
+    }
 }
