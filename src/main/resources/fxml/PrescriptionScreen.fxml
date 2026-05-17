@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.shms.controller.PrescriptionController"
+      spacing="20"
+      style="-fx-background-color: #f0f2f5;">
+
+    <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+    <Label text="Prescriptions-Doctor view"
+           style="-fx-font-family: Georgia; -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #1a6fba;"/>
+
+    <VBox spacing="14"
+          style="-fx-background-color: white; -fx-border-color: #dde4ee; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
+        <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+        <Label text="Add New Prescription"
+               style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1a6fba;"/>
+
+        <HBox spacing="14">
+            <TextField fx:id="patientIdField"
+                       promptText="Patient ID *"
+                       prefHeight="48"
+                       style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px; -fx-padding: 0 12;"
+                       HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="medicineNameField"
+                       promptText="Medicine Name *"
+                       prefHeight="48"
+                       style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px; -fx-padding: 0 12;"
+                       HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <HBox spacing="14">
+            <TextField fx:id="dosageField"
+                       promptText="Dosage *"
+                       prefHeight="48"
+                       style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px; -fx-padding: 0 12;"
+                       HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="durationField"
+                       promptText="Duration *"
+                       prefHeight="48"
+                       style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px; -fx-padding: 0 12;"
+                       HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <TextArea fx:id="instructionsField"
+                  promptText="Instructions *"
+                  prefHeight="80"
+                  style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px; -fx-padding: 8 12;"/>
+
+        <Button text="ADD PRESCRIPTION"
+                prefHeight="42"
+                onAction="#handleAddPrescription"
+                style="-fx-background-color: #1a6fba; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;"/>
+
+    </VBox>
+
+    <TableView fx:id="prescriptionTable"
+               style="-fx-background-color: white; -fx-border-color: #dde4ee; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 13px;"
+               columnResizePolicy="CONSTRAINED_RESIZE_POLICY"
+               VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId"           text="Prescription ID" prefWidth="130"/>
+            <TableColumn fx:id="colPatient"      text="Patient"         prefWidth="160"/>
+            <TableColumn fx:id="colDoctor"       text="Doctor"          prefWidth="130"/>
+            <TableColumn fx:id="colMedicine"     text="Medicine"        prefWidth="130"/>
+            <TableColumn fx:id="colDosage"       text="Dosage"          prefWidth="90"/>
+            <TableColumn fx:id="colDuration"     text="Duration"        prefWidth="90"/>
+            <TableColumn fx:id="colInstructions" text="Instructions"    prefWidth="220"/>
+        </columns>
+    </TableView>
+
+</VBox>

@@ -12,11 +12,7 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="120" style="-fx-background-color: #1F4E79;">
                     <children>
-                        <ImageView fx:id="logoView" fitWidth="120" fitHeight="120" preserveRatio="true">
-                            <image>
-                                <Image url="/images/logo.jpeg" />
-                            </image>
-                        </ImageView>
+                        <ImageView fx:id="logoView" fitWidth="120" fitHeight="120" preserveRatio="true" />
                     </children>
                 </VBox>
 

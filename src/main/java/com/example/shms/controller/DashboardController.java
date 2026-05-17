@@ -56,12 +56,8 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url,ResourceBundle rb){
-        try {
-            Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
-            logoView.setImage(logo);
-        } catch (Exception e) {
-            System.out.println("Logo load failed: " + e.getMessage());
-        }
+        Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
+        logoView.setImage(logo);
 
         setActiveButton(btnDashboard);
         setupUserInfo();
@@ -100,7 +96,16 @@ public class DashboardController implements Initializable {
         String initials = user.substring(0, Math.min(2, user.length())).toUpperCase();
         userLabel.setText(user);
         roleLabel.setText(role);
-        welcomeLabel.setText("Good morning, " + user);
+        int hour=LocalDateTime.now().getHour();
+        String greeting;
+        if(hour<12){
+            greeting="Good morning";
+        }else if(hour<17){
+            greeting="Good afternoon";
+        }else{
+            greeting="Good evening";
+        }
+        welcomeLabel.setText(greeting+", "+user+" 👋");
         userInitials.setText(initials);
     }
 
