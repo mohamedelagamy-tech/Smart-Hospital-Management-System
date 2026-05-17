@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.shms.NewBillController"
+      spacing="12"
+      stylesheets="@billing.css"
+      styleClass="form-container">
+
+    <padding><Insets top="30" right="30" bottom="30" left="30"/></padding>
+
+    <Label text="Generate New Bill" styleClass="form-title"/>
+
+    <Label text="Patient Name" styleClass="form-label"/>
+    <ComboBox fx:id="patientBox"
+              promptText="Select a patient"
+              prefWidth="300"
+              styleClass="combo-box"/>
+
+    <Label text="Service" styleClass="form-label"/>
+    <TextField fx:id="serviceField"
+               promptText="Enter service type"
+               prefWidth="300"
+               styleClass="form-field"/>
+
+    <Label text="Cost" styleClass="form-label"/>
+    <TextField fx:id="amountField"
+               promptText="Enter amount"
+               prefWidth="300"
+               styleClass="form-field"/>
+
+    <Label text="Status" styleClass="form-label"/>
+    <ComboBox fx:id="statusBox"
+              prefWidth="300"
+              styleClass="combo-box"/>
+
+    <Button fx:id="submitBtn"
+            text="Submit"
+            prefWidth="300" prefHeight="40"
+            styleClass="submit-btn"
+            onAction="#handleSubmit"/>
+
+</VBox>

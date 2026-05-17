@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.AuditLogController">
 
@@ -10,13 +11,18 @@
             <children>
                 <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 16 20; -fx-background-color: #1F4E79;">
                     <children>
-                        <VBox spacing="2" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: Transparent;" text="← Back" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                        <VBox prefHeight="54.0" prefWidth="378.0" spacing="2" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Audit Log" />
                                 <Label style="-fx-font-size: 11px; -fx-text-fill: #888888;" text="All login attempts — Admin access only" />
                             </children>
                         </VBox>
-                        <TextField fx:id="searchField" promptText="Search by username..." style="-fx-pref-width: 180px; -fx-pref-height: 34px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px;" />
+                        <TextField fx:id="searchField" promptText="🔍 Search by username..." style="-fx-pref-width: 180px; -fx-pref-height: 34px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px;" />
                         <ComboBox fx:id="statusFilter" promptText="All Statuses" style="-fx-pref-width: 130px; -fx-pref-height: 34px;" />
                         <Button onAction="#handleClearLog" style="-fx-background-color: #A32D2D; -fx-text-fill: white; -fx-font-size: 12px; -fx-pref-height: 34px; -fx-background-radius: 6; -fx-cursor: hand;" text="Clear Log" />
                     </children>

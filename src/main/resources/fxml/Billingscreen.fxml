@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.shms.controller.BillingController"
+      spacing="16">
+
+    <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+    <HBox alignment="CENTER_LEFT">
+        <Label text="Billing Management" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="newBillBtn" text="+ New Bill"
+                styleClass="new-bill-btn"
+                onAction="#openNewBillForm"/>
+    </HBox>
+
+    <HBox spacing="16" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField"
+                   promptText="Search by patient name, bill number, date..."
+                   prefWidth="280" prefHeight="40"
+                   styleClass="search-field"
+                   onKeyReleased="#applyFilters"/>
+
+        <VBox spacing="2">
+            <Label text="Sort By" styleClass="sort-label"/>
+            <ComboBox fx:id="sortBox" prefHeight="40" prefWidth="200"
+                      styleClass="combo-box"
+                      onAction="#applyFilters"/>
+        </VBox>
+    </HBox>
+    <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT">
+        <ToggleButton fx:id="btnAll"     text="All"     styleClass="filter-btn" onAction="#applyFilters"/>
+        <ToggleButton fx:id="btnPaid"    text="Paid"    styleClass="filter-btn" onAction="#applyFilters"/>
+        <ToggleButton fx:id="btnPending" text="Pending" styleClass="filter-btn" onAction="#applyFilters"/>
+        <ToggleButton fx:id="btnOverdue" text="Overdue" styleClass="filter-btn" onAction="#applyFilters"/>
+    </HBox>
+
+    <TableView fx:id="billingTable"
+               styleClass="billing-table"
+               columnResizePolicy="CONSTRAINED_RESIZE_POLICY"
+               VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colBillNum"  text="Bill Number"   prefWidth="140"/>
+            <TableColumn fx:id="colPatient"  text="Patient Name"  prefWidth="160"/>
+            <TableColumn fx:id="colService"  text="Service"       prefWidth="180"/>
+            <TableColumn fx:id="colDate"     text="Date"          prefWidth="100"/>
+            <TableColumn fx:id="colAmount"   text="Amount"        prefWidth="110"/>
+            <TableColumn fx:id="colStatus"   text="Status"        prefWidth="100"/>
+            <TableColumn fx:id="colActions"  text="Actions"       prefWidth="140"/>
+        </columns>
+    </TableView>
+
+</VBox>
