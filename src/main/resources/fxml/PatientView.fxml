@@ -14,7 +14,7 @@
             <children>
                 <HBox prefHeight="40.0" prefWidth="879.0" spacing="10.0">
                     <children>
-                        <TextField fx:id="searchField" promptText="Search by name or ID..." style="-fx-background-radius: 8;" />
+                        <TextField fx:id="searchField" promptText="🔍 Search by name or ID..." style="-fx-background-radius: 8;" />
                         <ComboBox fx:id="departmentFilter" prefWidth="150.0" promptText="Filter by Department" />
                         <Button fx:id="allBtn" mnemonicParsing="false" onAction="#handleAll" prefWidth="60.0" text="All" />
                         <Button fx:id="emergencyBtn" onAction="#handleEmergency" prefWidth="90.0" style="-fx-background-color: red;" text="Emergency" textFill="#fafafa">
