@@ -100,7 +100,16 @@ public class DashboardController implements Initializable {
         String initials = user.substring(0, Math.min(2, user.length())).toUpperCase();
         userLabel.setText(user);
         roleLabel.setText(role);
-        welcomeLabel.setText("Good morning, " + user);
+        int hour=LocalDateTime.now().getHour();
+        String greeting;
+        if(hour<12){
+            greeting="Good morning";
+        }else if(hour<17){
+            greeting="Good afternoon";
+        }else{
+            greeting="Good evening";
+        }
+        welcomeLabel.setText(greeting+", "+user+" 👋");
         userInitials.setText(initials);
     }
 
