@@ -1,6 +1,6 @@
 package com.example.shms.controller;
 
-import com.example.shms.NewBillController;
+import com.example.shms.controller.NewBillController;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Bill;
 import javafx.collections.FXCollections;
