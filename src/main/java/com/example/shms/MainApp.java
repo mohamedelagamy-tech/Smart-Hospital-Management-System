@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
 
 public class MainApp extends Application {
     private static Stage primaryStage;
@@ -28,6 +30,11 @@ public class MainApp extends Application {
             FXMLLoader loader=new FXMLLoader(MainApp.class.getResource("/fxml/"+fxmlFile +".fxml"));
             Scene scene=new Scene(loader.load(),width,height);
             primaryStage.setScene(scene);
+
+            FadeTransition fade= new FadeTransition(Duration.millis(300),scene.getRoot());
+            fade.setFromValue(0.0);
+            fade.setToValue(1.0);
+            fade.play();
         }catch(Exception e){
             System.out.println("Error navigating to "+fxmlFile+": "+e.getMessage());
             e.printStackTrace();
