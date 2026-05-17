@@ -52,15 +52,15 @@ public class DatabaseManager {
             st.execute("INSERT INTO departments (depName) VALUES ('Oncology')");
             st.execute("INSERT INTO departments (depName) VALUES ('Radiology')");
 
-            st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Khaled Nour','Cardiologist','Male','Mon-Wed-Fri','Available')");
-            st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Mona Samir','Pediatrician','Female','Sun-Tue-Thu','Available')");
-            st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Ahmed Hassan','Emergency Specialist','Male','Mon-Tue-Wed','Available')");
-            st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Layla Farouk','Neurologist','Female','Sun-Mon-Wed','Available')");
-            st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Omar Sherif','Orthopedic Surgeon','Male','Tue-Thu-Sat','Available')");
-            st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Hana Adel','Dermatologist','Female','Mon-Wed-Fri','Available')");
-            st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Tarek Mansour','Oncologist','Male','Sun-Tue-Thu','Available')");
-            st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Yasmine Farid','Radiologist','Female','Mon-Wed-Sat','Busy')");
-            st.execute("INSERT INTO doctors (name,specialization,gender,schedule,status) VALUES ('Dr. Mahmoud Gamal','General Surgeon','Male','Tue-Thu-Sat','Available')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Khaled Nour','khaled@hospital.com','doctor123','Cardiology','Available',15000,'Mon-Wed-Fri','8am-4pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Mona Samir','mona@hospital.com','doctor123','Pediatrics','Available',12000,'Sun-Tue-Thu','9am-5pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Ahmed Hassan','ahmed@hospital.com','doctor123','Emergency','Available',18000,'Mon-Tue-Wed','7am-3pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Layla Farouk','layla@hospital.com','doctor123','Neurology','Available',16000,'Sun-Mon-Wed','8am-4pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Omar Sherif','omar@hospital.com','doctor123','Orthopedics','Busy',14000,'Tue-Thu-Sat','10am-6pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Hana Adel','hana@hospital.com','doctor123','Dermatology','Available',11000,'Mon-Wed-Fri','9am-5pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Tarek Mansour','tarek@hospital.com','doctor123','Oncology','Available',20000,'Sun-Tue-Thu','8am-4pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Yasmine Farid','yasmine@hospital.com','doctor123','Radiology','Busy',13000,'Mon-Wed-Sat','7am-3pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Mahmoud Gamal','mahmoud@hospital.com','doctor123','Emergency','In Surgery',17000,'Tue-Thu-Sat','6am-2pm')");
 
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Sara Mohamed',34,'Female','01098765432','Cairo','A+','Cardiology',1)");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Omar Ali',25,'Male','01012345678','Giza','B+','Orthopedics',2)");
@@ -117,11 +117,15 @@ public class DatabaseManager {
             st.execute("CREATE TABLE IF NOT EXISTS doctors (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "name TEXT NOT NULL UNIQUE," +
-                    "specialization TEXT NOT NULL," +
-                    "gender TEXT NOT NULL," +
-                    "schedule TEXT NOT NULL," +
+                    "email TEXT,"+
+                    "password TEXT," +
+                    "department TEXT NOT NULL," +
                     "status TEXT DEFAULT 'Available'," +
-                    "rating REAL DEFAULT 0.0)");
+                    "salary REAL default 0.0," +
+                    "workingDays Text,"+
+                    "workingHours Text," +
+                    "totalRating REAL DEFAULT 0.0," +
+                    "ratingCount INTEGER DEFAULT 0)");
 
             st.execute("CREATE TABLE IF NOT EXISTS patients (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
