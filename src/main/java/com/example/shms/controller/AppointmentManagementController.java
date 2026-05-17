@@ -11,9 +11,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class AppointmentManagementController {
-    @FXML
-    private javafx.scene.control.TextField searchField;
+
     @FXML
     private TableView<Appointment> appointmentTable;
     @FXML
@@ -30,6 +32,8 @@ public class AppointmentManagementController {
     private TableColumn<Appointment, String> colStatus;
     @FXML
     private TableColumn<Appointment, String> colNotes;
+    @FXML
+    private javafx.scene.control.TextField searchField;
 
     private DatabaseManager db = DatabaseManager.getInstance();
 
@@ -48,6 +52,39 @@ public class AppointmentManagementController {
     private void loadAppointments() {
         java.util.List<Appointment> all = db.getAppointmentsByDoctor(0);
         appointmentTable.setItems(FXCollections.observableArrayList(all));
+    }
+
+    @FXML
+    private void handleSearch() {
+        String query = searchField.getText().toLowerCase();
+        java.util.List<com.example.shms.model.Appointment> all = db.getAppointmentsByDoctor(0);
+        java.util.List<com.example.shms.model.Appointment> filtered = all.stream().filter(a -> a.getStatus().toLowerCase().contains(query) || a.getDate().toString().contains(query) || a.getNotes().toLowerCase().contains(query)).collect(java.util.stream.Collectors.toList());
+        appointmentTable.setItems(javafx.collections.FXCollections.observableArrayList(filtered));
+    }
+
+    @FXML
+    private void filterAll() {
+        loadAppointments();
+    }
+
+    @FXML
+    private void filterScheduled() {
+        filterByStatus("Scheduled");
+    }
+
+    @FXML
+    private void filterCompleted() {
+        filterByStatus("Completed");
+    }
+
+    @FXML
+    private void filterCancelled() {
+        filterByStatus("Cancelled");
+    }
+
+    private void filterByStatus(String status) {
+        List<Appointment> filtered = db.getAppointmentsByDoctor(0).stream().filter(a -> a.getStatus().equals(status)).collect(Collectors.toList());
+        appointmentTable.setItems(FXCollections.observableArrayList(filtered));
     }
 
     @FXML
@@ -80,29 +117,7 @@ public class AppointmentManagementController {
             System.out.println("Error opening booking from :" + e.getMessage());
         }
     }
-@FXML private void handleSearch(){
-        String query=searchField.getText().toLowerCase();
-        java.util.List<com.example.shms.model.Appointment> all=db.getAppointmentsByDoctor(0);
-        java.util.List<com.example.shms.model.Appointment> filtered = all.stream().filter(a->a.getStatus().toLowerCase().contains(query) || a.getDate().toString().contains(query) || a.getNotes().toLowerCase().contains(query)).collect(java.util.stream.Collectors.toList());
-        appointmentTable.setItems(javafx.collections.FXCollections.observableArrayList(filtered));
-    }
-    @FXML private void filteredAll(){
-        loadAppointments();
-    }
-    @FXML private void filterScheduled(){
-        filterByStatus("Scheduled");
-    }
-    @FXML private void filterCompleted(){
-        filterByStatus("Completed");
-    }
-    @FXML private void filterCancelled(){
-        filterByStatus("Cancelled");
-    }
-    private void filterByStatus(String status){
-        java.util.List<com.example.shms.model.Appointment> all = db.getAppointmentsByDoctor(0);
-        java.util.List<com.example.shms.model.Appointment> filtered = all.stream().filter(a->a.getStatus().equals(status)).collect(java.util.stream.Collectors.toList());
-        appointmentTable.setItems(javafx.collections.FXCollections.observableArrayList(filtered));
-    }
+
     @FXML
     private void handleBack() {
         MainApp.navigateTo("dashboard", 1200, 700);
