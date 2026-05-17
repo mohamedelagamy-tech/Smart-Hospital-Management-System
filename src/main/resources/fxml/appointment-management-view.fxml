@@ -42,7 +42,7 @@
       style="-fx-padding:0 20 12 20; -fx-background-color:#EEF2FF;">
     <TextField fx:id="searchField" promptText="Search appointments..."
                style="-fx-border-radius:20; -fx-padding:8 14; -fx-border-width:0.5; -fx-font-size:13;"
-               HBox.hgrow="ALWAYS" onKeyReleased="handleSearch"/>
+               HBox.hgrow="ALWAYS" onAction="#handleSearch"/>
     <Button text="All" onAction="#filterAll"
             style="-fx-background-color:#185FA5; -fx-text-fill:white; -fx-background-radius:20; -fx-padding:8 16; -fx-border-width:0"/>
     <Button text="Scheduled" onAction="#filterScheduled"
