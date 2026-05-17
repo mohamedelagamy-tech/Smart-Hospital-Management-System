@@ -48,6 +48,35 @@ public class PatientController {
         bloodTypeCol.setCellValueFactory(new PropertyValueFactory<>("bloodType"));
         priorityCol.setCellValueFactory(new PropertyValueFactory<>("priority"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+        priorityCol.setCellFactory(col->new TableCell<Patient, Integer>(){
+            @Override
+            protected void updateItem(Integer priority, boolean empty) {
+                super.updateItem(priority, empty);
+                if(empty|| priority==null) {
+                    setText(null);
+                    setStyle("");
+                }else{
+                    switch(priority) {
+                        case 1->{
+                            setText("Emergency");
+                            setStyle("-fx-text-fill: #DC2626; -fx-font-weight:bold; ");
+                        }
+                        case 2->{
+                            setText("Urgent");
+                            setStyle("-fx-text-fill: #B45309; -fx-font-weight:bold; ");
+                        }
+                        case 3->{
+                            setText("Normal");
+                            setStyle("-fx-text-fill: #166534;-fx-font-weight: bold;");
+                        }
+                        default ->{
+                            setText(priority+"");
+                            setStyle("");
+                        }
+                    }
+                }
+            }
+        });
         statusCol.setCellFactory(col->new  TableCell<Patient, String>() {
             @Override
             protected void updateItem(String status, boolean empty) {
@@ -86,7 +115,9 @@ public class PatientController {
             }
             protected void updateItem(Void item, boolean empty){
                 super.updateItem(item, empty);
-                setGraphic(empty? null: buttons);
+                setGraphic(null);
+                if(empty||getIndex()>=0 && getIndex()<getTableView().getItems().size())
+                    setGraphic(buttons);
             }
         });
 
