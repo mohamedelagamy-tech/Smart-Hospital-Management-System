@@ -12,15 +12,15 @@
       style="-fx-background-color: #f4f6f9;">
 
     <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
-
-    <!-- ── Title ── -->
+    <Button text="← Back"
+            onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-text-fill: #1a6fba;
+               -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;"/>
     <Label text="Statistics Dashboard"
            style="-fx-font-family: Georgia; -fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
 
-    <!-- ── Row 1: Appointments + Room Occupancy ── -->
     <HBox spacing="20">
 
-        <!-- Chart 1: Appointments per day (Bar) -->
         <VBox spacing="8" HBox.hgrow="ALWAYS"
               style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
             <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
@@ -35,7 +35,6 @@
             </BarChart>
         </VBox>
 
-        <!-- Chart 2: Room Occupancy (Pie) -->
         <VBox spacing="8" HBox.hgrow="ALWAYS"
               style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
             <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
@@ -49,10 +48,8 @@
 
     </HBox>
 
-    <!-- ── Row 2: Revenue + Top Doctors ── -->
     <HBox spacing="20">
 
-        <!-- Chart 3: Revenue over time (Line) -->
         <VBox spacing="8" HBox.hgrow="ALWAYS"
               style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
             <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
@@ -67,7 +64,6 @@
             </LineChart>
         </VBox>
 
-        <!-- Chart 4: Top Rated Doctors (Bar) -->
         <VBox spacing="8" HBox.hgrow="ALWAYS"
               style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
             <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
@@ -84,7 +80,6 @@
 
     </HBox>
 
-    <!-- ── Notifications Panel ── -->
     <VBox spacing="10"
           style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
         <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>

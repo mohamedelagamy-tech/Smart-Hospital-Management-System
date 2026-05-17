@@ -1,5 +1,6 @@
 package com.example.shms.controller;
 
+import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -27,12 +28,14 @@ public class StatisticsController implements Initializable {
     @FXML private BarChart<String, Number>  doctorsChart;
     @FXML private ListView<String>          notificationsList;
     @FXML private Label                     notifStatusLabel;
-
-    // ── Data ─────────────────────────────────────────────────────────────────
+    @FXML
+    private void handleBack() {
+        stopThread();
+        MainApp.navigateTo("dashboard", 1200, 700);
+    }
     private final DatabaseManager db = DatabaseManager.getInstance();
     private Thread notificationThread;
 
-    // ── initialize() ─────────────────────────────────────────────────────────
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadAppointmentsChart();
@@ -42,7 +45,6 @@ public class StatisticsController implements Initializable {
         startNotificationThread();
     }
 
-    // ── Chart 1: Appointments per day (Bar) ──────────────────────────────────
     private void loadAppointmentsChart() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Appointments");
@@ -61,7 +63,6 @@ public class StatisticsController implements Initializable {
                 ));
             }
         } catch (SQLException e) {
-            // fallback sample data
             series.getData().addAll(
                     new XYChart.Data<>("Mon", 12),
                     new XYChart.Data<>("Tue", 18),
@@ -78,7 +79,6 @@ public class StatisticsController implements Initializable {
         styleBarChart(appointmentsChart, "#1a6fba");
     }
 
-    // ── Chart 2: Room Occupancy (Pie) ─────────────────────────────────────────
     private void loadOccupancyChart() {
         int occupied = 0, available = 0, cleaning = 0;
 
@@ -109,7 +109,6 @@ public class StatisticsController implements Initializable {
         occupancyChart.setData(data);
         occupancyChart.setLegendVisible(true);
 
-        // Color slices after render
         Platform.runLater(() -> {
             if (data.size() > 0) data.get(0).getNode().setStyle("-fx-pie-color: #ef4444;");
             if (data.size() > 1) data.get(1).getNode().setStyle("-fx-pie-color: #22c55e;");
@@ -117,7 +116,6 @@ public class StatisticsController implements Initializable {
         });
     }
 
-    // ── Chart 3: Revenue over time (Line) ─────────────────────────────────────
     private void loadRevenueChart() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Revenue");
@@ -136,7 +134,6 @@ public class StatisticsController implements Initializable {
                 ));
             }
         } catch (SQLException e) {
-            // fallback sample data
             series.getData().addAll(
                     new XYChart.Data<>("Jan", 12000),
                     new XYChart.Data<>("Feb", 18500),
@@ -151,7 +148,6 @@ public class StatisticsController implements Initializable {
         revenueChart.setCreateSymbols(true);
     }
 
-    // ── Chart 4: Top Rated Doctors (Bar) ──────────────────────────────────────
     private void loadDoctorsChart() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Rating");
@@ -171,7 +167,6 @@ public class StatisticsController implements Initializable {
                 ));
             }
         } catch (SQLException e) {
-            // fallback sample data
             series.getData().addAll(
                     new XYChart.Data<>("Dr. Anderson", 4.8),
                     new XYChart.Data<>("Dr. Williams", 4.6),
@@ -186,7 +181,6 @@ public class StatisticsController implements Initializable {
         styleBarChart(doctorsChart, "#f59e0b");
     }
 
-    // ── Background thread: Live Notifications ────────────────────────────────
     private void startNotificationThread() {
         ObservableList<String> notifications = FXCollections.observableArrayList();
         notificationsList.setItems(notifications);
@@ -220,7 +214,6 @@ public class StatisticsController implements Initializable {
         try {
             Statement st = db.getConnection().createStatement();
 
-            // Latest appointment
             ResultSet rs = st.executeQuery(
                     "SELECT p.name, a.appointment_date FROM appointments a " +
                             "JOIN patients p ON a.patient_id = p.id " +
@@ -231,7 +224,6 @@ public class StatisticsController implements Initializable {
                         " on " + rs.getString("appointment_date"));
             }
 
-            // Latest bill
             rs = st.executeQuery(
                     "SELECT patientName, amount FROM bills ORDER BY date DESC LIMIT 2"
             );
@@ -249,7 +241,6 @@ public class StatisticsController implements Initializable {
         return list.toArray(new String[0]);
     }
 
-    // ── Helper: style bar chart color ────────────────────────────────────────
     private void styleBarChart(BarChart<String, Number> chart, String color) {
         Platform.runLater(() -> {
             chart.lookupAll(".default-color0.chart-bar").forEach(node ->
@@ -257,7 +248,6 @@ public class StatisticsController implements Initializable {
         });
     }
 
-    // ── Stop thread when leaving screen ──────────────────────────────────────
     public void stopThread() {
         if (notificationThread != null) notificationThread.interrupt();
     }
