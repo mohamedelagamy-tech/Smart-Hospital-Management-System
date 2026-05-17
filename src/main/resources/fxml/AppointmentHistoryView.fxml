@@ -20,4 +20,5 @@
         <TableColumn fx:id="colNotes" text="Notes" prefWidth="150"/>
     </columns>
 </TableView>
+
 </VBox>
