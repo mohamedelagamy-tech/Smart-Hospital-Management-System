@@ -44,12 +44,8 @@ public class LoginController {
                 }
             }
         });
-        try {
-            Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
-            logoView.setImage(logo);
-        } catch (Exception e) {
-            System.out.println("Failed to load logo: "+e.getMessage());
-        }
+        Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
+        logoView.setImage(logo);
     }
 
     @FXML private void handleLogin(){

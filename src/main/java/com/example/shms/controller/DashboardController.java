@@ -56,12 +56,8 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url,ResourceBundle rb){
-        try {
-            Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
-            logoView.setImage(logo);
-        } catch (Exception e) {
-            System.out.println("Logo load failed: " + e.getMessage());
-        }
+        Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpeg"));
+        logoView.setImage(logo);
 
         setActiveButton(btnDashboard);
         setupUserInfo();
