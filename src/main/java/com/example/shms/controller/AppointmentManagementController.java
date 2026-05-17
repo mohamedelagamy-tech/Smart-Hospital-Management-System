@@ -2,15 +2,16 @@ package com.example.shms.controller;
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Appointment;
+import com.example.shms.utils.SessionManager;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,8 +35,11 @@ public class AppointmentManagementController {
     private TableColumn<Appointment, String> colNotes;
     @FXML
     private javafx.scene.control.TextField searchField;
+    @FXML
+    private Button bookBtn;
 
     private DatabaseManager db = DatabaseManager.getInstance();
+
 
     @FXML
     public void intialize() {
@@ -47,7 +51,13 @@ public class AppointmentManagementController {
         colStatus.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getStatus()));
         colNotes.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNotes()));
         loadAppointments();
-    }
+
+        String role=com.example.shms.utils.SessionManager.getInstance().getLoggedInRole();
+        if(!"RECEPTIONIST".equals(role)) {
+            bookBtn.setVisible(false);
+            bookBtn.setManaged(false);
+        }
+        }
 
     private void loadAppointments() {
         java.util.List<Appointment> all = db.getAppointmentsByDoctor(0);
