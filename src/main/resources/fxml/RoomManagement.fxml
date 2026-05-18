@@ -6,17 +6,15 @@
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.shms.RoomManagementController"
+      fx:controller="com.example.shms.controller.RoomManagementController"
       style="-fx-background-color: #dde8f5;"
       spacing="24">
 
     <padding><Insets top="36" right="44" bottom="36" left="44"/></padding>
 
-    <!-- Title -->
     <Label text="Room Management"
            style="-fx-font-family: Georgia; -fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
 
-    <!-- Search Bar -->
     <HBox alignment="CENTER_LEFT" spacing="10"
           style="-fx-background-color: white; -fx-border-color: #b0c4de; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10 16 10 16;">
         <Label text="🔍" style="-fx-font-size: 16px;"/>
@@ -27,7 +25,6 @@
                    onKeyReleased="#onSearch"/>
     </HBox>
 
-    <!-- Cards ScrollPane -->
     <ScrollPane fx:id="scrollPane"
                 fitToWidth="true"
                 style="-fx-background-color: transparent; -fx-border-color: transparent;"
