@@ -92,7 +92,17 @@
             </HBox>
             <GridPane fx:id="calendarGrid" hgap="0" vgap="0"
                       VBox.vgrow="ALWAYS"
-                      style="-fx-background-color:white;"/>
+                      style="-fx-background-color:white;">
+            <columnConstraints>
+            <columnConstraints percentWidth="14.28"/>
+            <columnConstraints percentWidth="14.28"/>
+            <columnConstraints percentWidth="14.28"/>
+            <columnConstraints percentWidth="14.28"/>
+            <columnConstraints percentWidth="14.28"/>
+            <columnConstraints percentWidth="14.28"/>
+            <columnConstraints percentWidth="14.28"/>
+         </columnConstraints>
+     </GridPane>
+</VBox>
         </VBox>
     </VBox>
-</VBox>
