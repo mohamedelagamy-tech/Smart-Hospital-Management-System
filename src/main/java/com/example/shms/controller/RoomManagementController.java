@@ -32,7 +32,7 @@ public class RoomManagementController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadRoomsFromDatabase();
         buildAllCards();
-
+        cardsPane.setPrefWrapLength(1100);
     }
 
     private void loadRoomsFromDatabase() {
@@ -41,6 +41,7 @@ public class RoomManagementController implements Initializable {
         if (rooms != null) {
             allRooms.addAll(rooms);
         }
+        System.out.println("Rooms loaded: " + allRooms.size());
     }
 
     private void buildAllCards() {
