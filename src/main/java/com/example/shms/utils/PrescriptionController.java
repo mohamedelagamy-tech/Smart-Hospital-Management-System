@@ -1,5 +1,6 @@
 package com.example.shms.utils;
 
+import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Prescription;
 import javafx.collections.FXCollections;
@@ -177,5 +178,9 @@ public class PrescriptionController implements Initializable {
         addFormPane.setVisible(true);
         addFormPane.setManaged(true);
         prescriptionTable.setItems(allPrescriptions);
+    }
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
     }
 }
