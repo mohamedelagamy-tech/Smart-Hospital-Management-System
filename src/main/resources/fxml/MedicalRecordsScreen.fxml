@@ -27,10 +27,8 @@
                    onKeyReleased="#onSearch"/>
     </HBox>
 
-    <!-- ── Table ── -->
     <TableView fx:id="recordsTable"
                style="-fx-background-color: white; -fx-border-color: #dde4ee; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 13px;"
-               columnResizePolicy="CONSTRAINED_RESIZE_POLICY"
                VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="colNumber"    text="#"           prefWidth="50"/>

@@ -595,9 +595,26 @@ public class DatabaseManager {
         return 0.0;
     }
 
-
     public List<MedicalRecord> getAllMedicalRecords() {
-        return medicalRecords;
+        List<MedicalRecord> records = new ArrayList<>();
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM medical_records");
+            while (rs.next()) {
+                records.add(new MedicalRecord(
+                        rs.getInt("id"),
+                        rs.getInt("patientId"),
+                        rs.getInt("doctorId"),
+                        rs.getString("date"),
+                        rs.getString("diagnosis"),
+                        rs.getString("treatment"),
+                        rs.getString("status")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return records;
     }
 
     public void addMedicalRecord(MedicalRecord record) {

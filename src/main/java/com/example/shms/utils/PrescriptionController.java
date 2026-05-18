@@ -44,6 +44,7 @@ public class PrescriptionController implements Initializable {
         setupTableColumns();
         loadFromDatabase();
         styleTableHeader();
+        prescriptionTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void setupTableColumns() {

@@ -51,6 +51,7 @@ public class BillingController implements Initializable {
                 "Amount (Low to High)"
         );
         sortBox.setValue("Date (Newest First)");
+        billingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         filterGroup = new ToggleGroup();
         btnAll.setToggleGroup(filterGroup);

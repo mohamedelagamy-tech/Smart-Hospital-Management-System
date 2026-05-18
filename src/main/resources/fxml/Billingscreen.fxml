@@ -42,7 +42,6 @@
 
     <TableView fx:id="billingTable"
                styleClass="billing-table"
-               columnResizePolicy="CONSTRAINED_RESIZE_POLICY"
                VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="colBillNum"  text="Bill Number"   prefWidth="140"/>
