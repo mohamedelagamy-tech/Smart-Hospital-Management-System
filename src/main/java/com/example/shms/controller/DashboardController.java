@@ -145,6 +145,7 @@ public class DashboardController implements Initializable {
                 btnRooms.setManaged(false);
                 labelAdmin.setVisible(false);
                 labelAdmin.setManaged(false);
+                btnRecords.setVisible(false);
                 break;
             case "NURSE":
                 btnDoctors.setVisible(false);
@@ -159,6 +160,12 @@ public class DashboardController implements Initializable {
                 btnPrescriptions.setManaged(false);
                 labelAdmin.setVisible(false);
                 labelAdmin.setManaged(false);
+                btnRooms.setVisible(false);
+                btnRooms.setManaged(false);
+                btnRecords.setVisible(false);
+                btnRecords.setManaged(false);
+                btnStatistics.setVisible(false);
+                btnStatistics.setManaged(false);
                 break;
             case "RECEPTIONIST":
                 btnDoctors.setVisible(false);
@@ -171,6 +178,10 @@ public class DashboardController implements Initializable {
                 btnAuditLog.setManaged(false);
                 btnDepartments.setVisible(false);
                 btnDepartments.setManaged(false);
+                btnStatistics.setVisible(false);
+                btnStatistics.setManaged(false);
+                btnRooms.setVisible(false);
+                btnRooms.setManaged(false);
                 break;
             case "PATIENT":
                 btnDoctors.setVisible(false);
