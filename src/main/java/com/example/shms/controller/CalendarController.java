@@ -26,7 +26,8 @@ public class CalendarController {
         calendarGrid.getChildren().clear();
         String month = currentMonth.getMonth().toString();
         monthLabel.setText(month.charAt(0) + month.substring(1).toLowerCase() + " " + currentMonth.getYear());
-        int firstDay = (currentMonth.getDayOfWeek().getValue() % 7 + 1) % 7;
+        int dow=currentMonth.withDayOfMonth(1).getDayOfWeek().getValue();
+        int firstDay=dow == 7?0:dow;
         int daysInMonth = currentMonth.lengthOfMonth();
         List<Appointment> all = db.getAppointmentsByPatient(0);
 
