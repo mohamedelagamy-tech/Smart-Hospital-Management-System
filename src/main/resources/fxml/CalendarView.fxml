@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.sceme.layout.ColumnConstraints?>
 <VBox spacing="0" style="-fx-background-color:#EEF2FF;"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.shms.controller.CalendarController">
@@ -94,13 +94,13 @@
                       VBox.vgrow="ALWAYS"
                       style="-fx-background-color:white;">
             <columnConstraints>
-            <columnConstraints percentWidth="14.28"/>
-            <columnConstraints percentWidth="14.28"/>
-            <columnConstraints percentWidth="14.28"/>
-            <columnConstraints percentWidth="14.28"/>
-            <columnConstraints percentWidth="14.28"/>
-            <columnConstraints percentWidth="14.28"/>
-            <columnConstraints percentWidth="14.28"/>
+            <ColumnConstraints percentWidth="14.28"/>
+            <ColumnConstraints percentWidth="14.28"/>
+            <ColumnConstraints percentWidth="14.28"/>
+            <ColumnConstraints percentWidth="14.28"/>
+            <ColumnConstraints percentWidth="14.28"/>
+            <ColumnConstraints percentWidth="14.28"/>
+            <ColumnConstraints percentWidth="14.28"/>
          </columnConstraints>
      </GridPane>
 </VBox>
