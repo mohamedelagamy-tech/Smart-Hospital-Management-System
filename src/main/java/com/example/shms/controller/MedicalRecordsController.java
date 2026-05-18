@@ -1,5 +1,6 @@
 package com.example.shms.controller;
 
+import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.MedicalRecord;
 import javafx.beans.property.SimpleStringProperty;
@@ -148,6 +149,11 @@ public class MedicalRecordsController implements Initializable {
             case "Follow-up" -> base + "-fx-text-fill: #d97706; -fx-background-color: #fef3c7;";
             default          -> base + "-fx-text-fill: #555555; -fx-background-color: #eeeeee;";
         };
+    }
+
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
     }
 }
 

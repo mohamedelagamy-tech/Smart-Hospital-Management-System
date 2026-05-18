@@ -11,12 +11,13 @@
       style="-fx-background-color: #f0f2f5;">
 
     <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
-
-    <!-- ── Title ── -->
+    <Button text="← Back"
+            onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-text-fill: #1a6fba;
+               -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;"/>
     <Label text="Medical Records"
            style="-fx-font-family: Georgia; -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #1a6fba;"/>
 
-    <!-- ── Search Bar ── -->
     <HBox alignment="CENTER_LEFT" spacing="10"
           style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 16 10 16;">
         <Label text="🔍" style="-fx-font-size: 15px; -fx-text-fill: #aaaaaa;"/>
