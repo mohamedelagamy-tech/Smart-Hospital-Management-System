@@ -262,6 +262,7 @@ public class DashboardController implements Initializable {
         setActiveButton(btnAppointments);
         MainApp.navigateTo("appointment-management-view", 1200,700);
     }
+
     @FXML
     private void showRecords(){
         setActiveButton(btnRecords);
@@ -300,5 +301,9 @@ public class DashboardController implements Initializable {
     private void showStatistics() {
         setActiveButton(btnStatistics);
         MainApp.navigateTo("StatisticsDashboard", 1200, 700);
+    }
+    @FXML
+    private void showCalendar(){
+        MainApp.navigateTo("CalendarView",900,700);
     }
 }
