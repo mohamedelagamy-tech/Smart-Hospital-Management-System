@@ -113,7 +113,7 @@ public class BillingController implements Initializable {
     @FXML
     private void openNewBillForm() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/NewBillForm.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NewBillForm.fxml"));
             Parent root = loader.load();
 
             NewBillController formCtrl = loader.getController();
