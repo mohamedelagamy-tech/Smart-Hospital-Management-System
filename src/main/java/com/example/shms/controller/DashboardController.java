@@ -160,12 +160,7 @@ public class DashboardController implements Initializable {
                 btnPrescriptions.setManaged(false);
                 labelAdmin.setVisible(false);
                 labelAdmin.setManaged(false);
-                btnRooms.setVisible(false);
-                btnRooms.setManaged(false);
-                btnRecords.setVisible(false);
-                btnRecords.setManaged(false);
-                btnStatistics.setVisible(false);
-                btnStatistics.setManaged(false);
+
                 break;
             case "RECEPTIONIST":
                 btnDoctors.setVisible(false);

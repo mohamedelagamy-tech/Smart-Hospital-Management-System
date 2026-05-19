@@ -428,7 +428,27 @@ public class DatabaseManager {
             }
         }
     }
-    public List<Room> getAllRooms() { return rooms; }
+    public List<Room> getAllRooms() {
+        List<Room> result = new ArrayList<>();
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM rooms");
+            while (rs.next()) {
+                Room r = new Room(
+                        rs.getInt("assignedPatientId"),
+                        rs.getString("department") != null ? rs.getString("department") : "",
+                        rs.getInt("id"),
+                        rs.getInt("roomNumber"),
+                        rs.getString("status"),
+                        rs.getString("roomtype") != null ? rs.getString("roomtype") : ""
+                );
+                result.add(r);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error loading rooms: " + e.getMessage());
+        }
+        return result;
+    }
     public List<Room> getAvailableRooms() {
         List<Room> result = new ArrayList<>();
         for (Room r : rooms) {
