@@ -435,12 +435,12 @@ public class DatabaseManager {
             ResultSet rs = st.executeQuery("SELECT * FROM rooms");
             while (rs.next()) {
                 Room r = new Room(
-                        rs.getInt("assignedPatientId"),
-                        rs.getString("department") != null ? rs.getString("department") : "",
+                        rs.getInt("assignedPatientID"),
+                        "",
                         rs.getInt("id"),
-                        rs.getInt("roomNumber"),
+                        Integer.parseInt(rs.getString("roomNumber")),
                         rs.getString("status"),
-                        rs.getString("roomtype") != null ? rs.getString("roomtype") : ""
+                        ""
                 );
                 result.add(r);
             }
