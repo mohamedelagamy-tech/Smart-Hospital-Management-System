@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DoctorRatingController">
+   <top>
+      <HBox prefHeight="94.0" prefWidth="904.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="16.0" prefWidth="58.0" style="-fx-background-color: transparent;" text="&lt;- Back" textFill="WHITE" />
+            <Label prefHeight="59.0" prefWidth="178.0" text="Doctor Rating" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox fx:id="avatarLabel" prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #F4F7FA; -fx-background-radius: 8;" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" style="-fx-background-color: WHITE; -fx-background-radius: 12; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-border-width: 1;">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text=" Rate Your Doctor" textFill="#1e3a5f">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Your feedback helps us improve patient care" textFill="#64748b">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0">
+                     <children>
+                        <Label fx:id="avatarLabel" prefHeight="43.0" prefWidth="44.0" style="-fx-background-color: #DBEAFE; -fx-background-radius: 28;" text="DR" textFill="#1d4ed8">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <VBox fx:id="doctorNameLabel" prefHeight="96.0" prefWidth="155.0" spacing="4.0">
+                           <children>
+                              <Label fx:id="doctorNameLabel" text="Dr. Mariam" textFill="#1e3a5f">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="doctorSpecLabel" text="Cardiology" textFill="#64748b">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="dischargeLabel" prefHeight="24.0" prefWidth="141.0" style="-fx-background-color: #DCFCE7; -fx-background-radius: 999; -fx-padding: 2 10 2 10;" text="✓ Discharged today" textFill="#166534">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="12.0" style="-fx-background-color: WHITE; -fx-background-radius: 12; -fx-border-color: #E2E8F0; -fx-border-radius: 12;">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="How would you rate your experience?" textFill="#475569">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="star1Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                        <Button fx:id="star2Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                        <Button fx:id="star3Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                        <Button fx:id="star4Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                        <Button fx:id="star5Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: WHITE; -fx-background-radius: 12; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-border-width: 1;">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="Leave a comment (optional)" textFill="#475569">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="commentArea" prefHeight="200.0" prefWidth="200.0" promptText="Share details about your visit…" wrapText="true" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <Button fx:id="submitBtn" disable="true" mnemonicParsing="false" prefHeight="1.0" prefWidth="300.0" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="Submit Rating" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="successLabel" prefHeight="18.0" prefWidth="100.0" textFill="#16a34a" visible="false">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
