@@ -52,14 +52,14 @@ public class StatisticsController implements Initializable {
         try {
             Statement st = db.getConnection().createStatement();
             ResultSet rs = st.executeQuery(
-                    "SELECT DATE(appointment_date) as day, COUNT(*) as total " +
+                    "SELECT appointmentDate, COUNT(*) as total " +
                             "FROM appointments " +
-                            "GROUP BY DATE(appointment_date) " +
-                            "ORDER BY day DESC LIMIT 7"
+                            "GROUP BY appointmentDate " +
+                            "ORDER BY appointmentDate DESC LIMIT 7"
             );
             while (rs.next()) {
                 series.getData().add(new XYChart.Data<>(
-                        rs.getString("day"), rs.getInt("total")
+                        rs.getString("appointmentDate"), rs.getInt("total")
                 ));
             }
         } catch (SQLException e) {
@@ -122,8 +122,10 @@ public class StatisticsController implements Initializable {
 
         try {
             Statement st = db.getConnection().createStatement();
+
+
             ResultSet rs = st.executeQuery(
-                    "SELECT strftime('%Y-%m', date) as month, SUM(amount) as total " +
+                    "SELECT appointmentDate as month, SUM(amount) as total " +
                             "FROM bills " +
                             "GROUP BY month " +
                             "ORDER BY month ASC LIMIT 6"
@@ -133,6 +135,7 @@ public class StatisticsController implements Initializable {
                         rs.getString("month"), rs.getDouble("total")
                 ));
             }
+
         } catch (SQLException e) {
             series.getData().addAll(
                     new XYChart.Data<>("Jan", 12000),
@@ -155,17 +158,19 @@ public class StatisticsController implements Initializable {
         try {
             Statement st = db.getConnection().createStatement();
             ResultSet rs = st.executeQuery(
-                    "SELECT name, (totalRating / ratingCount) as avg_rating " +
+                    "SELECT name, (totalRating * 1.0 / ratingCount) as avg_rating " +
                             "FROM doctors " +
                             "WHERE ratingCount > 0 " +
                             "ORDER BY avg_rating DESC LIMIT 5"
             );
+
             while (rs.next()) {
                 String name = "Dr. " + rs.getString("name");
                 series.getData().add(new XYChart.Data<>(
                         name, rs.getDouble("avg_rating")
                 ));
             }
+
         } catch (SQLException e) {
             series.getData().addAll(
                     new XYChart.Data<>("Dr. Anderson", 4.8),
@@ -213,19 +218,17 @@ public class StatisticsController implements Initializable {
         ObservableList<String> list = FXCollections.observableArrayList();
         try {
             Statement st = db.getConnection().createStatement();
-
             ResultSet rs = st.executeQuery(
-                    "SELECT p.name, a.appointment_date FROM appointments a " +
-                            "JOIN patients p ON a.patient_id = p.id " +
-                            "ORDER BY a.appointment_date DESC LIMIT 3"
+                    "SELECT patientName, appointmentDate FROM appointments " +
+                            "ORDER BY id DESC LIMIT 3"
             );
             while (rs.next()) {
-                list.add("📅  New appointment — " + rs.getString("name") +
-                        " on " + rs.getString("appointment_date"));
+                list.add("📅  New appointment — " + rs.getString("patientName") +
+                        " on " + rs.getString("appointmentDate"));
             }
 
             rs = st.executeQuery(
-                    "SELECT patientName, amount FROM bills ORDER BY date DESC LIMIT 2"
+                    "SELECT patientName, amount FROM bills ORDER BY id DESC LIMIT 2"
             );
             while (rs.next()) {
                 list.add("💰  Bill generated — " + rs.getString("patientName") +
