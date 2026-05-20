@@ -49,8 +49,10 @@ public class PrescriptionController implements Initializable {
         String role = SessionManager.getInstance().getLoggedInRole();
         if (role != null && role.equalsIgnoreCase("PATIENT")) {
             showPatientView();
-        } else {
+        } else if (role != null && role.equalsIgnoreCase("DOCTOR")) {
             showDoctorView();
+        } else {
+            showPatientView();
         }
     }
 
@@ -172,7 +174,6 @@ public class PrescriptionController implements Initializable {
     public void showPatientView() {
         patientViewPane.setVisible(true);
         patientViewPane.setManaged(true);
-        // hide the add form
         addFormPane.setVisible(false);
         addFormPane.setManaged(false);
         prescriptionTable.setItems(FXCollections.emptyObservableList());
