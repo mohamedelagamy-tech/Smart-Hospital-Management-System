@@ -4,6 +4,7 @@ module com.example.shms {
     requires java.sql;
     requires java.desktop;
     requires javafx.media;
+    requires jakarta.mail;
     opens com.example.shms to javafx.fxml;
     opens com.example.shms.controller to javafx.fxml;
     opens com.example.shms.model to javafx.fxml, javafx.base;

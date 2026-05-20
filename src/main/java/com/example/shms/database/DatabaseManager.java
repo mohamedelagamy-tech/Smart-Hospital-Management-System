@@ -62,28 +62,33 @@ public class DatabaseManager {
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Yasmine Farid','yasmine@hospital.com','doctor123','Radiology','Busy',13000,'Mon-Wed-Sat','7am-3pm')");
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Mahmoud Gamal','mahmoud@hospital.com','doctor123','Emergency','In Surgery',17000,'Tue-Thu-Sat','6am-2pm')");
 
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Sara Mohamed',34,'Female','01098765432','Cairo','A+','Cardiology',1)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Omar Ali',25,'Male','01012345678','Giza','B+','Orthopedics',2)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Nour Hassan',45,'Female','01112223344','Alexandria','O+','Neurology',2)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Karim Adel',30,'Male','01234567890','Cairo','AB+','Emergency',1)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Layla Mahmoud',28,'Female','01098001122','Cairo','A-','Dermatology',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Youssef Tarek',52,'Male','01156789012','Giza','B-','Oncology',2)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Dina Mostafa',38,'Female','01234509876','Cairo','O-','Radiology',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Mohamed Fawzy',28,'Male','01116341931','Alexandria','A+','Cardiology',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Rania Khaled',29,'Female','01067890123','Cairo','AB-','Neurology',2)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Amr Saeed',44,'Male','01145678901','Giza','B+','Orthopedics',2)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Adam Khaled',7,'Male','01023456789','Cairo','AB-','Pediatrics',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Lina Hassan',4,'Female','01034567890','Giza','B+','Pediatrics',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Yara Samir',11,'Female','01045678901','Alexandria','A+','Pediatrics',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Mona Adel',55,'Female','01056789012','Cairo','O+','Cardiology',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Tarek Nabil',40,'Male','01067891234','Giza','B-','Emergency',1)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Hana Sherif',22,'Female','01078901234','Alexandria','A-','Dermatology',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Mahmoud Farid',67,'Male','01089012345','Cairo','AB+','Oncology',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Salma Ibrahim',33,'Female','01090123456','Giza','O-','Radiology',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Khaled Mostafa',48,'Male','01001234567','Cairo','A+','Neurology',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Nadia Gamal',36,'Female','01011234567','Alexandria','B+','Orthopedics',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Fares Mahmoud',9,'Male','01021234567','Cairo','O+','Pediatrics',3)");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority) VALUES ('Rana Tarek',27,'Female','01031234567','Giza','AB-','Dermatology',3)");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Sara Mohamed',34,'Female','01098765432','Cairo','A+','Cardiology',1,'sara.mohamed@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Omar Ali',25,'Male','01012345678','Giza','B+','Orthopedics',2,'omar.ali@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Nour Hassan',45,'Female','01112223344','Alexandria','O+','Neurology',2,'nour.hassan@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Karim Adel',30,'Male','01234567890','Cairo','AB+','Emergency',1,'karim.adel@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Layla Mahmoud',28,'Female','01098001122','Cairo','A-','Dermatology',3,'layla.mahmoud@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Youssef Tarek',52,'Male','01156789012','Giza','B-','Oncology',2,'youssef.tarek@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Dina Mostafa',38,'Female','01234509876','Cairo','O-','Radiology',3,'dina.mostafa@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Mohamed Fawzy',28,'Male','01116341931','Alexandria','A+','Cardiology',3,'mohamed.fawzy@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Rania Khaled',29,'Female','01067890123','Cairo','AB-','Neurology',2,'rania.khaled@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Amr Saeed',44,'Male','01145678901','Giza','B+','Orthopedics',2,'amr.saeed@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Adam Khaled',7,'Male','01023456789','Cairo','AB-','Pediatrics',3,'adam.khaled@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Lina Hassan',4,'Female','01034567890','Giza','B+','Pediatrics',3,'lina.hassan@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Yara Samir',11,'Female','01045678901','Alexandria','A+','Pediatrics',3,'yara.samir@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Mona Adel',55,'Female','01056789012','Cairo','O+','Cardiology',3,'mona.adel@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Tarek Nabil',40,'Male','01067891234','Giza','B-','Emergency',1,'tarek.nabil@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Hana Sherif',22,'Female','01078901234','Alexandria','A-','Dermatology',3,'hana.sherif@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Mahmoud Farid',67,'Male','01089012345','Cairo','AB+','Oncology',3,'mahmoud.farid@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Salma Ibrahim',33,'Female','01090123456','Giza','O-','Radiology',3,'salma.ibrahim@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Khaled Mostafa',48,'Male','01001234567','Cairo','A+','Neurology',3,'khaled.mostafa@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Nadia Gamal',36,'Female','01011234567','Alexandria','B+','Orthopedics',3,'nadia.gamal@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Fares Mahmoud',9,'Male','01021234567','Cairo','O+','Pediatrics',3,'fares.mahmoud@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Rana Tarek',27,'Female','01031234567','Giza','AB-','Dermatology',3,'rana.tarek@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Salma Abdelkhalek',19,'Female','01090123456','Alexandria','O-','Radiology',3,'Salmaabdelkhalek26@gmail.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Salma Abdelsattar',19,'Female','01001234567','Alexandria','A+','Neurology',3,'engsalmaabdelsattar22108@gmail.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Zeina Yasser',19,'Female','01011234567','Alexandria','B+','Orthopedics',3,'zeinafarghaly@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Mohamed Mazen',18,'Male','01021234567','Cairo','O+','Oncology',3,'m.mazenelagamy@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Mariam ElShafie',18,'Female','01031234567','Giza','AB-','Dermatology',3,'rana.tarek@email.com')");
 
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('101','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('102','Occupied')");
@@ -143,7 +148,8 @@ public class DatabaseManager {
                     "bloodType TEXT NOT NULL," +
                     "department TEXT NOT NULL," +
                     "priority INTEGER DEFAULT 3," +
-                    "status TEXT DEFAULT 'Waiting')");
+                    "status TEXT DEFAULT 'Waiting'," +
+                    "email TEXT)");
 
             st.execute("CREATE TABLE IF NOT EXISTS departments (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -686,6 +692,39 @@ public class DatabaseManager {
 
     public void addMedicalRecord(MedicalRecord record) {
         medicalRecords.add(record);
+    }
+
+    public String getPatientEmail(int patientId){
+        try(Statement st = connection.createStatement()){
+            ResultSet rs = st.executeQuery("SELECT email FROM patients WHERE id = "+patientId);
+            if(rs.next())
+                return rs.getString("email");
+        }catch(SQLException e){
+            System.out.println("Get patient email failed: "+e.getMessage());
+        }
+        return null;
+    }
+
+    public String getPatientName(int patientId){
+        try(Statement st=connection.createStatement()){
+            ResultSet rs=st.executeQuery("SELECT name FROM patients WHERE id = "+patientId);
+            if(rs.next())
+                return rs.getString("name");
+        }catch(SQLException e){
+            System.out.println("Get patient name failed: "+e.getMessage());
+        }
+        return null;
+    }
+
+    public String getDoctorName(int doctorId){
+        try(Statement st=connection.createStatement()) {
+            ResultSet rs=st.executeQuery("SELECT name FROM doctors WHERE id = "+doctorId);
+            if(rs.next())
+                return rs.getString("name");
+        }catch(SQLException e) {
+            System.out.println("Get doctor name failed: "+e.getMessage());
+        }
+        return null;
     }
 
 }

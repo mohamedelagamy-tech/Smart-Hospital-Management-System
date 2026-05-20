@@ -182,12 +182,34 @@ public class DischargeSummaryController implements Initializable {
         );
         summary.writeToFile();
 
+        final int finalPatientId = patientId;
+        final double finalTotalBill = totalBill;
+        final String finalDoctorName = lblDoctor.getText();
+        final String finalRoomInfo = lblRoom.getText();
+
+        Thread emailThread = new Thread(new Runnable() {
+            @Override
+            public void run(){
+                try{
+                    String patientEmail=db.getPatientEmail(finalPatientId);
+                    String patientName=db.getPatientName(finalPatientId);
+                    if(patientEmail != null && !patientEmail.isEmpty()){
+                        EmailService.sendDischargeSummary(patientEmail,patientName,finalDoctorName,finalRoomInfo,String.format("%.0f", finalTotalBill));
+                    }
+                } catch(Exception e){
+                    System.out.println("Failed to send discharge email: "+e.getMessage());
+                }
+            }
+        });
+        emailThread.setDaemon(true);
+        emailThread.start();
+
+        showAlert("Email has been sent");
         showAlert("Discharge summary saved as discharge_" + patientId + ".txt");
     }
 
     private int extractPatientId(String entry) {
         try {
-            // Format: "Name (P-101)" → extract 101
             int start = entry.lastIndexOf("P-") + 2;
             int end   = entry.lastIndexOf(")");
             return Integer.parseInt(entry.substring(start, end).trim());
