@@ -46,6 +46,12 @@ public class PrescriptionController implements Initializable {
         loadFromDatabase();
         styleTableHeader();
         prescriptionTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        String role = SessionManager.getInstance().getLoggedInRole();
+        if (role != null && role.equalsIgnoreCase("PATIENT")) {
+            showPatientView();
+        } else {
+            showDoctorView();
+        }
     }
 
     private void setupTableColumns() {
