@@ -63,7 +63,6 @@ public class DoctorController {
         workingHoursCol.setCellValueFactory(new PropertyValueFactory<>("workingHours"));
         ratingCol.setCellValueFactory(new PropertyValueFactory<>("averageRating"));
 
-        // Rating column — formatted to 2 decimal places
         ratingCol.setCellFactory(col -> new TableCell<Doctor, Double>() {
             @Override
             protected void updateItem(Double rating, boolean empty) {
@@ -72,12 +71,11 @@ public class DoctorController {
                     setText(null);
                     setStyle("");
                 } else {
-                    setText(String.format("%.2f", rating));
+                    setText(String.format("%.2f ★", rating));
                 }
             }
         });
 
-        // Status column — color coded green / orange / red
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
         statusCol.setCellFactory(col -> new TableCell<Doctor, String>() {
             @Override
@@ -103,10 +101,13 @@ public class DoctorController {
         actionsCol.setCellFactory(col -> new TableCell<>() {
             private final Button editBtn   = new Button("Edit");
             private final Button deleteBtn = new Button("Delete");
-            private final HBox   buttons   = new HBox(5, editBtn, deleteBtn);
+            private final Button rateBtn   = new Button("Rate");
+            private final HBox   buttons   = new HBox(5, editBtn, deleteBtn, rateBtn);
             {
                 editBtn.setStyle("-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-size: 11;");
-                deleteBtn.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-size: 11;");
+                deleteBtn.setStyle("-fx-background-color: #DC2626; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-size: 11;");
+                rateBtn.setStyle("-fx-background-color: #F59E0B; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-size: 11;");
+
                 editBtn.setOnAction(e -> {
                     Doctor d = getTableView().getItems().get(getIndex());
                     handleEditDoctor(d);
@@ -114,6 +115,10 @@ public class DoctorController {
                 deleteBtn.setOnAction(e -> {
                     Doctor d = getTableView().getItems().get(getIndex());
                     handleDeleteDoctor(d);
+                });
+                rateBtn.setOnAction(e -> {
+                    Doctor d = getTableView().getItems().get(getIndex());
+                    handleRateDoctor(d);
                 });
             }
             @Override
@@ -245,6 +250,23 @@ public class DoctorController {
         });
     }
 
+    private void handleRateDoctor(Doctor d) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DoctorRating.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Rate Doctor");
+            stage.setScene(new Scene(loader.load()));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            DoctorRatingController ratingController = loader.getController();
+            ratingController.setDoctorController(this);
+            ratingController.setDoctor(d);
+            stage.showAndWait();
+            loadDoctors(); // refresh table so updated rating shows immediately
+        } catch (Exception e) {
+            System.out.println("Error opening rating screen: " + e.getMessage());
+        }
+    }
+
     private void sortBy(String mode) {
         switch (mode) {
             case "ID"         -> Collections.sort(doctorList);
@@ -261,4 +283,3 @@ public class DoctorController {
         MainApp.navigateTo("dashboard", 1200, 700);
     }
 }
-

@@ -7,42 +7,79 @@
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.shms.controller.BillingController"
-      spacing="16">
+      spacing="16"
+      style="-fx-background-color: #dde8f5;">
 
     <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
 
+    <!-- Back Button -->
+    <Button text="← Back" onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-text-fill: #1a6fba;
+                   -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;"/>
+
+    <!-- Title + New Bill -->
     <HBox alignment="CENTER_LEFT">
-        <Label text="Billing Management" styleClass="page-title"/>
+        <Label text="Billing Management"
+               style="-fx-font-family: Georgia; -fx-font-size: 28px;
+                      -fx-font-weight: bold; -fx-text-fill: #1a6fba;"/>
         <Region HBox.hgrow="ALWAYS"/>
         <Button fx:id="newBillBtn" text="+ New Bill"
-                styleClass="new-bill-btn"
-                onAction="#openNewBillForm"/>
+                onAction="#openNewBillForm"
+                style="-fx-background-color: #1a1a2e; -fx-text-fill: white;
+                       -fx-background-radius: 8; -fx-font-size: 13px;
+                       -fx-cursor: hand; -fx-pref-height: 40px;"/>
     </HBox>
 
+    <!-- Search + Sort -->
     <HBox spacing="16" alignment="CENTER_LEFT">
         <TextField fx:id="searchField"
                    promptText="Search by patient name, bill number, date..."
                    prefWidth="280" prefHeight="40"
-                   styleClass="search-field"
+                   style="-fx-background-color: white; -fx-border-color: #b0c4de;
+                          -fx-border-radius: 8; -fx-background-radius: 8;
+                          -fx-font-size: 13px; -fx-padding: 0 12;"
                    onKeyReleased="#applyFilters"/>
 
         <VBox spacing="2">
-            <Label text="Sort By" styleClass="sort-label"/>
+            <Label text="Sort By"
+                   style="-fx-font-size: 11px; -fx-text-fill: #888888;"/>
             <ComboBox fx:id="sortBox" prefHeight="40" prefWidth="200"
-                      styleClass="combo-box"
+                      style="-fx-background-color: white; -fx-border-color: #b0c4de;
+                             -fx-border-radius: 6; -fx-background-radius: 6;
+                             -fx-font-size: 13px;"
                       onAction="#applyFilters"/>
         </VBox>
     </HBox>
+
+    <!-- Filter Buttons -->
     <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT">
-        <ToggleButton fx:id="btnAll"     text="All"     styleClass="filter-btn" onAction="#applyFilters"/>
-        <ToggleButton fx:id="btnPaid"    text="Paid"    styleClass="filter-btn" onAction="#applyFilters"/>
-        <ToggleButton fx:id="btnPending" text="Pending" styleClass="filter-btn" onAction="#applyFilters"/>
-        <ToggleButton fx:id="btnOverdue" text="Overdue" styleClass="filter-btn" onAction="#applyFilters"/>
+        <ToggleButton fx:id="btnAll"     text="All"
+                      style="-fx-background-color: white; -fx-border-color: #b0c4de;
+                             -fx-border-radius: 20; -fx-background-radius: 20;
+                             -fx-font-size: 13px; -fx-cursor: hand; -fx-pref-height: 34px;"
+                      onAction="#applyFilters"/>
+        <ToggleButton fx:id="btnPaid"    text="Paid"
+                      style="-fx-background-color: white; -fx-border-color: #b0c4de;
+                             -fx-border-radius: 20; -fx-background-radius: 20;
+                             -fx-font-size: 13px; -fx-cursor: hand; -fx-pref-height: 34px;"
+                      onAction="#applyFilters"/>
+        <ToggleButton fx:id="btnPending" text="Pending"
+                      style="-fx-background-color: white; -fx-border-color: #b0c4de;
+                             -fx-border-radius: 20; -fx-background-radius: 20;
+                             -fx-font-size: 13px; -fx-cursor: hand; -fx-pref-height: 34px;"
+                      onAction="#applyFilters"/>
+        <ToggleButton fx:id="btnOverdue" text="Overdue"
+                      style="-fx-background-color: white; -fx-border-color: #b0c4de;
+                             -fx-border-radius: 20; -fx-background-radius: 20;
+                             -fx-font-size: 13px; -fx-cursor: hand; -fx-pref-height: 34px;"
+                      onAction="#applyFilters"/>
     </HBox>
 
+    <!-- Table -->
     <TableView fx:id="billingTable"
-               styleClass="billing-table"
-               columnResizePolicy="CONSTRAINED_RESIZE_POLICY"
+               style="-fx-background-color: white; -fx-border-color: #c5d8ee;
+                      -fx-border-radius: 10; -fx-background-radius: 10;
+                      -fx-font-size: 13px;"
                VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="colBillNum"  text="Bill Number"   prefWidth="140"/>
@@ -56,3 +93,4 @@
     </TableView>
 
 </VBox>
+

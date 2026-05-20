@@ -1,5 +1,6 @@
-package com.example.shms.utils;
+package com.example.shms.controller;
 
+import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Room;
 import javafx.fxml.FXML;
@@ -32,6 +33,7 @@ public class RoomManagementController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadRoomsFromDatabase();
         buildAllCards();
+        cardsPane.setPrefWrapLength(1100);
     }
 
     private void loadRoomsFromDatabase() {
@@ -40,6 +42,7 @@ public class RoomManagementController implements Initializable {
         if (rooms != null) {
             allRooms.addAll(rooms);
         }
+        System.out.println("Rooms loaded: " + allRooms.size());
     }
 
     private void buildAllCards() {
@@ -175,5 +178,9 @@ public class RoomManagementController implements Initializable {
                 buildAllCards();
             }
         });
+    }
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
     }
 }

@@ -1,9 +1,8 @@
-package com.example.shms.utils;
+package com.example.shms.controller;
 
+import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
-import com.example.shms.model.Doctor;
 import com.example.shms.model.MedicalRecord;
-import com.example.shms.model.Patient;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,6 +38,7 @@ public class MedicalRecordsController implements Initializable {
         setupColumns();
         loadFromDatabase();
         styleTableHeader();
+        recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
 
@@ -149,6 +149,11 @@ public class MedicalRecordsController implements Initializable {
             case "Follow-up" -> base + "-fx-text-fill: #d97706; -fx-background-color: #fef3c7;";
             default          -> base + "-fx-text-fill: #555555; -fx-background-color: #eeeeee;";
         };
+    }
+
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
     }
 }
 

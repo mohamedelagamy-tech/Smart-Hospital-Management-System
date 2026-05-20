@@ -1,5 +1,6 @@
 package com.example.shms.controller;
 
+import com.example.shms.MainApp;
 import com.example.shms.controller.NewBillController;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Bill;
@@ -51,6 +52,7 @@ public class BillingController implements Initializable {
                 "Amount (Low to High)"
         );
         sortBox.setValue("Date (Newest First)");
+        billingTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         filterGroup = new ToggleGroup();
         btnAll.setToggleGroup(filterGroup);
@@ -109,9 +111,9 @@ public class BillingController implements Initializable {
     }
 
     @FXML
-    private void openNewBillForm() {
+    public void openNewBillForm() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/shms/NewBillForm.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NewBillForm.fxml"));
             Parent root = loader.load();
 
             NewBillController formCtrl = loader.getController();
@@ -171,6 +173,10 @@ public class BillingController implements Initializable {
     public void setBills(ObservableList<Bill> bills) {
         this.allBills = bills;
         billingTable.setItems(allBills);
+    }
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
     }
 
 }

@@ -145,6 +145,7 @@ public class DashboardController implements Initializable {
                 btnRooms.setManaged(false);
                 labelAdmin.setVisible(false);
                 labelAdmin.setManaged(false);
+                btnRecords.setVisible(false);
                 break;
             case "NURSE":
                 btnDoctors.setVisible(false);
@@ -159,6 +160,7 @@ public class DashboardController implements Initializable {
                 btnPrescriptions.setManaged(false);
                 labelAdmin.setVisible(false);
                 labelAdmin.setManaged(false);
+
                 break;
             case "RECEPTIONIST":
                 btnDoctors.setVisible(false);
@@ -171,6 +173,10 @@ public class DashboardController implements Initializable {
                 btnAuditLog.setManaged(false);
                 btnDepartments.setVisible(false);
                 btnDepartments.setManaged(false);
+                btnStatistics.setVisible(false);
+                btnStatistics.setManaged(false);
+                btnRooms.setVisible(false);
+                btnRooms.setManaged(false);
                 break;
             case "PATIENT":
                 btnDoctors.setVisible(false);
@@ -266,12 +272,12 @@ public class DashboardController implements Initializable {
     @FXML
     private void showRecords(){
         setActiveButton(btnRecords);
-        MainApp.navigateTo("MedicalRecords",1200,700);
+        MainApp.navigateTo("MedicalRecordsScreen",1200,700);
     }
     @FXML
     private void showPrescriptions(){
         setActiveButton(btnPrescriptions);
-        MainApp.navigateTo("PrescriptionView",1200,700);
+        MainApp.navigateTo("PrescriptionScreen",1200,700);
     }
     @FXML
     private void showEmergency(){
@@ -281,12 +287,12 @@ public class DashboardController implements Initializable {
     @FXML
     private void showBilling(){
         setActiveButton(btnBilling);
-        MainApp.navigateTo("BillingView",1200,700);
+        MainApp.navigateTo("BillingScreen",1200,700);
     }
     @FXML
     private void showRooms(){
         setActiveButton(btnRooms);
-        MainApp.navigateTo("RoomView",1200,700);
+        MainApp.navigateTo("RoomManagement",1200,700);
     }
     @FXML
     private void showDepartments(){

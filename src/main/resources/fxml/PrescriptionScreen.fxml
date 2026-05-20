@@ -11,7 +11,9 @@
       style="-fx-background-color: #f0f2f5;">
 
     <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
-
+    <Button text="← Back" onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-text-fill: #1a6fba;
+               -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;"/>
     <Label text="Prescriptions-Doctor view"
            style="-fx-font-family: Georgia; -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #1a6fba;"/>
 
@@ -61,7 +63,6 @@
     </VBox>
     <TableView fx:id="prescriptionTable"
                style="-fx-background-color: white; -fx-border-color: #dde4ee; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 13px;"
-               columnResizePolicy="CONSTRAINED_RESIZE_POLICY"
                VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="colId"           text="Prescription ID" prefWidth="130"/>
@@ -73,7 +74,6 @@
             <TableColumn fx:id="colInstructions" text="Instructions"    prefWidth="220"/>
         </columns>
     </TableView>
-    <!-- ── Patient View (hidden by default) ── -->
     <VBox fx:id="patientViewPane" spacing="14" visible="false" managed="false"
           style="-fx-background-color: white; -fx-border-color: #dde4ee; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
         <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>

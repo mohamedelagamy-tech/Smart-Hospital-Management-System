@@ -22,7 +22,6 @@ public class NewBillController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Populate dropdowns
         patientBox.getItems().addAll(
                 "Sarah Johnson",
                 "Michael Chen",
@@ -37,6 +36,10 @@ public class NewBillController implements Initializable {
     public void init(ObservableList<Bill> allBills, TableView<Bill> billingTable) {
         this.allBills     = allBills;
         this.billingTable = billingTable;
+    }
+    @FXML
+    private void handleBack() {
+        ((Stage) serviceField.getScene().getWindow()).close();
     }
 
     @FXML
