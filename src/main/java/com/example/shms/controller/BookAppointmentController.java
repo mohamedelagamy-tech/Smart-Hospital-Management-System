@@ -31,7 +31,7 @@ private void loadPatients(){
     try{
         java.sql.ResultSet rs = db.getAllPatients();
         while (rs != null && rs.next()){
-            patientCombo.getItems().add(rs.getInt("PatientID")+"-"+rs.getString("Name"));
+            patientCombo.getItems().add(rs.getInt("id")+"-"+rs.getString("Name"));
         }
     } catch (Exception e) {
        System.out.println("loadPatient error"+e.getMessage());
@@ -41,7 +41,7 @@ private void loadDoctors(){
     try{
         java.sql.ResultSet rs = db.getAllDoctors();
         while (rs!= null && rs.next()){
-            doctorCombo.getItems().add(rs.getInt("docotrID")+"-"+rs.getString("Name"));
+            doctorCombo.getItems().add(rs.getInt("id")+"-"+rs.getString("Name"));
         }
     }
     catch ( Exception e){
