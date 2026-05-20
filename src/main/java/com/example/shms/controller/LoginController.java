@@ -160,7 +160,7 @@ public class LoginController {
 
     private void logAudit(String username, String role, String status){
         try {
-            String sql="INSERT INTO auditLog (username, role,status,timestamp) VALUES (?, ?, ?, datetime('now'))";
+            String sql="INSERT INTO auditLog (username, role,status,timestamp) VALUES (?, ?, ?, datetime('now','+3 hours'))";
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ps.setString(1,username);
             ps.setString(2,role);

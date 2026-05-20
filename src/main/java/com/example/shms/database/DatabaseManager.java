@@ -127,6 +127,12 @@ public class DatabaseManager {
                     "totalRating REAL DEFAULT 0.0," +
                     "ratingCount INTEGER DEFAULT 0)");
 
+            st.execute("CREATE TABLE IF NOT EXISTS doctor_ratings (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "doctor_id INTEGER NOT NULL," +
+                    "rating INTEGER NOT NULL," +
+                    "comment TEXT)");
+
             st.execute("CREATE TABLE IF NOT EXISTS patients (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "name TEXT NOT NULL UNIQUE," +
@@ -428,7 +434,27 @@ public class DatabaseManager {
             }
         }
     }
-    public List<Room> getAllRooms() { return rooms; }
+    public List<Room> getAllRooms() {
+        List<Room> result = new ArrayList<>();
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM rooms");
+            while (rs.next()) {
+                Room r = new Room(
+                        rs.getInt("assignedPatientID"),
+                        "",
+                        rs.getInt("id"),
+                        Integer.parseInt(rs.getString("roomNumber")),
+                        rs.getString("status"),
+                        ""
+                );
+                result.add(r);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error loading rooms: " + e.getMessage());
+        }
+        return result;
+    }
     public List<Room> getAvailableRooms() {
         List<Room> result = new ArrayList<>();
         for (Room r : rooms) {
@@ -593,6 +619,25 @@ public class DatabaseManager {
             System.out.println("Error getting average rating: " + e.getMessage());
         }
         return 0.0;
+    }
+
+    public void saveDoctorRating(int doctorId, int rating, String comment) {
+        String sql = "INSERT INTO doctor_ratings (doctor_id, rating, comment) VALUES (?, ?, ?)";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, doctorId);
+            ps.setInt(2, rating);
+            ps.setString(3, comment);
+
+            ps.executeUpdate();
+
+            addRating(doctorId, rating);
+
+            System.out.println("Doctor rating saved successfully!");
+
+        } catch (SQLException e) {
+            System.out.println("Error saving doctor rating: " + e.getMessage());
+        }
     }
 
     public List<MedicalRecord> getAllMedicalRecords() {

@@ -6,12 +6,16 @@
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.shms.NewBillController"
+      fx:controller="com.example.shms.controller.NewBillController"
       spacing="12"
       stylesheets="@billing.css"
       styleClass="form-container">
 
     <padding><Insets top="30" right="30" bottom="30" left="30"/></padding>
+
+    <Button text="← Back" onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-text-fill: #1a6fba;
+               -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;"/>
 
     <Label text="Generate New Bill" styleClass="form-title"/>
 

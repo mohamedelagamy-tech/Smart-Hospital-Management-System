@@ -1,6 +1,7 @@
 package com.example.shms.utils;
 
 
+import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Bill;
 import com.example.shms.model.DischargeSummary;
@@ -156,7 +157,10 @@ public class DischargeSummaryController implements Initializable {
         summary.writeToFile();
 
     }
-
+    @FXML
+    private void handleBack() {
+        MainApp.navigateTo("dashboard", 1200, 700);
+    }
     @FXML
     private void handlePrint() {
         String selected = patientComboBox.getValue();

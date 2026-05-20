@@ -38,6 +38,10 @@ public class NewBillController implements Initializable {
         this.allBills     = allBills;
         this.billingTable = billingTable;
     }
+    @FXML
+    private void handleBack() {
+        ((Stage) serviceField.getScene().getWindow()).close();
+    }
 
     @FXML
     private void handleSubmit() {
