@@ -174,14 +174,12 @@ public class DatabaseManager {
 
             st.execute("CREATE TABLE IF NOT EXISTS appointments (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "patientID INTEGER NOT NULL," +
-                    "patientName TEXT NOT NULL," +
-                    "doctorID INTEGER NOT NULL," +
-                    "doctorName TEXT NOT NULL," +
-                    "appointmentDate TEXT NOT NULL," +
-                    "appointmentTime TEXT NOT NULL," +
+                    "patientId INTEGER NOT NULL," +
+                    "doctorId INTEGER NOT NULL," +
+                    "date TEXT NOT NULL," +
+                    "time TEXT NOT NULL," +
                     "status TEXT NOT NULL," +
-                    "priority TEXT NOT NULL)");
+                    "notes TEXT)");
 
             st.execute("CREATE TABLE IF NOT EXISTS prescriptions (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -192,6 +190,15 @@ public class DatabaseManager {
                     "instructions TEXT NOT NULL," +
                     "duration TEXT NOT NULL," +
                     "dateIssued TEXT NOT NULL)");
+
+            st.execute("CREATE TABLE IF NOT EXISTS medical_records (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "patientId INTEGER NOT NULL," +
+                    "doctorId INTEGER NOT NULL," +
+                    "date TEXT NOT NULL," +
+                    "diagnoses TEXT," +
+                    "treatment TEXT," +
+                    "notes TEXT)");
 
             System.out.println("All tables created successfully!");
             insertData();
@@ -289,7 +296,7 @@ public class DatabaseManager {
         }
     }
     public void updateStatus(int id, String status) {
-        String sql = "UPDATE patients SET status=? WHERE patientID=?";
+        String sql = "UPDATE patients SET status=? WHERE id=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, status);
             ps.setInt(2, id);
@@ -326,7 +333,7 @@ public class DatabaseManager {
     }
     public void cancelAppointment(int id) {
         try (java.sql.PreparedStatement ps = connection.prepareStatement(
-                "UPDATE appointments SET status='Cancelled' WHERE appointmentId=?")) {
+                "UPDATE appointments SET status='Cancelled' WHERE id=?")) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (java.sql.SQLException e) {
@@ -335,7 +342,7 @@ public class DatabaseManager {
     }
     public void markComplete(int id) {
         try (java.sql.PreparedStatement ps = connection.prepareStatement(
-                "UPDATE appointments SET status='Completed' WHERE appointmentId=?")) {
+                "UPDATE appointments SET status='Completed' WHERE id=?")) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (java.sql.SQLException e) {
@@ -381,7 +388,7 @@ public class DatabaseManager {
     }
     private Appointment mapAppointment(java.sql.ResultSet rs) throws java.sql.SQLException {
         return new Appointment(
-                rs.getInt("appointmentId"),
+                rs.getInt("id"),
                 rs.getInt("patientId"),
                 rs.getInt("doctorId"),
                 java.time.LocalDate.parse(rs.getString("date")),
@@ -457,8 +464,23 @@ public class DatabaseManager {
     }
     public List<Room> getAvailableRooms() {
         List<Room> result = new ArrayList<>();
-        for (Room r : rooms) {
-            if (r.getRoomStatus().equals("Available")) result.add(r);
+        try(PreparedStatement ps=connection.prepareStatement(
+                "SELECT * FROM rooms WHERE status ='Available'")){
+                    ResultSet rs=ps.executeQuery();
+                    while (rs.next()) {
+                        Room r = new Room(
+                        rs.getInt("assignedPatientID"),
+                        "",
+                        rs.getInt("id"),
+                        Integer.parseInt(rs.getString("roomNumber")),
+                        rs.getString("status"),
+                        ""
+                );
+                result.add(r);
+            }
+        }catch (SQLException e){
+            System.out.println("Error getting available rooms"+e.getMessage());
+            return null;
         }
         return result;
     }
@@ -653,7 +675,7 @@ public class DatabaseManager {
                         rs.getString("date"),
                         rs.getString("diagnosis"),
                         rs.getString("treatment"),
-                        rs.getString("status")
+                        rs.getString("notes")
                 ));
             }
         } catch (SQLException e) {
