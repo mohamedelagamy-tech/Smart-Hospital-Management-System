@@ -86,8 +86,8 @@ public class DatabaseManager {
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Rana Tarek',27,'Female','01031234567','Giza','AB-','Dermatology',3,'rana.tarek@email.com')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Salma Abdelkhalek',19,'Female','01012778327','Alexandria','O-','Radiology',3,'Salmaabdelkhalek26@gmail.com')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Salma Abdelsattar',19,'Female','01115119117','Alexandria','A+','Neurology',3,'engsalmaabdelsattar22108@gmail.com')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Zeina Yasser',19,'Female','01012127367','Alexandria','B+','Orthopedics',3,'zeinafarghaly@email.com')");
-            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Mohamed Mazen',18,'Male','01558887707','Alexandria','O+','Oncology',3,'m.mazenelagamy@email.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Zeina Yasser',19,'Female','01012127367','Alexandria','B+','Orthopedics',3,'zeinafarghaly@gmail.com')");
+            st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Mohamed Mazen',18,'Male','01558887707','Alexandria','O+','Oncology',3,'m.mazenelagamy@gmail.com')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Mariam ElShafie',18,'Female','01009649895','Alexandria','AB-','Dermatology',3,'m.a.elshafei2007@gmail.com')");
 
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('101','Available')");
