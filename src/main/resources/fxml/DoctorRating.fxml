@@ -24,7 +24,7 @@
       </HBox>
    </top>
    <center>
-      <VBox fx:id="avatarLabel" prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #F4F7FA; -fx-background-radius: 8;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #F4F7FA; -fx-background-radius: 8;" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </padding>
@@ -51,7 +51,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <VBox fx:id="doctorNameLabel" prefHeight="96.0" prefWidth="155.0" spacing="4.0">
+                        <VBox prefHeight="96.0" prefWidth="155.0" spacing="4.0">
                            <children>
                               <Label fx:id="doctorNameLabel" text="Dr. Mariam" textFill="#1e3a5f">
                                  <font>
