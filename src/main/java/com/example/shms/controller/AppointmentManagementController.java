@@ -60,8 +60,17 @@ public class AppointmentManagementController {
         }
 
     private void loadAppointments() {
-        java.util.List<Appointment> all = db.getAppointmentsByDoctor(0);
-        appointmentTable.setItems(FXCollections.observableArrayList(all));
+        try{
+            java.sql.Statement st = db.getConnection().createStatement();
+            java.sql.ResultSet rs = st.executeQuery("SELECT * FROM appointments ORDER BY date,time ");
+            java.util.List<Appointment> all = new java.util.ArrayList<>();
+            while(rs.next()){
+                all.add(new Appointment(rs.getInt("id"),rs.getInt("patientId"),rs.getInt("doctorId"),java.time.LocalDate.parse(rs.getString("date")),java.time.LocalTime.parse(rs.getString("time")),rs.getString("status"), rs.getString("notes")));
+            }
+            appointmentTable.setItems(javafx.collections.FXCollections.observableArrayList(all));
+        }catch (Exception e){
+            System.out.println("loadAppointments error:"+e.getMessage());
+        }
     }
 
     @FXML

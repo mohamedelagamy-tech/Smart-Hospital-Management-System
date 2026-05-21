@@ -1,3 +1,4 @@
+//private static final String db_URL = "jdbc:sqlite:hospital.db";
 package com.example.shms.database;
 
 import com.example.shms.model.*;
@@ -726,6 +727,7 @@ public class DatabaseManager {
         }
         return null;
     }
+
 
 }
 
