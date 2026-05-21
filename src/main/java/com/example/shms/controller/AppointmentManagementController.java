@@ -69,6 +69,8 @@ public class AppointmentManagementController {
                 System.out.println("Row:" +a.getAppointmentId()+" "+a.getPatientId());
                 all.add(a);
             }
+            System.out.println("Setting" + all.size()+"items to table");
+            System.out.println("Table columns:"+ appointmentTable.getColumns().size());
             appointmentTable.setItems(javafx.collections.FXCollections.observableArrayList(all));
         }catch (Exception e){
             System.out.println("loadAppointments error:"+e.getMessage());
