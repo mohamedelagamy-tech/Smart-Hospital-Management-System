@@ -65,7 +65,9 @@ public class AppointmentManagementController {
             java.sql.ResultSet rs = st.executeQuery("SELECT * FROM appointments ORDER BY date,time ");
             java.util.List<Appointment> all = new java.util.ArrayList<>();
             while(rs.next()){
-                all.add(new Appointment(rs.getInt("id"),rs.getInt("patientId"),rs.getInt("doctorId"),java.time.LocalDate.parse(rs.getString("date")),java.time.LocalTime.parse(rs.getString("time")),rs.getString("status") != null ? rs.getString("status"):"Scheduled", rs.getString("notes")!= null ? rs.getString("notes"):""));
+              Appointment a = new Appointment (rs.getInt("id"),rs.getInt("patientId"),rs.getInt("doctorId"),java.time.LocalDate.parse(rs.getString("date")),java.time.LocalTime.parse(rs.getString("time")),rs.getString("status") != null ? rs.getString("status"):"Scheduled", rs.getString("notes")!= null ? rs.getString("notes"):"");
+                System.out.println("Row:" +a.getAppointmentId()+" "+a.getPatientId());
+                all.add(a);
             }
             appointmentTable.setItems(javafx.collections.FXCollections.observableArrayList(all));
         }catch (Exception e){
