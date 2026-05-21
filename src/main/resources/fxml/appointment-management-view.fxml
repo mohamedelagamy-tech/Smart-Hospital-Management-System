@@ -59,13 +59,13 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-                <TableColumn fx:id="colId" text="ID" style="-fx-alignment:CENTER;"/>
-                <TableColumn fx:id="colPatient" text="Patient"/>
-                <TableColumn fx:id="colDoctor" text="Doctor"/>
-                <TableColumn fx:id="colDate" text="Date" style="-fx-alignment:CENTER;"/>
-                <TableColumn fx:id="colTime" text="Time" style="-fx-alignment:CENTER;"/>
-                <TableColumn fx:id="colStatus" text="Status" style="-fx-alignment:CENTER;"/>
-                <TableColumn fx:id="colNotes" text="Notes" style="-fx-alignment:CENTER;"/>
+                <TableColumn fx:id="colId" text="ID" style="-fx-text-fill:black;-fx-alignment:CENTER;"/>
+                <TableColumn fx:id="colPatient" text="Patient" style="-fx-text-fill:black;-fx-alignment:CENTER;"/>
+                <TableColumn fx:id="colDoctor" text="Doctor" style="-fx-text-fill:black;-fx-alignment:CENTER;"/>
+                <TableColumn fx:id="colDate" text="Date" style="fx-text-fill:black; -fx-alignment:CENTER;"/>
+                <TableColumn fx:id="colTime" text="Time" style="fx-text-fill:black; -fx-alignment:CENTER;"/>
+                <TableColumn fx:id="colStatus" text="Status" style="fx-text-fill:black; -fx-alignment:CENTER;"/>
+                <TableColumn fx:id="colNotes" text="Notes" style="fx-text-fill:black; -fx-alignment:CENTER;"/>
 
             </columns>
         </TableView>
