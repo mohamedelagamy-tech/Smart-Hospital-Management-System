@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarController {
@@ -29,7 +30,24 @@ public class CalendarController {
         int dow=currentMonth.withDayOfMonth(1).getDayOfWeek().getValue();
         int firstDay = dow == 7 ? 0 : dow;
         int daysInMonth = currentMonth.lengthOfMonth();
-        List<Appointment> all = db.getAppointmentsByPatient(0);
+        List<Appointment> all = new java.util.ArrayList<>();
+        try{
+            java.sql.Statement st=db.getConnection().createStatement();
+            java.sql.ResultSet rs=st.executeQuery("SELECT * FROM appointments");
+            while(rs.next()){
+                all.add(new Appointment(
+                        rs.getInt("id"),
+                        rs.getInt("patientId"),
+                        rs.getInt("doctorId"),
+                        java.time.LocalDate.parse(rs.getString("date")),
+                        java.time.LocalTime.parse(rs.getString("time")),
+                        rs.getString("status"),
+                        rs.getString("notes")!=null? rs.getString("notes") :""
+                        ));
+            }
+        }catch(Exception e){
+            System.out.println("Calender loading failed"+e.getMessage());
+        }
 
         int col = firstDay;
         int row = 0;
@@ -63,7 +81,7 @@ public class CalendarController {
                         textColor = "#791F1F";
                     }
                     Label pill = new Label(a.getTime().toString().substring(0, 5) + "" + a.getStatus());
-                    pill.setStyle("-fx-background-color:" + color + "; -fx-test-fill:" + textColor + ";-fx-background-radius:99; -fx-padding:2 6;" + "-fx-font-size:10; -fx-font-weight:bold;");
+                    pill.setStyle("-fx-background-color:" + color + "; -fx-text-fill:" + textColor + ";-fx-background-radius:99; -fx-padding:2 6;" + "-fx-font-size:10; -fx-font-weight:bold;");
                     cell.getChildren().add(pill);
                 }
             }
