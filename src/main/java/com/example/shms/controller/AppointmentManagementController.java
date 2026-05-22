@@ -43,21 +43,31 @@ public class AppointmentManagementController {
 
     @FXML
     public void intialize() {
-        colId.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getAppointmentId()).asObject());
-        colPatient.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getPatientId()).asObject());
-        colDoctor.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getDoctorId()).asObject());
-        colDate.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getDate().toString()));
-        colTime.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTime().toString()));
-        colStatus.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getStatus()));
-        colNotes.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNotes()));
-        loadAppointments();
+        colId.setCellValueFactory(d -> new javafx.beans.property.SimpleIntegerProperty(d.getValue().getAppointmentId()).asObject());
+        colPatient.setCellValueFactory(d -> new javafx.beans.property.SimpleIntegerProperty(d.getValue().getPatientId()).asObject());
+        colDoctor.setCellValueFactory(d -> new javafx.beans.property.SimpleIntegerProperty(d.getValue().getDoctorId()).asObject());
+        colDate.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(d.getValue().getDate() !=null ? d.getValue().getDate().toString():""));
+        colTime.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(d.getValue().getTime() !=null? d.getValue().getTime().toString():""));
+        colStatus.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(d.getValue().getStatus() !=null ? d.getValue().getStatus() :""));
+        colNotes.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(d.getValue().getNotes()!= null ? d.getValue().getNotes():""));
+        colId.setCellFactory(col-> new javafx.scene.control.TableCell<Appointment , Integer>(){
+            @Override
+            protected void updateItem(Integer item , boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+                    setStyle("-fx-text-fill: black;");
+                }
+                loadAppointments();
 
-        String role=com.example.shms.utils.SessionManager.getInstance().getLoggedInRole();
-        if(!"RECEPTIONIST".equals(role)) {
-            bookBtn.setVisible(false);
-            bookBtn.setManaged(false);
-        }
-        }
+                String role = com.example.shms.utils.SessionManager.getInstance().getLoggedInRole();
+                if (!"RECEPTIONIST".equals(role)) {
+                    bookBtn.setVisible(false);
+                    bookBtn.setManaged(false);
+                }
+            }
 
     private void loadAppointments() {
         try{
@@ -148,5 +158,7 @@ public class AppointmentManagementController {
     }
     @FXML private void handleRefresh(){
         loadAppointments();
+    }
+}
     }
 }
