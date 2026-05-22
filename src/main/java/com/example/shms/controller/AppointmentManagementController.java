@@ -6,6 +6,7 @@ import com.example.shms.utils.SessionManager;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert;
@@ -42,7 +43,7 @@ public class AppointmentManagementController {
 
 
     @FXML
-    public void intialize() {
+    public void initialize() {
         colId.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getAppointmentId()).asObject());
         colPatient.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getPatientId()).asObject());
         colDoctor.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getDoctorId()).asObject());
@@ -52,11 +53,6 @@ public class AppointmentManagementController {
         colNotes.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNotes()));
         loadAppointments();
 
-        String role=com.example.shms.utils.SessionManager.getInstance().getLoggedInRole();
-        if(!"RECEPTIONIST".equals(role)) {
-            bookBtn.setVisible(false);
-            bookBtn.setManaged(false);
-        }
         }
 
     private void loadAppointments() {
@@ -92,17 +88,23 @@ public class AppointmentManagementController {
 
     @FXML
     private void filterScheduled() {
-        filterByStatus("Scheduled");
+        appointmentTable.setItems(FXCollections.observableArrayList(
+                appointmentTable.getItems().filtered(a->a.getStatus().equals("Scheduled"))
+        ));
     }
 
     @FXML
     private void filterCompleted() {
-        filterByStatus("Completed");
+        appointmentTable.setItems(FXCollections.observableArrayList(
+                appointmentTable.getItems().filtered(a->a.getStatus().equals("Completed"))
+        ));
     }
 
     @FXML
     private void filterCancelled() {
-        filterByStatus("Cancelled");
+        appointmentTable.setItems(FXCollections.observableArrayList(
+                appointmentTable.getItems().filtered(a->a.getStatus().equals("Cancelled"))
+        ));
     }
 
     private void filterByStatus(String status) {

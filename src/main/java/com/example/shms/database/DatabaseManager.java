@@ -133,7 +133,17 @@ public class DatabaseManager {
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('304','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('501','Occupied')");
 
-
+            // Seed appointments
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (1, 1, '2026-05-20', '09:00', 'Completed', 'Regular checkup')");
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (2, 5, '2026-05-21', '10:30', 'Completed', 'Follow-up visit')");
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (3, 4, '2026-05-22', '11:00', 'Scheduled', 'First consultation')");
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (4, 3, '2026-05-22', '08:00', 'Scheduled', 'Emergency follow-up')");
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (5, 6, '2026-05-23', '13:00', 'Scheduled', 'Skin examination')");
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (6, 7, '2026-05-23', '14:00', 'Scheduled', 'Oncology review')");
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (7, 8, '2026-05-24', '09:30', 'Scheduled', 'Radiology scan')");
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (8, 1, '2026-05-24', '11:00', 'Scheduled', 'Cardiology checkup')");
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (9, 4, '2026-05-25', '10:00', 'Cancelled', 'Patient unavailable')");
+            st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (10, 5, '2026-05-25', '15:00', 'Scheduled', 'Post-surgery review')");
             System.out.println("Data inserted!");
 
         } catch (SQLException e) {
