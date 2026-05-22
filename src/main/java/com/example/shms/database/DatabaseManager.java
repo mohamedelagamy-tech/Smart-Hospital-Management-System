@@ -155,6 +155,17 @@ public class DatabaseManager {
             st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (9, 4, '2026-05-10', 'Epilepsy', 'Prescribed Levetiracetam 500mg', 'Completed')");
             st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (10, 5, '2026-05-18', 'Fracture - Left Arm', 'Cast applied for 6 weeks', 'Follow-up')");
 
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (1, 1, 'Amlodipine', '5mg', 'Take once daily after meal', '3 months', '2026-05-20')");
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (2, 5, 'Ibuprofen', '400mg', 'Take twice daily with food', '2 weeks', '2026-05-21')");
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (3, 4, 'Sumatriptan', '50mg', 'Take at onset of migraine', '1 month', '2026-05-22')");
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (4, 3, 'Amoxicillin', '500mg', 'Take three times daily', '1 week', '2026-05-22')");
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (5, 6, 'Hydrocortisone', '1%', 'Apply to affected area twice daily', '2 weeks', '2026-05-23')");
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (6, 7, 'Methotrexate', '15mg', 'Take once weekly', '6 months', '2026-05-23')");
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (7, 8, 'Tamsulosin', '0.4mg', 'Take once daily at bedtime', '1 month', '2026-05-24')");
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (8, 1, 'Metoprolol', '25mg', 'Take twice daily', '3 months', '2026-05-24')");
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (9, 4, 'Levetiracetam', '500mg', 'Take twice daily', '6 months', '2026-05-10')");
+            st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (10, 5, 'Calcium', '500mg', 'Take once daily with vitamin D', '3 months', '2026-05-18')");
+
             System.out.println("Data inserted!");
 
         } catch (SQLException e) {
@@ -472,8 +483,42 @@ public class DatabaseManager {
         return result;
     }
     public List<Bill> getAllBills() { return bills; }
-
-    public void addPrescription(Prescription p) { prescriptions.add(p); }
+    public List<Prescription> getAllPrescriptions() {
+        List<Prescription> result = new ArrayList<>();
+        String sql="SELECT * FROM prescriptions";
+        try(Statement st=connection.createStatement()){
+            ResultSet rs= st.executeQuery(sql);
+            while (rs.next()){
+                result.add(new Prescription(
+                        rs.getInt("id"),
+                        rs.getInt("patientID"),
+                        rs.getInt("doctorID"),
+                        rs.getString("medicineName"),
+                        rs.getString("dosage"),
+                        rs.getString("duration"),
+                        rs.getString("instructions")
+                ));
+            }
+        }catch (SQLException e){
+            System.out.println("error getting prescriptions: " + e.getMessage());
+        }
+        return result;
+    }
+    public void addPrescription(Prescription p) {
+        String sql="INSERT INTO prescriptions (patientID,doctorID,medicineName,dosage,instructions,duration,dateIssued) VALUES (?,?,?,?,?,?,?,)";
+        try(PreparedStatement ps= connection.prepareStatement(sql)){
+            ps.setInt(1,p.getPatientId());
+            ps.setInt(2,p.getDoctorId());
+            ps.setString(3,p.getMedicineName());
+            ps.setString(4,p.getDosage());
+            ps.setString(5,p.getInstructions());
+            ps.setString(6, p.getDuration());
+            ps.setString(7,java.time.LocalDate.now().toString());
+            ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("error adding prescription: " + e.getMessage());
+        }
+    }
     public List<Prescription> getPrescriptionsByPatient(int patientId) {
         List<Prescription> result = new ArrayList<>();
         for (Prescription p : prescriptions) {
