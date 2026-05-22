@@ -166,6 +166,17 @@ public class DatabaseManager {
             st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (9, 4, 'Levetiracetam', '500mg', 'Take twice daily', '6 months', '2026-05-10')");
             st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (10, 5, 'Calcium', '500mg', 'Take once daily with vitamin D', '3 months', '2026-05-18')");
 
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (1,'Sara Mohamed','Dr. Khaled Nour','Cardiology Consultation',850.00,'Paid','Credit Card','2026-05-20')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (2,'Omar Ali','Dr. Omar Sherif','Orthopedic Examination',600.00,'Pending','Cash','2026-05-21')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (3,'Nour Hassan','Dr. Layla Farouk','Neurology Consultation',750.00,'Paid','Insurance','2026-05-22')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (4,'Karim Adel','Dr. Ahmed Hassan','Emergency Treatment',1200.00,'Overdue','Cash','2026-05-22')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (5,'Layla Mahmoud','Dr. Hana Adel','Dermatology Treatment',450.00,'Paid','Credit Card','2026-05-23')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (6,'Youssef Tarek','Dr. Tarek Mansour','Chemotherapy Session',3500.00,'Pending','Insurance','2026-05-23')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (7,'Dina Mostafa','Dr. Yasmine Farid','Radiology Scan',900.00,'Overdue','Cash','2026-05-24')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (8,'Mohamed Fawzy','Dr. Khaled Nour','ECG and Consultation',700.00,'Paid','Credit Card','2026-05-24')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (9,'Rania Khaled','Dr. Layla Farouk','MRI Scan',1100.00,'Pending','Insurance','2026-05-25')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (10,'Amr Saeed','Dr. Omar Sherif','Surgery Followup',500.00,'Paid','Cash','2026-05-25')");
+
             System.out.println("Data inserted!");
 
         } catch (SQLException e) {
@@ -235,10 +246,11 @@ public class DatabaseManager {
                     "patientID INTEGER NOT NULL," +
                     "patientName TEXT NOT NULL," +
                     "doctorName TEXT NOT NULL," +
-                    "treatment TEXT NOT NULL," +
+                    "service TEXT NOT NULL," +
                     "amount REAL NOT NULL," +
-                    "paymentStatus TEXT NOT NULL," +
-                    "paymentMethod TEXT NOT NULL)");
+                    "status TEXT NOT NULL," +
+                    "paymentMethod TEXT NOT NULL," +
+                    "date TEXT)");
 
             st.execute("CREATE TABLE IF NOT EXISTS appointments (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -466,9 +478,6 @@ public class DatabaseManager {
         );
     }
 
-    public void addBill(Bill bill) {
-        bills.add(bill);
-    }
     public void updateBillStatus(String billId, String newStatus) {
         for (Bill b : bills) {
             if (b.getBillNumber().equals(billId))
@@ -482,7 +491,44 @@ public class DatabaseManager {
         }
         return result;
     }
-    public List<Bill> getAllBills() { return bills; }
+    public void addBill(Bill bill){
+        String sql="INSERT INTO bills(patientID,patientName,doctorName,service,amount,status,paymentMethod) VALUES(?,?,?,?,?,?,?)";
+        try(PreparedStatement ps= connection.prepareStatement(sql)){
+            ps.setInt(1,bill.getPatientId());
+            ps.setString(2,bill.getPatientName());
+            ps.setString(3,bill.getDoctorName());
+            ps.setString(4,bill.getService());
+            ps.setDouble(5,bill.getAmount());
+            ps.setString(6, bill.getBillStatus());
+            ps.setString(7,bill.getPaymentMethod());
+            ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("error adding bill: " + e.getMessage());
+        }
+    }
+    public List<Bill> getAllBills() {
+        List<Bill> result = new ArrayList<>();
+        String sql="SELECT * FROM bills";
+        try(Statement st=connection.createStatement()){
+            ResultSet rs= st.executeQuery(sql);
+            while (rs.next()){
+                result.add(new Bill(
+                        rs.getInt("id"),
+                        rs.getInt("patientID"),
+                        rs.getString("patientName"),
+                        rs.getString("doctorName"),
+                        rs.getString("service"),
+                        rs.getDouble("amount"),
+                        rs.getString("status"),
+                        rs.getString("paymentMethod"),
+                        rs.getString("date")!=null?rs.getString("date"):""
+                ));
+            }
+        }catch (SQLException e){
+            System.out.println("error getting bills: " + e.getMessage());
+        }
+        return result;
+    }
     public List<Prescription> getAllPrescriptions() {
         List<Prescription> result = new ArrayList<>();
         String sql="SELECT * FROM prescriptions";
@@ -505,7 +551,7 @@ public class DatabaseManager {
         return result;
     }
     public void addPrescription(Prescription p) {
-        String sql="INSERT INTO prescriptions (patientID,doctorID,medicineName,dosage,instructions,duration,dateIssued) VALUES (?,?,?,?,?,?,?,)";
+        String sql="INSERT INTO prescriptions (patientID,doctorID,medicineName,dosage,instructions,duration,dateIssued) VALUES (?,?,?,?,?,?,?)";
         try(PreparedStatement ps= connection.prepareStatement(sql)){
             ps.setInt(1,p.getPatientId());
             ps.setInt(2,p.getDoctorId());
