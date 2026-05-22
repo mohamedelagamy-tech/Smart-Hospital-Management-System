@@ -81,7 +81,7 @@ public class MedicalRecordsController implements Initializable {
             }
         });
         colStatus.setCellValueFactory(cell ->
-                new SimpleStringProperty(cell.getValue().getStatus()));
+                new SimpleStringProperty(cell.getValue().getNotes()));
 
         recordsTable.setRowFactory(tv -> new TableRow<>() {
             @Override
@@ -119,7 +119,7 @@ public class MedicalRecordsController implements Initializable {
                     || doctorId.contains(query)
                     || r.getDiagnosis().toLowerCase().contains(query)
                     || r.getTreatment().toLowerCase().contains(query)
-                    || r.getStatus().toLowerCase().contains(query)
+                    || r.getNotes().toLowerCase().contains(query)
                     || r.getDate().contains(query)) {
                 filtered.add(r);
             }

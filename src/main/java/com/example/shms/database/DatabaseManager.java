@@ -133,7 +133,6 @@ public class DatabaseManager {
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('304','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('501','Occupied')");
 
-            // Seed appointments
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (1, 1, '2026-05-20', '09:00', 'Completed', 'Regular checkup')");
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (2, 5, '2026-05-21', '10:30', 'Completed', 'Follow-up visit')");
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (3, 4, '2026-05-22', '11:00', 'Scheduled', 'First consultation')");
@@ -144,6 +143,18 @@ public class DatabaseManager {
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (8, 1, '2026-05-24', '11:00', 'Scheduled', 'Cardiology checkup')");
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (9, 4, '2026-05-25', '10:00', 'Cancelled', 'Patient unavailable')");
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (10, 5, '2026-05-25', '15:00', 'Scheduled', 'Post-surgery review')");
+
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (1, 1, '2026-05-20', 'Hypertension', 'Prescribed Amlodipine 5mg', 'Active')");
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (2, 5, '2026-05-21', 'Knee Injury', 'Physical therapy recommended', 'Follow-up')");
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (3, 4, '2026-05-22', 'Migraine', 'Prescribed Sumatriptan', 'Completed')");
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (4, 3, '2026-05-22', 'Appendicitis', 'Emergency appendectomy performed', 'Completed')");
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (5, 6, '2026-05-23', 'Eczema', 'Prescribed hydrocortisone cream', 'Active')");
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (6, 7, '2026-05-23', 'Lymphoma', 'Chemotherapy session 3 of 6', 'Active')");
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (7, 8, '2026-05-24', 'Kidney Stone', 'CT scan ordered', 'Follow-up')");
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (8, 1, '2026-05-24', 'Arrhythmia', 'ECG performed, prescribed Metoprolol', 'Active')");
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (9, 4, '2026-05-10', 'Epilepsy', 'Prescribed Levetiracetam 500mg', 'Completed')");
+            st.execute("INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES (10, 5, '2026-05-18', 'Fracture - Left Arm', 'Cast applied for 6 weeks', 'Follow-up')");
+
             System.out.println("Data inserted!");
 
         } catch (SQLException e) {
@@ -719,7 +730,7 @@ public class DatabaseManager {
                         rs.getInt("patientId"),
                         rs.getInt("doctorId"),
                         rs.getString("date"),
-                        rs.getString("diagnosis"),
+                        rs.getString("diagnoses"),
                         rs.getString("treatment"),
                         rs.getString("notes")
                 ));
@@ -731,7 +742,18 @@ public class DatabaseManager {
     }
 
     public void addMedicalRecord(MedicalRecord record) {
-        medicalRecords.add(record);
+        String sql="INSERT INTO medical_records (patientId, doctorId, date, diagnoses, treatment, notes) VALUES(?,?,?,?,?,?)";
+        try(PreparedStatement ps=connection.prepareStatement(sql)) {
+            ps.setInt(1,record.getPatientId());
+            ps.setInt(2,record.getDoctorId());
+            ps.setString(3,record.getDate());
+            ps.setString(4,record.getDiagnosis());
+            ps.setString(5,record.getTreatment());
+            ps.setString(6,record.getNotes());
+            ps.executeUpdate();
+        }catch(SQLException e) {
+            System.out.println("error adding  medical record: " + e.getMessage());
+        }
     }
 
     public String getPatientEmail(int patientId){
