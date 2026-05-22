@@ -62,6 +62,35 @@ public class DatabaseManager {
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Tarek Mansour','tarek@hospital.com','doctor123','Oncology','Available',20000,'Sun-Tue-Thu','8am-4pm')");
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Yasmine Farid','yasmine@hospital.com','doctor123','Radiology','Busy',13000,'Mon-Wed-Sat','7am-3pm')");
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Mahmoud Gamal','mahmoud@hospital.com','doctor123','Emergency','In Surgery',17000,'Tue-Thu-Sat','6am-2pm')");
+            int[][] seedRatings={
+                    {5,4,5,4,5},
+                    {3,4,3,4,3},
+                    {5,5,4,5,4},
+                    {4,3,4,3,4},
+                    {2,3,2,3,2},
+                    {4,5,4,5,5},
+                    {5,4,5,5,4},
+                    {3,2,3,2,3},
+                    {4,4,5,4,4}
+            };
+            String[] comments = {
+                    "Excellent doctor, very professional",
+                    "Good experience overall",
+                    "Very knowledgeable and caring",
+                    "Explained everything clearly",
+                    "Would recommend to others"
+            };
+            for(int di=0;di<seedRatings.length;di++){
+                int docId=di+1;
+                int[] ratings=seedRatings[di];
+                double total=0;
+                for(int i=0;i<ratings.length;i++){
+                    st.execute("INSERT INTO doctor_ratings (doctor_id, rating, comment) VALUES ("
+                            + docId + ", " + ratings[i] + ", '" + comments[i] + "')");
+                    total+=ratings[i];
+                }
+                st.execute("UPDATE doctors SET totalRating="+total+", ratingCount="+ratings.length+" WHERE id="+docId);
+            }
 
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Sara Mohamed',34,'Female','01098765432','Cairo','A+','Cardiology',1,'sara.mohamed@email.com')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Omar Ali',25,'Male','01012345678','Giza','B+','Orthopedics',2,'omar.ali@email.com')");
