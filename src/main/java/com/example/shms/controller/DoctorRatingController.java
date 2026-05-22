@@ -86,7 +86,6 @@ public class DoctorRatingController {
         } catch (Exception e) {
             System.out.println("error saving rating " + e.getMessage());
         }
-        doctorController.loadDoctors();
         submitBtn.setDisable(true);
         successLabel.setText("✓ Thank you! Your rating has been submitted.");
         successLabel.setVisible(true);

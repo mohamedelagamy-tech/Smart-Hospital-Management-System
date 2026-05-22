@@ -6,6 +6,7 @@ import com.example.shms.utils.SessionManager;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert;
@@ -42,32 +43,17 @@ public class AppointmentManagementController {
 
 
     @FXML
-    public void intialize() {
-        colId.setCellValueFactory(d -> new javafx.beans.property.SimpleIntegerProperty(d.getValue().getAppointmentId()).asObject());
-        colPatient.setCellValueFactory(d -> new javafx.beans.property.SimpleIntegerProperty(d.getValue().getPatientId()).asObject());
-        colDoctor.setCellValueFactory(d -> new javafx.beans.property.SimpleIntegerProperty(d.getValue().getDoctorId()).asObject());
-        colDate.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(d.getValue().getDate() !=null ? d.getValue().getDate().toString():""));
-        colTime.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(d.getValue().getTime() !=null? d.getValue().getTime().toString():""));
-        colStatus.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(d.getValue().getStatus() !=null ? d.getValue().getStatus() :""));
-        colNotes.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(d.getValue().getNotes()!= null ? d.getValue().getNotes():""));
-        colId.setCellFactory(col-> new javafx.scene.control.TableCell<Appointment , Integer>(){
-            @Override
-            protected void updateItem(Integer item , boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.toString());
-                    setStyle("-fx-text-fill: black;");
-                }
-                loadAppointments();
+    public void initialize() {
+        colId.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getAppointmentId()).asObject());
+        colPatient.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getPatientId()).asObject());
+        colDoctor.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getDoctorId()).asObject());
+        colDate.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getDate().toString()));
+        colTime.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTime().toString()));
+        colStatus.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getStatus()));
+        colNotes.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNotes()));
+        loadAppointments();
 
-                String role = com.example.shms.utils.SessionManager.getInstance().getLoggedInRole();
-                if (!"RECEPTIONIST".equals(role)) {
-                    bookBtn.setVisible(false);
-                    bookBtn.setManaged(false);
-                }
-            }
+        }
 
     private void loadAppointments() {
         try{
@@ -102,17 +88,23 @@ public class AppointmentManagementController {
 
     @FXML
     private void filterScheduled() {
-        filterByStatus("Scheduled");
+        appointmentTable.setItems(FXCollections.observableArrayList(
+                appointmentTable.getItems().filtered(a->a.getStatus().equals("Scheduled"))
+        ));
     }
 
     @FXML
     private void filterCompleted() {
-        filterByStatus("Completed");
+        appointmentTable.setItems(FXCollections.observableArrayList(
+                appointmentTable.getItems().filtered(a->a.getStatus().equals("Completed"))
+        ));
     }
 
     @FXML
     private void filterCancelled() {
-        filterByStatus("Cancelled");
+        appointmentTable.setItems(FXCollections.observableArrayList(
+                appointmentTable.getItems().filtered(a->a.getStatus().equals("Cancelled"))
+        ));
     }
 
     private void filterByStatus(String status) {
@@ -158,7 +150,5 @@ public class AppointmentManagementController {
     }
     @FXML private void handleRefresh(){
         loadAppointments();
-    }
-}
     }
 }
