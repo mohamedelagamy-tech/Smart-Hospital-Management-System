@@ -23,9 +23,9 @@ public class AppointmentManagementController {
     @FXML
     private TableColumn<Appointment, Integer> colId;
     @FXML
-    private TableColumn<Appointment, Integer> colPatient;
+    private TableColumn<Appointment, String> colPatient;
     @FXML
-    private TableColumn<Appointment, Integer> colDoctor;
+    private TableColumn<Appointment, String> colDoctor;
     @FXML
     private TableColumn<Appointment, String> colDate;
     @FXML
@@ -45,8 +45,8 @@ public class AppointmentManagementController {
     @FXML
     public void initialize() {
         colId.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getAppointmentId()).asObject());
-        colPatient.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getPatientId()).asObject());
-        colDoctor.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getDoctorId()).asObject());
+        colPatient.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(db.getPatientName(d.getValue().getPatientId())));
+        colDoctor.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(db.getDoctorName(d.getValue().getDoctorId())));
         colDate.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getDate().toString()));
         colTime.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTime().toString()));
         colStatus.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getStatus()));
