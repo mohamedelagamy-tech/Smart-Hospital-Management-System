@@ -121,17 +121,17 @@ public class DatabaseManager {
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email) VALUES ('Mariam ElShafie',18,'Female','01009649895','Alexandria','AB-','Dermatology',3,'m.a.elshafei2007@gmail.com')");
 
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('101','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('102','Occupied')");
+            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('102','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('103','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('201','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('202','Occupied')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('301','Occupied')");
+            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('202','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('301','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('302','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('401','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('402','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('303','Occupied')");
+            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('303','Available')");
             st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('304','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('501','Occupied')");
+            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('501','Available')");
 
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (1, 1, '2026-05-20', '09:00', 'Completed', 'Regular checkup')");
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (2, 5, '2026-05-21', '10:30', 'Completed', 'Follow-up visit')");
@@ -478,12 +478,6 @@ public class DatabaseManager {
         );
     }
 
-    public void updateBillStatus(String billId, String newStatus) {
-        for (Bill b : bills) {
-            if (b.getBillNumber().equals(billId))
-                b.setBillStatus(newStatus);
-        }
-    }
     public List<Bill> getBillsByPatient(int patientId) {
         List<Bill> result = new ArrayList<>();
         for (Bill b : bills) {
@@ -574,19 +568,22 @@ public class DatabaseManager {
     }
 
     public void assignRoom(int roomId, int patientId) {
-        for (Room r : rooms) {
-            if (r.getId() == roomId) {
-                r.setRoomStatus("Occupied");
-                r.setAssignedPatientId(patientId);
-            }
+        String sql="UPDATE rooms SET status='Occupied', assignedPatientID=? WHERE id=?";
+        try(PreparedStatement ps= connection.prepareStatement(sql)){
+            ps.setInt(1,patientId);
+            ps.setInt(2,roomId);
+            ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("error assigning room: " + e.getMessage());
         }
     }
     public void releaseRoom(int roomId) {
-        for (Room r : rooms) {
-            if (r.getId() == roomId) {
-                r.setRoomStatus("Available");
-                r.setAssignedPatientId(0);
-            }
+        String sql="UPDATE rooms SET status='Available', assignedPatientID=NULL WHERE id=?";
+        try(PreparedStatement ps= connection.prepareStatement(sql)){
+            ps.setInt(1,roomId);
+            ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("error releasing room: " + e.getMessage());
         }
     }
     public List<Room> getAllRooms() {
@@ -632,15 +629,24 @@ public class DatabaseManager {
         }
         return result;
     }
-    public ResultSet getAvailableRoom(){
+    public Room getAvailableRoom(){
         String sql = "SELECT * FROM rooms WHERE status='Available' LIMIT 1";
-        try{
-            Statement st=connection.createStatement();
-            return st.executeQuery(sql);
+        try(Statement st=connection.createStatement()){
+            ResultSet rs=st.executeQuery(sql);
+            if(rs.next()){
+                return new Room(
+                        rs.getInt("assignedPatientID"),
+                        "",
+                        rs.getInt("id"),
+                        Integer.parseInt(rs.getString("roomNumber")),
+                        rs.getString("status"),
+                        ""
+                );
+            }
         } catch (SQLException e) {
             System.out.println("Error getting room: " + e.getMessage());
-            return null;
         }
+        return null;
     }
     public int getNextPatientId(){
         try(Statement st= connection.createStatement()){
