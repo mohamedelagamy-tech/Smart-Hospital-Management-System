@@ -84,7 +84,12 @@ public class LoginController {
                     @Override
                     public void run(){
                         session.logout();
-                        Platform.runLater(()->MainApp.navigateTo("login",800,500));
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run(){
+                                MainApp.navigateTo("login", 900, 650);
+                            }
+                        });
                     }
                 });
 

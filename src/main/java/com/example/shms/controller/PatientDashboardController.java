@@ -246,4 +246,6 @@ public class PatientDashboardController implements Initializable {
     @FXML private void showPrescriptions(){
         MainApp.navigateTo("PrescriptionView",1200,700);
     }
+    @FXML private void showBills() {
+    }
 }
