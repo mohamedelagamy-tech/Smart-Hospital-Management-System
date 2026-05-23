@@ -71,9 +71,9 @@ public class BillingController implements Initializable {
         colBillNum.setCellValueFactory(new PropertyValueFactory<>("billNumber"));
         colPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         colService.setCellValueFactory(new PropertyValueFactory<>("service"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("BILLDate"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("billStatus"));
 
         colStatus.setCellFactory(col -> new TableCell<>() {
             @Override
@@ -107,7 +107,7 @@ public class BillingController implements Initializable {
 
         billingTable.setFixedCellSize(52);
         billingTable.setItems(allBills);
-        allBills.addAll(db.getAllBills());
+        allBills.addAll(FXCollections.observableArrayList(db.getAllBills()));
     }
 
     @FXML

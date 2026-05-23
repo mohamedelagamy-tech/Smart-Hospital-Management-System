@@ -4,6 +4,7 @@ import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.EmergencyQueue;
 import com.example.shms.model.Patient;
+import com.example.shms.model.Room;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
+
+import java.util.List;
 
 
 public class EmergencyQueueController {
@@ -124,16 +127,35 @@ public class EmergencyQueueController {
             nextPatient.setText("No next patient");
             return;
         }
-        String room=getAvailableRoom();
-        db.updateStatus(next.getPatientID(),"With Doctor");
-        calledItems.add(next.getName()+"  →  " + room);
-        calledHeading.setText("Called ("+calledItems.size()+")");
-        calledEmptyLabel.setVisible(false);
-        messageLabel.setText(next.getName()+" please proceed to room "+room);
+        try{
+            Room room=db.getAvailableRoom();
+            if(room!=null){
+                db.assignRoom(room.getId(),next.getPatientID());
+                db.updateStatus(next.getPatientID(),"With Doctor");
+                calledItems.add(next.getName()+"  →  Room "+room.getRoomNumber());
+                calledHeading.setText("Called("+calledItems.size()+")");
+                calledEmptyLabel.setVisible(false);
+                messageLabel.setText(next.getName()+" please proceed to room "+room.getRoomNumber());
+            }else{
+                messageLabel.setText("No available rooms for "+next.getName());
+            }
+        }catch (Exception ex){
+            System.out.println("Error assigning room: "+ex.getMessage());
+        }
         refreshAll();
     }
     @FXML
     private void handleReset(){
+        List<Room>occupied=db.getAvailableRooms();
+        try{
+            java.sql.Statement st=db.getConnection().createStatement();
+            java.sql.ResultSet rs=st.executeQuery("SELECT id FROM rooms WHERE status='Occupied'");
+            while(rs.next()){
+                db.releaseRoom(rs.getInt("id"));
+            }
+        }catch(Exception ex){
+            System.out.println("error releasing room: "+ex.getMessage());
+        }
         queue.clear();
         calledItems.clear();
         calledHeading.setText("Called (0)");
@@ -141,17 +163,6 @@ public class EmergencyQueueController {
         messageLabel.setText("");
         loadQueueFromDB();
         refreshAll();
-    }
-    private String getAvailableRoom(){
-        try{
-            var rs=db.getAvailableRoom();
-            if(rs!=null && rs.next()){
-                return "Room "+rs.getString("roomNumber");
-            }
-        } catch (Exception e) {
-            System.out.println("Error getting available rooms"+e.getMessage());
-        }
-        return "Room 1";
     }
     private void playDing(){
         try {
