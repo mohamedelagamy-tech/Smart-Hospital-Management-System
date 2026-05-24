@@ -97,4 +97,18 @@ public class SessionManager {
     public void resetSessionTimer(Runnable onTimeout) {
         startSessionTimer(onTimeout);
     }
+
+    private int loggedInPatientId = -1;
+    private int loggedInDoctorId = -1;
+
+    public int getLoggedInPatientId(){ return loggedInPatientId;}
+    public void setLoggedInPatientId(int id){ this.loggedInPatientId=id; }
+
+    public int getLoggedInDoctorId() {
+        return loggedInDoctorId;
+    }
+
+    public void setLoggedInDoctorId(int id) {
+        this.loggedInDoctorId = id;
+    }
 }
