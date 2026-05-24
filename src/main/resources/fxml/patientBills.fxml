@@ -8,7 +8,7 @@
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
             <children>
                 <Button onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="← Back" />
-                <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="💰 My Bills" />
+                <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="📄 My Bills" />
                 <HBox HBox.hgrow="ALWAYS" />
                 <Label fx:id="userLabel" style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.8);" text="Mohamed" />
             </children>
@@ -43,24 +43,24 @@
                                                     <Label fx:id="billStatusLabel" style="-fx-font-size: 11px; -fx-background-color: #FCEBEB; -fx-text-fill: #A32D2D; -fx-background-radius: 99; -fx-padding: 2 8;" text="—" />
                                                 </HBox>
                                                 <HBox style="-fx-padding: 10 0 4 0;">
-                                                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Total " HBox.hgrow="ALWAYS" />
-                                                    <Label fx:id="billTotalLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="EGP 0" />
+                                                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Total" HBox.hgrow="ALWAYS" />
+                                                    <Label fx:id="billTotalLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text=" EGP 0" />
                                                 </HBox>
                                             </children>
                                         </VBox>
                                     </children>
                                 </VBox>
-                                <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" HBox.hgrow="ALWAYS">
+                                <VBox prefHeight="351.0" prefWidth="320.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 8 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" text="💳  Pay Now" />
                                         <Label style="-fx-font-size: 11px; -fx-text-fill: #666;" text="Select payment method" />
                                         <ComboBox fx:id="paymentMethodCombo" maxWidth="Infinity" promptText="Choose payment method" style="-fx-pref-height: 36px;" />
                                         <Label style="-fx-font-size: 11px; -fx-text-fill: #666;" text="Amount to pay" />
-                                        <Slider fx:id="paymentSlider" max="100" min="0" showTickLabels="false" style="-fx-pref-width: 100%;" value="100" />
+                                        <Slider fx:id="paymentSlider" max="100" min="0" showTickLabels="false" style="-fx-pref-width: 100%; -fx-accent: #1F4E79;" value="100" />
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label style="-fx-font-size: 10px; -fx-text-fill: #888;" text="0 EGP" HBox.hgrow="ALWAYS" />
-                                                <Label fx:id="sliderMaxLabel" style="-fx-font-size: 10px; -fx-text-fill: #888;" text=" to 525 EGP (Full)" />
+                                                <Label style="-fx-font-size: 10px; -fx-text-fill: #888;" text="0 EGP to" HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="sliderMaxLabel" style="-fx-font-size: 10px; -fx-text-fill: #888;" text=" 525 EGP (Full)" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" style="-fx-background-color: #E6F1FB; -fx-background-radius: 8; -fx-padding: 10 14;">
@@ -78,15 +78,7 @@
                         <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;">
                             <children>
                                 <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 8 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" text="🕐  Payment History" />
-                                <TableView fx:id="historyTable" prefHeight="200" style="-fx-background-color: transparent; -fx-border-color: transparent;">
-                                    <columns>
-                                        <TableColumn fx:id="colBillId" prefWidth="100" text="Bill ID" />
-                                        <TableColumn fx:id="colDoctor" prefWidth="180" text="Doctor" />
-                                        <TableColumn fx:id="colTreatment" prefWidth="180" text="Treatment" />
-                                        <TableColumn fx:id="colAmount" prefWidth="120" text="Amount" />
-                                        <TableColumn fx:id="colStatus" prefWidth="120" text="Status" />
-                                    </columns>
-                                </TableView>
+                                <ListView fx:id="historyList" prefHeight="200" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
                             </children>
                         </VBox>
                     </children>

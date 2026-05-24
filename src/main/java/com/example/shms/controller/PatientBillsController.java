@@ -3,20 +3,19 @@ package com.example.shms.controller;
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.utils.SessionManager;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PatientBillsController implements Initializable {
@@ -33,12 +32,7 @@ public class PatientBillsController implements Initializable {
     @FXML private Button payButton;
     @FXML private Slider paymentSlider;
     @FXML private ComboBox<String> paymentMethodCombo;
-    @FXML private TableView<ObservableList<String>> historyTable;
-    @FXML private TableColumn<ObservableList<String>, String> colBillId;
-    @FXML private TableColumn<ObservableList<String>, String> colDoctor;
-    @FXML private TableColumn<ObservableList<String>, String> colTreatment;
-    @FXML private TableColumn<ObservableList<String>, String> colAmount;
-    @FXML private TableColumn<ObservableList<String>, String> colStatus;
+    @FXML private ListView<String> historyList;
 
     private final SessionManager session=SessionManager.getInstance();
     private final DatabaseManager db=DatabaseManager.getInstance();
@@ -47,84 +41,61 @@ public class PatientBillsController implements Initializable {
     private int patientId= -1;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url,ResourceBundle rb){
         userLabel.setText(session.getLoggedInUser());
         setupPaymentMethods();
-        setupTable();
         loadPatientBills();
         setupSlider();
     }
 
     private void setupPaymentMethods(){
-        paymentMethodCombo.setItems(FXCollections.observableArrayList("💳 Card","🏦 Bank Transfer","💵 Cash","📱 Vodafone Cash"));
+        List<String> methods= new ArrayList<>();
+        methods.add("💳 Card");
+        methods.add("🏦 Bank Transfer");
+        methods.add("💵 Cash");
+        methods.add("📱 Vodafone Cash");
+        paymentMethodCombo.setItems(FXCollections.observableArrayList(methods));
         paymentMethodCombo.setValue("💳 Card");
-    }
-
-    private void setupTable(){
-        colBillId.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList<String>, String> data) {
-                return new SimpleStringProperty(data.getValue().get(0));
-            }
-        });
-        colDoctor.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList<String>, String> data){
-                return new SimpleStringProperty(data.getValue().get(1));
-            }
-        });
-        colTreatment.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList<String>, String> data){
-                return new SimpleStringProperty(data.getValue().get(2));
-            }
-        });
-        colAmount.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList<String>, String> data){
-                return new SimpleStringProperty(data.getValue().get(3));
-            }
-        });
-        colStatus.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList<String>,String> data){
-                return new SimpleStringProperty(data.getValue().get(4));
-            }
-        });
     }
 
     private void loadPatientBills(){
         String username=session.getLoggedInUser();
         try(Statement st=db.getConnection().createStatement()){
-            ResultSet patientRs = st.executeQuery("SELECT id FROM patients WHERE username = '"+username+"' LIMIT 1");
-            if(!patientRs.next())
+
+            ResultSet patientRs=st.executeQuery("SELECT id FROM patients WHERE username = '"+username+"' LIMIT 1");
+            if(!patientRs.next()){
+                billIdLabel.setText("No patient record found");
+                payButton.setDisable(true);
+                paymentSlider.setDisable(true);
                 return;
+            }
             patientId=patientRs.getInt("id");
 
-            ResultSet bills = st.executeQuery("SELECT * FROM bills WHERE patientID = "+patientId+" ORDER BY id DESC");
+            ResultSet bills= db.getConnection().createStatement().executeQuery("SELECT * FROM bills WHERE patientID = "+patientId+" ORDER BY id DESC");
 
-            ObservableList<ObservableList<String>> data=FXCollections.observableArrayList();
+            List<String> historyItems= new ArrayList<>();
             boolean firstUnpaid=true;
+            currentBillId= -1;
 
-            while(bills.next()){
-                String status = bills.getString("paymentStatus");
-                ObservableList<String> row=FXCollections.observableArrayList();
-                row.add("#B-"+String.format("%03d",bills.getInt("id")));
-                row.add(bills.getString("doctorName"));
-                row.add(bills.getString("treatment"));
-                row.add("EGP "+String.format("%.0f",bills.getDouble("amount")));
-                row.add(status);
-                data.add(row);
+            while (bills.next()) {
+                String status=bills.getString("paymentStatus");
+                double amount=bills.getDouble("amount");
+                String entry= "#B-"+String.format("%03d", bills.getInt("id"))+
+                        "  |  "+bills.getString("doctorName")+
+                        "  |  "+bills.getString("treatment")+
+                        "  |  EGP "+String.format("%.0f",amount)+
+                        "  |  "+status;
+                historyItems.add(entry);
 
                 if(firstUnpaid && !status.equals("Paid")){
                     currentBillId=bills.getInt("id");
-                    totalAmount=bills.getDouble("amount");
-                    billIdLabel.setText("#B-"+String.format("%03d",currentBillId));
+                    totalAmount=amount;
+                    billIdLabel.setText("#B-"+String.format("%03d", currentBillId));
                     billDoctorLabel.setText(bills.getString("doctorName"));
                     billTreatmentLabel.setText(bills.getString("treatment"));
                     billStatusLabel.setText(status);
                     billTotalLabel.setText("EGP "+String.format("%.0f",totalAmount));
-                    sliderMaxLabel.setText("EGP "+String.format("%.0f",totalAmount)+" (Full)");
+                    sliderMaxLabel.setText("EGP "+String.format("%.0f",totalAmount) +" (Full)");
                     paymentSlider.setMax(totalAmount);
                     paymentSlider.setValue(totalAmount);
                     amountDueLabel.setText("EGP "+String.format("%.0f",totalAmount));
@@ -135,11 +106,19 @@ public class PatientBillsController implements Initializable {
 
             if(currentBillId== -1){
                 billIdLabel.setText("No unpaid bills");
+                billDoctorLabel.setText("—");
+                billTreatmentLabel.setText("—");
+                billStatusLabel.setText("All paid");
+                billTotalLabel.setText("EGP 0");
                 payButton.setDisable(true);
                 paymentSlider.setDisable(true);
             }
 
-            historyTable.setItems(data);
+            if(historyItems.isEmpty()){
+                historyItems.add("No bills found");
+            }
+
+            historyList.setItems(FXCollections.observableArrayList(historyItems));
 
         }catch(SQLException e){
             System.out.println("Bills load failed: "+e.getMessage());
@@ -177,14 +156,14 @@ public class PatientBillsController implements Initializable {
             }else if(amountToPay>0){
                 newStatus="Partially Paid";
             }else{
-                paymentMessage.setText("Please select an amount greater than 0");
+                paymentMessage.setText("Please select an amount greater than 0.");
                 paymentMessage.setStyle("-fx-text-fill:#A32D2D;");
                 return;
             }
 
             st.execute("UPDATE bills SET paymentStatus = '"+newStatus+"', paymentMethod = '"+method+"' WHERE id = "+currentBillId);
 
-            paymentMessage.setText("Payment successful! Status updated to: "+newStatus);
+            paymentMessage.setText("Payment successful! Status: "+newStatus);
             paymentMessage.setStyle("-fx-text-fill:#1D6A2E;");
             loadPatientBills();
 
