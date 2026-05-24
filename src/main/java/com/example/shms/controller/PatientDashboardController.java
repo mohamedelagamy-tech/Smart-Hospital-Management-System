@@ -209,10 +209,10 @@ public class PatientDashboardController implements Initializable {
         List<String> items = new ArrayList<>();
         try(Statement st=db.getConnection().createStatement()){
 
-            ResultSet appts=st.executeQuery("SELECT a.appointmentDate, a.status, d.name as doctorName "+"FROM appointments a JOIN doctors d ON a.doctorID = d.id "+"WHERE a.patientID = "+patientId+" ORDER BY a.appointmentDate DESC");
+            ResultSet appts=st.executeQuery("SELECT a.date, a.status, d.name as doctorName "+"FROM appointments a JOIN doctors d ON a.doctorID = d.id "+"WHERE a.patientID = "+patientId+" ORDER BY a.appointmentDate DESC");
             while(appts.next()){
                 items.add("📅  Appointment — "+appts.getString("doctorName")+
-                        "  •  "+appts.getString("appointmentDate")+
+                        "  •  "+appts.getString("date")+
                         "  ["+appts.getString("status") + "]");
             }
 
@@ -224,7 +224,7 @@ public class PatientDashboardController implements Initializable {
             }
             items.add("🏥  Patient registered — Welcome to SHMS");
 
-        }catch (SQLException e){
+        }catch(SQLException e){
             System.out.println("Failed to load timeline: "+e.getMessage());
         }
 
@@ -247,5 +247,6 @@ public class PatientDashboardController implements Initializable {
         MainApp.navigateTo("PrescriptionView",1200,700);
     }
     @FXML private void showBills() {
+        MainApp.navigateTo("patientBills",1200,700);
     }
 }
