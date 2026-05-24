@@ -297,7 +297,7 @@ public class DashboardController implements Initializable {
     @FXML
     private void showDepartments(){
         setActiveButton(btnDepartments);
-        MainApp.navigateTo("DepartmentView",1200,700);
+        MainApp.navigateTo("DepartmentScreen",1200,700);
     }
     @FXML private void showAuditLog(){
         setActiveButton(btnAuditLog);
