@@ -8,26 +8,29 @@ public class Bill implements Billable {
     private String status; 
     private String date;
     private String patientName;
+    private String doctorName;
     private String service;
+    private String paymentMethod;
 
-    public Bill(String billNumber,String patientName,String service, String date,double amount,String status) {
-        this.status = status;
-        this.service = service;
-        this.patientName = patientName;
-        this.date = date;
-        this.billNumber = billNumber;
-        this.amount = amount;
-    }
-
-    public Bill(String status, String service, String patientName, int patientId, String date, String billNumber, int appointmentId, double amount) {
-        this.status = status;
-        this.service = service;
-        this.patientName = patientName;
+    public Bill(int id, int patientId, String patientName, String doctorName, String service, double amount, String status, String paymentMethod,String date) {
+        this.billNumber ="BILL-" + String.format("%03d", id);
         this.patientId = patientId;
-        this.date = date;
-        this.billNumber = billNumber;
-        this.appointmentId = appointmentId;
+        this.patientName = patientName;
+        this.doctorName = doctorName;
+        this.service = service;
         this.amount = amount;
+        this.status = status;
+        this.paymentMethod = paymentMethod;
+        this.date=date;
+        this.appointmentId=0;
+    }
+    public Bill(String billNumber, String patientName, String service, String date,double amount, String status) {
+        this.billNumber = billNumber;
+        this.patientName = patientName;
+        this.service = service;
+        this.date = date;
+        this.amount = amount;
+        this.status = status;
     }
 
     public String getBillNumber() { return billNumber; }
@@ -41,4 +44,15 @@ public class Bill implements Billable {
     public void setBillStatus(String status) { this.status = status; }
     public void setAmount(double amount) { this.amount = amount; }
 
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 }

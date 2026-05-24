@@ -83,9 +83,7 @@ public class PrescriptionController implements Initializable {
 
     private void loadFromDatabase() {
         allPrescriptions.clear();
-        List<Prescription> list = db.getPrescriptionsByPatient(0); // load all
-        // If DatabaseManager has getAllPrescriptions(), use that instead:
-        // List<Prescription> list = db.getAllPrescriptions();
+        List<Prescription> list = db.getAllPrescriptions(); // load all
         if (list != null) allPrescriptions.addAll(list);
     }
 

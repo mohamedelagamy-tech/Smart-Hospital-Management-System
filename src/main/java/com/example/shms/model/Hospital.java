@@ -10,7 +10,7 @@ public class Hospital {
     private Hospital(){
         this.hospitalName="SHMS";
         this.address="Alexandria, Egypt";
-        this.hotline="+20 123 456 7890 ";
+        this.hotline="+20 123 456 7890";
     }
 
     public static Hospital getInstance(){

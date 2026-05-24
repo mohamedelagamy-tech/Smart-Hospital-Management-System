@@ -67,36 +67,41 @@ public class LoginController {
             return;
         }
 
-        try {
-            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+        try{
+            String sql="SELECT * FROM users WHERE username = ? AND password = ?";
+            PreparedStatement ps=db.getConnection().prepareStatement(sql);
             ps.setString(1,username);
-            ps.setString(2, PasswordEncryption.hash(password));
+            ps.setString(2,PasswordEncryption.hash(password));
             ResultSet rs=ps.executeQuery();
 
-            if(rs.next()) {
+            if(rs.next()){
                 String role =rs.getString("role");
                 session.login(username,role);
                 logAudit(username, role,"SUCCESS");
                 showError("Login successful!","success");
 
-                session.startSessionTimer(new Runnable() {
+                session.startSessionTimer(new Runnable(){
                     @Override
-                    public void run() {
+                    public void run(){
                         session.logout();
-                        Platform.runLater(()->MainApp.navigateTo("login",800,500));
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run(){
+                                MainApp.navigateTo("login", 900, 650);
+                            }
+                        });
                     }
                 });
 
-                switch(role) {
+                switch(role){
                     case "ADMIN":
                     case "DOCTOR":
                     case "NURSE":
-                    case "RECEPTIONIST":
-                    case "PATIENT":MainApp.navigateTo("dashboard",1200,700);break;
+                    case "RECEPTIONIST":MainApp.navigateTo("dashboard",1200,700);break;
+                    case "PATIENT": MainApp.navigateTo("patientDashboard",1200,700);break;
                     default:showError("Unknown role detected.","error");
                 }
-            } else {
+            }else{
                 session.addAttempts();
                 logAudit(username,"UNKNOWN","FAILED");
                 int remainingAttempts = 5-session.getLoginAttempts();
@@ -104,7 +109,7 @@ public class LoginController {
                 shakeField(passwordField);
             }
 
-        } catch(SQLException e){
+        }catch(SQLException e){
             showError("Database error: "+e.getMessage(),"dbError");
         }
     }

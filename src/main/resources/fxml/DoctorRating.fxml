@@ -9,12 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DoctorRatingController">
    <top>
       <HBox prefHeight="94.0" prefWidth="904.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleBack" prefHeight="16.0" prefWidth="58.0" style="-fx-background-color: transparent;" text="←Back" textFill="WHITE" />
-            <Label prefHeight="26.0" prefWidth="178.0" text="Doctor Rating" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="16.0" prefWidth="58.0" style="-fx-background-color: transparent;" text="&lt;- Back" textFill="WHITE" />
+            <Label prefHeight="59.0" prefWidth="178.0" text="Doctor Rating" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -73,7 +74,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="810.0" spacing="12.0" style="-fx-background-color: WHITE; -fx-background-radius: 12; -fx-border-color: #E2E8F0; -fx-border-radius: 12;">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="12.0" style="-fx-background-color: WHITE; -fx-background-radius: 12; -fx-border-color: #E2E8F0; -fx-border-radius: 12;">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
@@ -85,18 +86,13 @@
                   </Label>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="star1Btn" mnemonicParsing="false" onAction="#handleStar1" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
-                        <Button fx:id="star2Btn" mnemonicParsing="false" onAction="#handleStar2" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
-                        <Button fx:id="star3Btn" mnemonicParsing="false" onAction="#handleStar3" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
-                        <Button fx:id="star4Btn" mnemonicParsing="false" onAction="#handleStar4" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
-                        <Button fx:id="star5Btn" mnemonicParsing="false" onAction="#handleStar5" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                        <Button fx:id="star1Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                        <Button fx:id="star2Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                        <Button fx:id="star3Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                        <Button fx:id="star4Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
+                        <Button fx:id="star5Btn" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 36px; -fx-cursor: hand; -fx-text-fill: #D1D5DB;" text="★" />
                      </children>
                   </HBox>
-                  <Label fx:id="ratingLabel" textFill="#16a34a">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: WHITE; -fx-background-radius: 12; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-border-width: 1;">
@@ -113,7 +109,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" />
                </children>
             </VBox>
-            <Button fx:id="submitBtn" disable="true" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="1.0" prefWidth="300.0" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="Submit Rating" textFill="WHITE">
+            <Button fx:id="submitBtn" disable="true" mnemonicParsing="false" prefHeight="1.0" prefWidth="300.0" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="Submit Rating" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

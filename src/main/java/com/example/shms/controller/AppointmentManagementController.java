@@ -6,6 +6,7 @@ import com.example.shms.utils.SessionManager;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert;
@@ -22,9 +23,9 @@ public class AppointmentManagementController {
     @FXML
     private TableColumn<Appointment, Integer> colId;
     @FXML
-    private TableColumn<Appointment, Integer> colPatient;
+    private TableColumn<Appointment, String> colPatient;
     @FXML
-    private TableColumn<Appointment, Integer> colDoctor;
+    private TableColumn<Appointment, String> colDoctor;
     @FXML
     private TableColumn<Appointment, String> colDate;
     @FXML
@@ -42,26 +43,34 @@ public class AppointmentManagementController {
 
 
     @FXML
-    public void intialize() {
+    public void initialize() {
         colId.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getAppointmentId()).asObject());
-        colPatient.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getPatientId()).asObject());
-        colDoctor.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getDoctorId()).asObject());
+        colPatient.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(db.getPatientName(d.getValue().getPatientId())));
+        colDoctor.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(db.getDoctorName(d.getValue().getDoctorId())));
         colDate.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getDate().toString()));
         colTime.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTime().toString()));
         colStatus.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getStatus()));
         colNotes.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNotes()));
         loadAppointments();
 
-        String role=com.example.shms.utils.SessionManager.getInstance().getLoggedInRole();
-        if(!"RECEPTIONIST".equals(role)) {
-            bookBtn.setVisible(false);
-            bookBtn.setManaged(false);
-        }
         }
 
     private void loadAppointments() {
-        java.util.List<Appointment> all = db.getAppointmentsByDoctor(0);
-        appointmentTable.setItems(FXCollections.observableArrayList(all));
+        try{
+            java.sql.Statement st = db.getConnection().createStatement();
+            java.sql.ResultSet rs = st.executeQuery("SELECT * FROM appointments ORDER BY date,time ");
+            java.util.List<Appointment> all = new java.util.ArrayList<>();
+            while(rs.next()){
+              Appointment a = new Appointment (rs.getInt("id"),rs.getInt("patientId"),rs.getInt("doctorId"),java.time.LocalDate.parse(rs.getString("date")),java.time.LocalTime.parse(rs.getString("time")),rs.getString("status") != null ? rs.getString("status"):"Scheduled", rs.getString("notes")!= null ? rs.getString("notes"):"");
+                System.out.println("Row:" +a.getAppointmentId()+" "+a.getPatientId());
+                all.add(a);
+            }
+            System.out.println("Setting" + all.size()+"items to table");
+            System.out.println("Table columns:"+ appointmentTable.getColumns().size());
+            appointmentTable.setItems(javafx.collections.FXCollections.observableArrayList(all));
+        }catch (Exception e){
+            System.out.println("loadAppointments error:"+e.getMessage());
+        }
     }
 
     @FXML
@@ -79,17 +88,23 @@ public class AppointmentManagementController {
 
     @FXML
     private void filterScheduled() {
-        filterByStatus("Scheduled");
+        appointmentTable.setItems(FXCollections.observableArrayList(
+                appointmentTable.getItems().filtered(a->a.getStatus().equals("Scheduled"))
+        ));
     }
 
     @FXML
     private void filterCompleted() {
-        filterByStatus("Completed");
+        appointmentTable.setItems(FXCollections.observableArrayList(
+                appointmentTable.getItems().filtered(a->a.getStatus().equals("Completed"))
+        ));
     }
 
     @FXML
     private void filterCancelled() {
-        filterByStatus("Cancelled");
+        appointmentTable.setItems(FXCollections.observableArrayList(
+                appointmentTable.getItems().filtered(a->a.getStatus().equals("Cancelled"))
+        ));
     }
 
     private void filterByStatus(String status) {
