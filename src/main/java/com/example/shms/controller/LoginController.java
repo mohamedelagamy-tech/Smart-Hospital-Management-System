@@ -77,24 +77,6 @@ public class LoginController {
             if(rs.next()){
                 String role =rs.getString("role");
                 session.login(username,role);
-                try {
-                    if("PATIENT".equals(role)) {
-                        ResultSet patientRs = db.getConnection().createStatement()
-                                .executeQuery("SELECT id FROM patients WHERE name = (SELECT name FROM users WHERE jsername='" + username + "')");
-                        if (patientRs.next()) {
-                            session.setLoggedInPatientId(patientRs.getInt("id"));
-                        } else if ("DOCTOR".equals(role)) {
-                            ResultSet doctorRs = db.getConnection().createStatement()
-                                    .executeQuery("SELECT id FROM doctors WHERE NAME =(SELECT name FROM users WHERE username = '" + username + "')");
-                            if (doctorRs.next()) {
-                                session.setLoggedInDoctorId(doctorRs.getInt("id"));
-                            }
-                        }
-                    }
-
-                } catch (SQLException e){
-                    System.out.println("ID lookup error:" + e.getMessage());
-                }
                 logAudit(username , role , "SUCCESS");
                 showError("Login successful!","success");
 
