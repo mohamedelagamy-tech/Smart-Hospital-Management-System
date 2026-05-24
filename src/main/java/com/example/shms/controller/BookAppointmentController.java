@@ -64,6 +64,10 @@ private void loadDoctors(){
                 notesField.getText()
                 );
         validator.bookAppointment(appt);
+
+        int doctorId = doctorCombo.getSelectionModel().getSelectedIndex() + 1;
+        db.UpdateAvailability(doctorId, "Busy");
+
         statusLabel.setText("Appointment booked successfully!");
     }
     catch(com.example.shms.exception.AppointmentConflictException e){

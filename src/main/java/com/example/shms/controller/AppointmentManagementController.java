@@ -61,30 +61,30 @@ public class AppointmentManagementController {
             String query;
             if ("PATIENT".equals(role)) {
                 int patientId = com.example.shms.utils.SessionManager.getInstance().getLoggedInPatientId();
-                query = "SELECT a.id, p.name as patientName, d.name as doctotName," +
-                        "a.date,a.time,a.Status, a.notes, a.patientId, a.doctorId" +
-                        "FROM appointments a" +
-                        "JOIN patients p ON a.patientId = p.id" +
-                        "JOIN doctors d ON a.doctorId = d.id" +
-                        "WHERE a.patientId=" + patientId +
+                query = "SELECT a.id, p.name as patientName, d.name as doctorName, " +
+                        "a.date, a.time, a.status, a.notes, a.patientId, a.doctorId " +
+                        "FROM appointments a " +
+                        "JOIN patients p ON a.patientId = p.id " +
+                        "JOIN doctors d ON a.doctorId = d.id " +
+                        "WHERE a.patientId=" + patientId + " " +
                         "ORDER BY a.date, a.time";
             }
             else if ("DOCTOR".equals(role)){
                 int doctorId = com.example.shms.utils.SessionManager.getInstance().getLoggedInDoctorId();
-                query = "SELECT a.id, p.name as patientName, d.name as doctotName," +
-                        "a.date,a.time,a.Status, a.notes, a.patientId, a.doctorId" +
-                        "FROM appointments a" +
-                        "JOIN patients p ON a.patientId = p.id" +
-                        "JOIN doctors d ON a.doctorId = d.id" +
-                        "WHERE a.patientId=" + doctorId +
+                query =  "SELECT a.id, p.name as patientName, d.name as doctorName, " +
+                        "a.date, a.time, a.status, a.notes, a.patientId, a.doctorId " +
+                        "FROM appointments a " +
+                        "JOIN patients p ON a.patientId = p.id " +
+                        "JOIN doctors d ON a.doctorId = d.id " +
+                        "WHERE a.doctorId=" + doctorId + " " +
                         "ORDER BY a.date, a.time";
             }
             else {
-                query = "SELECT a.id, p.name as patientName, d.name as doctotName," +
-                        "a.date,a.time,a.Status, a.notes, a.patientId, a.doctorId" +
-                        "FROM appointments a" +
-                        "JOIN patients p ON a.patientId = p.id" +
-                        "JOIN doctors d ON a.doctorId = d.id" +
+                query = "SELECT a.id, p.name as patientName, d.name as doctorName, " +
+                        "a.date, a.time, a.status, a.notes, a.patientId, a.doctorId " +
+                        "FROM appointments a " +
+                        "JOIN patients p ON a.patientId = p.id " +
+                        "JOIN doctors d ON a.doctorId = d.id " +
                         "ORDER BY a.date, a.time";
             }
             java.sql.ResultSet rs = db.getConnection().createStatement().executeQuery(query);
@@ -156,8 +156,10 @@ public class AppointmentManagementController {
         }
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Cancel this appointment");
         confirm.showAndWait().ifPresent(r -> {
-            if (r == ButtonType.OK)
+            if (r == ButtonType.OK) {
                 db.cancelAppointment(selected.getAppointmentId());
+                db.UpdateAvailability(selected.getDoctorId(), "Available");
+            }
             loadAppointments();
 
         });
