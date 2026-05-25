@@ -27,23 +27,23 @@
                                         <VBox spacing="0" style="-fx-padding: 8 0 0 0;">
                                             <children>
                                                 <HBox style="-fx-padding: 7 0; -fx-border-color: #F8F8F8; -fx-border-width: 0 0 1 0;">
-                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Bill ID" HBox.hgrow="ALWAYS" />
+                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Bill ID " HBox.hgrow="ALWAYS" />
                                                     <Label fx:id="billIdLabel" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="—" />
                                                 </HBox>
                                                 <HBox style="-fx-padding: 7 0; -fx-border-color: #F8F8F8; -fx-border-width: 0 0 1 0;">
-                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Doctor" HBox.hgrow="ALWAYS" />
+                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Doctor " HBox.hgrow="ALWAYS" />
                                                     <Label fx:id="billDoctorLabel" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="—" />
                                                 </HBox>
                                                 <HBox style="-fx-padding: 7 0; -fx-border-color: #F8F8F8; -fx-border-width: 0 0 1 0;">
-                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Treatment" HBox.hgrow="ALWAYS" />
+                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Treatment " HBox.hgrow="ALWAYS" />
                                                     <Label fx:id="billTreatmentLabel" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="—" />
                                                 </HBox>
                                                 <HBox style="-fx-padding: 7 0; -fx-border-color: #F8F8F8; -fx-border-width: 0 0 1 0;">
-                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Status" HBox.hgrow="ALWAYS" />
+                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Status " HBox.hgrow="ALWAYS" />
                                                     <Label fx:id="billStatusLabel" style="-fx-font-size: 11px; -fx-background-color: #FCEBEB; -fx-text-fill: #A32D2D; -fx-background-radius: 99; -fx-padding: 2 8;" text="—" />
                                                 </HBox>
                                                 <HBox style="-fx-padding: 10 0 4 0;">
-                                                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Total" HBox.hgrow="ALWAYS" />
+                                                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Total " HBox.hgrow="ALWAYS" />
                                                     <Label fx:id="billTotalLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text=" EGP 0" />
                                                 </HBox>
                                             </children>
@@ -59,13 +59,13 @@
                                         <Slider fx:id="paymentSlider" max="100" min="0" showTickLabels="false" style="-fx-pref-width: 100%; -fx-accent: #1F4E79;" value="100" />
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label style="-fx-font-size: 10px; -fx-text-fill: #888;" text="0 EGP to" HBox.hgrow="ALWAYS" />
+                                                <Label style="-fx-font-size: 10px; -fx-text-fill: #888;" text="0 EGP to " HBox.hgrow="ALWAYS" />
                                                 <Label fx:id="sliderMaxLabel" style="-fx-font-size: 10px; -fx-text-fill: #888;" text=" 525 EGP (Full)" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" style="-fx-background-color: #E6F1FB; -fx-background-radius: 8; -fx-padding: 10 14;">
                                             <children>
-                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #0C447C;" text="Amount due" HBox.hgrow="ALWAYS" />
+                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #0C447C;" text="Amount due " HBox.hgrow="ALWAYS" />
                                                 <Label fx:id="amountDueLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text=" 525 EGP" />
                                             </children>
                                         </HBox>

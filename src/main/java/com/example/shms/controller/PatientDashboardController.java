@@ -134,19 +134,19 @@ public class PatientDashboardController implements Initializable {
                     "SELECT a.*, d.name as doctorName FROM appointments a "+
                             "JOIN doctors d ON a.doctorID = d.id "+
                             "WHERE a.patientID = " + patientId+
-                            " AND a.status = 'Confirmed' ORDER BY a.appointmentDate LIMIT 5");
+                            " AND a.status = 'Confirmed' ORDER BY a.date LIMIT 5");
 
             boolean first=true;
             while(rs.next()){
-                String entry="📅  "+rs.getString("appointmentDate")+
-                        " at "+rs.getString("appointmentTime")+
+                String entry="📅  "+rs.getString("date")+
+                        " at "+rs.getString("time")+
                         "  —  "+rs.getString("doctorName")+
                         "  ["+rs.getString("status") + "]";
                 items.add(entry);
 
                 if(first){
-                    nextApptLabel.setText("Next: "+rs.getString("appointmentDate")+
-                            " at "+rs.getString("appointmentTime"));
+                    nextApptLabel.setText("Next: "+rs.getString("date")+
+                            " at "+rs.getString("time"));
                     nextApptDetail.setText("With "+rs.getString("doctorName"));
                     first=false;
                 }
@@ -173,7 +173,7 @@ public class PatientDashboardController implements Initializable {
 
             while(rs.next()){
                 double amount=rs.getDouble("amount");
-                String status=rs.getString("paymentStatus");
+                String status=rs.getString("status");
                 total+=amount;
                 if(status.equals("Paid")) {
                     paid += amount;
@@ -186,7 +186,7 @@ public class PatientDashboardController implements Initializable {
                 }else{
                     icon="❌";
                 }
-                String entry = icon+"  "+rs.getString("treatment")+
+                String entry = icon+"  "+rs.getString("service")+
                         "  —  EGP "+String.format("%.0f",amount)+
                         "  ["+status+"]";
                 items.add(entry);
@@ -209,7 +209,7 @@ public class PatientDashboardController implements Initializable {
         List<String> items = new ArrayList<>();
         try(Statement st=db.getConnection().createStatement()){
 
-            ResultSet appts=st.executeQuery("SELECT a.date, a.status, d.name as doctorName "+"FROM appointments a JOIN doctors d ON a.doctorID = d.id "+"WHERE a.patientID = "+patientId+" ORDER BY a.appointmentDate DESC");
+            ResultSet appts=st.executeQuery("SELECT a.date, a.status, d.name as doctorName "+"FROM appointments a JOIN doctors d ON a.doctorId = d.id "+"WHERE a.patientId = "+patientId+" ORDER BY a.date DESC");
             while(appts.next()){
                 items.add("📅  Appointment — "+appts.getString("doctorName")+
                         "  •  "+appts.getString("date")+
@@ -241,10 +241,10 @@ public class PatientDashboardController implements Initializable {
 
     @FXML private void showHome(){}
     @FXML private void showAppointments(){
-        MainApp.navigateTo("AppointmentView",1200,700);
+        MainApp.navigateTo("AppointmentHistoryView",1200,700);
     }
     @FXML private void showPrescriptions(){
-        MainApp.navigateTo("PrescriptionView",1200,700);
+        MainApp.navigateTo("PrescriptionScreen",1200,700);
     }
     @FXML private void showBills() {
         MainApp.navigateTo("patientBills",1200,700);

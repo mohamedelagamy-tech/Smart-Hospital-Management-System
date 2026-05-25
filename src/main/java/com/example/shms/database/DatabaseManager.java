@@ -267,15 +267,17 @@ public class DatabaseManager {
             st.execute("INSERT INTO prescriptions (patientID, doctorID, medicineName, dosage, instructions, duration, dateIssued) VALUES (10, 5, 'Calcium', '500mg', 'Take once daily with vitamin D', '3 months', '2026-05-18')");
 
             st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (1,'Sara Mohamed','Dr. Khaled Nour','Cardiology Consultation',850.00,'Paid','Credit Card','2026-05-20')");
-            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (2,'Omar Ali','Dr. Omar Sherif','Orthopedic Examination',600.00,'Pending','Cash','2026-05-21')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (2,'Omar Ali','Dr. Omar Sherif','Orthopedic Examination',600.00,'Partially Paid','Cash','2026-05-21')");
             st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (3,'Nour Hassan','Dr. Layla Farouk','Neurology Consultation',750.00,'Paid','Insurance','2026-05-22')");
             st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (4,'Karim Adel','Dr. Ahmed Hassan','Emergency Treatment',1200.00,'Overdue','Cash','2026-05-22')");
             st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (5,'Layla Mahmoud','Dr. Hana Adel','Dermatology Treatment',450.00,'Paid','Credit Card','2026-05-23')");
-            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (6,'Youssef Tarek','Dr. Tarek Mansour','Chemotherapy Session',3500.00,'Pending','Insurance','2026-05-23')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (6,'Youssef Tarek','Dr. Tarek Mansour','Chemotherapy Session',3500.00,'Partially Paid','Insurance','2026-05-23')");
             st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (7,'Dina Mostafa','Dr. Yasmine Farid','Radiology Scan',900.00,'Overdue','Cash','2026-05-24')");
             st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (8,'Mohamed Fawzy','Dr. Khaled Nour','ECG and Consultation',700.00,'Paid','Credit Card','2026-05-24')");
-            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (9,'Rania Khaled','Dr. Layla Farouk','MRI Scan',1100.00,'Pending','Insurance','2026-05-25')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (9,'Rania Khaled','Dr. Layla Farouk','MRI Scan',1100.00,'Partially Paid','Insurance','2026-05-25')");
             st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (10,'Amr Saeed','Dr. Omar Sherif','Surgery Followup',500.00,'Paid','Cash','2026-05-25')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (26,'Mohamed Mazen','Dr. Tarek Mansour','Oncology Consultation',750,'Overdue','Cash','2026-05-22')");
+            st.execute("INSERT INTO bills (patientID,patientName,doctorName,service,amount,status,paymentMethod,date) VALUES (26,'Mohamed Mazen','Dr. Tarek Mansour','Lab Tests',300,'Paid','Card','2026-05-20')");
 
             System.out.println("Data inserted!");
 
