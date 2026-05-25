@@ -72,8 +72,6 @@ public class AppointmentManagementController {
            int count=0;
             java.util.List<Appointment> all = new java.util.ArrayList<>();
             while(rs.next()) {
-                count++;
-                System.out.println("Row" + count + ":" + rs.getString("patientName") + " " rs.getString("date"));
                 Appointment a = new Appointment(
                         rs.getInt("id"),
                         rs.getInt("patientId"),
@@ -84,6 +82,7 @@ public class AppointmentManagementController {
                         rs.getString("notes") != null ? rs.getString("notes") : ""
                 );
                 all.add(a);
+                System.out.println("Loaded: " + rs.getString("patientName"));
             }
             System.out.println("Total rows loaded:" + count);
             appointmentTable.setItems(
