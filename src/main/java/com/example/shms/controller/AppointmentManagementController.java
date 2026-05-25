@@ -62,25 +62,18 @@ public class AppointmentManagementController {
 
             if("PATIENT".equals(role)){
                 int pid = com.example.shms.utils.SessionManager.getInstance().getLoggedInPatientId();
-                sql = "SELECT a.id, p.name as patientName, d.name as doctorName," +
-                        "a.date, a.time, a.status, a.notes , a.patientId, a.doctorId"+
-                        "FROM appointments a" +
-                        "JOIN patients p ON a.patientId = p.id "+
-                        "JOIN doctors d ON  a.dpctorId = d.id "+
-                        "WHERE a.patientId= " + pid +
-                        "ORDER BY a.date, a.time ";
+                sql = "SELECT a.id, p.name as patientName, d.name as doctorName," + "a.date, a.time, a.status, a.notes , a.patientId, a.doctorId"+ "FROM appointments a" + "JOIN patients p ON a.patientId = p.id "+ "JOIN doctors d ON  a.dpctorId = d.id "+ "WHERE a.patientId= " + pid + "ORDER BY a.date, a.time ";
+            } else {
+                sql = "SELECT a.id, p.name as patientName, d.name as doctorName,"+ "a.date, a.time, a.status, a.notes, a.patientId, a.doctorId"+ "FROM appointments a "+ "JOIN patients p ON a.patientId = p.id"+ "JOIN doctors d ON a.doctorId = d.id"+ "ORDER BY a.date, a.time";
             }
-            else {
-                sql = "SELECT a.id, p.name as patientName, d.name as doctorName,"+
-                        "a.date, a.time, a.status, a.notes, a.patientId, a.doctorId"+
-                        "FROM appointments a "+
-                        "JOIN patients p ON a.patientId = p.id"+
-                        "JOIN doctors d ON a.doctorId = d.id"+
-                        "ORDER BY a.date, a.time";
-            }
+
             java.sql.ResultSet rs = db.getConnection().createStatement().executeQuery(sql);
+           System.out.println("Query executed successfully");
+           int count=0;
             java.util.List<Appointment> all = new java.util.ArrayList<>();
             while(rs.next()) {
+                count++;
+                System.out.println("Row" + count + ":" + rs.getString("patientName") + " " rs.getString("date"));
                 Appointment a = new Appointment(
                         rs.getInt("id"),
                         rs.getInt("patientId"),
@@ -92,6 +85,7 @@ public class AppointmentManagementController {
                 );
                 all.add(a);
             }
+            System.out.println("Total rows loaded:" + count);
             appointmentTable.setItems(
                     javafx.collections.FXCollections.observableArrayList(all));
         }
