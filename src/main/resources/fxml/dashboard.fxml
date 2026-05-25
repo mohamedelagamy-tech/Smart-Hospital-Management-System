@@ -102,12 +102,12 @@
                                 </VBox>
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="86" prefWidth="210" spacing="14" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
+                        <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="210" spacing="14" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
                             <children>
                                 <StackPane maxHeight="42" maxWidth="42" prefHeight="42" prefWidth="42" style="-fx-background-color: #FFF3E0; -fx-background-radius: 10;">
                                     <children><Label style="-fx-font-size: 18px;" text="📅" /></children>
                                 </StackPane>
-                                <VBox spacing="3">
+                                <VBox prefHeight="54.0" prefWidth="142.0" spacing="3">
                                     <children>
                                         <Label fx:id="statAppointments" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="0" />
                                         <Label style="-fx-font-size: 11px; -fx-text-fill: #888888;" text="Scheduled Appointments" />
@@ -115,7 +115,7 @@
                                 </VBox>
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="86" prefWidth="210" spacing="14" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
+                        <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="210.0" spacing="14" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 16;">
                             <children>
                                 <StackPane maxHeight="42" maxWidth="42" prefHeight="42" prefWidth="42" style="-fx-background-color: #EDE7F6; -fx-background-radius: 10;">
                                     <children><Label style="-fx-font-size: 18px;" text="🛏" /></children>

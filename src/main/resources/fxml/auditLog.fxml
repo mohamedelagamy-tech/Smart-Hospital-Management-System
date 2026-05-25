@@ -19,6 +19,10 @@
                         <VBox prefHeight="54.0" prefWidth="378.0" spacing="2" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Audit Log" />
+                        <Label text="Audit Log" textFill="SNOW">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font></Label>
                                 <Label style="-fx-font-size: 11px; -fx-text-fill: #888888;" text="All login attempts — Admin access only" />
                             </children>
                         </VBox>
