@@ -59,11 +59,11 @@ public class AppointmentManagementController {
         try{
             String role = com.example.shms.utils.SessionManager.getInstance().getLoggedInRole();
             String select = "SELECT a.id, p.name as patientName, d.name as doctorName,";
-            String fields = "a.date, a.time, a.status, a.notes, a,patientId, a.doctorId";
-            String from = "FROM appointments a";
-            String join1 = "JOIN patients p ON a.patientId = p.id";
-            String join2 = "JOIN doctors d ON a.doctorId = d.id";
-            String order = "ORDER BY a.datw, a.time";
+            String fields = "a.date, a.time, a.status, a.notes, a.patientId, a.doctorId";
+            String from = " FROM appointments a ";
+            String join1 = " JOIN patients p ON a.patientId = p.id ";
+            String join2 = " JOIN doctors d ON a.doctorId = d.id ";
+            String order = " ORDER BY a.date, a.time";
 
             String sql;
             if("PATIENT".equals(role)) {
