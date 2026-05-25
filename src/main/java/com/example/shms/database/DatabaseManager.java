@@ -1,4 +1,3 @@
-//private static final String db_URL = "jdbc:sqlite:hospital.db";
 package com.example.shms.database;
 
 import com.example.shms.model.*;
@@ -354,6 +353,10 @@ public class DatabaseManager {
                     "status TEXT NOT NULL," +
                     "paymentMethod TEXT NOT NULL," +
                     "date TEXT)");
+
+            st.execute("ALTER TABLE bills ADD COLUMN amountPaid REAL DEFAULT 0.0");
+        } catch (SQLException ignoredAlter) {}
+        try (Statement st = connection.createStatement()) {
 
             st.execute("CREATE TABLE IF NOT EXISTS appointments (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -714,9 +717,9 @@ public class DatabaseManager {
         List<Room> result = new ArrayList<>();
         try(PreparedStatement ps=connection.prepareStatement(
                 "SELECT * FROM rooms WHERE status ='Available'")){
-                    ResultSet rs=ps.executeQuery();
-                    while (rs.next()) {
-                        Room r = new Room(
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()) {
+                Room r = new Room(
                         rs.getInt("assignedPatientID"),
                         "",
                         rs.getInt("id"),
@@ -988,8 +991,4 @@ public class DatabaseManager {
         }
         return null;
     }
-
-
 }
-
-
