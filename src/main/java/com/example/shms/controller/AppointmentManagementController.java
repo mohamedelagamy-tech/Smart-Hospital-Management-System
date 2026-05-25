@@ -55,24 +55,50 @@ public class AppointmentManagementController {
 
         }
 
-    private void loadAppointments() {
+    private void loadAppointments(){
         try{
-            java.sql.Statement st = db.getConnection().createStatement();
-            java.sql.ResultSet rs = st.executeQuery("SELECT * FROM appointments ORDER BY date,time ");
+            String role = com.example.shms.utils.SessionManager.getInstance().getLoggedInRole();
+            String sql;
+
+            if("PATIENT".equals(role)){
+                int pid = com.example.shms.utils.SessionManager.getInstance().getLoggedInPatientId();
+                sql = "SELECT a.id, p.name as patientName, d.name as doctorName," +
+                        "a.date, a.time, a.status, a.notes , a.patientId, a.doctorId"+
+                        "FROM appointments a" +
+                        "JOIN patients p ON a.patientId = p.id "+
+                        "JOIN doctors d ON  a.dpctorId = d.id "+
+                        "WHERE a.patientId= " + pid +
+                        "ORDER BY a.date, a.time ";
+            }
+            else {
+                sql = "SELECT a.id, p.name as patientName, d.name as doctorName,"+
+                        "a.date, a.time, a.status, a.notes, a.patientId, a.doctorId"+
+                        "FROM appointments a "+
+                        "JOIN patients p ON a.patientId = p.id"+
+                        "JOIN doctors d ON a.doctorId = d.id"+
+                        "ORDER BY a.date, a.time";
+            }
+            java.sql.ResultSet rs = db.getConnection().createStatement().executeQuery(sql);
             java.util.List<Appointment> all = new java.util.ArrayList<>();
-            while(rs.next()){
-                Appointment a = new Appointment (rs.getInt("id"),rs.getInt("patientId"),rs.getInt("doctorId"),java.time.LocalDate.parse(rs.getString("date")),java.time.LocalTime.parse(rs.getString("time")),rs.getString("status") != null ? rs.getString("status"):"Scheduled", rs.getString("notes")!= null ? rs.getString("notes"):"");
-                System.out.println("Row:" +a.getAppointmentId()+" "+a.getPatientId());
+            while(rs.next()) {
+                Appointment a = new Appointment(
+                        rs.getInt("id"),
+                        rs.getInt("patientId"),
+                        rs.getInt("doctorId"),
+                        java.time.LocalDate.parse(rs.getString("date")),
+                        java.time.LocalTime.parse(rs.getString("time")),
+                        rs.getString("status") != null ? rs.getString("status") : "Scheduled",
+                        rs.getString("notes") != null ? rs.getString("notes") : ""
+                );
                 all.add(a);
             }
-            System.out.println("Setting" + all.size()+"items to table");
-            System.out.println("Table columns:"+ appointmentTable.getColumns().size());
-            appointmentTable.setItems(javafx.collections.FXCollections.observableArrayList(all));
-        }catch (Exception e){
-            System.out.println("loadAppointments error:"+e.getMessage());
+            appointmentTable.setItems(
+                    javafx.collections.FXCollections.observableArrayList(all));
+        }
+        catch (Exception e){
+            System.out.println("loadAppointment error:" + e.getMessage());
         }
     }
-
     @FXML
     private void handleSearch() {
         String query = searchField.getText().toLowerCase();
