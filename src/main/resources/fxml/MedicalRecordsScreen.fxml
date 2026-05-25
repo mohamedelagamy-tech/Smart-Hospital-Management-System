@@ -1,45 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.shms.controller.MedicalRecordsController"
-      spacing="20"
-      style="-fx-background-color: #f0f2f5;">
+<BorderPane prefHeight="700" prefWidth="1200" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.MedicalRecordsController">
 
-    <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
-    <Button text="← Back"
-            onAction="#handleBack"
-            style="-fx-background-color: transparent; -fx-text-fill: #1a6fba;
-               -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;"/>
-    <Label text="Medical Records"
-           style="-fx-font-family: Georgia; -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #1a6fba;"/>
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="60" spacing="12" style="-fx-background-color: #1F4E79; -fx-padding: 0 24;">
+            <Button text="← Back" onAction="#handleBack"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+               -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;
+               -fx-underline: true;"/>
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" text=" Medical Records" />
+        </HBox>
+    </top>
 
-    <HBox alignment="CENTER_LEFT" spacing="10"
-          style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 16 10 16;">
-        <Label text="🔍" style="-fx-font-size: 15px; -fx-text-fill: #aaaaaa;"/>
-        <TextField fx:id="searchField"
-                   promptText="Search by patient, doctor, or diagnosis..."
-                   style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 13px;"
-                   HBox.hgrow="ALWAYS"
-                   onKeyReleased="#onSearch"/>
-    </HBox>
+    <center>
+        <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f4f6f9;">
 
-    <TableView fx:id="recordsTable"
-               style="-fx-background-color: white; -fx-border-color: #dde4ee; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 13px;"
-               VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn fx:id="colNumber"    text="#"           prefWidth="50"/>
-            <TableColumn fx:id="colPatient"   text="Patient"     prefWidth="160"/>
-            <TableColumn fx:id="colDoctor"    text="Doctor"      prefWidth="130"/>
-            <TableColumn fx:id="colDate"      text="Date"        prefWidth="100"/>
-            <TableColumn fx:id="colDiagnosis" text="Diagnosis"   prefWidth="150"/>
-            <TableColumn fx:id="colTreatment" text="Treatment"   prefWidth="200"/>
-            <TableColumn fx:id="colStatus"    text="Status"      prefWidth="100"/>
-        </columns>
-    </TableView>
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: white; -fx-border-color: #dde1e7;                          -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 0 16;">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #aaa;" text="🔍" />
+                <TextField fx:id="searchField" onKeyReleased="#onSearch" prefHeight="42" promptText="Search by patient, doctor, or diagnosis..." style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 13px;" HBox.hgrow="ALWAYS" />
+            </HBox>
 
-</VBox>
+            <VBox style="-fx-background-color: white; -fx-background-radius: 12;                          -fx-border-color: #eeeeee; -fx-border-radius: 12; -fx-border-width: 1;" VBox.vgrow="ALWAYS">
+                <TableView fx:id="recordsTable" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colNumber" prefWidth="50" text="#" />
+                        <TableColumn fx:id="colPatient" prefWidth="160" text="Patient" />
+                        <TableColumn fx:id="colDoctor" prefWidth="150" text="Doctor" />
+                        <TableColumn fx:id="colDate" prefWidth="100" text="Date" />
+                        <TableColumn fx:id="colDiagnosis" prefWidth="160" text="Diagnosis" />
+                        <TableColumn fx:id="colTreatment" prefWidth="180" text="Treatment" />
+                        <TableColumn fx:id="colStatus" prefWidth="110" text="Status" />
+                    </columns>
+                </TableView>
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

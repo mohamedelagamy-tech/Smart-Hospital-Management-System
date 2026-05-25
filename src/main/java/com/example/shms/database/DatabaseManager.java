@@ -665,10 +665,23 @@ public class DatabaseManager {
             System.out.println("error adding prescription: " + e.getMessage());
         }
     }
-    public List<Prescription> getPrescriptionsByPatient(int patientId) {
-        List<Prescription> result = new ArrayList<>();
-        for (Prescription p : prescriptions) {
-            if (p.getPatientId() == patientId) result.add(p);
+    public List<Prescription> getPrescriptionsByPatient(int patientId){
+        List<Prescription> result=new ArrayList<>();
+        try(Statement st=connection.createStatement()){
+            ResultSet rs=st.executeQuery("SELECT * FROM prescriptions WHERE patientID = "+patientId);
+            while(rs.next()){
+                result.add(new Prescription(
+                        rs.getInt("id"),
+                        rs.getInt("patientID"),
+                        rs.getInt("doctorID"),
+                        rs.getString("medicineName"),
+                        rs.getString("dosage"),
+                        rs.getString("duration"),
+                        rs.getString("instructions")
+                ));
+            }
+        }catch(SQLException e){
+            System.out.println("Failed to get prescriptions by patient: "+e.getMessage());
         }
         return result;
     }
