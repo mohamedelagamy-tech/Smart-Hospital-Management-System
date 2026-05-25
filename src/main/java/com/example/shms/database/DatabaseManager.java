@@ -350,7 +350,7 @@ public class DatabaseManager {
                     "doctorName TEXT NOT NULL," +
                     "service TEXT NOT NULL," +
                     "amount REAL NOT NULL," +
-                    "status TEXT NOT NULL," +
+                    "status TEXT DEFAULT 'Pending'," +
                     "paymentMethod TEXT NOT NULL," +
                     "date TEXT)");
 
