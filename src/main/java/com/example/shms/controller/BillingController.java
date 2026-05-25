@@ -88,6 +88,7 @@ public class BillingController implements Initializable {
                     case "Paid"    -> badge.setStyle("-fx-background-color: #27ae60; -fx-background-radius: 20;");
                     case "Partially Paid" -> badge.setStyle("-fx-background-color: #e67e22; -fx-background-radius: 20;");
                     case "Overdue" -> badge.setStyle("-fx-background-color: #e74c3c; -fx-background-radius: 20;");
+                    default -> badge.setStyle("-fx-background-color: #7f8c8d; -fx-background-radius: 20;");
                 }
                 setGraphic(badge);
                 setText(null);
