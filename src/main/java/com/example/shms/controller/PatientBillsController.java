@@ -182,6 +182,6 @@ public class PatientBillsController implements Initializable {
     }
 
     @FXML private void handleBack(){
-        MainApp.navigateTo("patientDashboard",1200,700);
+        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
 }

@@ -3,6 +3,7 @@ package com.example.shms.controller;
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.MedicalRecord;
+import com.example.shms.utils.SessionManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -153,7 +154,7 @@ public class MedicalRecordsController implements Initializable {
 
     @FXML
     private void handleBack() {
-        MainApp.navigateTo("dashboard", 1200, 700);
+        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
 }
 

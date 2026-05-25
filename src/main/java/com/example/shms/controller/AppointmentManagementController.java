@@ -168,7 +168,7 @@ public class AppointmentManagementController {
 
     @FXML
     private void handleBack() {
-        MainApp.navigateTo("dashboard", 1200, 700);
+        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
         getClass().getResource("/fxml/bookAppointmentView.fxml");
     }
     @FXML private void handleRefresh(){

@@ -1,13 +1,13 @@
-package com.example.shms.utils;
+package com.example.shms.controller;
 
 
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Bill;
 import com.example.shms.model.DischargeSummary;
-import com.example.shms.model.Patient;
 import com.example.shms.model.Prescription;
 import com.example.shms.model.Room;
+import com.example.shms.utils.EmailService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

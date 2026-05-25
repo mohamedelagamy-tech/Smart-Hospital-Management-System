@@ -3,6 +3,7 @@ package com.example.shms.controller;
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Prescription;
+import com.example.shms.utils.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,20 +19,20 @@ import java.util.ResourceBundle;
 
 public class PrescriptionController implements Initializable {
 
-    @FXML private TextField  patientIdField;
-    @FXML private TextField  medicineNameField;
-    @FXML private TextField  dosageField;
-    @FXML private TextField  durationField;
-    @FXML private TextArea   instructionsField;
+    @FXML private TextField patientIdField;
+    @FXML private TextField medicineNameField;
+    @FXML private TextField dosageField;
+    @FXML private TextField durationField;
+    @FXML private TextArea instructionsField;
 
-    @FXML private TableView<Prescription>       prescriptionTable;
+    @FXML private TableView<Prescription> prescriptionTable;
     @FXML private TableColumn<Prescription, Integer> colId;
     @FXML private TableColumn<Prescription, Integer> colPatient;
     @FXML private TableColumn<Prescription, Integer> colDoctor;
-    @FXML private TableColumn<Prescription, String>  colMedicine;
-    @FXML private TableColumn<Prescription, String>  colDosage;
-    @FXML private TableColumn<Prescription, String>  colDuration;
-    @FXML private TableColumn<Prescription, String>  colInstructions;
+    @FXML private TableColumn<Prescription, String> colMedicine;
+    @FXML private TableColumn<Prescription, String> colDosage;
+    @FXML private TableColumn<Prescription, String> colDuration;
+    @FXML private TableColumn<Prescription, String> colInstructions;
 
     @FXML private VBox patientViewPane;
     @FXML private TextField patientSearchField;
@@ -48,7 +49,7 @@ public class PrescriptionController implements Initializable {
         prescriptionTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
-    private void setupTableColumns() {
+    private void setupTableColumns(){
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colPatient.setCellValueFactory(new PropertyValueFactory<>("patientId"));
         colDoctor.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
@@ -164,7 +165,6 @@ public class PrescriptionController implements Initializable {
     public void showPatientView() {
         patientViewPane.setVisible(true);
         patientViewPane.setManaged(true);
-        // hide the add form
         addFormPane.setVisible(false);
         addFormPane.setManaged(false);
         prescriptionTable.setItems(FXCollections.emptyObservableList());
@@ -179,6 +179,6 @@ public class PrescriptionController implements Initializable {
     }
     @FXML
     private void handleBack() {
-        MainApp.navigateTo("dashboard", 1200, 700);
+        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
 }
