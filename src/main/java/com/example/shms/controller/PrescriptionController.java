@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import com.example.shms.utils.SessionManager;
 
 import java.net.URL;
 import java.util.List;
@@ -24,6 +25,8 @@ public class PrescriptionController implements Initializable {
     @FXML private TextField dosageField;
     @FXML private TextField durationField;
     @FXML private TextArea instructionsField;
+    @FXML private Label roleIndicator;
+    @FXML private Label patientNameLabel;
 
     @FXML private TableView<Prescription> prescriptionTable;
     @FXML private TableColumn<Prescription, Integer> colId;
@@ -44,9 +47,19 @@ public class PrescriptionController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupTableColumns();
-        loadFromDatabase();
         styleTableHeader();
         prescriptionTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        String role = SessionManager.getInstance().getLoggedInRole();
+        if (role.equals("PATIENT")) {
+            showPatientView();
+            loadPatientPrescriptions();
+            roleIndicator.setText("Patient View");
+        } else {
+            showDoctorView();
+            loadFromDatabase();
+            roleIndicator.setText("Doctor View");
+        }
     }
 
     private void setupTableColumns(){
@@ -177,8 +190,25 @@ public class PrescriptionController implements Initializable {
         addFormPane.setManaged(true);
         prescriptionTable.setItems(allPrescriptions);
     }
+    private void loadPatientPrescriptions(){
+        String username = SessionManager.getInstance().getLoggedInUser();
+        try(java.sql.Statement st=db.getConnection().createStatement()){
+            java.sql.ResultSet patientRs = st.executeQuery("SELECT id, name FROM patients WHERE username = '"+username+"' LIMIT 1");
+            if (!patientRs.next()){
+                return;
+             }
+            }
+            int patientId=patientRs.getInt("id");
+            String name=patientRs.getString("name");
+            patientNameLabel.setText("Showing prescriptions for: "+name);
+            ObservableList<Prescription> list=FXCollections.observableArrayList(db.getPrescriptionsByPatient(patientId));
+            prescriptionTable.setItems(list);
+        }catch(Exception e){
+            System.out.println("Patient prescriptions load failed: "+e.getMessage());
+        }
+    }
     @FXML
-    private void handleBack() {
+    private void handleBack(){
         MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
 }
