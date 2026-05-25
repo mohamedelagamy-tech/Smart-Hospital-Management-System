@@ -3,6 +3,7 @@ package com.example.shms.controller;
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Room;
+import com.example.shms.utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -181,6 +182,6 @@ public class RoomManagementController implements Initializable {
     }
     @FXML
     private void handleBack() {
-        MainApp.navigateTo("dashboard", 1200, 700);
+        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
 }
