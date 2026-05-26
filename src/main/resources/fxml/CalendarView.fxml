@@ -9,10 +9,7 @@
     <HBox alignment="CENTER_LEFT" spacing="16"
           style="-fx-background-color:#185FA5;-fx-padding:14 20;
                  -fx-background-radius:12 12 0 0;">
-        <Button text="Back" onAction="#handleBack"
-                style="-fx-background-color:white; -fx-text-fill:#185FA5;
-                       -fx-font-weight-bold; -fxpbackground-radius:20;
-                        -fx-padding:6 16; -fx-border-width:0;"/>
+        <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE"/>
         <Label text="Appointment Calendar"
                style="-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:white;"
                HBox.hgrow="ALWAYS"/>
