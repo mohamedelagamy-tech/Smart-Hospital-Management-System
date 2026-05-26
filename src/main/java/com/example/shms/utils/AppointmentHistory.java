@@ -10,19 +10,19 @@ public class AppointmentHistory {
     }
     public List<Appointment> getHistory(int patientId){
         List<Appointment> history=db.getAppointmentsByPatient(patientId);
-                Collections.sort(history);
+        Collections.sort(history);
         return history;
     }
-public List<Appointment> getCompletedOnly(int patientId){
-    List<Appointment> all=getHistory(patientId);
-    List<Appointment> completed = new java.util.ArrayList<>();
-    for (Appointment a:all)
-    {
-        if ("Completed".equals(a.getStatus())){
-            completed.add(a);
+    public List<Appointment> getCompletedOnly(int patientId){
+        List<Appointment> all=getHistory(patientId);
+        List<Appointment> completed = new java.util.ArrayList<>();
+        for (Appointment a:all)
+        {
+            if ("Completed".equals(a.getStatus())){
+                completed.add(a);
+            }
         }
-    }
-    return completed;
+        return completed;
     }
     public  void printHistory(int patientId){
         List<Appointment> history = getHistory(patientId);

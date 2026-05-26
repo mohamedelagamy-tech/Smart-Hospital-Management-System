@@ -1,6 +1,8 @@
 package com.example.shms.controller;
+import com.example.shms.MainApp;
 import  com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Appointment;
+import com.example.shms.utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -43,7 +45,7 @@ public class CalendarController {
                         java.time.LocalTime.parse(rs.getString("time")),
                         rs.getString("status"),
                         rs.getString("notes")!=null? rs.getString("notes") :""
-                        ));
+                ));
             }
         }catch(Exception e){
             System.out.println("Calender loading failed"+e.getMessage());
@@ -108,8 +110,6 @@ public class CalendarController {
 
     @FXML
     private void handleBack() {
-        com.example.shms.MainApp.navigateTo("dashboard", 1200, 700);
+        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
 }
-
-

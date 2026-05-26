@@ -56,4 +56,3 @@ public class Receptionist extends Person{
                 + ", Status: "+ status;
     }
 }
-

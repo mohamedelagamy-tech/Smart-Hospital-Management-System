@@ -5,7 +5,7 @@ public class Bill implements Billable {
     private int patientId;
     private int appointmentId;
     private double amount;
-    private String status; 
+    private String status;
     private String date;
     private String patientName;
     private String doctorName;
@@ -13,7 +13,7 @@ public class Bill implements Billable {
     private String paymentMethod;
 
     public Bill(int id, int patientId, String patientName, String doctorName, String service, double amount, String status, String paymentMethod,String date) {
-        this.billNumber ="BILL-" + String.format("%03d", id);
+        this.billNumber ="#B-" + String.format("%03d", id);
         this.patientId = patientId;
         this.patientName = patientName;
         this.doctorName = doctorName;

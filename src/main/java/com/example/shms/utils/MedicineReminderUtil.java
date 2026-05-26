@@ -14,8 +14,8 @@ import java.util.List;
 public class MedicineReminderUtil {
 
     public static void showReminders() {
-            String role = SessionManager.getInstance().getLoggedInRole();
-            if (role == null || !role.equalsIgnoreCase("Patient")) return;
+        String role = SessionManager.getInstance().getLoggedInRole();
+        if (role == null || !role.equalsIgnoreCase("Patient")) return;
 
         DatabaseManager db = DatabaseManager.getInstance();
 

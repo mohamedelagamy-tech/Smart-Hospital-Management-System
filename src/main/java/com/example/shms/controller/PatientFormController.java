@@ -138,7 +138,7 @@ public class PatientFormController {
         normalPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #63991e; -fx-border-color: transparent; -fx-font-size: 18;");
     }
     @FXML private void handleNormalPriority(){
-         selectedPriority=3;
+        selectedPriority=3;
         emergencyPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: red; -fx-border-color: transparent; -fx-font-size: 18;");
         urgentPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #ef9f27; -fx-border-color: transparent; -fx-font-size: 18;");
         normalPriorityBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #63991e; -fx-border-color:#63991e; -fx-border-radius: 6;-fx-font-size: 18;");

@@ -55,17 +55,17 @@ public class BookAppointmentController {
             }
         }
     }
-private void loadDoctors(){
-    try{
-        java.sql.ResultSet rs = db.getAllDoctors();
-        while (rs!= null && rs.next()){
-            doctorCombo.getItems().add(rs.getInt("id")+"-"+rs.getString("Name"));
+    private void loadDoctors(){
+        try{
+            java.sql.ResultSet rs = db.getAllDoctors();
+            while (rs!= null && rs.next()){
+                doctorCombo.getItems().add(rs.getInt("id")+"-"+rs.getString("Name"));
+            }
+        }
+        catch ( Exception e){
+            System.out.println("loadDoctors error:"+ e.getMessage());
         }
     }
-    catch ( Exception e){
-        System.out.println("loadDoctors error:"+ e.getMessage());
-    }
-}
     @FXML private void handleBook(){
         if(patientCombo.getValue() == null || doctorCombo.getValue() == null
                 || datePicker.getValue() == null || timeCombo.getValue() == null){
@@ -86,8 +86,7 @@ private void loadDoctors(){
         }
     }
     @FXML private void handleClose(){
-    Stage stage =(javafx.stage.Stage ) statusLabel.getScene().getWindow();
-    stage.close();
+        Stage stage =(javafx.stage.Stage ) statusLabel.getScene().getWindow();
+        stage.close();
     }
 }
-

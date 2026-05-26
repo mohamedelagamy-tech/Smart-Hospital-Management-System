@@ -11,14 +11,14 @@
         <ComboBox fx:id="patientCombo" prefWidth="200"/>
         <Button text="Search" onAction="#handleSearch"/>
     </HBox>
-<TableView fx:id="historyTable" VBox.vgrow="ALWAYS">
-    <columns>
-        <TableColumn fx:id="colDate" text="Date" prefWidth="100"/>
-        <TableColumn fx:id="colTime" text="Time" prefWidth="80"/>
-        <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="120"/>
-        <TableColumn fx:id="colSatus" text="Status" prefWidth="100"/>
-        <TableColumn fx:id="colNotes" text="Notes" prefWidth="150"/>
-    </columns>
-</TableView>
+    <TableView fx:id="historyTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colDate" text="Date" prefWidth="100"/>
+            <TableColumn fx:id="colTime" text="Time" prefWidth="80"/>
+            <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="120"/>
+            <TableColumn fx:id="colSatus" text="Status" prefWidth="100"/>
+            <TableColumn fx:id="colNotes" text="Notes" prefWidth="150"/>
+        </columns>
+    </TableView>
 
 </VBox>

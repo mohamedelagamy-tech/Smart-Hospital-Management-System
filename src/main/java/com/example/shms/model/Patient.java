@@ -112,4 +112,3 @@ public class Patient extends Person implements Comparable<Patient>{
         this.status = status;
     }
 }
-

@@ -276,7 +276,6 @@ public class StatisticsController implements Initializable {
                         .forEach(node -> node.setStyle("-fx-bar-fill: "+color+";"))
         );
     }
-
     public void stopThread(){
         if(notificationThread != null){
             notificationThread.interrupt();

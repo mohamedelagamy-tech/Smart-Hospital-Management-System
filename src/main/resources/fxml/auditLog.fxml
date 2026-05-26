@@ -11,14 +11,18 @@
             <children>
                 <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 16 20; -fx-background-color: #1F4E79;">
                     <children>
-                  <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: Transparent;" text="← Back" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
+                        <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: Transparent; -fx-underline:true;" text="← Back" textFill="WHITE">
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Button>
                         <VBox prefHeight="54.0" prefWidth="378.0" spacing="2" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Audit Log" />
+                                <Label text="Audit Log" textFill="SNOW">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font></Label>
                                 <Label style="-fx-font-size: 11px; -fx-text-fill: #888888;" text="All login attempts — Admin access only" />
                             </children>
                         </VBox>

@@ -6,29 +6,29 @@
       fx:controller="com.example.shms.controller.BookAppointmentController">
       <Label text="Book Appointment"
              style="-fx-font-size:16; -fx-font-weight:bold;"/>
-<HBox spacing="10" alignment ="CENTER_LEFT">
-<Label text ="Patient:" minWidth="80"/>
-<ComboBox fx:id="patientCombo" prefWidth="200"/>
-</HBox>
-<HBox spacing="10" alignment="CENTER_LEFT">
-<Label text="Doctor:" minWidth="80"/>
-<ComboBox fx:id="doctorCombo" prefWidth="200"/>
-</HBox>
-<HBox spacing="10" alignment="CENTER_LEFT">
-<Label text="Date:" minWidth="80"/>
-<DatePicker fx:id="datePicker"/>
-</HBox>
-<HBox spacing="10" alignment="CENTER_LEFT">
-<Label text="Time:" minWidth="80"/>
-<ComboBox fx:id="timeCombo" prefWidth="200"/>
-</HBox>
-<HBox spacing="10" alignment="CENTER_LEFT">
-<Label text="Notes:" minWidth="80"/>
-<TextArea fx:id="notesField" prefHeight="60" prefWidth="200"/>
-</HBox>
-<Label fx:id="statusLabel" style="-fx-text-fill: red;"/>
-<HBox spacing="10">
-<Button text="Book" onAction="#handleBook"/>
-<Button text="Close" onAction="#handleClose"/>
-</HBox>
+      <HBox spacing="10" alignment ="CENTER_LEFT">
+            <Label text ="Patient:" minWidth="80"/>
+            <ComboBox fx:id="patientCombo" prefWidth="200"/>
+      </HBox>
+      <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Doctor:" minWidth="80"/>
+            <ComboBox fx:id="doctorCombo" prefWidth="200"/>
+      </HBox>
+      <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Date:" minWidth="80"/>
+            <DatePicker fx:id="datePicker"/>
+      </HBox>
+      <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Time:" minWidth="80"/>
+            <ComboBox fx:id="timeCombo" prefWidth="200"/>
+      </HBox>
+      <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Notes:" minWidth="80"/>
+            <TextArea fx:id="notesField" prefHeight="60" prefWidth="200"/>
+      </HBox>
+      <Label fx:id="statusLabel" style="-fx-text-fill: red;"/>
+      <HBox spacing="10">
+            <Button text="Book" onAction="#handleBook"/>
+            <Button text="Close" onAction="#handleClose"/>
+      </HBox>
 </VBox>

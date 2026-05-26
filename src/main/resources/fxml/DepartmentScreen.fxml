@@ -21,7 +21,7 @@
             <Insets left="20.0" right="20.0" />
          </padding>
          <children>
-            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-cursor: hand;" text="← Back" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline:true;" text="← Back" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
@@ -64,11 +64,11 @@
                            </font>
                         </Label>
                         <TableView fx:id="departmentTable" prefHeight="550.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                          <columns>
-                            <TableColumn fx:id="idCol" prefWidth="70.0" text="ID" />
-                            <TableColumn fx:id="nameCol" prefWidth="210.0" text="Name" />
-                             <TableColumn fx:id="doctorCountCol" prefWidth="85.0" text="Doctors" />
-                          </columns>
+                           <columns>
+                              <TableColumn fx:id="idCol" prefWidth="70.0" text="ID" />
+                              <TableColumn fx:id="nameCol" prefWidth="210.0" text="Name" />
+                              <TableColumn fx:id="doctorCountCol" prefWidth="85.0" text="Doctors" />
+                           </columns>
                         </TableView>
                      </children>
                   </VBox>

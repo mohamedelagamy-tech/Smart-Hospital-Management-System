@@ -77,7 +77,7 @@ public class LoginController {
             if(rs.next()){
                 String role =rs.getString("role");
                 session.login(username,role);
-                logAudit(username, role,"SUCCESS");
+                logAudit(username , role , "SUCCESS");
                 showError("Login successful!","success");
 
                 session.startSessionTimer(new Runnable(){
@@ -136,15 +136,15 @@ public class LoginController {
         errorLabel.setText(message);
         switch(type){
             case "empty": errorLabel.setStyle("-fx-text-fill: orange;-fx-font-size: 11;");
-            break;
+                break;
             case "invalid": errorLabel.setStyle("-fx-text-fill: #A32D2D;-fx-background-color: #FCEBEB;-fx-background-radius:4;-fx-padding: 6 10;-fx-font-size: 11; ");
-            break;
+                break;
             case "locked": errorLabel.setStyle("-fx-text-fill: #7B0000;-fx-background-color: #FFD0D0;-fx-background-radius:4;-fx-padding: 6 10;-fx-font-size: 11; ");
-            break;
+                break;
             case "success": errorLabel.setStyle("-fx-text-fill: #1D6A2E;-fx-background-color: #D6F0DC;-fx-background-radius:4;-fx-padding: 6 10;-fx-font-size: 11; ");
-            break;
+                break;
             case "dbError": errorLabel.setStyle("-fx-text-fill: #555555;-fx-background-color: #F0F0F0;-fx-background-radius:4;-fx-padding: 6 10;-fx-font-size: 11; ");
-            break;
+                break;
         }
     }
 

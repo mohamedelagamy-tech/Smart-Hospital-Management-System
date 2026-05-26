@@ -1,4 +1,3 @@
-
 package com.example.shms.model;
 import java.util.List;
 import java.io.FileWriter;
@@ -24,22 +23,21 @@ public class DischargeSummary {
     public double getTotalBill() {
         return totalBill;
     }
-public void writeToFile() {
-    try(FileWriter writer = new FileWriter("discharge_" + patientID + ".txt")) {
-        writer.write("=== DISCHARGE SUMMARY ===\n");
-        writer.write("Patient ID: " + patientID + "\n");
-        writer.write("Doctor ID: " + doctorID + "\n");
-        writer.write("Rooms Used: " + roomUsed + "\n");
-        writer.write("Total Bill: " + totalBill + "\n");
-        writer.write("Prescriptions: \n");
-        for (Prescription p : prescriptions) {
-            writer.write(" -" + p.getMedicineName() + "|" + p.getDosage() + "|" + p.getDuration() + "\n");
+    public void writeToFile() {
+        try(FileWriter writer = new FileWriter("discharge_" + patientID + ".txt")) {
+            writer.write("=== DISCHARGE SUMMARY ===\n");
+            writer.write("Patient ID: " + patientID + "\n");
+            writer.write("Doctor ID: " + doctorID + "\n");
+            writer.write("Rooms Used: " + roomUsed + "\n");
+            writer.write("Total Bill: " + totalBill + "\n");
+            writer.write("Prescriptions: \n");
+            for (Prescription p : prescriptions) {
+                writer.write(" -" + p.getMedicineName() + "|" + p.getDosage() + "|" + p.getDuration() + "\n");
+            }
+            System.out.println("file saved!");
         }
-        System.out.println("file saved!");
+        catch (IOException e){
+            System.out.println("Error writing file"+e.getMessage());
         }
-    catch (IOException e){
-        System.out.println("Error writing file"+e.getMessage());
     }
-}
-    
 }

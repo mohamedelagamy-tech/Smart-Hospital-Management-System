@@ -29,11 +29,11 @@
                             <font>
                                 <Font name="System Bold Italic" size="12.0" />
                             </font></Button>
-                  <ComboBox fx:id="sortCombo" prefHeight="26.0" prefWidth="112.0" />
+                        <ComboBox fx:id="sortCombo" prefHeight="26.0" prefWidth="112.0" />
                         <Button fx:id="resetBtn" onAction="#handleReset" prefWidth="60.0" text="Reset" />
                     </children>
                 </HBox>
-                  <Button fx:id="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddPatient" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="+ Add Patient" textAlignment="CENTER" textFill="WHITE" />
+                <Button fx:id="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddPatient" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="+ Add Patient" textAlignment="CENTER" textFill="WHITE" />
                 <TableView fx:id="patientTable" prefHeight="425.0" prefWidth="878.0" style="-fx-background-color: white; -fx-background-radius: 10;" tableMenuButtonVisible="true">
                     <columns>
                         <TableColumn fx:id="idCol" prefWidth="60.0" text="ID" />
@@ -51,12 +51,12 @@
     <top>
         <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
             <children>
-            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent;" text="← Back" textFill="WHITE">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
-            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
+                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                 <Label text="Patient Management" textFill="#fffafa" HBox.hgrow="ALWAYS">
                     <font>
                         <Font name="Arial Bold" size="24.0" />

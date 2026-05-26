@@ -3,36 +3,32 @@ package com.example.shms.controller;
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Prescription;
+import com.example.shms.utils.SessionManager;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class PrescriptionController implements Initializable {
+public class PrescriptionController {
 
-    @FXML private TextField  patientIdField;
-    @FXML private TextField  medicineNameField;
-    @FXML private TextField  dosageField;
-    @FXML private TextField  durationField;
-    @FXML private TextArea   instructionsField;
-
-    @FXML private TableView<Prescription>       prescriptionTable;
-    @FXML private TableColumn<Prescription, Integer> colId;
-    @FXML private TableColumn<Prescription, Integer> colPatient;
-    @FXML private TableColumn<Prescription, Integer> colDoctor;
-    @FXML private TableColumn<Prescription, String>  colMedicine;
-    @FXML private TableColumn<Prescription, String>  colDosage;
-    @FXML private TableColumn<Prescription, String>  colDuration;
-    @FXML private TableColumn<Prescription, String>  colInstructions;
-
+    @FXML private TextField patientIdField;
+    @FXML private TextField medicineNameField;
+    @FXML private TextField dosageField;
+    @FXML private TextField durationField;
+    @FXML private TextArea instructionsField;
+    @FXML private Label patientNameLabel;
+    @FXML private TableView<Prescription> prescriptionTable;
+    @FXML private TableColumn<Prescription, String> colId;
+    @FXML private TableColumn<Prescription, String> colPatient;
+    @FXML private TableColumn<Prescription, String> colDoctor;
+    @FXML private TableColumn<Prescription, String> colMedicine;
+    @FXML private TableColumn<Prescription, String> colDosage;
+    @FXML private TableColumn<Prescription, String> colDuration;
+    @FXML private TableColumn<Prescription, String> colInstructions;
     @FXML private VBox patientViewPane;
     @FXML private TextField patientSearchField;
     @FXML private VBox addFormPane;
@@ -40,145 +36,140 @@ public class PrescriptionController implements Initializable {
     private final ObservableList<Prescription> allPrescriptions = FXCollections.observableArrayList();
     private final DatabaseManager db = DatabaseManager.getInstance();
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML private void initialize(){
         setupTableColumns();
-        loadFromDatabase();
-        styleTableHeader();
         prescriptionTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        prescriptionTable.setFixedCellSize(52);
+        String role = SessionManager.getInstance().getLoggedInRole();
+        if(role.equals("PATIENT")){
+            showPatientView();
+            loadPatientPrescriptions();
+        }else{
+            showDoctorView();
+            loadFromDatabase();
+        }
     }
-
     private void setupTableColumns() {
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colPatient.setCellValueFactory(new PropertyValueFactory<>("patientId"));
-        colDoctor.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
-        colMedicine.setCellValueFactory(new PropertyValueFactory<>("medicineName"));
-        colDosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
-        colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        colInstructions.setCellValueFactory(new PropertyValueFactory<>("instructions"));
-
-        colId.setCellFactory(col -> new TableCell<>() {
-            @Override
-            protected void updateItem(Integer id, boolean empty) {
-                super.updateItem(id, empty);
-                if (empty || id == null) { setText(null); return; }
-                setText("RX-" + String.format("%03d", id));
-                setStyle("-fx-text-fill: #1a6fba; -fx-font-weight: bold;");
-            }
+        colId.setCellValueFactory(cell ->
+                new SimpleStringProperty("RX-" + String.format("%03d", cell.getValue().getId())));
+        colPatient.setCellValueFactory(cell -> {
+            String name = db.getPatientName(cell.getValue().getPatientId());
+            return new SimpleStringProperty(name != null ? name : "Unknown");
         });
-
+        colDoctor.setCellValueFactory(cell -> {
+            String name = db.getDoctorName(cell.getValue().getDoctorId());
+            return new SimpleStringProperty(name != null ? name : "—");
+        });
+        colMedicine.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getMedicineName()));
+        colDosage.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getDosage()));
+        colDuration.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getDuration()));
+        colInstructions.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getInstructions()));
         prescriptionTable.setRowFactory(tv -> new TableRow<>() {
             @Override
-            protected void updateItem(Prescription item, boolean empty) {
+            protected void updateItem(Prescription item,boolean empty){
                 super.updateItem(item, empty);
                 setStyle((!empty && getIndex() % 2 != 0)
                         ? "-fx-background-color: #f7f9fc;"
                         : "-fx-background-color: white;");
             }
         });
-
-        prescriptionTable.setFixedCellSize(52);
         prescriptionTable.setItems(allPrescriptions);
     }
-
     private void loadFromDatabase() {
         allPrescriptions.clear();
-        List<Prescription> list = db.getAllPrescriptions(); // load all
-        if (list != null) allPrescriptions.addAll(list);
+        List<Prescription> list = db.getAllPrescriptions();
+        if(list != null) allPrescriptions.addAll(list);
     }
-
+    private void loadPatientPrescriptions(){
+        String username = SessionManager.getInstance().getLoggedInUser();
+        try(java.sql.Statement st=db.getConnection().createStatement()){
+            java.sql.ResultSet rs=st.executeQuery("SELECT id, name FROM patients WHERE username = '"+username+"' LIMIT 1");
+            if(!rs.next()) return;
+            int patientId = rs.getInt("id");
+            String name = rs.getString("name");
+            patientNameLabel.setText("Showing prescriptions for: "+name);
+            prescriptionTable.setItems(FXCollections.observableArrayList(db.getPrescriptionsByPatient(patientId)));
+        }catch(Exception e){
+            System.out.println("Patient prescriptions load failed: " + e.getMessage());
+        }
+    }
     @FXML
-    private void handleAddPrescription() {
+    private void handleAddPrescription(){
         String patientIdText = patientIdField.getText().trim();
-        String medicine      = medicineNameField.getText().trim();
-        String dosage        = dosageField.getText().trim();
-        String duration      = durationField.getText().trim();
-        String instructions  = instructionsField.getText().trim();
-
-        if (patientIdText.isEmpty() || medicine.isEmpty() ||
-                dosage.isEmpty() || duration.isEmpty() || instructions.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Missing Fields", "All fields are required.");
+        String medicine = medicineNameField.getText().trim();
+        String dosage = dosageField.getText().trim();
+        String duration = durationField.getText().trim();
+        String instructions = instructionsField.getText().trim();
+        if(patientIdText.isEmpty() || medicine.isEmpty() || dosage.isEmpty() || duration.isEmpty() || instructions.isEmpty()){
+            showAlert(Alert.AlertType.WARNING, "Missing Fields","All fields are required.");
             return;
         }
-
         int patientId;
-        try {
+        try{
             patientId = Integer.parseInt(patientIdText);
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Invalid Input", "Patient ID must be a number.");
+        }catch(NumberFormatException e){
+            showAlert(Alert.AlertType.ERROR, "Invalid Input","Patient ID must be a number.");
             return;
         }
-
-        int newId = allPrescriptions.size() + 1;
-        Prescription p = new Prescription(newId, patientId, 0, medicine, dosage, duration, instructions);
-
+        int doctorId=0;
+        try{
+            String username = SessionManager.getInstance().getLoggedInUser();
+            java.sql.ResultSet rs = db.getConnection().createStatement().executeQuery(
+                    "SELECT id FROM doctors WHERE username = '"+username+"' LIMIT 1"
+            );
+            if(rs.next())
+                doctorId=rs.getInt("id");
+        }catch(Exception e){
+            System.out.println("Doctor lookup failed: " + e.getMessage());
+        }
+        Prescription p=new Prescription(0,patientId,doctorId,medicine,dosage,duration,instructions);
         db.addPrescription(p);
-        allPrescriptions.add(p);
-        prescriptionTable.setItems(allPrescriptions);
-
+        loadFromDatabase();
         clearForm();
     }
-
-    private void clearForm() {
+    private void clearForm(){
         patientIdField.clear();
         medicineNameField.clear();
         dosageField.clear();
         durationField.clear();
         instructionsField.clear();
     }
-
-    private void showAlert(Alert.AlertType type, String title, String message) {
+    private void showAlert(Alert.AlertType type,String title,String message){
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.show();
     }
-
-    private void styleTableHeader() {
-        prescriptionTable.widthProperty().addListener((obs, o, n) -> {
-            javafx.scene.Node header = prescriptionTable.lookup("TableHeaderRow");
-            if (header != null) {
-                header.setStyle("-fx-background-color: #1a6fba;");
-                header.lookupAll(".column-header .label").forEach(node ->
-                        node.setStyle("-fx-text-fill: white; -fx-font-weight: bold;"));
-            }
-        });
-    }
-    @FXML
-    private void handlePatientSearch(KeyEvent event) {
+    @FXML private void handlePatientSearch(KeyEvent event){
         String input = patientSearchField.getText().trim();
-        if (input.isEmpty()) {
+        if(input.isEmpty()){
             prescriptionTable.setItems(allPrescriptions);
             return;
         }
-        try {
+        try{
             int patientId = Integer.parseInt(input);
-            ObservableList<Prescription> filtered = FXCollections.observableArrayList(
+            prescriptionTable.setItems(FXCollections.observableArrayList(
                     db.getPrescriptionsByPatient(patientId)
-            );
-            prescriptionTable.setItems(filtered);
-        } catch (NumberFormatException e) {
+            ));
+        }catch(NumberFormatException e){
             prescriptionTable.setItems(FXCollections.emptyObservableList());
         }
     }
-    public void showPatientView() {
+    public void showPatientView(){
         patientViewPane.setVisible(true);
         patientViewPane.setManaged(true);
-        // hide the add form
         addFormPane.setVisible(false);
         addFormPane.setManaged(false);
         prescriptionTable.setItems(FXCollections.emptyObservableList());
     }
-
-    public void showDoctorView() {
+    public void showDoctorView(){
         patientViewPane.setVisible(false);
         patientViewPane.setManaged(false);
         addFormPane.setVisible(true);
         addFormPane.setManaged(true);
         prescriptionTable.setItems(allPrescriptions);
     }
-    @FXML
-    private void handleBack() {
-        MainApp.navigateTo("dashboard", 1200, 700);
+    @FXML private void handleBack() {
+        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
 }

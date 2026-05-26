@@ -38,6 +38,9 @@ public class DashboardController implements Initializable {
     @FXML private Label labelMain;
     @FXML private Label labelMedical;
     @FXML private Label labelAdmin;
+    @FXML private Label statRevenue;
+    @FXML private Label statOutstanding;
+    @FXML private Label statEmergency;
 
     @FXML private Button btnDashboard;
     @FXML private Button btnPatients;
@@ -72,9 +75,6 @@ public class DashboardController implements Initializable {
         loadStats();
         autoRefresh();
     }
-
-
-
 
     private void autoRefresh() {
         Thread refreshThread = new Thread(new Runnable() {
@@ -183,23 +183,32 @@ public class DashboardController implements Initializable {
     }
 
     private void loadStats(){
-        try (Statement st= db.getConnection().createStatement()) {
+        try(Statement st=db.getConnection().createStatement()){
             ResultSet rs;
 
-            rs= st.executeQuery("SELECT COUNT(*) FROM patients");
+            rs=st.executeQuery("SELECT COUNT(*) FROM patients");
             statPatients.setText(String.valueOf(rs.getInt(1)));
 
-            rs= st.executeQuery("SELECT COUNT(*) FROM doctors");
+            rs=st.executeQuery("SELECT COUNT(*) FROM doctors");
             statDoctors.setText(String.valueOf(rs.getInt(1)));
 
-            rs= st.executeQuery("SELECT COUNT(*) FROM appointments");
+            rs=st.executeQuery("SELECT COUNT(*) FROM appointments");
             statAppointments.setText(String.valueOf(rs.getInt(1)));
 
-            ResultSet available = st.executeQuery("SELECT COUNT(*) FROM rooms WHERE status = 'Available'");
-            ResultSet total = st.executeQuery("SELECT COUNT(*) FROM rooms");
-            statRooms.setText(available.getInt(1) + "/" + total.getInt(1));
+            ResultSet available=st.executeQuery("SELECT COUNT(*) FROM rooms WHERE status = 'Available'");
+            ResultSet total=st.executeQuery("SELECT COUNT(*) FROM rooms");
+            statRooms.setText(available.getInt(1)+"/"+total.getInt(1));
 
-        } catch (SQLException e) {
+            ResultSet rev=st.executeQuery("SELECT COALESCE(SUM(amount),0) FROM bills WHERE status = 'Paid'");
+            statRevenue.setText("EGP "+String.format("%,.0f",rev.getDouble(1)));
+
+            ResultSet out=st.executeQuery("SELECT COALESCE(SUM(amount),0) FROM bills WHERE status IN ('Pending','Overdue','Partially Paid')");
+            statOutstanding.setText("EGP "+String.format("%,.0f",out.getDouble(1)));
+
+            ResultSet emg=st.executeQuery("SELECT COUNT(*) FROM patients WHERE priority = 1");
+            statEmergency.setText(String.valueOf(emg.getInt(1)));
+
+        }catch(SQLException e){
             System.out.println("Stats load failed: "+e.getMessage());
         }
     }

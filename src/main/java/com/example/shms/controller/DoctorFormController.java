@@ -167,6 +167,4 @@ public class DoctorFormController {
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
     }
-
-
 }

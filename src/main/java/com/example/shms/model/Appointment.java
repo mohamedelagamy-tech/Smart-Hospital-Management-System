@@ -25,7 +25,7 @@ public class Appointment implements Comparable<Appointment> {
     public int compareTo(Appointment other) {
         int dateComparison = this.date.compareTo(other.date);
         if (dateComparison != 0) return dateComparison;
-            return this.time.compareTo(other.time);
+        return this.time.compareTo(other.time);
     }
     public int getAppointmentId()
     {

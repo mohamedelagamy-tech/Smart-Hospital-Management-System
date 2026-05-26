@@ -74,16 +74,16 @@ public class PatientDashboardController implements Initializable {
         String user=session.getLoggedInUser();
         userLabel.setText(user);
         roleLabel.setText("PATIENT");
-        String initials = user.substring(0,Math.min(2,user.length())).toUpperCase();
+        String initials=user.substring(0,Math.min(2,user.length())).toUpperCase();
         userInitials.setText(initials);
         profileInitials.setText(initials);
 
-        int hour = LocalDateTime.now().getHour();
+        int hour=LocalDateTime.now().getHour();
         String greeting;
-        if(hour<12) {
-            greeting = "Good morning";
-        }else if(hour<17) {
-            greeting = "Good afternoon";
+        if(hour<12){
+            greeting="Good morning";
+        }else if(hour<17){
+            greeting="Good afternoon";
         }else{
             greeting="Good evening";
         }
@@ -91,7 +91,7 @@ public class PatientDashboardController implements Initializable {
     }
 
     private void setupClock(){
-        Timeline clock = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+        Timeline clock=new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
                 String time=LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEE dd MMM  •  hh:mm a"));
@@ -106,7 +106,7 @@ public class PatientDashboardController implements Initializable {
         String username=session.getLoggedInUser();
         try(Statement st=db.getConnection().createStatement()){
 
-            ResultSet patientRs=st.executeQuery("SELECT * FROM patients WHERE name LIKE '%"+username+"%' LIMIT 1");
+            ResultSet patientRs=st.executeQuery("SELECT * FROM patients WHERE username = '"+username+"' LIMIT 1");
 
             if(patientRs.next()){
                 int patientId=patientRs.getInt("id");
@@ -128,25 +128,25 @@ public class PatientDashboardController implements Initializable {
     }
 
     private void loadAppointments(int patientId){
-        List<String> items = new ArrayList<>();
+        List<String> items=new ArrayList<>();
         try(Statement st=db.getConnection().createStatement()){
             ResultSet rs=st.executeQuery(
                     "SELECT a.*, d.name as doctorName FROM appointments a "+
                             "JOIN doctors d ON a.doctorID = d.id "+
-                            "WHERE a.patientID = " + patientId+
-                            " AND a.status = 'Confirmed' ORDER BY a.appointmentDate LIMIT 5");
+                            "WHERE a.patientID = "+patientId+
+                            " AND a.status = 'Confirmed' ORDER BY a.date LIMIT 5");
 
             boolean first=true;
             while(rs.next()){
-                String entry="📅  "+rs.getString("appointmentDate")+
-                        " at "+rs.getString("appointmentTime")+
+                String entry="📅  "+rs.getString("date")+
+                        " at "+rs.getString("time")+
                         "  —  "+rs.getString("doctorName")+
-                        "  ["+rs.getString("status") + "]";
+                        "  ["+rs.getString("status")+"]";
                 items.add(entry);
 
                 if(first){
-                    nextApptLabel.setText("Next: "+rs.getString("appointmentDate")+
-                            " at "+rs.getString("appointmentTime"));
+                    nextApptLabel.setText("Next: "+rs.getString("date")+
+                            " at "+rs.getString("time"));
                     nextApptDetail.setText("With "+rs.getString("doctorName"));
                     first=false;
                 }
@@ -165,7 +165,7 @@ public class PatientDashboardController implements Initializable {
     }
 
     private void loadBills(int patientId){
-        List<String> items = new ArrayList<>();
+        List<String> items=new ArrayList<>();
         double total=0,paid=0,unpaid=0;
 
         try(Statement st=db.getConnection().createStatement()){
@@ -173,26 +173,28 @@ public class PatientDashboardController implements Initializable {
 
             while(rs.next()){
                 double amount=rs.getDouble("amount");
-                String status=rs.getString("paymentStatus");
+                String status=rs.getString("status");
                 total+=amount;
-                if(status.equals("Paid")) {
-                    paid += amount;
-                }else {
-                    unpaid += amount;
+                if(status.equals("Paid")){
+                    paid+=amount;
+                }else{
+                    unpaid+=amount;
                 }
                 String icon;
                 if(status.equals("Paid")){
                     icon="✅";
+                }else if(status.equals("Partially Paid")){
+                    icon="🔶";
                 }else{
                     icon="❌";
                 }
-                String entry = icon+"  "+rs.getString("treatment")+
+                String entry=icon+"  "+rs.getString("service")+
                         "  —  EGP "+String.format("%.0f",amount)+
                         "  ["+status+"]";
                 items.add(entry);
             }
 
-        }catch (SQLException e){
+        }catch(SQLException e){
             System.out.println("Failed to load bills: "+e.getMessage());
         }
 
@@ -206,29 +208,31 @@ public class PatientDashboardController implements Initializable {
     }
 
     private void loadTimeline(int patientId,String name){
-        List<String> items = new ArrayList<>();
+        List<String> items=new ArrayList<>();
         try(Statement st=db.getConnection().createStatement()){
 
-            ResultSet appts=st.executeQuery("SELECT a.appointmentDate, a.status, d.name as doctorName "+"FROM appointments a JOIN doctors d ON a.doctorID = d.id "+"WHERE a.patientID = "+patientId+" ORDER BY a.appointmentDate DESC");
+            ResultSet appts=st.executeQuery("SELECT a.date, a.status, d.name as doctorName "+
+                    "FROM appointments a JOIN doctors d ON a.doctorId = d.id "+
+                    "WHERE a.patientId = "+patientId+" ORDER BY a.date DESC");
             while(appts.next()){
                 items.add("📅  Appointment — "+appts.getString("doctorName")+
-                        "  •  "+appts.getString("appointmentDate")+
-                        "  ["+appts.getString("status") + "]");
+                        "  •  "+appts.getString("date")+
+                        "  ["+appts.getString("status")+"]");
             }
 
             ResultSet prescriptions=st.executeQuery("SELECT * FROM prescriptions WHERE patientID = "+patientId+" ORDER BY dateIssued DESC");
             while(prescriptions.next()){
                 items.add("💊  Prescription — "+prescriptions.getString("medicineName")+
-                        " "+prescriptions.getString("dosage") +
+                        " "+prescriptions.getString("dosage")+
                         "  •  "+prescriptions.getString("dateIssued"));
             }
             items.add("🏥  Patient registered — Welcome to SHMS");
 
-        }catch (SQLException e){
+        }catch(SQLException e){
             System.out.println("Failed to load timeline: "+e.getMessage());
         }
 
-        if (items.isEmpty())
+        if(items.isEmpty())
             items.add("No history yet");
         timelineList.setItems(FXCollections.observableArrayList(items));
     }
@@ -241,14 +245,15 @@ public class PatientDashboardController implements Initializable {
 
     @FXML private void showHome(){}
     @FXML private void showAppointments(){
-        MainApp.navigateTo("AppointmentView",1200,700);
+        MainApp.navigateTo("appointment-management-view",1200,700);
     }
     @FXML private void showBookAppointments(){
 
     }
     @FXML private void showPrescriptions(){
-        MainApp.navigateTo("PrescriptionView",1200,700);
+        MainApp.navigateTo("PrescriptionScreen",1200,700);
     }
-    @FXML private void showBills() {
+    @FXML private void showBills(){
+        MainApp.navigateTo("patientBills",1200,700);
     }
 }

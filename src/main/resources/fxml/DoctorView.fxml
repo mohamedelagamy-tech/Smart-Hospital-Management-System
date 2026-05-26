@@ -9,7 +9,7 @@
    <top>
       <HBox prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent;" text="← Back" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font></Button>
@@ -65,18 +65,18 @@
                </children>
             </HBox>
             <TableView fx:id="doctorTable" prefHeight="360.0" prefWidth="879.0">
-              <columns>
-                <TableColumn fx:id="idCol" prefWidth="37.399994254112244" text="ID" />
-                <TableColumn fx:id="nameCol" prefWidth="139.60000610351562" text="Name" />
-                 <TableColumn fx:id="departmentCol" prefWidth="145.80001831054688" text="Department" />
-                 <TableColumn fx:id="salaryCol" prefWidth="91.20001220703125" text="Salary" />
-                 <TableColumn fx:id="workingDaysCol" prefWidth="88.00003051757812" text="Working Days" />
-                 <TableColumn fx:id="workingHoursCol" prefWidth="91.99996948242188" text="Working Hours" />
-                 <TableColumn fx:id="ratingCol" prefWidth="46.0" text="Rating" />
-                 <TableColumn fx:id="statusCol" prefWidth="73.0" text="Status" />
-                 <TableColumn fx:id="actionsCol" prefWidth="230.20001220703125" text="Actions" />
+               <columns>
+                  <TableColumn fx:id="idCol" prefWidth="37.399994254112244" text="ID" />
+                  <TableColumn fx:id="nameCol" prefWidth="139.60000610351562" text="Name" />
+                  <TableColumn fx:id="departmentCol" prefWidth="145.80001831054688" text="Department" />
+                  <TableColumn fx:id="salaryCol" prefWidth="91.20001220703125" text="Salary" />
+                  <TableColumn fx:id="workingDaysCol" prefWidth="88.00003051757812" text="Working Days" />
+                  <TableColumn fx:id="workingHoursCol" prefWidth="91.99996948242188" text="Working Hours" />
+                  <TableColumn fx:id="ratingCol" prefWidth="46.0" text="Rating" />
+                  <TableColumn fx:id="statusCol" prefWidth="73.0" text="Status" />
+                  <TableColumn fx:id="actionsCol" prefWidth="230.20001220703125" text="Actions" />
 
-              </columns>
+               </columns>
             </TableView>
             <HBox prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #F4F7FA;">
                <children>

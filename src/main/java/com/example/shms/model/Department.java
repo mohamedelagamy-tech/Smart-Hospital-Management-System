@@ -10,16 +10,16 @@ public class Department {
     private ArrayList<Doctor> doctors;
     private ArrayList<String> listOfRooms;
 
-  public Department(int departmentID, String departmentName, String location, String description){
-      this.departmentID=departmentID;
-      this.departmentName=departmentName;
-      this.location=location;
-      this.description=description;
+    public Department(int departmentID, String departmentName, String location, String description){
+        this.departmentID=departmentID;
+        this.departmentName=departmentName;
+        this.location=location;
+        this.description=description;
 
-      doctors= new ArrayList<>();
-      listOfRooms= new ArrayList<>();
+        doctors= new ArrayList<>();
+        listOfRooms= new ArrayList<>();
 
-  }
+    }
 
     public int getDepartmentID() {
         return departmentID;
@@ -70,7 +70,7 @@ public class Department {
     }
 
     public void addDoctor(Doctor doctor){
-      doctors.add(doctor);
+        doctors.add(doctor);
     }
     public void removeDoctor(Doctor doctor){
         doctors.remove(doctor);

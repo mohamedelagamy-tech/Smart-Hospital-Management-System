@@ -14,7 +14,7 @@
       <HBox prefHeight="94.0" prefWidth="904.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#handleBack" prefHeight="16.0" prefWidth="58.0" style="-fx-background-color: transparent;" text="← Back" textFill="WHITE" />
-            <Label prefHeight="33.0" prefWidth="178.0" text="Doctor Rating" textFill="WHITE">
+            <Label prefHeight="59.0" prefWidth="178.0" text="Doctor Rating" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

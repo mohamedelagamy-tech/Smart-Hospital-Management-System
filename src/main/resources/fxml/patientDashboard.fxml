@@ -30,7 +30,7 @@
                         </VBox>
                     </children>
                 </HBox>
-                <Button onAction="#handleLogout" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="Logout" />
+                <Button onAction="#handleLogout" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="➜] Logout" />
             </children>
         </HBox>
     </top>
@@ -100,16 +100,16 @@
                                                 <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text="Address" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                                                 <Label fx:id="profileAddress" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Alexandria" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                             </children>
-                                 <columnConstraints>
-                                    <ColumnConstraints />
-                                    <ColumnConstraints />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                 </rowConstraints>
+                                            <columnConstraints>
+                                                <ColumnConstraints />
+                                                <ColumnConstraints />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                            </rowConstraints>
                                         </GridPane>
                                         <Separator />
                                         <Button maxWidth="Infinity" style="-fx-background-color: #FCEBEB; -fx-text-fill: #A32D2D; -fx-font-size: 11px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 8; -fx-cursor: hand;" text="🚨  Emergency: +20 123 456 7890" />

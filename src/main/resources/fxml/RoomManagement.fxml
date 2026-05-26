@@ -1,43 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.shms.controller.RoomManagementController"
-      style="-fx-background-color: #dde8f5;"
-      spacing="24">
+<BorderPane prefHeight="700"
+            prefWidth="1200"
+            style="-fx-background-color: #f4f6f9;"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.shms.controller.RoomManagementController">
+    <top>
+        <HBox alignment="CENTER_LEFT"
+              prefHeight="60"
+              spacing="12"
+              style="-fx-background-color: #1F4E79; -fx-padding: 0 24;">
 
-    <padding><Insets top="36" right="44" bottom="36" left="44"/></padding>
-    <Button text="← Back" onAction="#handleBack"
-            style="-fx-background-color: transparent; -fx-text-fill: #1a6fba;
-               -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;"/>
-    <Label text="Room Management"
-           style="-fx-font-family: Georgia; -fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
+            <Button onAction="#handleBack"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: white;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;
+                           -fx-padding: 0;
+                           -fx-underline: true;"
+                    text="← Back" />
 
-    <HBox alignment="CENTER_LEFT" spacing="10"
-          style="-fx-background-color: white; -fx-border-color: #b0c4de; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10 16 10 16;">
-        <Label text="🔍" style="-fx-font-size: 16px;"/>
-        <TextField fx:id="searchField"
-                   promptText="Search rooms or patients..."
-                   style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 14px;"
-                   HBox.hgrow="ALWAYS"
-                   onKeyReleased="#onSearch"/>
-    </HBox>
+            <Label style="-fx-font-size: 16px;
+                           -fx-font-weight: bold;
+                           -fx-text-fill: white;"
+                   text="🛏 Room Management" />
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="16"
+              style="-fx-padding: 24; -fx-background-color: #f4f6f9;">
+            <HBox alignment="CENTER_LEFT"
+                  spacing="10"
+                  style="-fx-background-color: white;
+                          -fx-border-color: #dde1e7;
+                          -fx-border-radius: 8;
+                          -fx-background-radius: 8;
+                          -fx-padding: 0 16;">
 
-    <ScrollPane fx:id="scrollPane"
-                fitToWidth="true"
-                style="-fx-background-color: transparent; -fx-border-color: transparent;"
-                VBox.vgrow="ALWAYS">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #aaa;"
+                       text="🔍" />
+                <TextField fx:id="searchField"
+                           onKeyReleased="#onSearch"
+                           prefHeight="42"
+                           promptText="Search rooms, type or department..."
+                           style="-fx-background-color: transparent;
+                                  -fx-border-color: transparent;
+                                  -fx-font-size: 13px;"
+                           HBox.hgrow="ALWAYS" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <ToggleButton fx:id="btnAll"
+                              text="All"
+                              style="-fx-background-color: #1F4E79;
+                                     -fx-text-fill: white;
+                                     -fx-border-radius: 20;
+                                     -fx-background-radius: 20;
+                                     -fx-font-size: 13px;
+                                     -fx-cursor: hand;
+                                     -fx-pref-height: 34px;" />
+                <ToggleButton fx:id="btnAvailable"
+                              text="Available"
+                              style="-fx-background-color: #27ae60;
+                                     -fx-text-fill: white;
+                                     -fx-border-radius: 20;
+                                     -fx-background-radius: 20;
+                                     -fx-font-size: 13px;
+                                     -fx-cursor: hand;
+                                     -fx-pref-height: 34px;" />
+                <ToggleButton fx:id="btnOccupied"
+                              text="Occupied"
+                              style="-fx-background-color: #e74c3c;
+                                     -fx-text-fill: white;
+                                     -fx-border-radius: 20;
+                                     -fx-background-radius: 20;
+                                     -fx-font-size: 13px;
+                                     -fx-cursor: hand;
+                                     -fx-pref-height: 34px;" />
+                <ToggleButton fx:id="btnCleaning"
+                              text="Cleaning"
+                              style="-fx-background-color: #f97316;
+                                     -fx-text-fill: white;
+                                     -fx-border-radius: 20;
+                                     -fx-background-radius: 20;
+                                     -fx-font-size: 13px;
+                                     -fx-cursor: hand;
+                                     -fx-pref-height: 34px;" />
+            </HBox>
+            <ScrollPane fx:id="scrollPane"
+                        fitToWidth="true"
+                        hbarPolicy="NEVER"
+                        VBox.vgrow="ALWAYS"
+                        style="-fx-background-color: transparent;
+                               -fx-border-color: transparent;">
+                <content>
+                    <FlowPane fx:id="cardsPane"
+                              hgap="20"
+                              vgap="20"
+                              alignment="TOP_CENTER"
+                              prefWrapLength="1400"
+                              style="-fx-background-color: transparent;">
 
-        <FlowPane fx:id="cardsPane"
-                  style="-fx-background-color: transparent;"
-                  hgap="18" vgap="18">
-            <padding><Insets top="4" right="4" bottom="8" left="4"/></padding>
-        </FlowPane>
+                        <padding>
+                            <Insets top="4" right="4" bottom="8" left="4"/>
+                        </padding>
 
-    </ScrollPane>
-
-</VBox>
+                    </FlowPane>
+                </content>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>

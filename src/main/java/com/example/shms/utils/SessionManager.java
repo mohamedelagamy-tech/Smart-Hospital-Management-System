@@ -43,7 +43,7 @@ public class SessionManager {
         loginAttempts=0;
     }
     public boolean locked(){
-       return loginAttempts>=5;
+        return loginAttempts>=5;
     }
 
     public boolean isLoggedIn(){
@@ -73,7 +73,7 @@ public class SessionManager {
 
     private Thread timeoutThread;
     private Runnable onTimeout;
-    private static final int timeoutSeconds = 300;
+    private static final int timeoutSeconds = 3600;
 
     public void startSessionTimer(Runnable onTimeout){
         this.onTimeout = onTimeout;
@@ -99,21 +99,8 @@ public class SessionManager {
         }
     }
 
-    public void resetSessionTimer(Runnable onTimeout) {
+    public void resetSessionTimer(Runnable onTimeout){
         startSessionTimer(onTimeout);
-    }
 
-    private int loggedInPatientId = -1;
-    private int loggedInDoctorId = -1;
-
-    public int getLoggedInPatientId(){ return loggedInPatientId;}
-    public void setLoggedInPatientId(int id){ this.loggedInPatientId=id; }
-
-    public int getLoggedInDoctorId() {
-        return loggedInDoctorId;
-    }
-
-    public void setLoggedInDoctorId(int id) {
-        this.loggedInDoctorId = id;
     }
 }
