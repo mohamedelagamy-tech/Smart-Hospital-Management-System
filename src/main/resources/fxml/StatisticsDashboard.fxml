@@ -22,7 +22,7 @@
 
         <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE" />
 
-        <Label style="-fx-font-family: Georgia;                       -fx-font-size: 28px;                       -fx-font-weight: bold;                       -fx-text-fill: #1a1d23;" text="Statistics" textFill="WHITE" />
+        <Label style="-fx-font-family: Georgia;                       -fx-font-size: 28px;                      -fx-font-weight: bold;                       -fx-text-fill: #1a1d23;" text="Statistics" textFill="WHITE" />
 
     </HBox>
     <HBox spacing="20">
