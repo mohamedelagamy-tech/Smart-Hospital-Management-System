@@ -12,9 +12,12 @@
       style="-fx-background-color: #f4f6f9;">
 
     <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
-    <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline:true;" text="←Back" text-fill="WHITE">
+    <Button mnemonicParsing="false"
+            onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-underline:true; -fx-text-fill:white"
+            text="←Back"/>
 
-    </Button>
+
 
     <Label text="Statistics Dashboard"
            style="-fx-font-family: Georgia; -fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
