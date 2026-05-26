@@ -20,7 +20,6 @@ public class PrescriptionController {
     @FXML private TextField dosageField;
     @FXML private TextField durationField;
     @FXML private TextArea instructionsField;
-    @FXML private Label roleIndicator;
     @FXML private Label patientNameLabel;
     @FXML private TableView<Prescription> prescriptionTable;
     @FXML private TableColumn<Prescription, String> colId;
@@ -45,11 +44,9 @@ public class PrescriptionController {
         if(role.equals("PATIENT")){
             showPatientView();
             loadPatientPrescriptions();
-            roleIndicator.setText("Patient View");
         }else{
             showDoctorView();
             loadFromDatabase();
-            roleIndicator.setText("Doctor View");
         }
     }
     private void setupTableColumns() {

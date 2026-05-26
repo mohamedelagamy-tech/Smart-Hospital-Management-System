@@ -24,77 +24,95 @@ public class RoomManagementController implements Initializable {
     @FXML private TextField searchField;
     @FXML private FlowPane cardsPane;
     @FXML private ScrollPane scrollPane;
+    @FXML private ToggleButton btnAll;
+    @FXML private ToggleButton btnAvailable;
+    @FXML private ToggleButton btnOccupied;
+    @FXML private ToggleButton btnCleaning;
 
     private final List<Room> allRooms=new ArrayList<>();
     private final List<VBox> allCards=new ArrayList<>();
     private final DatabaseManager db=DatabaseManager.getInstance();
+    private String currentFilter="All";
 
     @Override
     public void initialize(URL location,ResourceBundle resources){
         loadRoomsFromDatabase();
         buildAllCards();
         cardsPane.setPrefWrapLength(1100);
+        setupFilterButtons();
+    }
+    private void setupFilterButtons(){
+        ToggleGroup group=new ToggleGroup();
+        btnAll.setToggleGroup(group);
+        btnAvailable.setToggleGroup(group);
+        btnOccupied.setToggleGroup(group);
+        btnCleaning.setToggleGroup(group);
+        btnAll.setSelected(true);
+        group.selectedToggleProperty().addListener((obs,oldVal,newVal)->{
+            if(newVal==null){ group.selectToggle(oldVal); return; }
+            currentFilter=((ToggleButton)newVal).getText();
+            applyFilter();
+        });
     }
     private void loadRoomsFromDatabase(){
         allRooms.clear();
         List<Room> rooms=db.getAllRooms();
-        if(rooms != null) {
-            allRooms.addAll(rooms);
-        }
+        if(rooms!=null) allRooms.addAll(rooms);
     }
     private void buildAllCards(){
         cardsPane.getChildren().clear();
         allCards.clear();
-        for(Room room : allRooms){
-            VBox card = buildCard(room);
+        for(Room room:allRooms){
+            VBox card=buildCard(room);
             allCards.add(card);
             cardsPane.getChildren().add(card);
         }
     }
     private VBox buildCard(Room room){
-        Label idLabel = new Label("Room "+room.getRoomNumber());
-        idLabel.setStyle("-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;");
+        Label accentBar=new Label();
+        accentBar.setMaxWidth(Double.MAX_VALUE);
+        accentBar.setPrefHeight(5);
+        accentBar.setStyle("-fx-background-color: "+accentColor(room.getRoomStatus())+";"+
+                "-fx-background-radius: 10 10 0 0;");
 
-        Label badge = new Label(room.getRoomStatus());
+        Label roomLabel=new Label("Room "+room.getRoomNumber());
+        roomLabel.setStyle("-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;");
+
+        Label badge=new Label(room.getRoomStatus());
         badge.setStyle(badgeStyle(room.getRoomStatus()));
 
-        HBox topRow = new HBox(8, idLabel, badge);
+        HBox topRow=new HBox(8,roomLabel,badge);
         topRow.setAlignment(Pos.CENTER_LEFT);
 
-        Label typeLabel = new Label(room.getDepartment());
-        typeLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #4a5568;");
+        Label typeLabel=new Label(room.getRoomtype()!=null ? room.getRoomtype() : "General");
+        typeLabel.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;"+
+                "-fx-background-color: #e8f0fb; -fx-background-radius: 4; -fx-padding: 2 8 2 8;");
 
-        Label detailLabel = new Label(getDetailText(room));
+        Label detailLabel=new Label(getDetailText(room));
         detailLabel.setStyle(isOccupied(room.getRoomStatus())
-                ? "-fx-font-size: 12px; -fx-text-fill: #4a5568;"
+                ? "-fx-font-size: 12px; -fx-text-fill: #4a5568; -fx-font-weight: bold;"
                 : "-fx-font-size: 12px; -fx-text-fill: #9aa5b4;");
 
-        String accentColor=accentColor(room.getRoomStatus());
+        VBox content=new VBox(6,topRow,typeLabel,detailLabel);
+        content.setPadding(new Insets(14));
 
-        VBox card = new VBox(6, topRow,typeLabel,detailLabel);
-        card.setStyle("-fx-background-color: white;" +
-                "-fx-border-color: " + accentColor+" #eeeeee #eeeeee #eeeeee;" +
-                "-fx-border-width: 0 0 0 4;"+
-                "-fx-border-radius: 0;"+
-                "-fx-background-radius: 10;"+
-                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 6, 0, 0, 2);");
-        card.setPrefSize(220, 130);
-        card.setPadding(new Insets(16));
+        VBox card=new VBox(0,accentBar,content);
+        card.setStyle("-fx-background-color: white; -fx-background-radius: 10;"+
+                "-fx-border-color: #eeeeee; -fx-border-radius: 10; -fx-border-width: 1;");
+        card.setPrefSize(228,140);
         card.setUserData(room);
 
         if(room.getRoomStatus().equalsIgnoreCase("Available")){
-            Button assignBtn = new Button("Assign Patient");
+            Button assignBtn=new Button("Assign Patient");
             assignBtn.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white;"+
                     "-fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand; -fx-padding: 5 12;");
             assignBtn.setOnAction(e->showAssignDialog(room));
-            card.getChildren().add(assignBtn);
+            content.getChildren().add(assignBtn);
         }
         return card;
     }
     private String accentColor(String status){
-        if(status == null){
-            return "#9aa5b4";
-        }
+        if(status==null) return "#9aa5b4";
         return switch(status.toLowerCase()){
             case "occupied"->"#e74c3c";
             case "available"->"#27ae60";
@@ -103,60 +121,65 @@ public class RoomManagementController implements Initializable {
         };
     }
     private String getDetailText(Room room){
-        if(isOccupied(room.getRoomStatus())) {
-            int patientId = room.getAssignedPatientId();
-            return patientId > 0 ? "Patient ID: " + patientId : "Occupied";
-        }else if(room.getRoomStatus().equalsIgnoreCase("Cleaning")) {
+        if(isOccupied(room.getRoomStatus())){
+            int patientId=room.getAssignedPatientId();
+            if(patientId>0){
+                String name=db.getPatientName(patientId);
+                return name!=null ? "👤 "+name : "Patient ID: "+patientId;
+            }
+            return "Occupied";
+        }else if(room.getRoomStatus().equalsIgnoreCase("Cleaning")){
             return "Being cleaned";
-        }else {
+        }else{
             return "Ready for admission";
         }
     }
-    @FXML private void onSearch(KeyEvent event) {
-        String query = searchField.getText().trim().toLowerCase();
-        for(VBox card : allCards) {
-            Room room=(Room) card.getUserData();
-            boolean match = query.isEmpty()
-                    || String.valueOf(room.getRoomNumber()).contains(query)
-                    || room.getDepartment().toLowerCase().contains(query)
-                    || room.getRoomStatus().toLowerCase().contains(query)
-                    || room.getRoomtype().toLowerCase().contains(query);
-            card.setVisible(match);
-            card.setManaged(match);
+    private void applyFilter(){
+        String query=searchField.getText().trim().toLowerCase();
+        for(VBox card:allCards){
+            Room room=(Room)card.getUserData();
+            boolean matchFilter=currentFilter.equals("All")||room.getRoomStatus().equalsIgnoreCase(currentFilter);
+            boolean matchSearch=query.isEmpty()
+                    ||String.valueOf(room.getRoomNumber()).contains(query)
+                    ||room.getRoomStatus().toLowerCase().contains(query)
+                    ||(room.getRoomtype()!=null&&room.getRoomtype().toLowerCase().contains(query));
+            card.setVisible(matchFilter&&matchSearch);
+            card.setManaged(matchFilter&&matchSearch);
         }
     }
-    @FXML public void onRefresh() {
+    @FXML private void onSearch(KeyEvent event){
+        applyFilter();
+    }
+    @FXML public void onRefresh(){
         loadRoomsFromDatabase();
         buildAllCards();
     }
     private boolean isOccupied(String status){
-        return status != null && status.equalsIgnoreCase("Occupied");
+        return status!=null&&status.equalsIgnoreCase("Occupied");
     }
     private String badgeStyle(String status){
-        String base="-fx-text-fill: white; -fx-font-size: 11px; -fx-font-weight: bold;" +
+        String base="-fx-text-fill: white; -fx-font-size: 11px; -fx-font-weight: bold;"+
                 "-fx-background-radius: 20; -fx-padding: 3 10 3 10;";
-        if(status==null) {
-            return base+"-fx-background-color: #9aa5b4;";
-        }
+        if(status==null) return base+"-fx-background-color: #9aa5b4;";
         return switch(status.toLowerCase()){
-            case "occupied"-> base+"-fx-background-color: #e74c3c;";
-            case "available"-> base+"-fx-background-color: #27ae60;";
-            case "cleaning"-> base+"-fx-background-color: #f97316;";
-            default-> base+"-fx-background-color: #9aa5b4;";
+            case "occupied"->base+"-fx-background-color: #e74c3c;";
+            case "available"->base+"-fx-background-color: #27ae60;";
+            case "cleaning"->base+"-fx-background-color: #f97316;";
+            default->base+"-fx-background-color: #9aa5b4;";
         };
     }
     private void showAssignDialog(Room room){
-        TextInputDialog dialog = new TextInputDialog();
+        TextInputDialog dialog=new TextInputDialog();
         dialog.setTitle("Assign Room");
-        dialog.setHeaderText("Assign Room " + room.getRoomNumber());
+        dialog.setHeaderText("Assign Room "+room.getRoomNumber());
         dialog.setContentText("Enter Patient ID:");
-        dialog.showAndWait().ifPresent(input -> {
-            try {
-                int patientId = Integer.parseInt(input.trim());
-                db.assignRoom(room.getId(), patientId);
+        dialog.showAndWait().ifPresent(input->{
+            try{
+                int patientId=Integer.parseInt(input.trim());
+                db.assignRoom(room.getId(),patientId);
                 loadRoomsFromDatabase();
                 buildAllCards();
-            }catch(NumberFormatException e) {
+            }catch(NumberFormatException e){
                 new Alert(Alert.AlertType.ERROR,"Invalid Patient ID").show();
             }
         });

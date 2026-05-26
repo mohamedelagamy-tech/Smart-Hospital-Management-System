@@ -22,16 +22,33 @@
     </top>
     <center>
         <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f4f6f9;">
-
             <HBox alignment="CENTER_LEFT" spacing="10"
                   style="-fx-background-color: white; -fx-border-color: #dde1e7;
                          -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 0 16;">
                 <Label text="🔍" style="-fx-font-size: 14px; -fx-text-fill: #aaa;"/>
                 <TextField fx:id="searchField"
-                           promptText="Search rooms or patients..."
+                           promptText="Search rooms, type or department..."
                            prefHeight="42" HBox.hgrow="ALWAYS"
                            onKeyReleased="#onSearch"
                            style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 13px;"/>
+            </HBox>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <ToggleButton fx:id="btnAll" text="All"
+                              style="-fx-background-color: #1F4E79; -fx-text-fill: white;
+                                     -fx-border-radius: 20; -fx-background-radius: 20;
+                                     -fx-font-size: 13px; -fx-cursor: hand; -fx-pref-height: 34px;"/>
+                <ToggleButton fx:id="btnAvailable" text="Available"
+                              style="-fx-background-color: #27ae60; -fx-text-fill: white;
+                                     -fx-border-radius: 20; -fx-background-radius: 20;
+                                     -fx-font-size: 13px; -fx-cursor: hand; -fx-pref-height: 34px;"/>
+                <ToggleButton fx:id="btnOccupied" text="Occupied"
+                              style="-fx-background-color: #e74c3c; -fx-text-fill: white;
+                                     -fx-border-radius: 20; -fx-background-radius: 20;
+                                     -fx-font-size: 13px; -fx-cursor: hand; -fx-pref-height: 34px;"/>
+                <ToggleButton fx:id="btnCleaning" text="Cleaning"
+                              style="-fx-background-color: #f97316; -fx-text-fill: white;
+                                     -fx-border-radius: 20; -fx-background-radius: 20;
+                                     -fx-font-size: 13px; -fx-cursor: hand; -fx-pref-height: 34px;"/>
             </HBox>
             <ScrollPane fx:id="scrollPane"
                         fitToWidth="true"
@@ -43,7 +60,6 @@
                     <padding><Insets top="4" right="4" bottom="8" left="4"/></padding>
                 </FlowPane>
             </ScrollPane>
-
         </VBox>
     </center>
 </BorderPane>
