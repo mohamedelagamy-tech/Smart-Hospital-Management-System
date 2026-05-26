@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class DischargeSummaryController implements Initializable {
 
-    @FXML private ComboBox<String>   patientComboBox;
+    @FXML private ComboBox<String> patientComboBox;
 
     @FXML private Label lblName;
     @FXML private Label lblPatientId;
@@ -39,12 +39,12 @@ public class DischargeSummaryController implements Initializable {
     @FXML private Label lblConsultationCharges;
     @FXML private Label lblTotalBill;
 
-    @FXML private TableView<Prescription>            prescriptionsTable;
-    @FXML private TableColumn<Prescription, String>  colMedicine;
-    @FXML private TableColumn<Prescription, String>  colDosage;
-    @FXML private TableColumn<Prescription, String>  colDuration;
+    @FXML private TableView<Prescription> prescriptionsTable;
+    @FXML private TableColumn<Prescription,String> colMedicine;
+    @FXML private TableColumn<Prescription,String> colDosage;
+    @FXML private TableColumn<Prescription,String> colDuration;
 
-    private final DatabaseManager db = DatabaseManager.getInstance();
+    private final DatabaseManager db=DatabaseManager.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -161,22 +161,25 @@ public class DischargeSummaryController implements Initializable {
         summary.writeToFile();
 
     }
-    @FXML private void handleBack() {
+    @FXML private void handleBack(){
         MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
-    @FXML
-    private void handlePrint() {
+    @FXML private void handlePrint() {
         String selected = patientComboBox.getValue();
         if (selected == null) {
             showAlert("Please select a patient first.");
             return;
         }
-        int patientId = extractPatientId(selected);
+        int patientId=extractPatientId(selected);
         List<Prescription> prescriptions = db.getPrescriptionsByPatient(patientId);
 
-        double totalBill = 0;
-        List<Bill> bills = db.getBillsByPatient(patientId);
-        if (bills != null) for (Bill b : bills) totalBill += b.getAmount();
+        double totalBill=0;
+        try(java.sql.Statement st = db.getConnection().createStatement()){
+            java.sql.ResultSet billRs = st.executeQuery("SELECT SUM(amount) FROM bills WHERE patientID = "+patientId);
+            if (billRs.next()) totalBill = billRs.getDouble(1);
+        } catch (Exception e) {
+            System.out.println("Bills query failed: "+e.getMessage());
+        }
 
         DischargeSummary summary = new DischargeSummary(
                 0, patientId,
@@ -185,6 +188,13 @@ public class DischargeSummaryController implements Initializable {
         );
         summary.writeToFile();
 
+        try (java.sql.Statement st = db.getConnection().createStatement()) {
+            st.execute("UPDATE patients SET status = 'Discharged' WHERE id = " + patientId);
+            System.out.println("Patient " + patientId + " discharged successfully.");
+        } catch (Exception e) {
+            System.out.println("Status update failed: " + e.getMessage());
+        }
+
         final int finalPatientId = patientId;
         final double finalTotalBill = totalBill;
         final String finalDoctorName = lblDoctor.getText();
@@ -192,23 +202,25 @@ public class DischargeSummaryController implements Initializable {
 
         Thread emailThread = new Thread(new Runnable() {
             @Override
-            public void run(){
-                try{
-                    String patientEmail=db.getPatientEmail(finalPatientId);
-                    String patientName=db.getPatientName(finalPatientId);
-                    if(patientEmail != null && !patientEmail.isEmpty()){
-                        EmailService.sendDischargeSummary(patientEmail,patientName,finalDoctorName,finalRoomInfo,String.format("%.0f", finalTotalBill));
+            public void run() {
+                try {
+                    String patientEmail = db.getPatientEmail(finalPatientId);
+                    String patientName = db.getPatientName(finalPatientId);
+                    if (patientEmail != null && !patientEmail.isEmpty()) {
+                        EmailService.sendDischargeSummary(
+                                patientEmail, patientName,
+                                finalDoctorName, finalRoomInfo,
+                                String.format("%.0f", finalTotalBill));
                     }
-                } catch(Exception e){
-                    System.out.println("Failed to send discharge email: "+e.getMessage());
+                } catch (Exception e) {
+                    System.out.println("Discharge email failed: " + e.getMessage());
                 }
             }
         });
         emailThread.setDaemon(true);
         emailThread.start();
 
-        showAlert("Email has been sent");
-        showAlert("Discharge summary saved as discharge_" + patientId + ".txt");
+        showAlert("Patient discharged successfully! Summary saved and email sent.");
     }
 
     private int extractPatientId(String entry) {

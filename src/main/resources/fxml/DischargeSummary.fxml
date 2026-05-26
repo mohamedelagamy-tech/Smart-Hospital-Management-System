@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.shms.controller.DischargeSummaryController"
+            prefHeight="700.0" prefWidth="1200.0">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10"
+              style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
+            <children>
+                <Button onAction="#handleBack" text="← Back"
+                        style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" />
+                <Label text="🏥  Discharge Summary"
+                       style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <VBox style="-fx-background-color: #F4F6F9; -fx-padding: 20;" spacing="14">
+            <children>
+                <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" spacing="8">
+                    <children>
+                        <Label text="Select Patient to Discharge"
+                               style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" />
+                        <ComboBox fx:id="patientComboBox" promptText="Select Patient"
+                                  maxWidth="Infinity" prefHeight="38"
+                                  onAction="#onPatientSelected"
+                                  style="-fx-font-size: 13px;" />
+                    </children>
+                </VBox>
+                <ScrollPane fitToWidth="true"
+                            style="-fx-background-color: transparent; -fx-border-color: transparent;"
+                            VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox spacing="14" style="-fx-padding: 0 0 20 0;">
+                            <children>
+                                <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" spacing="10">
+                                    <children>
+                                        <Label text="Patient Information"
+                                               style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 4 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" />
+                                        <HBox spacing="40">
+                                            <children>
+                                                <VBox spacing="3">
+                                                    <Label text="NAME" style="-fx-font-size: 10px; -fx-text-fill: #888;" />
+                                                    <Label fx:id="lblName" text="—" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                                </VBox>
+                                                <VBox spacing="3">
+                                                    <Label text="PATIENT ID" style="-fx-font-size: 10px; -fx-text-fill: #888;" />
+                                                    <Label fx:id="lblPatientId" text="—" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                                </VBox>
+                                                <VBox spacing="3">
+                                                    <Label text="ADMISSION" style="-fx-font-size: 10px; -fx-text-fill: #888;" />
+                                                    <Label fx:id="lblAdmission" text="—" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                                </VBox>
+                                                <VBox spacing="3">
+                                                    <Label text="DISCHARGE DATE" style="-fx-font-size: 10px; -fx-text-fill: #888;" />
+                                                    <Label fx:id="lblDischarge" text="—" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                                <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" spacing="10">
+                                    <children>
+                                        <Label text="Medical Details"
+                                               style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 4 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" />
+                                        <HBox spacing="40">
+                                            <children>
+                                                <VBox spacing="3">
+                                                    <Label text="ROOM" style="-fx-font-size: 10px; -fx-text-fill: #888;" />
+                                                    <Label fx:id="lblRoom" text="—" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                                </VBox>
+                                                <VBox spacing="3">
+                                                    <Label text="DOCTOR" style="-fx-font-size: 10px; -fx-text-fill: #888;" />
+                                                    <Label fx:id="lblDoctor" text="—" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                                </VBox>
+                                                <VBox spacing="3">
+                                                    <Label text="DIAGNOSIS" style="-fx-font-size: 10px; -fx-text-fill: #888;" />
+                                                    <Label fx:id="lblDiagnosis" text="—" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                                <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" spacing="10">
+                                    <children>
+                                        <Label text="Prescriptions"
+                                               style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 4 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" />
+                                        <TableView fx:id="prescriptionsTable" prefHeight="150"
+                                                   style="-fx-background-color: transparent; -fx-border-color: transparent;"
+                                                   columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+                                            <columns>
+                                                <TableColumn fx:id="colMedicine" text="Medicine" prefWidth="240" />
+                                                <TableColumn fx:id="colDosage" text="Dosage" prefWidth="120" />
+                                                <TableColumn fx:id="colDuration" text="Duration" prefWidth="120" />
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </VBox>
+                                <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" spacing="8">
+                                    <children>
+                                        <Label text="Bill Summary"
+                                               style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 4 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" />
+                                        <HBox>
+                                            <Label text="Room Charges" style="-fx-font-size: 12px; -fx-text-fill: #555;" HBox.hgrow="ALWAYS" />
+                                            <Label fx:id="lblRoomCharges" text="EGP 0" style="-fx-font-size: 12px; -fx-text-fill: #333;" />
+                                        </HBox>
+                                        <HBox>
+                                            <Label text="Medicine Charges" style="-fx-font-size: 12px; -fx-text-fill: #555;" HBox.hgrow="ALWAYS" />
+                                            <Label fx:id="lblMedicineCharges" text="EGP 0" style="-fx-font-size: 12px; -fx-text-fill: #333;" />
+                                        </HBox>
+                                        <HBox>
+                                            <Label text="Consultation Charges" style="-fx-font-size: 12px; -fx-text-fill: #555;" HBox.hgrow="ALWAYS" />
+                                            <Label fx:id="lblConsultationCharges" text="EGP 0" style="-fx-font-size: 12px; -fx-text-fill: #333;" />
+                                        </HBox>
+                                        <Separator />
+                                        <HBox>
+                                            <Label text="Total Bill" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" HBox.hgrow="ALWAYS" />
+                                            <Label fx:id="lblTotalBill" text="EGP 0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" />
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                                <Button text="🏥  Discharge Patient &amp; Send Summary" maxWidth="Infinity"
+                                        prefHeight="44" onAction="#handlePrint"
+                                        style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" />
+
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
