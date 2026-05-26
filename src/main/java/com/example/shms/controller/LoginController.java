@@ -77,7 +77,7 @@ public class LoginController {
             if(rs.next()){
                 String role =rs.getString("role");
                 session.login(username,role);
-                logAudit(username , role , "SUCCESS");
+                logAudit(username, role,"SUCCESS");
                 showError("Login successful!","success");
 
                 session.startSessionTimer(new Runnable(){

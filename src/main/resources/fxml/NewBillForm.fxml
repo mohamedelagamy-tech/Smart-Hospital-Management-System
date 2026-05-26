@@ -7,65 +7,45 @@
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.shms.controller.NewBillController"
-      spacing="0"
-      style="-fx-background-color: #f4f6f9;">
-    <VBox style="-fx-background-color: #1F4E79;" prefHeight="80">
-        <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
-        <Label text="Generate New Bill"
-               style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
-        <Label text="Fill in the details below to create a new bill" style="-fx-text-fill: #8888aa; -fx-font-size: 12px;"/>
-    </VBox>
-    <VBox spacing="14">
-        <padding><Insets top="28" right="30" bottom="28" left="30"/></padding>
-        <Button text="← Back" onAction="#handleBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #1a1a2e;
-                       -fx-font-size: 12px; -fx-cursor: hand; -fx-padding: 0;
-                       -fx-underline: true;"/>
-        <VBox spacing="5">
-            <Label text="Patient"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #444;"/>
-            <ComboBox fx:id="patientBox"
-                      promptText="Select a patient"
-                      prefWidth="340" prefHeight="38"
-                      style="-fx-background-color: white; -fx-border-color: #dde1e7;
-                             -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px;"/>
-        </VBox>
-        <VBox spacing="5">
-            <Label text="Doctor"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #444;"/>
-            <ComboBox fx:id="doctorBox"
-                      promptText="Select a doctor"
-                      prefWidth="340" prefHeight="38"
-                      style="-fx-background-color: white; -fx-border-color: #dde1e7;
-                             -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px;"/>
-        </VBox>
-        <VBox spacing="5">
-            <Label text="Service"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #444;"/>
-            <TextField fx:id="serviceField"
-                       promptText="e.g. Cardiology Consultation"
-                       prefWidth="340" prefHeight="38"
-                       style="-fx-background-color: white; -fx-border-color: #dde1e7;
-                              -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px;"/>
-        </VBox>
-        <VBox spacing="5">
-            <Label text="Amount (EGP)"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #444;"/>
-            <TextField fx:id="amountField"
-                       promptText="e.g. 850"
-                       prefWidth="340" prefHeight="38"
-                       style="-fx-background-color: white; -fx-border-color: #dde1e7;
-                              -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px;"/>
-        </VBox>
-        <Label fx:id="errorLabel"
-               prefWidth="340"
-               wrapText="true"
-               style="-fx-text-fill: #c0392b; -fx-font-size: 12px;"/>
-        <Button text="Generate Bill"
-                prefWidth="340" prefHeight="42"
-                onAction="#handleSubmit"
-                style="-fx-background-color: #1F4E79; -fx-text-fill: white;
-                       -fx-font-size: 14px; -fx-font-weight: bold;
-                       -fx-background-radius: 8; -fx-cursor: hand;"/>
-    </VBox>
+      spacing="12"
+      stylesheets="@billing.css"
+      styleClass="form-container">
+
+    <padding><Insets top="30" right="30" bottom="30" left="30"/></padding>
+
+    <Button text="← Back" onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-text-fill: #1a6fba;
+               -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;"/>
+
+    <Label text="Generate New Bill" styleClass="form-title"/>
+
+    <Label text="Patient Name" styleClass="form-label"/>
+    <ComboBox fx:id="patientBox"
+              promptText="Select a patient"
+              prefWidth="300"
+              styleClass="combo-box"/>
+
+    <Label text="Service" styleClass="form-label"/>
+    <TextField fx:id="serviceField"
+               promptText="Enter service type"
+               prefWidth="300"
+               styleClass="form-field"/>
+
+    <Label text="Cost" styleClass="form-label"/>
+    <TextField fx:id="amountField"
+               promptText="Enter amount"
+               prefWidth="300"
+               styleClass="form-field"/>
+
+    <Label text="Status" styleClass="form-label"/>
+    <ComboBox fx:id="statusBox"
+              prefWidth="300"
+              styleClass="combo-box"/>
+
+    <Button fx:id="submitBtn"
+            text="Submit"
+            prefWidth="300" prefHeight="40"
+            styleClass="submit-btn"
+            onAction="#handleSubmit"/>
+
 </VBox>

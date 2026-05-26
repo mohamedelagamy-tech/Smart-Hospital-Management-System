@@ -13,7 +13,7 @@ public class Bill implements Billable {
     private String paymentMethod;
 
     public Bill(int id, int patientId, String patientName, String doctorName, String service, double amount, String status, String paymentMethod,String date) {
-        this.billNumber ="#B-" + String.format("%03d", id);
+        this.billNumber ="BILL-" + String.format("%03d", id);
         this.patientId = patientId;
         this.patientName = patientName;
         this.doctorName = doctorName;
