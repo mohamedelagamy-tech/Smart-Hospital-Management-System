@@ -9,7 +9,7 @@
       fx:controller="com.example.shms.controller.NewBillController"
       spacing="0"
       style="-fx-background-color: #f4f6f9;">
-    <VBox style="-fx-background-color: #1a1a2e;" prefHeight="80">
+    <VBox style="-fx-background-color: #1F4E79;" prefHeight="80">
         <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
         <Label text="Generate New Bill"
                style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
@@ -64,7 +64,7 @@
         <Button text="Generate Bill"
                 prefWidth="340" prefHeight="42"
                 onAction="#handleSubmit"
-                style="-fx-background-color: #1a1a2e; -fx-text-fill: white;
+                style="-fx-background-color: #1F4E79; -fx-text-fill: white;
                        -fx-font-size: 14px; -fx-font-weight: bold;
                        -fx-background-radius: 8; -fx-cursor: hand;"/>
     </VBox>

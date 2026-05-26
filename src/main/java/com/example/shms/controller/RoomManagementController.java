@@ -10,8 +10,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -38,7 +38,7 @@ public class RoomManagementController implements Initializable {
     public void initialize(URL location,ResourceBundle resources){
         loadRoomsFromDatabase();
         buildAllCards();
-        cardsPane.setPrefWrapLength(1100);
+        cardsPane.setPrefWrapLength(1400);
         setupFilterButtons();
     }
     private void setupFilterButtons(){
