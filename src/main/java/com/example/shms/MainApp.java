@@ -23,7 +23,7 @@ public class MainApp extends Application {
         stage.show();
         MedicineReminderUtil.showReminders();
     }
-    public static void navigateTo(String fxmlFile, int width, int height){
+    public static void navigateTo(String fxmlFile, int width, int height) {
         try{
             if (primaryStage==null){
                 System.out.println("Stage is null");
