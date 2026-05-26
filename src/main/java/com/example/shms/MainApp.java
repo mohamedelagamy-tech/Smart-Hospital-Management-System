@@ -25,7 +25,7 @@ public class MainApp extends Application {
     }
     public static void navigateTo(String fxmlFile, int width, int height) {
         try{
-            if (primaryStage==null){
+            if(primaryStage==null){
                 System.out.println("Stage is null");
                 return;
             }
