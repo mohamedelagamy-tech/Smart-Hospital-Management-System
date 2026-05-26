@@ -6,7 +6,8 @@
 <BorderPane prefHeight="700" prefWidth="1200" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PrescriptionController">
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="60" spacing="12" style="-fx-background-color: #1F4E79; -fx-padding: 0 24;">
-            <Button onAction="#handleBack" style="-fx-background-color: white; -fx-text-fill: #1F4E79;                            -fx-font-size: 12px; -fx-font-weight: bold;                            -fx-background-radius: 99; -fx-cursor: hand; -fx-padding: 6 18;" text="← Back" />
+            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE">
+            </Button>
             <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" text="💊  Prescriptions" />
             <HBox HBox.hgrow="ALWAYS" />
         </HBox>

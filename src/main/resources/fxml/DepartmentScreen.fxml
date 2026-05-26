@@ -21,7 +21,7 @@
             <Insets left="20.0" right="20.0" />
          </padding>
          <children>
-            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-cursor: hand;" text="← Back" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline:true;" text="← Back" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>

@@ -11,7 +11,7 @@
             <children>
                 <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 16 20; -fx-background-color: #1F4E79;">
                     <children>
-                  <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: Transparent;" text="← Back" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: Transparent; -fx-underline:true;" text="← Back" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
