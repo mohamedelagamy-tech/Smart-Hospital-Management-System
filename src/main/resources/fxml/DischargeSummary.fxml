@@ -92,8 +92,11 @@
                                         <Label text="Prescriptions"
                                                style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 4 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" />
                                         <TableView fx:id="prescriptionsTable" prefHeight="150"
-                                                   style="-fx-background-color: transparent; -fx-border-color: transparent;"
-                                                   columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+                                                   style="-fx-background-color: transparent; -fx-border-color: transparent;">
+
+                                        <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                                        </columnResizePolicy>
                                             <columns>
                                                 <TableColumn fx:id="colMedicine" text="Medicine" prefWidth="240" />
                                                 <TableColumn fx:id="colDosage" text="Dosage" prefWidth="120" />
