@@ -16,9 +16,6 @@
             onAction="#handleBack"
             style="-fx-background-color: transparent; -fx-underline:true; -fx-text-fill:white"
             text="←Back"/>
-
-
-
     <Label text="Statistics Dashboard"
            style="-fx-font-family: Georgia; -fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
 
