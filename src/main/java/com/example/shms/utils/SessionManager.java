@@ -73,7 +73,7 @@ public class SessionManager {
 
     private Thread timeoutThread;
     private Runnable onTimeout;
-    private static final int timeoutSeconds = 300;
+    private static final int timeoutSeconds = 3600;
 
     public void startSessionTimer(Runnable onTimeout){
         this.onTimeout = onTimeout;
