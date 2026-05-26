@@ -30,7 +30,12 @@ public class SessionManager {
         this.loggedInRole=null;
         this.loginAttempts=0;
     }
-
+    public String getDashboardName() {
+        if ("PATIENT".equals(loggedInRole)){
+            return "patientDashboard";
+        }
+        return "dashboard";
+    }
     public void addAttempts(){
         loginAttempts++;
     }
