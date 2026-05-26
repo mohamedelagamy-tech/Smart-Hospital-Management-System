@@ -255,4 +255,3 @@ public class DischargeSummaryController implements Initializable {
         alert.show();
     }
 }
-

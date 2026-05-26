@@ -1,4 +1,4 @@
-package com.example.shms.controller;
+package com.example.shms.utils;
 
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
@@ -46,6 +46,14 @@ public class PrescriptionController implements Initializable {
         loadFromDatabase();
         styleTableHeader();
         prescriptionTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        String role = SessionManager.getInstance().getLoggedInRole();
+        if (role != null && role.equalsIgnoreCase("PATIENT")) {
+            showPatientView();
+        } else if (role != null && role.equalsIgnoreCase("DOCTOR")) {
+            showDoctorView();
+        } else {
+            showPatientView();
+        }
     }
 
     private void setupTableColumns() {
@@ -83,7 +91,9 @@ public class PrescriptionController implements Initializable {
 
     private void loadFromDatabase() {
         allPrescriptions.clear();
-        List<Prescription> list = db.getAllPrescriptions(); // load all
+        List<Prescription> list = db.getPrescriptionsByPatient(0); // load all
+        // If DatabaseManager has getAllPrescriptions(), use that instead:
+        // List<Prescription> list = db.getAllPrescriptions();
         if (list != null) allPrescriptions.addAll(list);
     }
 
@@ -164,7 +174,6 @@ public class PrescriptionController implements Initializable {
     public void showPatientView() {
         patientViewPane.setVisible(true);
         patientViewPane.setManaged(true);
-        // hide the add form
         addFormPane.setVisible(false);
         addFormPane.setManaged(false);
         prescriptionTable.setItems(FXCollections.emptyObservableList());
