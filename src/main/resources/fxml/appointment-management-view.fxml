@@ -5,7 +5,7 @@
 
 <VBox spacing="0" style="-fx-background-color:#EEF2FF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.AppointmentManagementController">
 
-    <HBox alignment="CENTER_LEFT" spacing="16" style="-fx-background-color:#185FA5; -fx-padding: 14 20;">
+    <HBox alignment="CENTER_LEFT" spacing="16" style="-fx-background-color:#1F4E79; -fx-padding: 14 20;">
         <Button onAction="#handleBack" style="-fx-background-color: transparent; -fx-text-fill: white;                        -fx-underline: true; -fx-font-size: 13px; -fx-cursor: hand;" text="← Back" />
         <Label style="-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:white;" text="Appointment Management" />
     </HBox>
@@ -18,7 +18,7 @@
         </HBox>
     </HBox>
     <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 0 20 12 20; -fx-background-color:#EEF2FF;">
-        <Button fx:id="bookBtn" onAction="#handleBook" style="-fx-background-color: #185FA5; -fx-text-fill: white;                        -fx-font-size: 12px; -fx-font-weight: bold;                        -fx-background-radius: 20; -fx-padding: 6 16;                        -fx-border-width: 0; -fx-cursor: hand;" text="+ Book" />
+        <Button fx:id="bookBtn" onAction="#handleBook" style="-fx-background-color: #1F4E79; -fx-text-fill: white;                        -fx-font-size: 12px; -fx-font-weight: bold;                        -fx-background-radius: 20; -fx-padding: 6 16;                        -fx-border-width: 0; -fx-cursor: hand;" text="+ Book" />
         <Button fx:id="cancelBtn" onAction="#handleCancel" style="-fx-background-color: #e74c3c; -fx-text-fill: white;                        -fx-font-size: 12px; -fx-font-weight: bold;                        -fx-background-radius: 20; -fx-padding: 6 16;                        -fx-border-width: 0; -fx-cursor: hand;" text="✕ Cancel" />
         <Button onAction="#handleRefresh" style="-fx-background-color: #27ae60; -fx-text-fill: white;                        -fx-font-size: 12px; -fx-font-weight: bold;                        -fx-background-radius: 20; -fx-padding: 6 16;                        -fx-border-width: 0; -fx-cursor: hand;" text="↻ Refresh" />
         <Region HBox.hgrow="ALWAYS" />
