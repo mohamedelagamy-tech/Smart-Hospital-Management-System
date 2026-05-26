@@ -5,13 +5,14 @@ import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Room;
 import com.example.shms.utils.SessionManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -99,7 +100,7 @@ public class RoomManagementController implements Initializable {
         VBox card=new VBox(0,accentBar,content);
         card.setStyle("-fx-background-color: white; -fx-background-radius: 10;"+
                 "-fx-border-color: #eeeeee; -fx-border-radius: 10; -fx-border-width: 1;");
-        card.setPrefSize(228,140);
+        card.setPrefSize(228,155);
         card.setUserData(room);
 
         if(room.getRoomStatus().equalsIgnoreCase("Available")){
@@ -109,7 +110,31 @@ public class RoomManagementController implements Initializable {
             assignBtn.setOnAction(e->showAssignDialog(room));
             content.getChildren().add(assignBtn);
         }
+        if(isOccupied(room.getRoomStatus())){
+            Button dischargeBtn=new Button("Discharge");
+            dischargeBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white;"+
+                    "-fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand; -fx-padding: 5 12;");
+            dischargeBtn.setOnAction(e->openDischargeSummary(room));
+            content.getChildren().add(dischargeBtn);
+        }
         return card;
+    }
+    private void openDischargeSummary(Room room){
+        try{
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/DischargeSummary.fxml"));
+            javafx.scene.Parent root=loader.load();
+            DischargeSummaryController ctrl=loader.getController();
+            ctrl.initWithPatient(room.getAssignedPatientId(),room.getId());
+            javafx.stage.Stage stage=new javafx.stage.Stage();
+            stage.setTitle("Discharge Summary");
+            stage.setScene(new javafx.scene.Scene(root,1200,700));
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            loadRoomsFromDatabase();
+            buildAllCards();
+        }catch(Exception e){
+            System.out.println("Failed to open discharge summary: "+e.getMessage());
+        }
     }
     private String accentColor(String status){
         if(status==null) return "#9aa5b4";

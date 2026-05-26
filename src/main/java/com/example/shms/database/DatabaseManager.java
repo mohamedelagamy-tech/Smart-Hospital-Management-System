@@ -1052,4 +1052,11 @@ public class DatabaseManager {
         }
         return null;
     }
+    public void dischargeRoom(int roomId){
+        try(Statement st=connection.createStatement()){
+            st.execute("UPDATE rooms SET status='Available',assignedPatientID=NULL WHERE id="+roomId);
+        }catch(SQLException e){
+            System.out.println("Discharge failed: "+e.getMessage());
+        }
+    }
 }
