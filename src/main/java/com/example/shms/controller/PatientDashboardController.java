@@ -248,7 +248,17 @@ public class PatientDashboardController implements Initializable {
         MainApp.navigateTo("appointment-management-view",1200,700);
     }
     @FXML private void showBookAppointments(){
-
+        try{
+            javafx.fxml.FXMLLoader loader=new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/bookAppointmentView.fxml"));
+            javafx.scene.Parent root=loader.load();
+            javafx.stage.Stage stage=new javafx.stage.Stage();
+            stage.setTitle("Book Appointment");
+            stage.setScene(new javafx.scene.Scene(root,420,580));
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            stage.show();
+        }catch(Exception e){
+            System.out.println("Failed to open booking form: "+e.getMessage());
+        }
     }
     @FXML private void showPrescriptions(){
         MainApp.navigateTo("PrescriptionScreen",1200,700);

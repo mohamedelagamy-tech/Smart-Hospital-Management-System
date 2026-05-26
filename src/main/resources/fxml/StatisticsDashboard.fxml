@@ -5,110 +5,91 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="20"
-      style="-fx-background-color: linear-gradient(to bottom, #f4f6f9, #eef1f5);"
-      xmlns="http://javafx.com/javafx/17.0.12"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.shms.controller.StatisticsController">
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.shms.controller.StatisticsController"
+            prefHeight="700" prefWidth="1200"
+            style="-fx-background-color: #f4f6f9;">
 
-    <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
-    </padding>
-    <HBox alignment="CENTER_LEFT" spacing="15">
-
-        <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE"/>
-
-        <Label text="Statistics"
-               style="-fx-font-family: Georgia;
-                      -fx-font-size: 28px;
-                      -fx-font-weight: bold;
-                      -fx-text-fill: #1a1d23;" />
-
-    </HBox>
-    <HBox spacing="20">
-        <VBox spacing="10" HBox.hgrow="ALWAYS"
-              style="-fx-background-color: white;
-                     -fx-background-radius: 12;
-                     -fx-border-color: #e5e7eb;
-                     -fx-border-radius: 12;
-                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
-
-            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
-
-            <Label text="📅 Appointments Per Day" style="-fx-font-weight: bold; -fx-text-fill: #1a1d23;" />
-
-            <BarChart fx:id="appointmentsChart" animated="true">
-                <xAxis><CategoryAxis label="Day"/></xAxis>
-                <yAxis><NumberAxis label="Count"/></yAxis>
-            </BarChart>
-        </VBox>
-        <VBox spacing="10" HBox.hgrow="ALWAYS"
-              style="-fx-background-color: white;
-                     -fx-background-radius: 12;
-                     -fx-border-color: #e5e7eb;
-                     -fx-border-radius: 12;
-                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
-
-            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
-
-            <Label text="🏥 Room Occupancy Rate"
-                   style="-fx-font-weight: bold; -fx-text-fill: #1a1d23;" />
-
-            <PieChart fx:id="occupancyChart" animated="true"/>
-        </VBox>
-    </HBox>
-    <HBox spacing="20">
-        <VBox spacing="10" HBox.hgrow="ALWAYS"
-              style="-fx-background-color: white;
-                     -fx-background-radius: 12;
-                     -fx-border-color: #e5e7eb;
-                     -fx-border-radius: 12;
-                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
-
-            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
-
-            <Label text="💰 Revenue Over Time"
-                   style="-fx-font-weight: bold; -fx-text-fill: #1a1d23;" />
-
-            <LineChart fx:id="revenueChart" animated="true">
-                <xAxis><CategoryAxis label="Month"/></xAxis>
-                <yAxis><NumberAxis label="Revenue"/></yAxis>
-            </LineChart>
-        </VBox>
-        <VBox spacing="10" HBox.hgrow="ALWAYS"
-              style="-fx-background-color: white;
-                     -fx-background-radius: 12;
-                     -fx-border-color: #e5e7eb;
-                     -fx-border-radius: 12;
-                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
-
-            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
-
-            <Label text="⭐ Top Rated Doctors" style="-fx-font-weight: bold; -fx-text-fill: #1a1d23;" />
-            <BarChart fx:id="doctorsChart" animated="true">
-                <xAxis><CategoryAxis label="Doctor"/></xAxis>
-                <yAxis><NumberAxis label="Rating" lowerBound="0" upperBound="5"/></yAxis>
-            </BarChart>
-
-        </VBox>
-    </HBox>
-    <VBox spacing="10"
-          style="-fx-background-color: white;
-                 -fx-background-radius: 12;
-                 -fx-border-color: #e5e7eb;
-                 -fx-border-radius: 12;
-                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
-
-        <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
-        <HBox alignment="CENTER_LEFT" spacing="10">
-            <Label text="🔔 Live Notifications"
-                   style="-fx-font-weight: bold; -fx-text-fill: #1a1d23;" />
-
-            <Region HBox.hgrow="ALWAYS"/>
-
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="60" spacing="12"
+              style="-fx-background-color: #1F4E79; -fx-padding: 0 24;">
+            <Button text="← Back" onAction="#handleBack"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+                           -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 0;
+                           -fx-underline: true;"/>
+            <Label text="📊  Statistics Dashboard"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <HBox HBox.hgrow="ALWAYS"/>
             <Label fx:id="notifStatusLabel"
-                   style="-fx-font-size: 11px; -fx-text-fill: #22c55e;" />
+                   style="-fx-font-size: 11px; -fx-text-fill: #22c55e;"/>
         </HBox>
-        <ListView fx:id="notificationsList" prefHeight="120" style="-fx-background-color: #f9fafb;-fx-border-color: #e5e7eb;-fx-border-radius: 6;-fx-font-size: 13px;" />
-    </VBox>
-</VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background-color: transparent; -fx-border-color: transparent;">
+            <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f4f6f9;">
+
+                <HBox spacing="16">
+                    <VBox spacing="10" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-background-radius: 12;
+                                 -fx-border-color: #eeeeee; -fx-border-radius: 12;
+                                 -fx-border-width: 1; -fx-padding: 16;">
+                        <Label text="📅  Appointments Per Day"
+                               style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;"/>
+                        <BarChart fx:id="appointmentsChart" animated="true" prefHeight="220">
+                            <xAxis><CategoryAxis label="Day"/></xAxis>
+                            <yAxis><NumberAxis label="Count"/></yAxis>
+                        </BarChart>
+                    </VBox>
+                    <VBox spacing="10" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-background-radius: 12;
+                                 -fx-border-color: #eeeeee; -fx-border-radius: 12;
+                                 -fx-border-width: 1; -fx-padding: 16;">
+                        <Label text="🏥  Room Occupancy"
+                               style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;"/>
+                        <PieChart fx:id="occupancyChart" animated="true" prefHeight="220"/>
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="16">
+                    <VBox spacing="10" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-background-radius: 12;
+                                 -fx-border-color: #eeeeee; -fx-border-radius: 12;
+                                 -fx-border-width: 1; -fx-padding: 16;">
+                        <Label text="💰  Revenue (Paid Bills)"
+                               style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;"/>
+                        <LineChart fx:id="revenueChart" animated="true" prefHeight="220">
+                            <xAxis><CategoryAxis label="Date"/></xAxis>
+                            <yAxis><NumberAxis label="EGP"/></yAxis>
+                        </LineChart>
+                    </VBox>
+                    <VBox spacing="10" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-background-radius: 12;
+                                 -fx-border-color: #eeeeee; -fx-border-radius: 12;
+                                 -fx-border-width: 1; -fx-padding: 16;">
+                        <Label text="👨‍⚕️  Most Active Doctors"
+                               style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;"/>
+                        <BarChart fx:id="doctorsChart" animated="true" prefHeight="220">
+                            <xAxis><CategoryAxis label="Doctor"/></xAxis>
+                            <yAxis><NumberAxis label="Appointments"/></yAxis>
+                        </BarChart>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="10"
+                      style="-fx-background-color: white; -fx-background-radius: 12;
+                             -fx-border-color: #eeeeee; -fx-border-radius: 12;
+                             -fx-border-width: 1; -fx-padding: 16;">
+                    <Label text="🔔  Live Activity Feed"
+                           style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;"/>
+                    <ListView fx:id="notificationsList" prefHeight="130"
+                              style="-fx-background-color: #f9fafb; -fx-border-color: #eeeeee;
+                                     -fx-border-radius: 6; -fx-font-size: 13px;"/>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
