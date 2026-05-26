@@ -72,7 +72,7 @@
                                         </HBox>
                                     </children>
                                 </VBox>
-                                <Button onAction="#showAppointments" style="-fx-background-color: white; -fx-text-fill: #1F4E79; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 8; -fx-cursor: hand;" text="📅  Book Appointment" />
+                                <Button onAction="#showBookAppointments" style="-fx-background-color: white; -fx-text-fill: #1F4E79; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 8; -fx-cursor: hand;" text="📅  Book Appointment" />
                             </children>
                         </HBox>
 

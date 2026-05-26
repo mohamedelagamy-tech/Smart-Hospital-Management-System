@@ -2,6 +2,7 @@ package com.example.shms.controller;
 
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
+import com.example.shms.utils.SessionManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,20 +22,25 @@ import java.util.ResourceBundle;
 
 public class StatisticsController implements Initializable {
 
-    // ── Injected from FXML ───────────────────────────────────────────────────
-    @FXML private BarChart<String, Number>  appointmentsChart;
-    @FXML private PieChart                  occupancyChart;
+    @FXML private BarChart<String, Number> appointmentsChart;
+    @FXML private PieChart occupancyChart;
     @FXML private LineChart<String, Number> revenueChart;
-    @FXML private BarChart<String, Number>  doctorsChart;
-    @FXML private ListView<String>          notificationsList;
-    @FXML private Label                     notifStatusLabel;
+    @FXML private BarChart<String, Number> doctorsChart;
+    @FXML private ListView<String> notificationsList;
+    @FXML private Label notifStatusLabel;
+
+    private final DatabaseManager db = DatabaseManager.getInstance();
+    private Thread notificationThread;
+
     @FXML
     private void handleBack() {
         stopThread();
-        MainApp.navigateTo("dashboard", 1200, 700);
+        MainApp.navigateTo(
+                SessionManager.getInstance().getDashboardName(),
+                1200,
+                700
+        );
     }
-    private final DatabaseManager db = DatabaseManager.getInstance();
-    private Thread notificationThread;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,19 +55,22 @@ public class StatisticsController implements Initializable {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Appointments");
 
-        try {
-            Statement st = db.getConnection().createStatement();
-            ResultSet rs = st.executeQuery(
-                    "SELECT appointmentDate, COUNT(*) as total " +
-                            "FROM appointments " +
-                            "GROUP BY appointmentDate " +
-                            "ORDER BY appointmentDate DESC LIMIT 7"
-            );
+        try (Statement st = db.getConnection().createStatement();
+             ResultSet rs = st.executeQuery("""
+                     SELECT appointmentDate, COUNT(*) AS total
+                     FROM appointments
+                     GROUP BY appointmentDate
+                     ORDER BY appointmentDate DESC
+                     LIMIT 7
+                     """)) {
+
             while (rs.next()) {
                 series.getData().add(new XYChart.Data<>(
-                        rs.getString("appointmentDate"), rs.getInt("total")
+                        rs.getString("appointmentDate"),
+                        rs.getInt("total")
                 ));
             }
+
         } catch (SQLException e) {
             series.getData().addAll(
                     new XYChart.Data<>("Mon", 12),
@@ -74,7 +83,7 @@ public class StatisticsController implements Initializable {
             );
         }
 
-        appointmentsChart.getData().add(series);
+        appointmentsChart.getData().setAll(series);
         appointmentsChart.setLegendVisible(false);
         styleBarChart(appointmentsChart, "#1a6fba");
     }
@@ -82,28 +91,31 @@ public class StatisticsController implements Initializable {
     private void loadOccupancyChart() {
         int occupied = 0, available = 0, cleaning = 0;
 
-        try {
-            Statement st = db.getConnection().createStatement();
-            ResultSet rs = st.executeQuery(
-                    "SELECT status, COUNT(*) as total FROM rooms GROUP BY status"
-            );
+        try (Statement st = db.getConnection().createStatement();
+             ResultSet rs = st.executeQuery("""
+                     SELECT status, COUNT(*) AS total
+                     FROM rooms
+                     GROUP BY status
+                     """)) {
+
             while (rs.next()) {
-                String status = rs.getString("status");
-                int count = rs.getInt("total");
-                switch (status.toLowerCase()) {
-                    case "occupied"  -> occupied  = count;
-                    case "available" -> available = count;
-                    case "cleaning"  -> cleaning  = count;
+                switch (rs.getString("status").toLowerCase()) {
+                    case "occupied" -> occupied = rs.getInt("total");
+                    case "available" -> available = rs.getInt("total");
+                    case "cleaning" -> cleaning = rs.getInt("total");
                 }
             }
-        } catch (SQLException e) {
-            occupied = 4; available = 5; cleaning = 1;
+
+        } catch (SQLException ignored) {
+            occupied = 4;
+            available = 5;
+            cleaning = 1;
         }
 
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList(
-                new PieChart.Data("Occupied ("  + occupied  + ")", occupied),
+                new PieChart.Data("Occupied (" + occupied + ")", occupied),
                 new PieChart.Data("Available (" + available + ")", available),
-                new PieChart.Data("Cleaning ("  + cleaning  + ")", cleaning)
+                new PieChart.Data("Cleaning (" + cleaning + ")", cleaning)
         );
 
         occupancyChart.setData(data);
@@ -120,23 +132,23 @@ public class StatisticsController implements Initializable {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Revenue");
 
-        try {
-            Statement st = db.getConnection().createStatement();
+        try (Statement st = db.getConnection().createStatement();
+             ResultSet rs = st.executeQuery("""
+                     SELECT appointmentDate AS month, SUM(amount) AS total
+                     FROM bills
+                     GROUP BY month
+                     ORDER BY month ASC
+                     LIMIT 6
+                     """)) {
 
-
-            ResultSet rs = st.executeQuery(
-                    "SELECT appointmentDate as month, SUM(amount) as total " +
-                            "FROM bills " +
-                            "GROUP BY month " +
-                            "ORDER BY month ASC LIMIT 6"
-            );
             while (rs.next()) {
                 series.getData().add(new XYChart.Data<>(
-                        rs.getString("month"), rs.getDouble("total")
+                        rs.getString("month"),
+                        rs.getDouble("total")
                 ));
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
             series.getData().addAll(
                     new XYChart.Data<>("Jan", 12000),
                     new XYChart.Data<>("Feb", 18500),
@@ -146,7 +158,7 @@ public class StatisticsController implements Initializable {
             );
         }
 
-        revenueChart.getData().add(series);
+        revenueChart.getData().setAll(series);
         revenueChart.setLegendVisible(false);
         revenueChart.setCreateSymbols(true);
     }
@@ -155,33 +167,34 @@ public class StatisticsController implements Initializable {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Rating");
 
-        try {
-            Statement st = db.getConnection().createStatement();
-            ResultSet rs = st.executeQuery(
-                    "SELECT name, (totalRating * 1.0 / ratingCount) as avg_rating " +
-                            "FROM doctors " +
-                            "WHERE ratingCount > 0 " +
-                            "ORDER BY avg_rating DESC LIMIT 5"
-            );
+        try (Statement st = db.getConnection().createStatement();
+             ResultSet rs = st.executeQuery("""
+                     SELECT name,
+                            (totalRating * 1.0 / ratingCount) AS avg_rating
+                     FROM doctors
+                     WHERE ratingCount > 0
+                     ORDER BY avg_rating DESC
+                     LIMIT 5
+                     """)) {
 
             while (rs.next()) {
-                String name = "Dr. " + rs.getString("name");
                 series.getData().add(new XYChart.Data<>(
-                        name, rs.getDouble("avg_rating")
+                        "Dr. " + rs.getString("name"),
+                        rs.getDouble("avg_rating")
                 ));
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
             series.getData().addAll(
                     new XYChart.Data<>("Dr. Anderson", 4.8),
                     new XYChart.Data<>("Dr. Williams", 4.6),
                     new XYChart.Data<>("Dr. Martinez", 4.5),
                     new XYChart.Data<>("Dr. Thompson", 4.3),
-                    new XYChart.Data<>("Dr. Lee",      4.1)
+                    new XYChart.Data<>("Dr. Lee", 4.1)
             );
         }
 
-        doctorsChart.getData().add(series);
+        doctorsChart.getData().setAll(series);
         doctorsChart.setLegendVisible(false);
         styleBarChart(doctorsChart, "#f59e0b");
     }
@@ -193,65 +206,80 @@ public class StatisticsController implements Initializable {
         notificationThread = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
-                    // Fetch latest activity every 30 seconds
-                    String time = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a"));
+                    String time = LocalTime.now()
+                            .format(DateTimeFormatter.ofPattern("hh:mm a"));
+
                     String[] messages = fetchLatestNotifications(time);
 
                     Platform.runLater(() -> {
-                        notifications.clear();
-                        for (String msg : messages) notifications.add(msg);
-                        notifStatusLabel.setText("● Live  —  Last updated: " + time);
+                        notifications.setAll(messages);
+                        notifStatusLabel.setText("● Live — Last updated: " + time);
                     });
 
-                    Thread.sleep(30000); // refresh every 30 seconds
+                    Thread.sleep(30_000);
+
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
             }
         });
 
-        notificationThread.setDaemon(true); // stops when app closes
+        notificationThread.setDaemon(true);
         notificationThread.start();
     }
 
-    private String[] fetchLatestNotifications(String time) {
+    private String[] fetchLatestNotifications(String time){
         ObservableList<String> list = FXCollections.observableArrayList();
-        try {
-            Statement st = db.getConnection().createStatement();
-            ResultSet rs = st.executeQuery(
-                    "SELECT patientName, appointmentDate FROM appointments " +
-                            "ORDER BY id DESC LIMIT 3"
-            );
-            while (rs.next()) {
-                list.add("📅  New appointment — " + rs.getString("patientName") +
-                        " on " + rs.getString("appointmentDate"));
+
+        try(Statement st=db.getConnection().createStatement()){
+
+            ResultSet rs = st.executeQuery("""
+                    SELECT patientName, appointmentDate
+                    FROM appointments
+                    ORDER BY id DESC
+                    LIMIT 3
+                    """);
+
+            while(rs.next()){
+                list.add("📅 New appointment — " +
+                        rs.getString("patientName") +
+                        " on " +
+                        rs.getString("appointmentDate"));
             }
 
-            rs = st.executeQuery(
-                    "SELECT patientName, amount FROM bills ORDER BY id DESC LIMIT 2"
-            );
-            while (rs.next()) {
-                list.add("💰  Bill generated — " + rs.getString("patientName") +
-                        "  ($" + rs.getDouble("amount") + ")");
+            rs=st.executeQuery("""
+                    SELECT patientName, amount
+                    FROM bills
+                    ORDER BY id DESC
+                    LIMIT 2
+                    """);
+
+            while(rs.next()){
+                list.add("💰 Bill generated — " +
+                        rs.getString("patientName") +
+                        " ($" + rs.getDouble("amount") + ")");
             }
 
-        } catch (SQLException e) {
-            list.add("📅  New patient admission — Sarah Johnson  [" + time + "]");
-            list.add("💊  Prescription added — Michael Chen  [" + time + "]");
-            list.add("🏥  Room 302 now available  [" + time + "]");
-            list.add("💰  Bill generated — Emma Davis  ($1,200)  [" + time + "]");
+        }catch (SQLException ignored){
+            list.add("📅 New admission — Sarah Johnson [" + time + "]");
+            list.add("💊 Prescription added — Michael Chen [" + time + "]");
+            list.add("🏥 Room 302 available [" + time + "]");
+            list.add("💰 Bill generated — Emma Davis ($1,200)");
         }
+
         return list.toArray(new String[0]);
     }
 
-    private void styleBarChart(BarChart<String, Number> chart, String color) {
-        Platform.runLater(() -> {
-            chart.lookupAll(".default-color0.chart-bar").forEach(node ->
-                    node.setStyle("-fx-bar-fill: " + color + ";"));
-        });
+    private void styleBarChart(BarChart<String, Number> chart, String color){
+        Platform.runLater(() ->
+                chart.lookupAll(".default-color0.chart-bar")
+                        .forEach(node -> node.setStyle("-fx-bar-fill: "+color+";"))
+        );
     }
 
-    public void stopThread() {
-        if (notificationThread != null) notificationThread.interrupt();
+    public void stopThread(){
+        if(notificationThread != null){
+            notificationThread.interrupt();
+        }
     }
 }
