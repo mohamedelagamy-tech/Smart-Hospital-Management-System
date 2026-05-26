@@ -31,6 +31,7 @@ public class BillingController implements Initializable {
     @FXML private ToggleButton btnPaid;
     @FXML private ToggleButton btnPending;
     @FXML private ToggleButton btnOverdue;
+    @FXML private ToggleButton btnPartiallyPaid;
 
     @FXML private TableView<Bill> billingTable;
     @FXML private TableColumn<Bill, String> colBillNum;
@@ -60,12 +61,8 @@ public class BillingController implements Initializable {
         btnPaid.setToggleGroup(filterGroup);
         btnPending.setToggleGroup(filterGroup);
         btnOverdue.setToggleGroup(filterGroup);
+        btnPartiallyPaid.setToggleGroup(filterGroup);
         btnAll.setSelected(true);
-
-        styleFilterBtn(btnAll);
-        styleFilterBtn(btnPaid);
-        styleFilterBtn(btnPending);
-        styleFilterBtn(btnOverdue);
 
         filterGroup.selectedToggleProperty().addListener((obs, o, n) -> applyFilters());
 
@@ -74,6 +71,17 @@ public class BillingController implements Initializable {
         colService.setCellValueFactory(new PropertyValueFactory<>("service"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("BILLDate"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        colAmount.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double amount,boolean empty){
+                super.updateItem(amount,empty);
+                if(empty || amount==null){
+                    setText(null);
+                    return;
+                }
+                setText("EGP "+String.format("%,.0f",amount));
+            }
+        });
         colStatus.setCellValueFactory(new PropertyValueFactory<>("billStatus"));
 
         colStatus.setCellFactory(col -> new TableCell<>() {
@@ -132,11 +140,11 @@ public class BillingController implements Initializable {
 
     @FXML
     public void applyFilters() {
-        String search = searchField.getText().toLowerCase();
-        String sort   = sortBox.getValue();
+        String search=searchField.getText().toLowerCase();
+        String sort=sortBox.getValue();
 
-        String activeFilter = "All";
-        if (filterGroup.getSelectedToggle() != null) {
+        String activeFilter="All";
+        if (filterGroup.getSelectedToggle() != null){
             activeFilter = ((ToggleButton) filterGroup.getSelectedToggle()).getText();
         }
         final String filter = activeFilter;
@@ -163,21 +171,12 @@ public class BillingController implements Initializable {
         billingTable.refresh();
     }
 
-    private void styleFilterBtn(ToggleButton btn) {
-        btn.selectedProperty().addListener((obs, was, isNow) ->
-                btn.setStyle(isNow
-                        ? "-fx-background-color: #1a1a2e; -fx-text-fill: white; -fx-border-radius: 20; -fx-background-radius: 20; -fx-font-size: 13px; -fx-cursor: hand;"
-                        : "-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 20; -fx-background-radius: 20; -fx-font-size: 13px; -fx-cursor: hand;"
-                )
-        );
-    }
-
     public void setBills(ObservableList<Bill> bills) {
         this.allBills = bills;
         billingTable.setItems(allBills);
     }
     @FXML
-    private void handleBack() {
+    private void handleBack(){
         MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
 

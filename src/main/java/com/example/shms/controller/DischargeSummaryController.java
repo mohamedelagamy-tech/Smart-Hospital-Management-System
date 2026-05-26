@@ -8,6 +8,7 @@ import com.example.shms.model.DischargeSummary;
 import com.example.shms.model.Prescription;
 import com.example.shms.model.Room;
 import com.example.shms.utils.EmailService;
+import com.example.shms.utils.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -101,7 +102,7 @@ public class DischargeSummaryController implements Initializable {
         if (rooms != null) {
             for (Room r : rooms) {
                 if (r.getAssignedPatientId() == patientId) {
-                    roomInfo = "Room " + r.getRoomNumber() + " - " + r.getDepartment();
+                    roomInfo = "Room " + r.getRoomNumber()+" - "+r.getRoomtype();
                     break;
                 }
             }
@@ -127,28 +128,31 @@ public class DischargeSummaryController implements Initializable {
         if (prescriptions != null) presObs.addAll(prescriptions);
         prescriptionsTable.setItems(presObs);
 
-        double roomCharges         = 0;
-        double medicineCharges     = 0;
-        double consultationCharges = 0;
-        double totalBill           = 0;
+        double roomCharges=0;
+        double medicineCharges=0;
+        double consultationCharges=0;
+        double totalBill=0;
 
         List<Bill> bills = db.getBillsByPatient(patientId);
         if (bills != null) {
             for (Bill b : bills) {
                 String service = b.getService().toLowerCase();
-                if (service.contains("room"))         roomCharges         += b.getAmount();
+                if (service.contains("room"))
+                    roomCharges+=b.getAmount();
                 else if (service.contains("medicine") || service.contains("prescription"))
-                    medicineCharges     += b.getAmount();
-                else if (service.contains("consult")) consultationCharges += b.getAmount();
-                else                                   consultationCharges += b.getAmount();
+                    medicineCharges+=b.getAmount();
+                else if (service.contains("consult"))
+                    consultationCharges += b.getAmount();
+                else
+                    consultationCharges += b.getAmount();
                 totalBill += b.getAmount();
             }
         }
 
-        lblRoomCharges.setText("$" + String.format("%.0f", roomCharges));
-        lblMedicineCharges.setText("$" + String.format("%.0f", medicineCharges));
-        lblConsultationCharges.setText("$" + String.format("%.0f", consultationCharges));
-        lblTotalBill.setText("$" + String.format("%.0f", totalBill));
+        lblRoomCharges.setText("EGP" + String.format("%.0f", roomCharges));
+        lblMedicineCharges.setText("EGP" + String.format("%.0f", medicineCharges));
+        lblConsultationCharges.setText("EGP" + String.format("%.0f", consultationCharges));
+        lblTotalBill.setText("EGP" + String.format("%.0f", totalBill));
 
         DischargeSummary summary = new DischargeSummary(
                 0, patientId, prescriptions != null ? prescriptions : List.of(),
@@ -157,9 +161,8 @@ public class DischargeSummaryController implements Initializable {
         summary.writeToFile();
 
     }
-    @FXML
-    private void handleBack() {
-        MainApp.navigateTo("dashboard", 1200, 700);
+    @FXML private void handleBack() {
+        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
     @FXML
     private void handlePrint() {

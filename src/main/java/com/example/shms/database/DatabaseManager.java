@@ -51,6 +51,15 @@ public class DatabaseManager {
             st.execute("INSERT INTO departments (depName) VALUES ('Dermatology')");
             st.execute("INSERT INTO departments (depName) VALUES ('Oncology')");
             st.execute("INSERT INTO departments (depName) VALUES ('Radiology')");
+            st.execute("INSERT INTO departments (depName) VALUES ('Psychiatry')");
+            st.execute("INSERT INTO departments (depName) VALUES ('ENT')");
+            st.execute("INSERT INTO departments (depName) VALUES ('Urology')");
+            st.execute("INSERT INTO departments (depName) VALUES ('Gastroenterology')");
+            st.execute("INSERT INTO departments (depName) VALUES ('Ophthalmology')");
+            st.execute("INSERT INTO departments (depName) VALUES ('Endocrinology')");
+            st.execute("INSERT INTO departments (depName) VALUES ('Nephrology')");
+            st.execute("INSERT INTO departments (depName) VALUES ('Pulmonology')");
+            st.execute("INSERT INTO departments (depName) VALUES ('General Surgery')");
 
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Khaled Nour','khaled@hospital.com','doctor123','Cardiology','Available',15000,'Mon-Wed-Fri','8am-4pm')");
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Mona Samir','mona@hospital.com','doctor123','Pediatrics','Available',12000,'Sun-Tue-Thu','9am-5pm')");
@@ -60,17 +69,37 @@ public class DatabaseManager {
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Hana Adel','hana@hospital.com','doctor123','Dermatology','Available',11000,'Mon-Wed-Fri','9am-5pm')");
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Tarek Mansour','tarek@hospital.com','doctor123','Oncology','Available',20000,'Sun-Tue-Thu','8am-4pm')");
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Yasmine Farid','yasmine@hospital.com','doctor123','Radiology','Busy',13000,'Mon-Wed-Sat','7am-3pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Mohamed Sobhy','mohsobhy@hospital.com','doctor123','Cardiology','Available',15000,'Mon-Wed-Thu','8am-5pm')");
             st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Mahmoud Gamal','mahmoud@hospital.com','doctor123','Emergency','In Surgery',17000,'Tue-Thu-Sat','6am-2pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Karim Salah','karim@hospital.com','doctor123','Psychiatry','Available',14500,'Sun-Tue-Thu','9am-5pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Nour ElMadany','nour@hospital.com','doctor123','ENT','Busy',13500,'Mon-Wed-Fri','10am-6pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Salma Nabil','salma@hospital.com','doctor123','Urology','Available',15500,'Tue-Thu-Sat','8am-4pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Mostafa Adel','mostafa@hospital.com','doctor123','Gastroenterology','In Surgery',17500,'Sun-Mon-Wed','7am-3pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Reem Wael','reem@hospital.com','doctor123','Ophthalmology','Available',12500,'Mon-Tue-Thu','9am-5pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Hassan Fathy','hassan@hospital.com','doctor123','Endocrinology','Busy',15000,'Wed-Fri-Sat','8am-4pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Dina Mostafa','dina@hospital.com','doctor123','Nephrology','Available',16500,'Sun-Tue-Thu','10am-6pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Ali Samy','ali@hospital.com','doctor123','Pulmonology','Available',14000,'Mon-Wed-Fri','7am-3pm')");
+            st.execute("INSERT INTO doctors (name,email,password,department,status,salary,workingDays,workingHours) VALUES ('Dr. Farah Emad','farah@hospital.com','doctor123','General Surgery','In Surgery',21000,'Tue-Thu-Sat','6am-2pm')");
             int[][] seedRatings={
                     {5,4,5,4,5},
                     {3,4,3,4,3},
                     {5,5,4,5,4},
                     {4,3,4,3,4},
                     {2,3,2,3,2},
+                    {5,3,4,5,4},
                     {4,5,4,5,5},
                     {5,4,5,5,4},
                     {3,2,3,2,3},
-                    {4,4,5,4,4}
+                    {4,4,5,4,4},
+                    {5,5,4,5,5},
+                    {3,4,4,3,4},
+                    {4,5,5,4,5},
+                    {5,4,5,5,4},
+                    {4,4,3,4,4},
+                    {3,3,4,3,4},
+                    {5,5,5,4,5},
+                    {4,3,4,4,3},
+                    {5,4,5,4,5}
             };
             String[] comments = {
                     "Excellent doctor, very professional",
@@ -219,18 +248,38 @@ public class DatabaseManager {
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email,username) VALUES ('Ramy Elnems',33,'Male','01100001099','Alexandria','O+','Neurology',3,'ramy.elnems@email.com','ramy.elnems')");
             st.execute("INSERT INTO patients (name,age,gender,phone,address,bloodType,department,priority,email,username) VALUES ('Safia Elrashidy',62,'Female','01100001100','Cairo','AB+','Radiology',2,'safia.elrashidy@email.com','safia.elrashidy')");
 
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('101','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('102','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('103','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('201','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('202','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('301','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('302','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('401','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('402','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('303','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('304','Available')");
-            st.execute("INSERT INTO rooms (roomNumber,status) VALUES ('501','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('101','ICU','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('102','ICU','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('103','ICU','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('104','ICU','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('201','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('202','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('203','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('204','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('205','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('206','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('207','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('208','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('301','Private','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('302','Private','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('303','Private','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('304','Private','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('305','Private','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('306','Private','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('401','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('402','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('403','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('404','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('405','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('406','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('407','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('408','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('409','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('410','Emergency','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('501','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('502','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('503','General','Available')");
+            st.execute("INSERT INTO rooms (roomNumber,roomtype,status) VALUES ('504','General','Available')");
 
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (1, 1, '2026-05-20', '09:00', 'Completed', 'Regular checkup')");
             st.execute("INSERT INTO appointments (patientId, doctorId, date, time, status, notes) VALUES (2, 5, '2026-05-21', '10:30', 'Completed', 'Follow-up visit')");
@@ -333,6 +382,8 @@ public class DatabaseManager {
             st.execute("CREATE TABLE IF NOT EXISTS rooms (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "roomNumber TEXT NOT NULL," +
+                    "roomtype TEXT DEFAULT 'General'," +
+                    "department TEXT DEFAULT 'General'," +
                     "status TEXT DEFAULT 'Available'," +
                     "assignedPatientID INTEGER)");
 
@@ -665,10 +716,23 @@ public class DatabaseManager {
             System.out.println("error adding prescription: " + e.getMessage());
         }
     }
-    public List<Prescription> getPrescriptionsByPatient(int patientId) {
-        List<Prescription> result = new ArrayList<>();
-        for (Prescription p : prescriptions) {
-            if (p.getPatientId() == patientId) result.add(p);
+    public List<Prescription> getPrescriptionsByPatient(int patientId){
+        List<Prescription> result=new ArrayList<>();
+        try(Statement st=connection.createStatement()){
+            ResultSet rs=st.executeQuery("SELECT * FROM prescriptions WHERE patientID = "+patientId);
+            while(rs.next()){
+                result.add(new Prescription(
+                        rs.getInt("id"),
+                        rs.getInt("patientID"),
+                        rs.getInt("doctorID"),
+                        rs.getString("medicineName"),
+                        rs.getString("dosage"),
+                        rs.getString("duration"),
+                        rs.getString("instructions")
+                ));
+            }
+        }catch(SQLException e){
+            System.out.println("Failed to get prescriptions by patient: "+e.getMessage());
         }
         return result;
     }
@@ -692,24 +756,23 @@ public class DatabaseManager {
             System.out.println("error releasing room: " + e.getMessage());
         }
     }
-    public List<Room> getAllRooms() {
-        List<Room> result = new ArrayList<>();
+    public List<Room> getAllRooms(){
+        List<Room> result=new ArrayList<>();
         try {
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM rooms");
-            while (rs.next()) {
+            Statement st=connection.createStatement();
+            ResultSet rs=st.executeQuery("SELECT * FROM rooms");
+            while(rs.next()){
                 Room r = new Room(
                         rs.getInt("assignedPatientID"),
-                        "",
                         rs.getInt("id"),
                         Integer.parseInt(rs.getString("roomNumber")),
                         rs.getString("status"),
-                        ""
+                        rs.getString("roomtype")
                 );
                 result.add(r);
             }
-        } catch (SQLException e) {
-            System.out.println("Error loading rooms: " + e.getMessage());
+        }catch (SQLException e){
+            System.out.println("Error loading rooms: "+e.getMessage());
         }
         return result;
     }
@@ -718,14 +781,13 @@ public class DatabaseManager {
         try(PreparedStatement ps=connection.prepareStatement(
                 "SELECT * FROM rooms WHERE status ='Available'")){
             ResultSet rs=ps.executeQuery();
-            while (rs.next()) {
-                Room r = new Room(
+            while(rs.next()){
+                Room r=new Room(
                         rs.getInt("assignedPatientID"),
-                        "",
                         rs.getInt("id"),
                         Integer.parseInt(rs.getString("roomNumber")),
                         rs.getString("status"),
-                        ""
+                        rs.getString("roomtype")
                 );
                 result.add(r);
             }
@@ -742,15 +804,14 @@ public class DatabaseManager {
             if(rs.next()){
                 return new Room(
                         rs.getInt("assignedPatientID"),
-                        "",
                         rs.getInt("id"),
                         Integer.parseInt(rs.getString("roomNumber")),
                         rs.getString("status"),
-                        ""
+                        rs.getString("roomtype")
                 );
             }
-        } catch (SQLException e) {
-            System.out.println("Error getting room: " + e.getMessage());
+        }catch(SQLException e){
+            System.out.println("Error getting room: "+e.getMessage());
         }
         return null;
     }

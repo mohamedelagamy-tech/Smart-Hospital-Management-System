@@ -99,17 +99,10 @@ public class SessionManager {
         }
     }
 
-    public void resetSessionTimer(Runnable onTimeout) {
+    public void resetSessionTimer(Runnable onTimeout){
         startSessionTimer(onTimeout);
-    }
 
-private int loggedInPatientId= -1;
-    public int getLoggedInPatientId() {
-        return loggedInPatientId;
-    }
-    public void setLoggedInPatientId(int id) {
-        this.loggedInPatientId = id;
-    }
+     }
     }
 
 
