@@ -3,7 +3,6 @@ package com.example.shms.controller;
 import com.example.shms.MainApp;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.model.Doctor;
-import com.example.shms.utils.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -281,6 +280,6 @@ public class DoctorController {
 
     @FXML
     private void handleBack() {
-        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
+        MainApp.navigateTo("dashboard", 1200, 700);
     }
 }
