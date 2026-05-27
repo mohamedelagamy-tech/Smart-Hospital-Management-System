@@ -7,7 +7,8 @@
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
             <children>
-                <Button onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="← Back" />
+                <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE">
+                </Button>
                 <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="📄 My Bills" />
                 <HBox HBox.hgrow="ALWAYS" />
                 <Label fx:id="userLabel" style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.8);" text="Mohamed" />
