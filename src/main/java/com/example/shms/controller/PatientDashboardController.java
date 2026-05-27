@@ -103,35 +103,30 @@ public class PatientDashboardController implements Initializable {
     }
 
     private void loadPatientData(){
+        String username=session.getLoggedInUser();
         try(Statement st=db.getConnection().createStatement()){
-           int patientId = session.getLoggedInPatientId();
 
-           if (patientId == -1){
-               System.out.println("No patient ID in session");
-               return;
-           }
-           ResultSet patientRs=st.executeQuery(
-                    "SELECT * FROM patients WHERE id = " + patientId + "LIMIT 1");
+            ResultSet patientRs=st.executeQuery("SELECT * FROM patients WHERE username = '"+username+"' LIMIT 1");
 
             if(patientRs.next()){
+                int patientId=patientRs.getInt("id");
                 String name=patientRs.getString("name");
                 profileName.setText(name);
                 profileBlood.setText(patientRs.getString("bloodType"));
                 profileDept.setText(patientRs.getString("department"));
                 profilePhone.setText(patientRs.getString("phone"));
                 profileAddress.setText(patientRs.getString("address"));
+
                 loadAppointments(patientId);
                 loadBills(patientId);
                 loadTimeline(patientId,name);
-            }
-            else {
-                System.out.println("No patient found with id: " + patientId);
             }
 
         }catch(SQLException e){
             System.out.println("Failed to load patient data: "+e.getMessage());
         }
     }
+
 
     private void loadAppointments(int patientId){
         List<String> items=new ArrayList<>();
