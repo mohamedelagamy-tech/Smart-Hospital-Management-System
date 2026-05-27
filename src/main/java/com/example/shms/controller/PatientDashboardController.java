@@ -104,10 +104,14 @@ public class PatientDashboardController implements Initializable {
 
     private void loadPatientData(){
         try(Statement st=db.getConnection().createStatement()){
+           int patientId = session.getLoggedInPatientId();
 
-
-            ResultSet patientRs=st.executeQuery(
-                    "SELECT * FROM patients WHERE id = "+patientId+"LIMIT 1");
+           if (patientId == -1){
+               System.out.println("No patient ID in session");
+               return;
+           }
+           ResultSet patientRs=st.executeQuery(
+                    "SELECT * FROM patients WHERE id = " + patientId + "LIMIT 1");
 
             if(patientRs.next()){
                 String name=patientRs.getString("name");
