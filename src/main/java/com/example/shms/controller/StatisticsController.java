@@ -26,6 +26,7 @@ public class StatisticsController implements Initializable {
     @FXML private PieChart occupancyChart;
     @FXML private LineChart<String,Number> revenueChart;
     @FXML private BarChart<String,Number> doctorsChart;
+    @FXML private PieChart billStatusChart;
     @FXML private ListView<String> notificationsList;
     @FXML private Label notifStatusLabel;
 
@@ -38,29 +39,46 @@ public class StatisticsController implements Initializable {
         loadOccupancyChart();
         loadRevenueChart();
         loadDoctorsChart();
+        loadBillStatusChart();
         startNotificationThread();
     }
+
     private void loadAppointmentsChart(){
-        XYChart.Series<String,Number> series=new XYChart.Series<>();
-        series.setName("Appointments");
+        XYChart.Series<String,Number> scheduled=new XYChart.Series<>();
+        scheduled.setName("Scheduled");
+        XYChart.Series<String,Number> completed=new XYChart.Series<>();
+        completed.setName("Completed");
+        XYChart.Series<String,Number> cancelled=new XYChart.Series<>();
+        cancelled.setName("Cancelled");
+
         try(Statement st=db.getConnection().createStatement();
             ResultSet rs=st.executeQuery(
-                    "SELECT date, COUNT(*) AS total FROM appointments "+
-                            "GROUP BY date ORDER BY date DESC LIMIT 7")){
+                    "SELECT status, COUNT(*) AS total FROM appointments GROUP BY status")){
             while(rs.next()){
-                series.getData().add(new XYChart.Data<>(rs.getString("date"),rs.getInt("total")));
+                String status=rs.getString("status");
+                int total=rs.getInt("total");
+                switch(status){
+                    case "Scheduled"->scheduled.getData().add(new XYChart.Data<>("Scheduled",total));
+                    case "Completed"->completed.getData().add(new XYChart.Data<>("Completed",total));
+                    case "Cancelled"->cancelled.getData().add(new XYChart.Data<>("Cancelled",total));
+                }
             }
         }catch(SQLException e){
-            series.getData().addAll(
-                    new XYChart.Data<>("Mon",12),new XYChart.Data<>("Tue",18),
-                    new XYChart.Data<>("Wed",15),new XYChart.Data<>("Thu",22),
-                    new XYChart.Data<>("Fri",19),new XYChart.Data<>("Sat",8),
-                    new XYChart.Data<>("Sun",5)
-            );
+            scheduled.getData().add(new XYChart.Data<>("Scheduled",6));
+            completed.getData().add(new XYChart.Data<>("Completed",3));
+            cancelled.getData().add(new XYChart.Data<>("Cancelled",1));
         }
-        appointmentsChart.getData().setAll(series);
-        appointmentsChart.setLegendVisible(false);
-        styleBarChart(appointmentsChart,"#1F4E79");
+
+        appointmentsChart.getData().setAll(scheduled,completed,cancelled);
+        appointmentsChart.setLegendVisible(true);
+        Platform.runLater(()->{
+            appointmentsChart.lookupAll(".default-color0.chart-bar")
+                    .forEach(n->n.setStyle("-fx-bar-fill: #534AB7;"));
+            appointmentsChart.lookupAll(".default-color1.chart-bar")
+                    .forEach(n->n.setStyle("-fx-bar-fill: #27ae60;"));
+            appointmentsChart.lookupAll(".default-color2.chart-bar")
+                    .forEach(n->n.setStyle("-fx-bar-fill: #e74c3c;"));
+        });
     }
     private void loadOccupancyChart(){
         int occupied=0,available=0,cleaning=0;
@@ -75,9 +93,9 @@ public class StatisticsController implements Initializable {
             }
         }catch(SQLException ignored){}
         ObservableList<PieChart.Data> data=FXCollections.observableArrayList(
-                new PieChart.Data("Occupied ("+occupied+")",occupied),
-                new PieChart.Data("Available ("+available+")",available),
-                new PieChart.Data("Cleaning ("+cleaning+")",cleaning)
+                new PieChart.Data("Occupied ("+occupied+")",Math.max(occupied,0.01)),
+                new PieChart.Data("Available ("+available+")",Math.max(available,0.01)),
+                new PieChart.Data("Cleaning ("+cleaning+")",Math.max(cleaning,0.01))
         );
         occupancyChart.setData(data);
         Platform.runLater(()->{
@@ -88,14 +106,13 @@ public class StatisticsController implements Initializable {
     }
     private void loadRevenueChart(){
         XYChart.Series<String,Number> series=new XYChart.Series<>();
-        series.setName("Revenue");
+        series.setName("Revenue (EGP)");
         try(Statement st=db.getConnection().createStatement();
             ResultSet rs=st.executeQuery(
                     "SELECT date, SUM(amount) AS total FROM bills "+
                             "WHERE status='Paid' GROUP BY date ORDER BY date ASC LIMIT 7")){
-            while(rs.next()){
+            while(rs.next())
                 series.getData().add(new XYChart.Data<>(rs.getString("date"),rs.getDouble("total")));
-            }
         }catch(SQLException e){
             series.getData().addAll(
                     new XYChart.Data<>("Jan",12000),new XYChart.Data<>("Feb",18500),
@@ -109,27 +126,52 @@ public class StatisticsController implements Initializable {
     }
     private void loadDoctorsChart(){
         XYChart.Series<String,Number> series=new XYChart.Series<>();
-        series.setName("Appointments");
+        series.setName("Patients");
         try(Statement st=db.getConnection().createStatement();
             ResultSet rs=st.executeQuery(
-                    "SELECT d.name, COUNT(a.id) AS total FROM doctors d "+
-                            "LEFT JOIN appointments a ON a.doctorId = d.id "+
-                            "GROUP BY d.id ORDER BY total DESC LIMIT 5")){
-            while(rs.next()){
-                series.getData().add(new XYChart.Data<>(
-                        rs.getString("name"),rs.getInt("total")
-                ));
-            }
+                    "SELECT department, COUNT(*) AS total FROM patients "+
+                            "GROUP BY department ORDER BY total DESC LIMIT 8")){
+            while(rs.next())
+                series.getData().add(new XYChart.Data<>(rs.getString("department"),rs.getInt("total")));
         }catch(SQLException e){
             series.getData().addAll(
-                    new XYChart.Data<>("Dr. Khaled",14),new XYChart.Data<>("Dr. Omar",11),
-                    new XYChart.Data<>("Dr. Layla",9),new XYChart.Data<>("Dr. Ahmed",8),
-                    new XYChart.Data<>("Dr. Hana",6)
+                    new XYChart.Data<>("Cardiology",22),
+                    new XYChart.Data<>("Oncology",18),
+                    new XYChart.Data<>("Neurology",15),
+                    new XYChart.Data<>("Orthopedics",12),
+                    new XYChart.Data<>("Dermatology",9)
             );
         }
         doctorsChart.getData().setAll(series);
         doctorsChart.setLegendVisible(false);
-        styleBarChart(doctorsChart,"#e67e22");
+        styleBarChart(doctorsChart,"#1D9E75");
+    }
+    private void loadBillStatusChart(){
+        int paid=0,pending=0,partial=0,overdue=0;
+        try(Statement st=db.getConnection().createStatement();
+            ResultSet rs=st.executeQuery("SELECT status, COUNT(*) AS total FROM bills GROUP BY status")){
+            while(rs.next()){
+                switch(rs.getString("status")){
+                    case "Paid"->paid=rs.getInt("total");
+                    case "Pending"->pending=rs.getInt("total");
+                    case "Partially Paid"->partial=rs.getInt("total");
+                    case "Overdue"->overdue=rs.getInt("total");
+                }
+            }
+        }catch(SQLException ignored){}
+        ObservableList<PieChart.Data> data=FXCollections.observableArrayList(
+                new PieChart.Data("Paid ("+paid+")",Math.max(paid,0.01)),
+                new PieChart.Data("Pending ("+pending+")",Math.max(pending,0.01)),
+                new PieChart.Data("Partial ("+partial+")",Math.max(partial,0.01)),
+                new PieChart.Data("Overdue ("+overdue+")",Math.max(overdue,0.01))
+        );
+        billStatusChart.setData(data);
+        Platform.runLater(()->{
+            if(data.size()>0) data.get(0).getNode().setStyle("-fx-pie-color: #27ae60;");
+            if(data.size()>1) data.get(1).getNode().setStyle("-fx-pie-color: #7f8c8d;");
+            if(data.size()>2) data.get(2).getNode().setStyle("-fx-pie-color: #e67e22;");
+            if(data.size()>3) data.get(3).getNode().setStyle("-fx-pie-color: #e74c3c;");
+        });
     }
     private void startNotificationThread(){
         ObservableList<String> notifications=FXCollections.observableArrayList();
@@ -159,16 +201,14 @@ public class StatisticsController implements Initializable {
                     "SELECT p.name, a.date FROM appointments a "+
                             "JOIN patients p ON a.patientId=p.id ORDER BY a.id DESC LIMIT 3"
             );
-            while(rs.next()){
+            while(rs.next())
                 list.add("📅 Appointment — "+rs.getString("name")+" on "+rs.getString("date"));
-            }
             rs=st.executeQuery(
                     "SELECT p.name, b.amount FROM bills b "+
                             "JOIN patients p ON b.patientID=p.id ORDER BY b.id DESC LIMIT 2"
             );
-            while(rs.next()){
+            while(rs.next())
                 list.add("💰 Bill — "+rs.getString("name")+" — EGP "+String.format("%.0f",rs.getDouble("amount")));
-            }
         }catch(SQLException ignored){
             list.add("📅 New admission — Sara Mohamed ["+time+"]");
             list.add("💊 Prescription added — Omar Ali ["+time+"]");
@@ -183,8 +223,7 @@ public class StatisticsController implements Initializable {
         );
     }
     public void stopThread(){
-        if(notificationThread!=null)
-            notificationThread.interrupt();
+        if(notificationThread!=null) notificationThread.interrupt();
     }
     @FXML private void handleBack(){
         stopThread();

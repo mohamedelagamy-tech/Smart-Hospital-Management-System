@@ -1054,7 +1054,7 @@ public class DatabaseManager {
     }
     public void dischargeRoom(int roomId){
         try(Statement st=connection.createStatement()){
-            st.execute("UPDATE rooms SET status='Available',assignedPatientID=NULL WHERE id="+roomId);
+            st.execute("UPDATE rooms SET status='Cleaning',assignedPatientID=NULL WHERE id="+roomId);
         }catch(SQLException e){
             System.out.println("Discharge failed: "+e.getMessage());
         }

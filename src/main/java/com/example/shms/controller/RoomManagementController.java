@@ -117,7 +117,39 @@ public class RoomManagementController implements Initializable {
             dischargeBtn.setOnAction(e->openDischargeSummary(room));
             content.getChildren().add(dischargeBtn);
         }
+        if(room.getRoomStatus().equalsIgnoreCase("Available")){
+            Button cleanBtn=new Button("\uD83E\uDDF9 Mark as Cleaning");
+            cleanBtn.setStyle("-fx-background-color: #f97316; -fx-text-fill: white;"+
+                    "-fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand; -fx-padding: 5 12;");
+            cleanBtn.setOnAction(e->setRoomCleaning(room));
+            content.getChildren().add(cleanBtn);
+        }
+        if(room.getRoomStatus().equalsIgnoreCase("Cleaning")){
+            Button availBtn=new Button("Mark as Available");
+            availBtn.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white;"+
+                    "-fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand; -fx-padding: 5 12;");
+            availBtn.setOnAction(e->setRoomAvailable(room));
+            content.getChildren().add(availBtn);
+        }
         return card;
+    }
+    private void setRoomCleaning(Room room){
+        try(java.sql.Statement st=db.getConnection().createStatement()){
+            st.execute("UPDATE rooms SET status='Cleaning' WHERE id="+room.getId());
+            loadRoomsFromDatabase();
+            buildAllCards();
+        }catch(Exception e){
+            System.out.println("Set cleaning failed: "+e.getMessage());
+        }
+    }
+    private void setRoomAvailable(Room room){
+        try(java.sql.Statement st=db.getConnection().createStatement()){
+            st.execute("UPDATE rooms SET status='Available' WHERE id="+room.getId());
+            loadRoomsFromDatabase();
+            buildAllCards();
+        }catch(Exception e){
+            System.out.println("Set available failed: "+e.getMessage());
+        }
     }
     private void openDischargeSummary(Room room){
         try{
@@ -195,17 +227,32 @@ public class RoomManagementController implements Initializable {
     }
     private void showAssignDialog(Room room){
         TextInputDialog dialog=new TextInputDialog();
-        dialog.setTitle("Assign Room");
-        dialog.setHeaderText("Assign Room "+room.getRoomNumber());
-        dialog.setContentText("Enter Patient ID:");
+        dialog.setTitle("Assign Room "+room.getRoomNumber());
+        dialog.setHeaderText("Search patient by name or ID");
+        dialog.setContentText("Enter patient name or ID:");
         dialog.showAndWait().ifPresent(input->{
-            try{
-                int patientId=Integer.parseInt(input.trim());
-                db.assignRoom(room.getId(),patientId);
-                loadRoomsFromDatabase();
-                buildAllCards();
-            }catch(NumberFormatException e){
-                new Alert(Alert.AlertType.ERROR,"Invalid Patient ID").show();
+            if(input.trim().isEmpty()) return;
+            try(java.sql.Statement st=db.getConnection().createStatement()){
+                String q=input.trim();
+                java.sql.ResultSet rs=st.executeQuery(
+                        "SELECT id, name FROM patients WHERE name LIKE '%"+q+"%' OR CAST(id AS TEXT) = '"+q+"' LIMIT 1"
+                );
+                if(rs.next()){
+                    int patientId=rs.getInt("id");
+                    String name=rs.getString("name");
+                    Alert confirm=new Alert(Alert.AlertType.CONFIRMATION,"Assign "+name+" to Room "+room.getRoomNumber()+"?");
+                    confirm.showAndWait().ifPresent(r->{
+                        if(r==ButtonType.OK){
+                            db.assignRoom(room.getId(),patientId);
+                            loadRoomsFromDatabase();
+                            buildAllCards();
+                        }
+                    });
+                }else{
+                    new Alert(Alert.AlertType.WARNING,"No patient found matching: "+input).show();
+                }
+            }catch(Exception e){
+                System.out.println("Patient search failed: "+e.getMessage());
             }
         });
     }

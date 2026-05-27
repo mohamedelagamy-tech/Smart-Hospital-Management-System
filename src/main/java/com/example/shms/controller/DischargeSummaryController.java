@@ -117,7 +117,7 @@ public class DischargeSummaryController implements Initializable {
             lblRoom.setText(roomInfo);
 
             ResultSet diagRs=st.executeQuery(
-                    "SELECT diagnosis FROM medicalRecords WHERE patientId="+patientId+" ORDER BY id DESC LIMIT 1"
+                    "SELECT diagnosis FROM medical_records WHERE patientId="+patientId+" ORDER BY id DESC LIMIT 1"
             );
             lblDiagnosis.setText(diagRs.next() ? diagRs.getString("diagnosis") : "See medical records");
 
@@ -210,7 +210,7 @@ public class DischargeSummaryController implements Initializable {
         emailThread.start();
 
         showAlert("Patient discharged! Summary saved.");
-        handleBack();
+        ((javafx.stage.Stage) prescriptionsTable.getScene().getWindow()).close();
     }
     private int extractPatientId(String entry){
         try{

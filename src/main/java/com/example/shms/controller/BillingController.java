@@ -129,10 +129,12 @@ public class BillingController implements Initializable {
             NewBillController formCtrl = loader.getController();
             formCtrl.init(allBills, billingTable);
 
-            Stage formStage = new Stage();
-            formStage.setTitle("Generate New Bill");
-            formStage.setScene(new Scene(root, 380, 480));
-            formStage.show();
+            Stage stage = new Stage();
+            stage.setTitle("Generate New Bill");
+            stage.setScene(new Scene(root,380, 480));
+            stage.setWidth(450);
+            stage.setHeight(600);
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

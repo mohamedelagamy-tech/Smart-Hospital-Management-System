@@ -25,11 +25,15 @@
                   <VBox spacing="5" HBox.hgrow="ALWAYS">
                         <Label text="Patient"
                                style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #444;"/>
-                        <ComboBox fx:id="patientCombo"
-                                  promptText="Select a patient"
-                                  prefWidth="340" prefHeight="38"
+                        <TextField fx:id="patientSearchField"
+                                   promptText="🔍 Search patient by name or ID"
+                                   prefWidth="340" prefHeight="38"
+                                   style="-fx-background-color: white; -fx-border-color: #dde1e7;
+                          -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px;"/>
+                        <ListView fx:id="patientResults"
+                                  prefWidth="340"
                                   style="-fx-background-color: white; -fx-border-color: #dde1e7;
-                                 -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px;"/>
+                         -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px;"/>
                   </VBox>
             </HBox>
 
