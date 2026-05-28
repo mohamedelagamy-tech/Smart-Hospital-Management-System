@@ -49,28 +49,33 @@
         </VBox>
     </center>
     <top>
-        <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
             <children>
                 <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Button>
-                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" text=" Medical Records" >
+                <Label text="Patient Management" textFill="#fffafa">
                     <font>
                         <Font name="Arial Bold" size="24.0" />
                     </font>
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
                 </Label>
-                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" />
             </children>
         </HBox>
     </top>
     <bottom>
-        <HBox prefHeight="33.0" prefWidth="900.0" style="-fx-background-color: #F4F7FA;" BorderPane.alignment="CENTER">
+        <HBox prefHeight="33.0" prefWidth="900.0"
+              style="-fx-background-color: #F4F7FA;"
+              BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="statusLabel" alignment="BOTTOM_RIGHT" prefHeight="18.0" prefWidth="229.0" text="Total Patients: 0" textFill="#374151" />
-            </children>
+                <Label fx:id="statusLabel" alignment="BOTTOM_RIGHT"
+                       prefHeight="18.0" prefWidth="29.0"
+                       text="Total Patients: 0" textFill="#374151"/>
+             </children>
         </HBox>
     </bottom>
 </BorderPane>
