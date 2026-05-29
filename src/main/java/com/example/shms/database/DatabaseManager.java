@@ -42,7 +42,6 @@ public class DatabaseManager {
             st.execute("INSERT INTO users (username,password,role) VALUES ('SalmaK','"+PasswordEncryption.hash("nurse123")+"','NURSE')");
             st.execute("INSERT INTO users (username,password,role) VALUES ('SalmaA','"+PasswordEncryption.hash("recep123")+"','RECEPTIONIST')");
             st.execute("INSERT INTO users (username,password,role) VALUES ('Mohamed','"+PasswordEncryption.hash("patient123")+"','PATIENT')");
-            st.execute("INSERT INTO users (username,password,role) VALUES ('mohamed.fawzy',"+PasswordEncryption.hash("patient123")+"','PATIENT')");
             st.execute("INSERT INTO users (username,password,role) VALUES ('salma.abdelkhalek','"+PasswordEncryption.hash("patient123")+"','PATIENT')");
             st.execute("INSERT INTO users (username,password,role) VALUES ('zeina.yasser','"+PasswordEncryption.hash("patient123")+"','PATIENT')");
             st.execute("INSERT INTO users (username,password,role) VALUES ('mariam.elshafie','"+PasswordEncryption.hash("patient123")+"','PATIENT')");
