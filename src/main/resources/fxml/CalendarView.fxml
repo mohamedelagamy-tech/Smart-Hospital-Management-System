@@ -30,15 +30,15 @@
           style="-fx-padding:12 20 ;-fx-background-color:#EEF2FF;">
         <Label text="Status"
                style="-fx-font-size:12; -fx-font-weight:bold; -fx-text-fill:#666;"/>
-        <Label text="Scheduled"
+        <Label text="Scheduled" onMouseClicked="#handleFilterScheduled"
                style="-fx-background-color:#E6F1FB;-fx-text-fill:#0C447C;
                        -fx-background-radius:99; -fx-padding:3 10 ;
                       -fx-font-size:12; -fx-font-weight:bold; "/>
-        <Label text="Completed"
+        <Label text="Completed" onMouseClicked="#handleFilterCompleted"
                style="-fx-background-color:#EAF3DE;-fx-text-fill:#27500A;
                       -fx-background-radius:99; -fx-padding:3 10 ;
                       -fx-font-size:12; -fx-font-weight:bold; "/>
-        <Label text="Cancelled"
+        <Label text="Cancelled" onMouseClicked="#handleFilterCompleted"
                style="-fx-background-color:#FCEBEB;-fx-text-fill:#791F1F;
                       -fx-background-radius:99; -fx-padding:3 10 ;
                       -fx-font-size:12; -fx-font-weight:bold; "/>
