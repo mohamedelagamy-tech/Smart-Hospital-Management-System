@@ -19,7 +19,7 @@ public class CalendarController {
 
     private com.example.shms.database.DatabaseManager db = com.example.shms.database.DatabaseManager.getInstance();
     private java.time.LocalDate currentMonth = java.time.LocalDate.now().withDayOfMonth(1);
-
+    private String currentFilter="All";
     @FXML
     public void initialize() {
         loadCalendar();
@@ -29,14 +29,14 @@ public class CalendarController {
         calendarGrid.getChildren().clear();
         String month = currentMonth.getMonth().toString();
         monthLabel.setText(month.charAt(0) + month.substring(1).toLowerCase() + " " + currentMonth.getYear());
-        int dow=currentMonth.withDayOfMonth(1).getDayOfWeek().getValue();
+        int dow = currentMonth.withDayOfMonth(1).getDayOfWeek().getValue();
         int firstDay = dow == 7 ? 0 : dow;
         int daysInMonth = currentMonth.lengthOfMonth();
         List<Appointment> all = new java.util.ArrayList<>();
-        try{
-            java.sql.Statement st=db.getConnection().createStatement();
-            java.sql.ResultSet rs=st.executeQuery("SELECT * FROM appointments");
-            while(rs.next()){
+        try {
+            java.sql.Statement st = db.getConnection().createStatement();
+            java.sql.ResultSet rs = st.executeQuery("SELECT * FROM appointments");
+            while (rs.next()) {
                 all.add(new Appointment(
                         rs.getInt("id"),
                         rs.getInt("patientId"),
@@ -44,11 +44,11 @@ public class CalendarController {
                         java.time.LocalDate.parse(rs.getString("date")),
                         java.time.LocalTime.parse(rs.getString("time")),
                         rs.getString("status"),
-                        rs.getString("notes")!=null? rs.getString("notes") :""
+                        rs.getString("notes") != null ? rs.getString("notes") : ""
                 ));
             }
-        }catch(Exception e){
-            System.out.println("Calender loading failed"+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Calender loading failed" + e.getMessage());
         }
 
         int col = firstDay;
@@ -71,6 +71,7 @@ public class CalendarController {
             cell.getChildren().add(dayLabel);
             for (Appointment a : all) {
                 if (a.getDate().equals(date)) {
+                   if( !currentFilter.equals("All") && !a.getStatus().equals(currentFilter)) continue;
                     String color, textColor;
                     if ("Scheduled".equals(a.getStatus())) {
                         color = "#E6F1FB";
@@ -95,6 +96,24 @@ public class CalendarController {
             }
         }
     }
+
+    @FXML
+    private void handleFilterAll() {
+        currentFilter = "All";
+        loadCalendar();
+    }
+    @FXML private void handleFilterScheduled(){
+        currentFilter="Scheduled";
+        loadCalendar();
+}
+@FXML private void handleFilterCompleted(){
+    currentFilter="Completed";
+    loadCalendar();
+}
+@FXML private void handleFilterCancelled() {
+    currentFilter = "Cancelled";
+    loadCalendar();
+}
 
     @FXML
     private void handlePrevMonth() {
