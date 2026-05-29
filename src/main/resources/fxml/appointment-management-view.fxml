@@ -11,7 +11,7 @@
                 style="-fx-background-color: transparent; -fx-underline: true;
                 -fx-font-size:13px ; -fx-cursor: hand; -fx-padding:14 20;"
                 text="← Back" textFill="WHITE"/>
-        <Label style="-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:white;" text="Appointment Management" />
+        <Label style="-fx-font-size:24; -fx-font-weight:bold; -fx-text-fill:white;" text="Appointment Management" />
     </HBox>
     <HBox fx:id="summaryBar" spacing="12" style="-fx-padding:16 20 8 20; -fx-background-color:#EEF2FF;" />
     <Label fx:id="patientHeaderLabel" managed="false" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #185FA5;                   -fx-padding: 8 20 0 20;" visible="false" />
