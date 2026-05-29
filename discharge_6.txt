@@ -1,0 +1,7 @@
+=== DISCHARGE SUMMARY ===
+Patient ID: 6
+Doctor ID: 0
+Rooms Used: 0
+Total Bill: 3500.0
+Prescriptions: 
+ -Methotrexate|15mg|6 months

@@ -1,0 +1,7 @@
+=== DISCHARGE SUMMARY ===
+Patient ID: 2
+Doctor ID: 0
+Rooms Used: 0
+Total Bill: 600.0
+Prescriptions: 
+ -Ibuprofen|400mg|2 weeks
