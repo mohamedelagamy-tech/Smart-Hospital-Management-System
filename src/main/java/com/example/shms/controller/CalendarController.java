@@ -71,7 +71,7 @@ public class CalendarController {
             cell.getChildren().add(dayLabel);
             for (Appointment a : all) {
                 if (a.getDate().equals(date)) {
-                   if( !currentFilter.equals("All") && !a.getStatus().equals(currentFilter)) continue;
+                   if( !currentFilter.equals("All") &&  !a.getStatus().equals(currentFilter)) continue;
                     String color, textColor;
                     if ("Scheduled".equals(a.getStatus())) {
                         color = "#E6F1FB";
