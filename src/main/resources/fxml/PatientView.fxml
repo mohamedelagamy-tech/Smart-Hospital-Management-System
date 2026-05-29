@@ -61,20 +61,16 @@
                         <Font name="Arial Bold" size="24.0" />
                     </font>
                     <HBox.margin>
-                        <Insets left="10.0"/>
+                        <Insets left="10.0" />
                     </HBox.margin>
                 </Label>
             </children>
         </HBox>
     </top>
     <bottom>
-        <HBox prefHeight="33.0" prefWidth="900.0"
-              style="-fx-background-color: #F4F7FA;"
-              BorderPane.alignment="CENTER">
+        <HBox prefHeight="33.0" prefWidth="900.0" style="-fx-background-color: #F4F7FA;" BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="statusLabel" alignment="BOTTOM_RIGHT"
-                       prefHeight="18.0" prefWidth="29.0"
-                       text="Total Patients: 0" textFill="#374151"/>
+                <Label fx:id="statusLabel" alignment="BOTTOM_RIGHT" prefHeight="18.0" prefWidth="199.0" text="Total Patients: 0" textFill="#374151" />
              </children>
         </HBox>
     </bottom>
