@@ -7,7 +7,12 @@
 
     <HBox alignment="CENTER_LEFT" spacing="16" style="-fx-background-color:#1E3A5F; -fx-padding: 14 20;">
         <Button onAction="#handleBack" style="-fx-background-color: transparent; -fx-text-fill: white;                        -fx-underline: true; -fx-font-size: 13px; -fx-cursor: hand;" text="← Back" />
-        <Label style="-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:white;" text="Appointment Management" />
+        <Label text="Appointment Management" textFill="#fffafa">
+            <font>
+                <Font name="Arial Bold"
+            size="24.0"/>
+            </font>
+        </Label>
     </HBox>
     <HBox fx:id="summaryBar" spacing="12" style="-fx-padding:16 20 8 20; -fx-background-color:#EEF2FF;" />
     <Label fx:id="patientHeaderLabel" managed="false" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #185FA5;                   -fx-padding: 8 20 0 20;" visible="false" />
