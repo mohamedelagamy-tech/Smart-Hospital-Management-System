@@ -9,7 +9,7 @@
     <top>
         <VBox style="-fx-background-color: white; -fx-border-color: #EEEEEE; -fx-border-width: 0 0 1 0;">
             <children>
-                <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 16 20; -fx-background-color: #1F4E79;">
+                <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 16 20; -fx-background-color: #1E3A5F;">
                     <children>
                         <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: Transparent; -fx-underline:true;" text="← Back" textFill="WHITE">
                             <font>

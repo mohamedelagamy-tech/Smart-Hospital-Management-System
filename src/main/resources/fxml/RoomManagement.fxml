@@ -14,7 +14,7 @@
         <HBox alignment="CENTER_LEFT"
               prefHeight="60"
               spacing="12"
-              style="-fx-background-color: #1F4E79; -fx-padding: 0 24;">
+              style="-fx-background-color: #1E3A5F ; -fx-padding: 0 24;">
 
             <Button onAction="#handleBack"
                     style="-fx-background-color: transparent;
