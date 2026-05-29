@@ -11,7 +11,6 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.shms.controller.RoomManagementController">
     <top>
-        <HBox>
         <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0"
         spacing="10" style="-fx-background-color:#1E3A5F;">
         <Button onAction="#handleBack"
@@ -20,7 +19,7 @@
                 text="← Back" textFill="WHITE"/>
         <Label style="-fx-font-size:24; -fx-font-weight:bold; -fx-text-fill:white;"
                text="🛏 Room Management " />
-         </HBox>
+        </HBox>
     </top>
     <center>
         <VBox spacing="16"
