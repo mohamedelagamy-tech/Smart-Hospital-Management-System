@@ -58,7 +58,7 @@ public class CalendarController {
             VBox cell = new VBox(2);
 
             boolean isToday = date.equals(LocalDate.now());
-            cell.setStyle("-fx-border-color:#e8eaf0; -fx-border-width:0.5;" + "-fx-padding:6; -fx-min-height:80;" + (isToday ? "-fx-background-color#EEF2FF;" : "-fx-background-color:white;"));
+            cell.setStyle("-fx-border-color:#1E3A5F; -fx-border-width:0.5;" + "-fx-padding:6; -fx-min-height:80;" + (isToday ? "-fx-background-color#EEF2FF;" : "-fx-background-color:white;"));
             Label dayLabel = new Label(String.valueOf(day));
             if (isToday) {
                 dayLabel.setStyle("-fx-background-color:#185FA5; -fx-text-fill:white;" +
