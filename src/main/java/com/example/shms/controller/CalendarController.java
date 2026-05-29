@@ -82,7 +82,7 @@ public class CalendarController {
                         color = "#FCEBEB";
                         textColor = "#791F1F";
                     }
-                    Label pill = new Label(a.getTime().toString().substring(0, 5) + "" + a.getStatus());
+                    Label pill = new Label(a.getTime().toString().substring(0, 5) + " " + a.getStatus());
                     pill.setStyle("-fx-background-color:" + color + "; -fx-text-fill:" + textColor + ";-fx-background-radius:99; -fx-padding:2 6;" + "-fx-font-size:10; -fx-font-weight:bold;");
                     cell.getChildren().add(pill);
                 }
