@@ -30,19 +30,22 @@
           style="-fx-padding:12 20 ;-fx-background-color:#EEF2FF;">
         <Label text="Status"
                style="-fx-font-size:12; -fx-font-weight:bold; -fx-text-fill:#666;"/>
+        <Button text="All" onAction="#handleFilterAll"
+                style="-fx-background-color:#E8EAF6;-fx-text-fill:#3949AB;
+                   -fx-background-radius:99; -fx-padding:3 10;
+                  -fx-font-size:12; -fx-font-weight:bold; -fx-cursor:hand;"/>
         <Button text="Scheduled" onAction="#handleFilterScheduled"
-               style="-fx-background-color:#E6F1FB;-fx-text-fill:#0C447C;
-                       -fx-background-radius:99; -fx-padding:3 10 ;
-                      -fx-font-size:12; -fx-font-weight:bold; -fx-cursor:hand;"/>
+                style="-fx-background-color:#E6F1FB;-fx-text-fill:#0C447C;
+                   -fx-background-radius:99; -fx-padding:3 10 ;
+                  -fx-font-size:12; -fx-font-weight:bold; -fx-cursor:hand;"/>
         <Button text="Completed" onAction="#handleFilterCompleted"
-               style="-fx-background-color:#EAF3DE;-fx-text-fill:#27500A;
-                      -fx-background-radius:99; -fx-padding:3 10 ;
-                      -fx-font-size:12; -fx-font-weight:bold; -fx-cursor:hand;"/>
+                style="-fx-background-color:#EAF3DE;-fx-text-fill:#27500A;
+                  -fx-background-radius:99; -fx-padding:3 10 ;
+                  -fx-font-size:12; -fx-font-weight:bold; -fx-cursor:hand;"/>
         <Button text="Cancelled" onAction="#handleFilterCancelled"
-               style="-fx-background-color:#FCEBEB;-fx-text-fill:#791F1F;
-                      -fx-background-radius:99; -fx-padding:3 10 ;
-                      -fx-font-size:12; -fx-font-weight:bold; -fx-cursor:hand;"/>
-
+                style="-fx-background-color:#FCEBEB;-fx-text-fill:#791F1F;
+                  -fx-background-radius:99; -fx-padding:3 10 ;
+                  -fx-font-size:12; -fx-font-weight:bold; -fx-cursor:hand;"/>
     </HBox>
     <VBox VBox.vgrow="ALWAYS"
           style="-fx-padding:0 20 20 20 ; -fx-background-color:#EEF2FF;">
