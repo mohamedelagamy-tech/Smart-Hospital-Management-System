@@ -50,17 +50,6 @@ public class EmailService {
         sendEmail(to,subject,body);
     }
 
-    public static void sendAppointmentReminder(String to,String patientName,String doctorName,String date,String time){
-        String subject="SHMS — Appointment Reminder";
-        String body="Dear "+patientName+",\n\n"
-                +"This is a reminder that you have an appointment tomorrow.\n\n"
-                +"Doctor: "+doctorName+"\n"
-                +"Date: "+date+"\n"
-                +"Time: " + time + "\n\n"
-                +"Thank you!\n";
-        sendEmail(to,subject,body);
-    }
-
     public static void sendDischargeSummary(String to,String patientName,String doctorName,String roomNumber,String totalBill) {
         String subject="SHMS — Discharge Summary";
         String body="Dear "+patientName+",\n\n"
