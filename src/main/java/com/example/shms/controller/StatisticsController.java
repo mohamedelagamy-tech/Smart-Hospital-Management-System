@@ -185,6 +185,7 @@ public class StatisticsController implements Initializable {
                if(label.startsWith("Pending")) node.setStyle("-fx-background-color:#7f8c8d;");
                if(label.startsWith("Partial")) node.setStyle("-fx-background-color:#e67e22;");
                if(label.startsWith("Overdue")) node.setStyle("-fx-background-color:#e74c3c;");
+
            });
         });
     }
