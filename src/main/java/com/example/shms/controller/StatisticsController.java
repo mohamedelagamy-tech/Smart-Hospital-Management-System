@@ -94,14 +94,14 @@ public class StatisticsController implements Initializable {
         }catch(SQLException ignored){}
         ObservableList<PieChart.Data> data=FXCollections.observableArrayList(
                 new PieChart.Data("Occupied ("+occupied+")",Math.max(occupied,0.01)),
-                new PieChart.Data("Available ("+available+")",Math.max(available,0.01)),
-                new PieChart.Data("Cleaning ("+cleaning+")",Math.max(cleaning,0.01))
+                new PieChart.Data("Cleaning ("+cleaning+")",Math.max(cleaning,0.01)),
+                new PieChart.Data("Available ("+available+")",Math.max(available,0.01))
         );
         occupancyChart.setData(data);
         Platform.runLater(()->{
             if(data.size()>0) data.get(0).getNode().setStyle("-fx-pie-color: #e74c3c;");
-            if(data.size()>1) data.get(1).getNode().setStyle("-fx-pie-color: #27ae60;");
-            if(data.size()>2) data.get(2).getNode().setStyle("-fx-pie-color: #f97316;");
+            if(data.size()>1) data.get(1).getNode().setStyle("-fx-pie-color: #f97316;");
+            if(data.size()>2) data.get(2).getNode().setStyle("-fx-pie-color: #27ae60;");
         });
     }
     private void loadRevenueChart(){
@@ -160,17 +160,17 @@ public class StatisticsController implements Initializable {
             }
         }catch(SQLException ignored){}
         ObservableList<PieChart.Data> data=FXCollections.observableArrayList(
-                new PieChart.Data("Paid ("+paid+")",Math.max(paid,0.01)),
+                new PieChart.Data("Overdue ("+overdue+")",Math.max(overdue,0.01)),
                 new PieChart.Data("Pending ("+pending+")",Math.max(pending,0.01)),
                 new PieChart.Data("Partial ("+partial+")",Math.max(partial,0.01)),
-                new PieChart.Data("Overdue ("+overdue+")",Math.max(overdue,0.01))
+                new PieChart.Data("Paid ("+paid+")",Math.max(paid,0.01))
         );
         billStatusChart.setData(data);
         Platform.runLater(()->{
-            if(data.size()>0) data.get(0).getNode().setStyle("-fx-pie-color: #27ae60;");
+            if(data.size()>0) data.get(0).getNode().setStyle("-fx-pie-color: #e74c3c;");
             if(data.size()>1) data.get(1).getNode().setStyle("-fx-pie-color: #7f8c8d;");
             if(data.size()>2) data.get(2).getNode().setStyle("-fx-pie-color: #e67e22;");
-            if(data.size()>3) data.get(3).getNode().setStyle("-fx-pie-color: #e74c3c;");
+            if(data.size()>3) data.get(3).getNode().setStyle("-fx-pie-color: #27ae60;");
         });
     }
     private void startNotificationThread(){
