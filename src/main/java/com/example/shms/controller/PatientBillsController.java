@@ -115,7 +115,19 @@ public class PatientBillsController implements Initializable {
                 billStatusLabel.setText("All paid");
                 billTotalLabel.setText("EGP 0");
                 payButton.setDisable(true);
-                paymentSlider.setDisable(true);
+                if(currentBillId == -1){
+                    billIdLabel.setText("No unpaid bills");
+                    billDoctorLabel.setText("—");
+                    billTreatmentLabel.setText("—");
+                    billStatusLabel.setText("All paid");
+                    billTotalLabel.setText("EGP 0");
+                    payButton.setDisable(true);
+                    payButton.setText("No bills due");
+                    paymentSlider.setDisable(true);
+                    paymentSlider.setValue(0);
+                    amountDueLabel.setText("EGP 0");
+                    sliderMaxLabel.setText("EGP 0");
+                }
             }
 
             if(historyItems.isEmpty()){
