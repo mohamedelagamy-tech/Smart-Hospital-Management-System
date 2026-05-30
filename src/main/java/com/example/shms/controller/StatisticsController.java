@@ -102,6 +102,13 @@ public class StatisticsController implements Initializable {
             if(data.size()>0) data.get(0).getNode().setStyle("-fx-pie-color: #e74c3c;");
             if(data.size()>1) data.get(1).getNode().setStyle("-fx-pie-color: #27ae60;");
             if(data.size()>2) data.get(2).getNode().setStyle("-fx-pie-color: #f97316;");
+            occupancyChart.lookupAll(".chart-legend-item-symbol").forEach(node ->{
+                javafx.scene.control.Label parent=(javafx.scene.control.Label)node.getParent();
+                String label=parent.getText();
+                if(label.startsWith("Occupied")) node.setStyle("-fx-background-color:#e74c3c;");
+                if(label.startsWith("Available")) node.setStyle("-fx-background-color:#27ae60");
+                if(label.startsWith("Cleaning")) node.setStyle("-fx-background-color:#f97316");
+            });
         });
     }
     private void loadRevenueChart(){
@@ -171,6 +178,14 @@ public class StatisticsController implements Initializable {
             if(data.size()>1) data.get(1).getNode().setStyle("-fx-pie-color: #7f8c8d;");
             if(data.size()>2) data.get(2).getNode().setStyle("-fx-pie-color: #e67e22;");
             if(data.size()>3) data.get(3).getNode().setStyle("-fx-pie-color: #e74c3c;");
+           billStatusChart.lookupAll(".chart-legend-item-symbol").forEach(node ->{
+               javafx.scene.control.Label parent=(javafx.scene.control.Label)node.getParent();
+               String label=parent.getText();
+               if(label.startsWith("Paid")) node.setStyle("-fx-background-color:#27ae60;");
+               if(label.startsWith("Pending")) node.setStyle("-fx-background-color:#7f8c8d;");
+               if(label.startsWith("Partial")) node.setStyle("-fx-background-color:#e67e22;");
+               if(label.startsWith("Overdue")) node.setStyle("-fx-background-color:#e74c3c;");
+           });
         });
     }
     private void startNotificationThread(){
