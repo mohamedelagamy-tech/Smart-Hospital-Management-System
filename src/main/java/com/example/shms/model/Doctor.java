@@ -48,7 +48,7 @@ public class Doctor extends Person implements Comparable<Doctor>, Schedulable  {
 
     @Override
     public int compareTo(Doctor other) {
-        return Double.compare(this.getAverageRating(), other.getAverageRating());
+        return Integer.compare(this.getID(), other.getID());
     }
 
     @Override
