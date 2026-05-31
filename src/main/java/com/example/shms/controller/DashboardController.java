@@ -41,6 +41,7 @@ public class DashboardController implements Initializable {
     @FXML private Label statRevenue;
     @FXML private Label statOutstanding;
     @FXML private Label statEmergency;
+    @FXML private Label statPrescriptions;
 
     @FXML private Button btnDashboard;
     @FXML private Button btnPatients;
@@ -207,6 +208,9 @@ public class DashboardController implements Initializable {
 
             ResultSet emg=st.executeQuery("SELECT COUNT(*) FROM patients WHERE priority = 1");
             statEmergency.setText(String.valueOf(emg.getInt(1)));
+
+            ResultSet presc=st.executeQuery("SELECT COUNT(*) FROM prescriptions");
+            statPrescriptions.setText(String.valueOf(presc.getInt(1)));
 
         }catch(SQLException e){
             System.out.println("Stats load failed: "+e.getMessage());
