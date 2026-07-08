@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.shms.controller.SettingsController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10"
+              style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
+            <Button onAction="#handleBack" text="← Back"
+                    style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" />
+            <Label text="⚙️  Settings"
+                   style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" />
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background-color: #F4F6F9; -fx-background: #F4F6F9;">
+            <content>
+                <VBox style="-fx-background-color: #F4F6F9; -fx-padding: 24;" spacing="16">
+
+                    <VBox spacing="14"
+                          style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 20;">
+                        <Label text="🎨  Appearance"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" />
+                        <Separator />
+
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                <Label text="Theme"
+                                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                <Label text="Choose how SHMS looks"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #888;" />
+                            </VBox>
+                            <ToggleGroup fx:id="themeGroup" />
+                            <ToggleButton fx:id="btnLight" text="☀️  Light"
+                                          toggleGroup="$themeGroup" onAction="#handleThemeChange"
+                                          style="-fx-background-color: #E6F1FB; -fx-text-fill: #1F4E79; -fx-font-size: 12px; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16;" />
+                            <ToggleButton fx:id="btnDark" text="🌙  Dark"
+                                          toggleGroup="$themeGroup" onAction="#handleThemeChange"
+                                          style="-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE; -fx-border-width: 0 1 0 1;" />
+                            <ToggleButton fx:id="btnHighContrast" text="⬛  High Contrast"
+                                          toggleGroup="$themeGroup" onAction="#handleThemeChange"
+                                          style="-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16;" />
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                <Label text="Font Size"
+                                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                <Label text="Adjust text size across the app"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #888;" />
+                            </VBox>
+                            <ToggleGroup fx:id="fontGroup" />
+                            <ToggleButton fx:id="btnSmall" text="A-"
+                                          toggleGroup="$fontGroup" onAction="#handleFontChange"
+                                          style="-fx-font-size: 11px; -fx-background-color: white; -fx-text-fill: #555; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE;" />
+                            <ToggleButton fx:id="btnMedium" text="A"
+                                          toggleGroup="$fontGroup" onAction="#handleFontChange"
+                                          style="-fx-font-size: 13px; -fx-background-color: #E6F1FB; -fx-text-fill: #1F4E79; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE; -fx-border-width: 0 1 0 1;" />
+                            <ToggleButton fx:id="btnLarge" text="A+"
+                                          toggleGroup="$fontGroup" onAction="#handleFontChange"
+                                          style="-fx-font-size: 15px; -fx-background-color: white; -fx-text-fill: #555; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE;" />
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="14"
+                          style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 20;">
+                        <Label text="🌐  Language"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" />
+                        <Separator />
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                <Label text="Display Language"
+                                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                <Label text="The app will reload when language changes"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #888;" />
+                            </VBox>
+                            <ToggleGroup fx:id="langGroup" />
+                            <ToggleButton fx:id="btnEnglish" text="🇬🇧  English"
+                                          toggleGroup="$langGroup" onAction="#handleLanguageChange"
+                                          style="-fx-background-color: #E6F1FB; -fx-text-fill: #1F4E79; -fx-font-size: 12px; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16;" />
+                            <ToggleButton fx:id="btnArabic" text="🇪🇬  العربية"
+                                          toggleGroup="$langGroup" onAction="#handleLanguageChange"
+                                          style="-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE; -fx-border-width: 1 1 1 0;" />
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="14"
+                          style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 20;">
+                        <Label text="👤  Account"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" />
+                        <Separator />
+
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                <Label text="Change Password"
+                                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                <Label text="Update your account password"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #888;" />
+                            </VBox>
+                            <Button text="Change →" onAction="#handleChangePassword"
+                                    style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 8 16;" />
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                <Label text="Two-Factor Authentication"
+                                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                <Label text="Add extra security to your account"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #888;" />
+                            </VBox>
+                            <ToggleButton fx:id="btn2FA" text="Enable"
+                                          onAction="#handle2FAToggle"
+                                          style="-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE; -fx-border-width: 1;" />
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="10"
+                          style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 20;">
+                        <Label text="ℹ️  About"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" />
+                        <Separator />
+                        <HBox>
+                            <Label text="Application" style="-fx-font-size: 12px; -fx-text-fill: #888;" HBox.hgrow="ALWAYS" />
+                            <Label text="Smart Hospital Management System" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                        </HBox>
+                        <HBox>
+                            <Label text="Version" style="-fx-font-size: 12px; -fx-text-fill: #888;" HBox.hgrow="ALWAYS" />
+                            <Label text="2.0.0" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                        </HBox>
+                        <HBox>
+                            <Label text="Team" style="-fx-font-size: 12px; -fx-text-fill: #888;" HBox.hgrow="ALWAYS" />
+                            <Label text="ZMMSS — AASTMT Alexandria" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                        </HBox>
+                        <HBox>
+                            <Label text="Built with" style="-fx-font-size: 12px; -fx-text-fill: #888;" HBox.hgrow="ALWAYS" />
+                            <Label text="Java 17 • JavaFX • SQLite • Anthropic API" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

@@ -1,6 +1,7 @@
 package com.example.shms;
 
 import com.example.shms.utils.MedicineReminderUtil;
+import com.example.shms.utils.ThemeManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,6 +33,8 @@ public class MainApp extends Application {
             FXMLLoader loader=new FXMLLoader(MainApp.class.getResource("/fxml/"+fxmlFile +".fxml"));
             Scene scene=new Scene(loader.load(),width,height);
             primaryStage.setScene(scene);
+
+            ThemeManager.applyCurrentPreferences(scene);
 
             FadeTransition fade= new FadeTransition(Duration.millis(300),scene.getRoot());
             fade.setFromValue(0.0);

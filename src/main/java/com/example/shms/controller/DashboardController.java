@@ -293,13 +293,14 @@ public class DashboardController implements Initializable {
         setActiveButton(btnAuditLog);
         MainApp.navigateTo("auditLog",1200,700);
     }
-    @FXML
-    private void showStatistics() {
+    @FXML private void showStatistics() {
         setActiveButton(btnStatistics);
         MainApp.navigateTo("StatisticsDashboard", 1200, 700);
     }
-    @FXML
-    private void showCalendar(){
+    @FXML private void showSettings(){
+        MainApp.navigateTo("Settings",1200,700);
+    }
+    @FXML private void showCalendar(){
         MainApp.navigateTo("CalendarView",900,700);
     }
 }

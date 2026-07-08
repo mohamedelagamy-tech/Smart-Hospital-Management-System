@@ -44,6 +44,7 @@
             <Button fx:id="btnDepartments" maxWidth="Infinity" onAction="#showDepartments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="🏥  Departments"/>
             <Button fx:id="btnAuditLog" maxWidth="Infinity" onAction="#showAuditLog" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📝  Audit Log"/>
             <Button fx:id="btnStatistics" maxWidth="Infinity" onAction="#showStatistics" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📊  Statistics"/>
+            <Button fx:id="btnSettings" maxWidth="Infinity" onAction="#showSettings" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="⚙️  Settings" />
         </VBox>
     </left>
     <center>
