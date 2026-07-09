@@ -1,7 +1,0 @@
-=== DISCHARGE SUMMARY ===
-Patient ID: 1
-Doctor ID: 0
-Rooms Used: 0
-Total Bill: 850.0
-Prescriptions: 
- -Amlodipine|5mg|3 months

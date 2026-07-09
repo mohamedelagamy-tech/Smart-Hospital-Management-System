@@ -1,7 +1,0 @@
-=== DISCHARGE SUMMARY ===
-Patient ID: 7
-Doctor ID: 0
-Rooms Used: 0
-Total Bill: 900.0
-Prescriptions: 
- -Tamsulosin|0.4mg|1 month

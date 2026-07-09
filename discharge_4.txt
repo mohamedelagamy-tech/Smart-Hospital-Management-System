@@ -1,7 +1,0 @@
-=== DISCHARGE SUMMARY ===
-Patient ID: 4
-Doctor ID: 0
-Rooms Used: 0
-Total Bill: 1200.0
-Prescriptions: 
- -Amoxicillin|500mg|1 week
