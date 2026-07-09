@@ -1,0 +1,70 @@
+.root {
+    -fx-base: #000000;
+    -fx-background: #000000;
+    -fx-text-fill: #FFFFFF;
+}
+
+.label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+.card {
+    -fx-background-color: #000000;
+    -fx-background-radius: 12;
+    -fx-border-color: #FFFF00;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+}
+
+.text-field,.text-area,.combo-box {
+    -fx-background-color: #000000;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #FFFF00;
+    -fx-border-width: 2;
+    -fx-prompt-text-fill: #AAAAAA;
+}
+
+.button {
+    -fx-background-color: #FFFF00;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 1;
+}
+
+.table-view {
+    -fx-background-color: #000000;
+}
+
+.table-view.column-header {
+    -fx-background-color: #FFFF00;
+}
+
+.table-view.column-header.label {
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #000000;
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #1A1A1A;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #FFFF00;
+    -fx-text-fill: #000000;
+}
+
+.scroll-pane,.scroll-pane.viewport {
+    -fx-background-color: #000000;
+}
+
+.list-view,.list-cell {
+    -fx-background-color: #000000;
+    -fx-text-fill: #FFFFFF;
+}
