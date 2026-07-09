@@ -95,3 +95,94 @@
 .stat-icon-orange { -fx-background-color: #FFF3E0; -fx-background-radius: 10; }
 .stat-icon-purple { -fx-background-color: #EDE7F6; -fx-background-radius: 10; }
 .stat-icon-red { -fx-background-color: #FFEBEE; -fx-background-radius: 10; }
+.top-bar {
+    -fx-background-color: #1F4E79;
+    -fx-padding: 0 20;
+}
+.top-bar-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-underline: true;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-padding: 14 20;
+}
+.settings-scroll {
+    -fx-background-color: #F4F6F9;
+    -fx-background: #F4F6F9;
+}
+.settings-content {
+    -fx-background-color: #F4F6F9;
+    -fx-padding: 24;
+}
+.settings-row-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+.primary-button {
+    -fx-background-color: #1F4E79;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+.toggle-left {
+    -fx-background-color: #E6F1FB;
+    -fx-text-fill: #1F4E79;
+    -fx-font-size: 12px;
+    -fx-background-radius: 8 0 0 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+.toggle-left:selected {
+    -fx-background-color: #1F4E79;
+    -fx-text-fill: white;
+}
+.toggle-mid {
+    -fx-background-color: white;
+    -fx-text-fill: #555;
+    -fx-font-size: 12px;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+    -fx-border-color: #EEEEEE;
+    -fx-border-width: 0 1 0 1;
+}
+.toggle-mid:selected {
+    -fx-background-color: #1F4E79;
+    -fx-text-fill: white;
+}
+.toggle-right {
+    -fx-background-color: white;
+    -fx-text-fill: #555;
+    -fx-font-size: 12px;
+    -fx-background-radius: 0 8 8 0;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+.toggle-right:selected {
+    -fx-background-color: #1F4E79;
+    -fx-text-fill: white;
+}
+.toggle-2fa {
+    -fx-background-color: white;
+    -fx-text-fill: #555;
+    -fx-font-size: 12px;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+    -fx-border-color: #EEEEEE;
+    -fx-border-width: 1;
+}
+.toggle-2fa:selected {
+    -fx-background-color: #E8F5E9;
+    -fx-text-fill: #2E7D32;
+    -fx-border-color: #4CAF50;
+}

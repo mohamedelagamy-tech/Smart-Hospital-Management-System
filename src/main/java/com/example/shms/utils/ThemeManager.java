@@ -21,6 +21,11 @@ public class ThemeManager {
         switch(theme){
             case "dark": cssFile = "/css/darkTheme.css";break;
             case "high-contrast": cssFile = "/css/highContrast.css";break;
+            case "ocean": cssFile = "/css/oceanTheme.css";break;
+            case "forest": cssFile = "/css/forestTheme.css";break;
+            case "purple": cssFile = "/css/purpleTheme.css";break;
+            case "rose": cssFile = "/css/roseTheme.css";break;
+            case "sand": cssFile = "/css/sandTheme.css";break;
             default: cssFile = "/css/lightTheme.css";break;
         }
 

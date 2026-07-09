@@ -1,0 +1,31 @@
+.root { -fx-background: #0A1628; -fx-base: #0D1F3C; -fx-control-inner-background: #0D1F3C; }
+.app-background { -fx-background-color: #0A1628; }
+.sidebar { -fx-background-color: #061020; -fx-border-color: #1A3A5C; -fx-border-width: 0 1 0 0; }
+.section-label { -fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #2A6A8A; -fx-padding: 8 8 4 8; }
+.nav-button { -fx-background-color: transparent; -fx-text-fill: #7ABCCC; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-max-width: Infinity; }
+.nav-button:hover { -fx-background-color: #0D2A4A; -fx-text-fill: #00D4FF; }
+.nav-button-active { -fx-background-color: #006080; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold; -fx-max-width: Infinity; }
+.card { -fx-background-color: #0D1F3C; -fx-background-radius: 10; -fx-border-color: #1A3A5C; -fx-border-radius: 10; -fx-border-width: 1; }
+.welcome-label { -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #00D4FF; }
+.stat-number { -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #00D4FF; }
+.stat-number-red { -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #FF6B6B; }
+.muted-text { -fx-font-size: 11px; -fx-text-fill: #5A8A9A; }
+.body-text { -fx-text-fill: #B0D4E0; }
+.card-title { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #00D4FF; }
+.label { -fx-text-fill: #B0D4E0; }
+.stat-icon-blue { -fx-background-color: #0A2A4A; -fx-background-radius: 10; }
+.stat-icon-green { -fx-background-color: #0A2A3A; -fx-background-radius: 10; }
+.stat-icon-orange { -fx-background-color: #1A2A3A; -fx-background-radius: 10; }
+.stat-icon-purple { -fx-background-color: #1A1A4A; -fx-background-radius: 10; }
+.stat-icon-red { -fx-background-color: #2A0A1A; -fx-background-radius: 10; }
+.table-view { -fx-background-color: #0D1F3C; }
+.table-row-cell { -fx-background-color: #0D1F3C; -fx-text-fill: #B0D4E0; }
+.table-row-cell:odd { -fx-background-color: #0A1628; }
+.table-row-cell:selected { -fx-background-color: #006080; }
+.table-cell { -fx-text-fill: #B0D4E0; }
+.list-view { -fx-background-color: #0D1F3C; }
+.list-cell { -fx-background-color: #0D1F3C; -fx-text-fill: #B0D4E0; }
+.list-cell:odd { -fx-background-color: #0A1628; }
+.scroll-pane { -fx-background: #0A1628; -fx-background-color: #0A1628; }
+.scroll-pane > .viewport { -fx-background-color: #0A1628; }
+.text-field, .password-field, .text-area { -fx-background-color: #0D1F3C; -fx-text-fill: #B0D4E0; -fx-border-color: #1A3A5C; }

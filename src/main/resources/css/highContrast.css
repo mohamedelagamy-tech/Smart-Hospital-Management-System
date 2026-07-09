@@ -98,3 +98,76 @@
 .stat-icon-orange { -fx-background-color: #332200; -fx-background-radius: 10; -fx-border-color: #FFFF00; -fx-border-width: 1; }
 .stat-icon-purple { -fx-background-color: #220033; -fx-background-radius: 10; -fx-border-color: #FFFF00; -fx-border-width: 1; }
 .stat-icon-red { -fx-background-color: #330000; -fx-background-radius: 10; -fx-border-color: #FFFF00; -fx-border-width: 1; }
+.top-bar {
+    -fx-background-color: #000000;
+    -fx-padding: 0 20;
+    -fx-border-color: #FFFF00;
+    -fx-border-width: 0 0 2 0;
+}
+.top-bar-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFF00;
+}
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFF00;
+    -fx-underline: true;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-padding: 14 20;
+}
+.settings-scroll {
+    -fx-background-color: #000000;
+    -fx-background: #000000;
+}
+.settings-content {
+    -fx-background-color: #000000;
+    -fx-padding: 24;
+}
+.settings-row-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+}
+.primary-button {
+    -fx-background-color: #FFFF00;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+.toggle-left, .toggle-mid, .toggle-right {
+    -fx-background-color: #000000;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+    -fx-border-color: #FFFF00;
+    -fx-border-width: 1;
+}
+.toggle-left { -fx-background-radius: 8 0 0 8; }
+.toggle-mid  { -fx-background-radius: 0; }
+.toggle-right { -fx-background-radius: 0 8 8 0; }
+.toggle-left:selected, .toggle-mid:selected, .toggle-right:selected {
+    -fx-background-color: #FFFF00;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
+.toggle-2fa {
+    -fx-background-color: #000000;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12px;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+    -fx-border-color: #FFFF00;
+    -fx-border-width: 1;
+}
+.toggle-2fa:selected {
+    -fx-background-color: #FFFF00;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
