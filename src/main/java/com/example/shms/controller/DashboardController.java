@@ -54,6 +54,8 @@ public class DashboardController implements Initializable {
     @FXML private Button btnRooms;
     @FXML private Button btnDepartments;
     @FXML private Button btnAuditLog;
+    @FXML private Button btnCalendar;
+    @FXML private Button btnSettings;
     @FXML private ImageView logoView;
     @FXML private Button btnStatistics;
     @FXML
@@ -217,17 +219,21 @@ public class DashboardController implements Initializable {
         }
     }
 
-    private void setActiveButton(Button active){
-        Button[] all = {btnDashboard,btnPatients,btnDoctors,btnAppointments,
-                btnRecords,btnPrescriptions,btnEmergency,btnBilling,
-                btnRooms,btnDepartments,btnAuditLog, btnStatistics};
-
-
-        for(Button btn : all){
+    private void setActiveButton(Button active) {
+        Button[] all = {btnDashboard, btnPatients, btnDoctors, btnAppointments,
+                btnCalendar, btnRecords, btnPrescriptions, btnEmergency,
+                btnBilling, btnRooms, btnDepartments, btnAuditLog,
+                btnStatistics, btnSettings};
+        for (Button btn : all) {
             btn.getStyleClass().remove("nav-button-active");
-            btn.setStyle("-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;");
+            if (!btn.getStyleClass().contains("nav-button")) {
+                btn.getStyleClass().add("nav-button");
+            }
         }
-        active.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;");
+        active.getStyleClass().remove("nav-button");
+        if (!active.getStyleClass().contains("nav-button-active")) {
+            active.getStyleClass().add("nav-button-active");
+        }
     }
 
     @FXML

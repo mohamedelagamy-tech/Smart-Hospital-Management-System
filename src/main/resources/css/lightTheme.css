@@ -1,37 +1,97 @@
 .root {
-    -fx-base: #f4f6f9;
-    -fx-background: #f4f6f9;
+    -fx-background: #F4F6F9;
+    -fx-base: #F4F6F9;
+    -fx-control-inner-background: white;
+    -fx-text-background-color: #333333;
 }
 
-.card {
-    -fx-background-color: white;
-    -fx-background-radius: 12;
-    -fx-border-color: #EEEEEE;
-    -fx-border-radius: 12;
-    -fx-border-width: 1;
+.label {
+    -fx-text-fill: #333333;
+}
+
+.vbox, .hbox, .border-pane, .scroll-pane, .anchor-pane {
+    -fx-background-color: transparent;
+}
+
+.text-field, .password-field, .text-area {
+    -fx-background-color: #FAFAFA;
+    -fx-text-fill: #333333;
+    -fx-border-color: #E0E0E0;
 }
 
 .table-view {
     -fx-background-color: white;
 }
 
-.table-view.column-header {
-    -fx-background-color: #1F4E79;
-}
-
-.table-view.column-header.label {
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #333333;
 }
 
 .table-row-cell:odd {
     -fx-background-color: #F7FAFD;
 }
 
-.table-row-cell:even {
+.table-row-cell:selected {
+    -fx-background-color: #E6F1FB;
+    -fx-text-fill: #1F4E79;
+}
+
+.table-cell {
+    -fx-text-fill: #333333;
+}
+
+.scroll-pane {
+    -fx-background: #F4F6F9;
+    -fx-background-color: #F4F6F9;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.list-view {
     -fx-background-color: white;
 }
 
-.table-row-cell:selected {
-    -fx-background-color: #E6F1FB;
+.list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #333333;
 }
+
+.list-cell:odd {
+    -fx-background-color: #F7FAFD;
+}
+
+.separator *.line {
+    -fx-background-color: #EEEEEE;
+    -fx-border-color: #EEEEEE;
+}
+.app-background { -fx-background-color: #F4F6F9; }
+.card { -fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; }
+.card-title { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; }
+.body-text { -fx-text-fill: #333333; }
+.muted-text { -fx-text-fill: #888888; }
+.stat-number { -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; }
+.nav-button { -fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; }
+.nav-button-active { -fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-weight: bold; }
+.sidebar { -fx-background-color: #F8FAFC; -fx-border-color: #EEEEEE; -fx-border-width: 0 1 0 0; }
+.section-label { -fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 8 8 4 8; }
+.app-background { -fx-background-color: #F4F6F9; }
+.sidebar { -fx-background-color: #F8FAFC; -fx-border-color: #EEEEEE; -fx-border-width: 0 1 0 0; }
+.section-label { -fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 8 8 4 8; }
+.nav-button { -fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-max-width: Infinity; }
+.nav-button:hover { -fx-background-color: #EEF2F7; -fx-text-fill: #1F4E79; }
+.nav-button-active { -fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold; -fx-max-width: Infinity; }
+.card { -fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #EEEEEE; -fx-border-radius: 10; -fx-border-width: 1; }
+.welcome-label { -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; }
+.stat-number { -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; }
+.stat-number-red { -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #e74c3c; }
+.muted-text { -fx-font-size: 11px; -fx-text-fill: #888888; }
+.body-text { -fx-text-fill: #333333; }
+.card-title { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; }
+.stat-icon-blue { -fx-background-color: #E6F1FB; -fx-background-radius: 10; }
+.stat-icon-green { -fx-background-color: #E8F5E9; -fx-background-radius: 10; }
+.stat-icon-orange { -fx-background-color: #FFF3E0; -fx-background-radius: 10; }
+.stat-icon-purple { -fx-background-color: #EDE7F6; -fx-background-radius: 10; }
+.stat-icon-red { -fx-background-color: #FFEBEE; -fx-background-radius: 10; }

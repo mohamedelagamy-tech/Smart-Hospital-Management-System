@@ -43,8 +43,18 @@ public class SettingsController {
         String theme="light";
         if(btnDark.isSelected()){
             theme="dark";
+            btnDark.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16;");
+            btnLight.setStyle("-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16;");
+            btnHighContrast.setStyle("-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16;");
         }else if(btnHighContrast.isSelected()){
-            theme = "high-contrast";
+            theme="high-contrast";
+            btnHighContrast.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16;");
+            btnLight.setStyle("-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16;");
+            btnDark.setStyle("-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16;");
+        }else {
+            btnLight.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16;");
+            btnDark.setStyle("-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16;");
+            btnHighContrast.setStyle("-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16;");
         }
         ThemeManager.applyTheme(theme);
     }
@@ -53,8 +63,18 @@ public class SettingsController {
         String size="medium";
         if(btnSmall.isSelected()){
             size="small";
+            btnSmall.setStyle("-fx-font-size: 11px; -fx-background-color: #1F4E79; -fx-text-fill: white; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16;");
+            btnMedium.setStyle("-fx-font-size: 13px; -fx-background-color: white; -fx-text-fill: #555; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE; -fx-border-width: 0 1 0 1;");
+            btnLarge.setStyle("-fx-font-size: 15px; -fx-background-color: white; -fx-text-fill: #555; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16;");
         }else if(btnLarge.isSelected()){
             size="large";
+            btnSmall.setStyle("-fx-font-size: 11px; -fx-background-color: white; -fx-text-fill: #555; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16;");
+            btnMedium.setStyle("-fx-font-size: 13px; -fx-background-color: white; -fx-text-fill: #555; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE; -fx-border-width: 0 1 0 1;");
+            btnLarge.setStyle("-fx-font-size: 15px; -fx-background-color: #1F4E79; -fx-text-fill: white; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16;");
+        }else {
+            btnSmall.setStyle("-fx-font-size: 11px; -fx-background-color: white; -fx-text-fill: #555; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16;");
+            btnMedium.setStyle("-fx-font-size: 13px; -fx-background-color: #1F4E79; -fx-text-fill: white; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE; -fx-border-width: 0 1 0 1;");
+            btnLarge.setStyle("-fx-font-size: 15px; -fx-background-color: white; -fx-text-fill: #555; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16;");
         }
         ThemeManager.applyFontSize(size);
     }
