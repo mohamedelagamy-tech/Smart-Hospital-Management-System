@@ -186,3 +186,6 @@
     -fx-text-fill: #2E7D32;
     -fx-border-color: #4CAF50;
 }
+.top-bar {
+    -fx-background-color: #1F4E79;
+}

@@ -171,3 +171,4 @@
     -fx-text-fill: #000000;
     -fx-font-weight: bold;
 }
+.top-bar { -fx-background-color: #000000; -fx-border-color: #FFFF00; -fx-border-width: 0 0 2 0; }

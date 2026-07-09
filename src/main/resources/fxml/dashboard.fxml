@@ -11,7 +11,7 @@
 
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10"
-              style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
+              styleClass="top-bar" style="-fx-padding: 0 20;">
             <ImageView fx:id="logoView" fitHeight="120" fitWidth="120" preserveRatio="true"/>
             <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="SHMS"/>
             <Label style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 14px;" text="|"/>

@@ -13,7 +13,7 @@
     </fx:define>
 
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
+        <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-padding: 0 20;" styleClass="top-bar">
             <Button onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="← Back" />
             <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="⚙  Settings" />
         </HBox>
@@ -195,11 +195,11 @@
                                 <Label styleClass="settings-row-title" text="Display Language" />
                                 <Label styleClass="muted-text" text="The app will reload when language changes" />
                             </VBox>
-                            <ToggleButton fx:id="btnEnglish" onAction="#handleLanguageChange" styleClass="toggle-left" text="🇬🇧  English">
+                            <ToggleButton fx:id="btnEnglish" onAction="#handleLanguageChange" styleClass="toggle-left" text="English">
                         <toggleGroup>
                            <ToggleGroup fx:id="langGroup" />
                         </toggleGroup></ToggleButton>
-                            <ToggleButton fx:id="btnArabic" onAction="#handleLanguageChange" styleClass="toggle-right" text="🇪🇬  العربية" toggleGroup="$langGroup" />
+                            <ToggleButton fx:id="btnArabic" onAction="#handleLanguageChange" styleClass="toggle-right" text="  العربية" toggleGroup="$langGroup" />
                         </HBox>
                     </VBox>
 
