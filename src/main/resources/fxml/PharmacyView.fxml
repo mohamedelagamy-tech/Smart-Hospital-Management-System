@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="0" style="-fx-background-color:#EEF2FF;"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.shms.controller.PharmacyController">
+
+    <HBox alignment="CENTER_LEFT" spacing="16"
+          style="-fx-background-color:#185FA5; -fx-padding:14 20;">
+        <Button text="← Back" onAction="#handleBack"
+                style="-fx-background-color:transparent; -fx-text-fill:white;
+                       -fx-font-weight:bold; -fx-underline:true;
+                       -fx-border-width:0; -fx-cursor:hand;"/>
+        <Label text="Pharmacy Management"
+               style="-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:white;"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                style="-fx-background-color:#EEF2FF; -fx-background:#EEF2FF;">
+        <VBox spacing="16" style="-fx-padding:16 20 20 20;">
+
+            <!-- Stats -->
+            <HBox spacing="12">
+                <VBox alignment="CENTER_LEFT" spacing="4" HBox.hgrow="ALWAYS"
+                      style="-fx-background-color:white; -fx-background-radius:12;
+                             -fx-border-color:#e0e0e0; -fx-border-width:0.5;
+                             -fx-border-radius:12; -fx-padding:12 16;">
+                    <Label text="Total Medications" style="-fx-font-size:11; -fx-text-fill:#888;"/>
+                    <Label fx:id="totalMedsLabel" text="0"
+                           style="-fx-font-size:20; -fx-font-weight:bold; -fx-text-fill:#185FA5;"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="4" HBox.hgrow="ALWAYS"
+                      style="-fx-background-color:#FAEEDA; -fx-background-radius:12;
+                             -fx-border-radius:12; -fx-padding:12 16;">
+                    <Label text="Low Stock" style="-fx-font-size:11; -fx-text-fill:#633806;"/>
+                    <Label fx:id="lowStockLabel" text="0"
+                           style="-fx-font-size:20; -fx-font-weight:bold; -fx-text-fill:#633806;"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="4" HBox.hgrow="ALWAYS"
+                      style="-fx-background-color:#FCEBEB; -fx-background-radius:12;
+                             -fx-border-radius:12; -fx-padding:12 16;">
+                    <Label text="Expiring Soon" style="-fx-font-size:11; -fx-text-fill:#791F1F;"/>
+                    <Label fx:id="expiringLabel" text="0"
+                           style="-fx-font-size:20; -fx-font-weight:bold; -fx-text-fill:#791F1F;"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="4" HBox.hgrow="ALWAYS"
+                      style="-fx-background-color:#E6F1FB; -fx-background-radius:12;
+                             -fx-border-radius:12; -fx-padding:12 16;">
+                    <Label text="Pending Reorders" style="-fx-font-size:11; -fx-text-fill:#0C447C;"/>
+                    <Label fx:id="pendingOrdersLabel" text="0"
+                           style="-fx-font-size:20; -fx-font-weight:bold; -fx-text-fill:#0C447C;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Toolbar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Search medications..."
+                           onAction="#handleSearch" HBox.hgrow="ALWAYS"
+                           style="-fx-background-radius:20; -fx-border-radius:20;
+                                  -fx-border-color:#ccc; -fx-border-width:0.5;
+                                  -fx-padding:8 14; -fx-font-size:13;"/>
+                <Button text="All" onAction="#filterAll"
+                        style="-fx-background-color:#185FA5; -fx-text-fill:white;
+                               -fx-background-radius:20; -fx-padding:7 14; -fx-border-width:0;"/>
+                <Button text="In Stock" onAction="#filterInStock"
+                        style="-fx-background-color:white; -fx-text-fill:#27500A;
+                               -fx-background-radius:20; -fx-padding:7 14;
+                               -fx-border-color:#27500A; -fx-border-width:0.5;"/>
+                <Button text="Low Stock" onAction="#filterLowStock"
+                        style="-fx-background-color:white; -fx-text-fill:#633806;
+                               -fx-background-radius:20; -fx-padding:7 14;
+                               -fx-border-color:#633806; -fx-border-width:0.5;"/>
+                <Button text="Expiring" onAction="#filterExpiring"
+                        style="-fx-background-color:white; -fx-text-fill:#791F1F;
+                               -fx-background-radius:20; -fx-padding:7 14;
+                               -fx-border-color:#791F1F; -fx-border-width:0.5;"/>
+                <Button text="+ Add" onAction="#handleAdd"
+                        style="-fx-background-color:#185FA5; -fx-text-fill:white;
+                               -fx-background-radius:20; -fx-padding:7 14; -fx-border-width:0;"/>
+                <Button text="Reorder Selected" onAction="#handleReorder"
+                        style="-fx-background-color:#633806; -fx-text-fill:white;
+                               -fx-background-radius:20; -fx-padding:7 14; -fx-border-width:0;"/>
+                <Button text="Reorder All Low" onAction="#handleReorderAll"
+                        style="-fx-background-color:#791F1F; -fx-text-fill:white;
+                               -fx-background-radius:20; -fx-padding:7 14; -fx-border-width:0;"/>
+            </HBox>
+
+            <!-- Medications Table -->
+            <VBox style="-fx-background-color:white; -fx-background-radius:12;
+                         -fx-border-color:#e0e0e0; -fx-border-width:0.5;
+                         -fx-border-radius:12;" VBox.vgrow="ALWAYS">
+                <Label text="Medications Inventory"
+                       style="-fx-font-size:13; -fx-font-weight:bold;
+                              -fx-text-fill:#185FA5; -fx-padding:12 16 8 16;"/>
+                <TableView fx:id="medicationTable" prefHeight="280">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                    <columns>
+                        <TableColumn fx:id="colName"     text="Medication"/>
+                        <TableColumn fx:id="colCategory" text="Category"/>
+                        <TableColumn fx:id="colStock"    text="Stock"/>
+                        <TableColumn fx:id="colMinStock" text="Min Stock"/>
+                        <TableColumn fx:id="colPrice"    text="Unit Price"/>
+                        <TableColumn fx:id="colExpiry"   text="Expiry Date"/>
+                        <TableColumn fx:id="colStatus"   text="Status"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Reorder Requests -->
+            <VBox style="-fx-background-color:white; -fx-background-radius:12;
+                         -fx-border-color:#e0e0e0; -fx-border-width:0.5;
+                         -fx-border-radius:12;">
+                <Label text="Reorder Requests"
+                       style="-fx-font-size:13; -fx-font-weight:bold;
+                              -fx-text-fill:#185FA5; -fx-padding:12 16 8 16;"/>
+                <TableView fx:id="reorderTable" prefHeight="200">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                    <columns>
+                        <TableColumn fx:id="colReorderMed"    text="Medication"/>
+                        <TableColumn fx:id="colQty"           text="Qty"/>
+                        <TableColumn fx:id="colSupplier"      text="Supplier"/>
+                        <TableColumn fx:id="colReqDate"       text="Request Date"/>
+                        <TableColumn fx:id="colExpDate"       text="Expected"/>
+                        <TableColumn fx:id="colReorderStatus" text="Status"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+        </VBox>
+    </ScrollPane>
+
+</VBox>

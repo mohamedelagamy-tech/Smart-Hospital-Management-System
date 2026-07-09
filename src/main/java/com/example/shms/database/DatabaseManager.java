@@ -662,6 +662,35 @@ public class DatabaseManager {
                     "treatment TEXT," +
                     "notes TEXT)");
 
+            st.execute("CREATE TABLE IF NOT EXISTS medications (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "name TEXT NOT NULL," +
+                    "category TEXT," +
+                    "form TEXT," +
+                    "stock INTEGER DEFAULT 0," +
+                    "minStock INTEGER DEFAULT 20," +
+                    "unitPrice REAL DEFAULT 0.0," +
+                    "expiryDate TEXT," +
+                    "status TEXT DEFAULT 'In Stock')");
+
+            st.execute("CREATE TABLE IF NOT EXISTS reorderRequests (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "medicationId INTEGER," +
+                    "medicationName TEXT," +
+                    "quantityRequested INTEGER," +
+                    "supplier TEXT," +
+                    "requestDate TEXT," +
+                    "expectedDate TEXT," +
+                    "status TEXT DEFAULT 'Pending')");
+
+            st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Amoxicillin 500mg','Antibiotic','Capsules',320,50,12.50,'2027-03-15','In Stock')");
+            st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Metformin 850mg','Diabetes','Tablets',18,50,8.00,'2026-08-20','Low Stock')");
+            st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Amlodipine 5mg','Cardiology','Tablets',12,40,15.75,'2026-07-01','Expiring Soon')");
+            st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Omeprazole 20mg','Gastrology','Capsules',0,30,22.00,'2027-11-30','Out of Stock')");
+            st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Paracetamol 500mg','Analgesic','Tablets',800,100,3.25,'2028-01-10','In Stock')");
+
+
+
             System.out.println("All tables created successfully!");
             insertData();
 

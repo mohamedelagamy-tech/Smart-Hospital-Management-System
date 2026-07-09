@@ -69,6 +69,9 @@
                     styleClass="nav-button" text="📊  Statistics"/>
             <Button fx:id="btnSettings" maxWidth="Infinity" onAction="#showSettings"
                     styleClass="nav-button" text="⚙️  Settings"/>
+            <Button fx:id="btnPharmacy" styleClass="nav-button" maxWidth="Infinity"
+                    onAction="#showPharmacy"
+                    text="Pharmacy"/>
         </VBox>
     </left>
 

@@ -309,4 +309,9 @@ public class DashboardController implements Initializable {
     @FXML private void showCalendar(){
         MainApp.navigateTo("CalendarView",900,700);
     }
+
+    @FXML
+    private void showPharmacy(){
+        MainApp.navigateTo("PharmacyView",1200,700);
+    }
 }
