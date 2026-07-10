@@ -30,3 +30,4 @@
 .scroll-pane > .viewport { -fx-background-color: #0A1F0A; }
 .text-field, .password-field, .text-area { -fx-background-color: #0F2A0F; -fx-text-fill: #A0D4A0; -fx-border-color: #1A4A1A; }
 .top-bar { -fx-background-color: #061506; }
+.user-avatar { -fx-background-color: #1A6A1A; -fx-background-radius: 13; }

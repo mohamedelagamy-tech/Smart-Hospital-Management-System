@@ -50,12 +50,12 @@ public class DashboardController implements Initializable {
     @FXML private Button btnRecords;
     @FXML private Button btnPrescriptions;
     @FXML private Button btnEmergency;
+    @FXML private Button btnPharmacy;
     @FXML private Button btnBilling;
     @FXML private Button btnRooms;
     @FXML private Button btnDepartments;
     @FXML private Button btnAuditLog;
     @FXML private Button btnCalendar;
-    @FXML private Button btnSettings;
     @FXML private ImageView logoView;
     @FXML private Button btnStatistics;
     @FXML
@@ -221,9 +221,9 @@ public class DashboardController implements Initializable {
 
     private void setActiveButton(Button active) {
         Button[] all = {btnDashboard, btnPatients, btnDoctors, btnAppointments,
-                btnCalendar, btnRecords, btnPrescriptions, btnEmergency,
+                btnCalendar, btnRecords, btnPrescriptions, btnEmergency,btnPharmacy,
                 btnBilling, btnRooms, btnDepartments, btnAuditLog,
-                btnStatistics, btnSettings};
+                btnStatistics};
         for (Button btn : all) {
             btn.getStyleClass().remove("nav-button-active");
             if (!btn.getStyleClass().contains("nav-button")) {

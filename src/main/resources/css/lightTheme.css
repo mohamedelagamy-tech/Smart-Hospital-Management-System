@@ -189,3 +189,4 @@
 .top-bar {
     -fx-background-color: #1F4E79;
 }
+.user-avatar { -fx-background-color: #2E75B6; -fx-background-radius: 13; }

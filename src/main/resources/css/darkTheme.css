@@ -190,3 +190,4 @@
     -fx-border-color: #4CAF50;
 }
 .top-bar { -fx-background-color: #0A1520; }
+.user-avatar { -fx-background-color: #1A4A7A; -fx-background-radius: 13; }
