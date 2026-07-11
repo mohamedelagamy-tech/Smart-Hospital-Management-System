@@ -34,4 +34,9 @@ public class LanguageManager {
                 ? javafx.geometry.NodeOrientation.RIGHT_TO_LEFT
                 : javafx.geometry.NodeOrientation.LEFT_TO_RIGHT;
     }
+    public static void applyToScene(javafx.scene.Scene scene) {
+        if (scene != null) {
+            scene.getRoot().setNodeOrientation(getOrientation());
+        }
+    }
 }
