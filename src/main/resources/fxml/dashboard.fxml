@@ -8,12 +8,11 @@
 
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-padding: 0 20;" styleClass="top-bar">
-            <ImageView fx:id="logoView" fitHeight="44" fitWidth="44" preserveRatio="true" />
-            <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="SHMS" />
+            <ImageView fx:id="logoView" fitHeight="120" fitWidth="120" preserveRatio="true" />
             <Label style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 14px;" text="|" />
-            <Label style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.6);" text="Smart Hospital Management System" />
+            <Label style="-fx-font-size: 22px; -fx-text-fill: rgba(255,255,255,0.6);" text="Smart Hospital Management System" />
             <HBox HBox.hgrow="ALWAYS" />
-            <Label fx:id="clockLabel" style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.7);" text="10:42 AM" />
+            <Label fx:id="clockLabel" style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.7);" />
             <Label style="-fx-text-fill: rgba(255,255,255,0.2);" text="|" />
             <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-background-color: rgba(255,255,255,0.1); -fx-background-radius: 20; -fx-padding: 4 12 4 4;">
                 <StackPane maxHeight="26" maxWidth="26" prefHeight="26" prefWidth="26" styleClass="user-avatar">

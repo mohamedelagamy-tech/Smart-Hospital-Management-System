@@ -10,7 +10,7 @@
       <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0" styleClass="top-bar" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back"/>
-            <Label text=" Doctor Management" styleClass="top-bar-title">
+            <Label style="-fx-font-size: 24px;" text=" Doctor Management" styleClass="top-bar-title">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

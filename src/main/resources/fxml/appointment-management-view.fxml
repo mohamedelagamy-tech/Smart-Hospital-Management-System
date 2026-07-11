@@ -10,7 +10,7 @@
     <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0"
           spacing="10" styleClass="top-bar">
         <Button onAction="#handleBack" styleClass="back-button" text="← Back" />
-        <Label styleClass="top-bar-title" text="Appointment Management" />
+        <Label style="-fx-font-size: 24px;" styleClass="top-bar-title" text="Appointment Management" />
     </HBox>
 
     <HBox fx:id="summaryBar" spacing="12" style="-fx-padding:16 20 8 20;" />
