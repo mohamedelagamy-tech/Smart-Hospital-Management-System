@@ -5,6 +5,7 @@ import com.example.shms.utils.SessionManager;
 import com.example.shms.utils.ThemeManager;
 import com.example.shms.utils.UserPreferences;
 import javafx.fxml.FXML;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.control.ToggleButton;
 
 public class SettingsController {
@@ -47,6 +48,7 @@ public class SettingsController {
         }else {
             btnEnglish.setSelected(true);
         }
+
     }
 
     private void highlightTheme(ToggleButton selected){
@@ -100,10 +102,21 @@ public class SettingsController {
         ThemeManager.applyFontSize(size);
     }
 
-    @FXML private void handleLanguageChange(){
-        String lang=btnArabic.isSelected() ? "Arabic":"English";
-        UserPreferences.setLanguage(lang);
-        MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
+    @FXML
+    private void handleLanguageChange() {
+        boolean isArabic = btnArabic.isSelected();
+        String lang = isArabic ? "Arabic" : "English";
+
+        com.example.shms.utils.UserPreferences.setLanguage(lang);
+        com.example.shms.utils.LanguageManager.setLanguage(lang);
+
+        javafx.stage.Stage stage = (javafx.stage.Stage) btnArabic.getScene().getWindow();
+        stage.getScene().getRoot().setNodeOrientation(
+                com.example.shms.utils.LanguageManager.getOrientation());
+
+        com.example.shms.MainApp.navigateTo(
+                com.example.shms.utils.SessionManager.getInstance().getDashboardName(),
+                1200, 700);
     }
 
     @FXML private void handleChangePassword(){

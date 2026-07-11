@@ -19,6 +19,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
+        String savedLang = com.example.shms.utils.UserPreferences.getLanguage();
+        com.example.shms.utils.LanguageManager.setLanguage(savedLang);
         stage.setTitle("Hospital management system");
         navigateTo("login",900,600);
         stage.show();
