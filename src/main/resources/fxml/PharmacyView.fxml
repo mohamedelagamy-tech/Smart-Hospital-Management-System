@@ -8,7 +8,7 @@
 
     <HBox alignment="CENTER_LEFT" spacing="16" styleClass="top-bar" style="-fx-padding:14 20;">
         <Button text="← Back" onAction="#handleBack" styleClass="back-button"/>
-        <Label text="Pharmacy Management" styleClass="top-bar-title" style="-fx-font-size:18;"/>
+        <Label text="Pharmacy Management" styleClass="top-bar-title" style="-fx-font-size: 24px;"/>
     </HBox>
 
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">

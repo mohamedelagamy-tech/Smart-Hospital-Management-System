@@ -199,3 +199,44 @@
     -fx-mark-color: #AABBCC;
 }
 .combo-box .list-cell { -fx-text-fill: #4CAF50; -fx-background-color: transparent; }
+.text-field {
+    -fx-background-color: #1A2535;
+    -fx-text-fill: #E8EDF2;
+    -fx-prompt-text-fill: #5A6A7A;
+    -fx-border-color: #2A3545;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+.password-field {
+    -fx-background-color: #1A2535;
+    -fx-text-fill: #E8EDF2;
+    -fx-prompt-text-fill: #5A6A7A;
+    -fx-border-color: #2A3545;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+.text-area {
+    -fx-background-color: #1A2535;
+    -fx-text-fill: #E8EDF2;
+    -fx-prompt-text-fill: #5A6A7A;
+    -fx-border-color: #2A3545;
+}
+.combo-box {
+    -fx-background-color: #1A2535;
+    -fx-border-color: #2A3545;
+}
+.combo-box .list-cell {
+    -fx-background-color: #1A2535;
+    -fx-text-fill: #E8EDF2;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: #1A2535;
+    -fx-border-color: #2A3545;
+}
+.combo-box-popup .list-cell {
+    -fx-background-color: #1A2535;
+    -fx-text-fill: #E8EDF2;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #2E75B6;
+}

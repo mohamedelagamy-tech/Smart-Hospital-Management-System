@@ -32,7 +32,9 @@ public class MainApp extends Application {
             }
             FXMLLoader loader=new FXMLLoader(MainApp.class.getResource("/fxml/"+fxmlFile +".fxml"));
             Scene scene=new Scene(loader.load(),width,height);
-            ThemeManager.applyCurrentPreferences(scene);
+            if(!fxmlFile.equals("login") && !fxmlFile.equals("twoFactor")){
+                ThemeManager.applyCurrentPreferences(scene);
+            }
             primaryStage.setScene(scene);
 
             FadeTransition fade= new FadeTransition(Duration.millis(300),scene.getRoot());
