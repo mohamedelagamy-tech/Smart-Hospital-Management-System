@@ -4,13 +4,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DashboardController">
+<BorderPane prefHeight="700.0" prefWidth="1200.0" nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DashboardController">
 
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-padding: 0 20;" styleClass="top-bar">
             <ImageView fx:id="logoView" fitHeight="120" fitWidth="120" preserveRatio="true" />
             <Label style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 14px;" text="|" />
-            <Label style="-fx-font-size: 22px; -fx-text-fill: rgba(255,255,255,0.6);" text="Smart Hospital Management System" />
+            <Label style="-fx-font-size: 22px; -fx-text-fill: rgba(255,255,255,0.6);" text="نظام إدارة المستشفى الذكي" />
             <HBox HBox.hgrow="ALWAYS" />
             <Label fx:id="clockLabel" style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.7);" />
             <Label style="-fx-text-fill: rgba(255,255,255,0.2);" text="|" />
@@ -20,41 +20,41 @@
                 </StackPane>
                 <VBox spacing="1">
                     <Label fx:id="userLabel" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: white;" text="Mohamed" />
-                    <Label fx:id="roleLabel" style="-fx-font-size: 10px; -fx-text-fill: rgba(255,255,255,0.5);" text="ADMIN" />
+                    <Label fx:id="roleLabel" style="-fx-font-size: 10px; -fx-text-fill: rgba(255,255,255,0.5);" text="مسؤول" />
                 </VBox>
             </HBox>
             <Button onAction="#showSettings" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 10;" text="⚙" />
-            <Button onAction="#handleLogout" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="→] Logout" />
+            <Button onAction="#handleLogout" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="تسجيل خروج [←" />
         </HBox>
     </top>
 
     <left>
         <VBox prefWidth="200" spacing="2" style="-fx-padding: 14 8;" styleClass="sidebar">
-            <Label fx:id="labelMain" styleClass="section-label" text="MAIN" />
-            <Button fx:id="btnDashboard" maxWidth="Infinity" onAction="#showDashboard" styleClass="nav-button-active" text="🏠  Dashboard" />
-            <Button fx:id="btnPatients" maxWidth="Infinity" onAction="#showPatients" styleClass="nav-button" text="👥  Patients" />
-            <Button fx:id="btnDoctors" maxWidth="Infinity" onAction="#showDoctors" styleClass="nav-button" text="👨‍⚕️  Doctors" />
-            <Button fx:id="btnAppointments" maxWidth="Infinity" onAction="#showAppointments" styleClass="nav-button" text="📅  Appointments" />
-            <Button fx:id="btnCalendar" maxWidth="Infinity" onAction="#showCalendar" styleClass="nav-button" text="🗓️  Calendar" />
-            <Label fx:id="labelMedical" styleClass="section-label" text="MEDICAL" />
-            <Button fx:id="btnRecords" maxWidth="Infinity" onAction="#showRecords" styleClass="nav-button" text="📋  Medical Records" />
-            <Button fx:id="btnPrescriptions" maxWidth="Infinity" onAction="#showPrescriptions" styleClass="nav-button" text="💊  Prescriptions" />
-            <Button fx:id="btnEmergency" maxWidth="Infinity" onAction="#showEmergency" styleClass="nav-button" text="🚨  Emergency Queue" />
-            <Button fx:id="btnPharmacy" maxWidth="Infinity" onAction="#showPharmacy" styleClass="nav-button" text="🧪  Pharmacy" />
-            <Label fx:id="labelAdmin" styleClass="section-label" text="ADMIN" />
-            <Button fx:id="btnBilling" maxWidth="Infinity" onAction="#showBilling" styleClass="nav-button" text="💰  Billing" />
-            <Button fx:id="btnRooms" maxWidth="Infinity" onAction="#showRooms" styleClass="nav-button" text="🛏  Rooms" />
-            <Button fx:id="btnDepartments" maxWidth="Infinity" onAction="#showDepartments" styleClass="nav-button" text="🏥  Departments" />
-            <Button fx:id="btnAuditLog" maxWidth="Infinity" onAction="#showAuditLog" styleClass="nav-button" text="📝  Audit Log" />
-            <Button fx:id="btnStatistics" maxWidth="Infinity" onAction="#showStatistics" styleClass="nav-button" text="📊  Statistics" />
+            <Label fx:id="labelMain" styleClass="section-label" text="الرئيسية" />
+            <Button fx:id="btnDashboard" maxWidth="Infinity" onAction="#showDashboard" styleClass="nav-button-active" text="🏠  لوحة التحكم" />
+            <Button fx:id="btnPatients" maxWidth="Infinity" onAction="#showPatients" styleClass="nav-button" text="👥  المرضى" />
+            <Button fx:id="btnDoctors" maxWidth="Infinity" onAction="#showDoctors" styleClass="nav-button" text="👨‍⚕️  الأطباء" />
+            <Button fx:id="btnAppointments" maxWidth="Infinity" onAction="#showAppointments" styleClass="nav-button" text="📅  المواعيد" />
+            <Button fx:id="btnCalendar" maxWidth="Infinity" onAction="#showCalendar" styleClass="nav-button" text="🗓️  التقويم" />
+            <Label fx:id="labelMedical" styleClass="section-label" text="طبي" />
+            <Button fx:id="btnRecords" maxWidth="Infinity" onAction="#showRecords" styleClass="nav-button" text="📋  السجلات الطبية" />
+            <Button fx:id="btnPrescriptions" maxWidth="Infinity" onAction="#showPrescriptions" styleClass="nav-button" text="💊  الوصفات الطبية" />
+            <Button fx:id="btnEmergency" maxWidth="Infinity" onAction="#showEmergency" styleClass="nav-button" text="🚨  طابور الطوارئ" />
+            <Button fx:id="btnPharmacy" maxWidth="Infinity" onAction="#showPharmacy" styleClass="nav-button" text="🧪  الصيدلية" />
+            <Label fx:id="labelAdmin" styleClass="section-label" text="الإدارة" />
+            <Button fx:id="btnBilling" maxWidth="Infinity" onAction="#showBilling" styleClass="nav-button" text="💰  الفواتير" />
+            <Button fx:id="btnRooms" maxWidth="Infinity" onAction="#showRooms" styleClass="nav-button" text="🛏  الغرف" />
+            <Button fx:id="btnDepartments" maxWidth="Infinity" onAction="#showDepartments" styleClass="nav-button" text="🏥  الأقسام" />
+            <Button fx:id="btnAuditLog" maxWidth="Infinity" onAction="#showAuditLog" styleClass="nav-button" text="📝  سجل التدقيق" />
+            <Button fx:id="btnStatistics" maxWidth="Infinity" onAction="#showStatistics" styleClass="nav-button" text="📊  الإحصائيات" />
         </VBox>
     </left>
 
     <center>
         <VBox spacing="20" style="-fx-padding: 24;" styleClass="app-background">
             <VBox spacing="3">
-                <Label fx:id="welcomeLabel" styleClass="welcome-label" text="Good morning 👋" />
-                <Label styleClass="muted-text" text="Here's what's happening at SHMS today" />
+                <Label fx:id="welcomeLabel" styleClass="welcome-label" text="صباح الخير 👋" />
+                <Label styleClass="muted-text" text="إليك ما يحدث في المستشفى اليوم" />
             </VBox>
             <HBox spacing="12">
                 <HBox alignment="CENTER_LEFT" prefHeight="86" spacing="14" style="-fx-padding: 16;" styleClass="card" HBox.hgrow="ALWAYS">
@@ -63,7 +63,7 @@
                     </StackPane>
                     <VBox spacing="3">
                         <Label fx:id="statPatients" styleClass="stat-number" text="0" />
-                        <Label styleClass="muted-text" text="Total Patients" />
+                        <Label styleClass="muted-text" text="إجمالي المرضى" />
                     </VBox>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="86" spacing="14" style="-fx-padding: 16;" styleClass="card" HBox.hgrow="ALWAYS">
@@ -72,7 +72,7 @@
                     </StackPane>
                     <VBox spacing="3">
                         <Label fx:id="statDoctors" styleClass="stat-number" text="0" />
-                        <Label styleClass="muted-text" text="Doctors on Duty" />
+                        <Label styleClass="muted-text" text="الأطباء في الخدمة" />
                     </VBox>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="86" spacing="14" style="-fx-padding: 16;" styleClass="card" HBox.hgrow="ALWAYS">
@@ -81,7 +81,7 @@
                     </StackPane>
                     <VBox spacing="3">
                         <Label fx:id="statAppointments" styleClass="stat-number" text="0" />
-                        <Label styleClass="muted-text" text="Scheduled Appointments" />
+                        <Label styleClass="muted-text" text="المواعيد المجدولة" />
                     </VBox>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="86" spacing="14" style="-fx-padding: 16;" styleClass="card" HBox.hgrow="ALWAYS">
@@ -90,7 +90,7 @@
                     </StackPane>
                     <VBox spacing="3">
                         <Label fx:id="statRooms" styleClass="stat-number" text="0/0" />
-                        <Label styleClass="muted-text" text="Rooms Available" />
+                        <Label styleClass="muted-text" text="الغرف المتاحة" />
                     </VBox>
                 </HBox>
             </HBox>
@@ -100,8 +100,8 @@
                         <Label style="-fx-font-size: 18px;" text="💰" />
                     </StackPane>
                     <VBox spacing="3">
-                        <Label fx:id="statRevenue" styleClass="stat-number" text="EGP 0" />
-                        <Label styleClass="muted-text" text="Total Revenue Collected" />
+                        <Label fx:id="statRevenue" styleClass="stat-number" text="0 ج.م" />
+                        <Label styleClass="muted-text" text="إجمالي الإيرادات المحصلة" />
                     </VBox>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="86" spacing="14" style="-fx-padding: 16;" styleClass="card" HBox.hgrow="ALWAYS">
@@ -109,8 +109,8 @@
                         <Label style="-fx-font-size: 18px;" text="⏳" />
                     </StackPane>
                     <VBox spacing="3">
-                        <Label fx:id="statOutstanding" styleClass="stat-number" text="EGP 0" />
-                        <Label styleClass="muted-text" text="Outstanding Payments" />
+                        <Label fx:id="statOutstanding" styleClass="stat-number" text="0 ج.م" />
+                        <Label styleClass="muted-text" text="المدفوعات المستحقة" />
                     </VBox>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="86" spacing="14" style="-fx-padding: 16;" styleClass="card" HBox.hgrow="ALWAYS">
@@ -119,7 +119,7 @@
                     </StackPane>
                     <VBox spacing="3">
                         <Label fx:id="statEmergency" styleClass="stat-number-red" text="0" />
-                        <Label styleClass="muted-text" text="Emergency Patients" />
+                        <Label styleClass="muted-text" text="مرضى الطوارئ" />
                     </VBox>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="86" spacing="14" style="-fx-padding: 16;" styleClass="card" HBox.hgrow="ALWAYS">
@@ -128,7 +128,7 @@
                     </StackPane>
                     <VBox spacing="3">
                         <Label fx:id="statPrescriptions" styleClass="stat-number" text="0" />
-                        <Label styleClass="muted-text" text="Active Prescriptions" />
+                        <Label styleClass="muted-text" text="الوصفات النشطة" />
                     </VBox>
                 </HBox>
             </HBox>
