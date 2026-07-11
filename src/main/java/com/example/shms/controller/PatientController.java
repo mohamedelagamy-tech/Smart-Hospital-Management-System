@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class PatientController {
+    @FXML private javafx.scene.control.Button backBtn;
+    @FXML private javafx.scene.control.Label pageTitle;
     @FXML private TableView<Patient> patientTable;
     @FXML private TableColumn<Patient, Integer> idCol;
     @FXML private TableColumn<Patient, String> nameCol;
@@ -40,6 +42,32 @@ public class PatientController {
     private String currentPriorityFilter="all";
     @FXML
     private void initialize() {
+        if (com.example.shms.utils.LanguageManager.isArabic()) {
+
+            backBtn.setText("→ رجوع");
+            pageTitle.setText("إدارة المرضى");
+
+            searchField.setPromptText("🔍 ابحث بالاسم أو الرقم...");
+            departmentFilter.setPromptText("تصفية حسب القسم");
+            sortCombo.setPromptText("ترتيب");
+
+            allBtn.setText("الكل");
+            emergencyBtn.setText("طوارئ");
+            urgentBtn.setText("عاجل");
+            normalBtn.setText("عادي");
+            resetBtn.setText("إعادة");
+            addBtn.setText("+ إضافة مريض");
+
+            idCol.setText("الرقم");
+            nameCol.setText("الاسم");
+            ageCol.setText("العمر");
+            bloodTypeCol.setText("فصيلة الدم");
+            priorityCol.setText("الأولوية");
+            statusCol.setText("الحالة");
+            actionsCol.setText("الإجراءات");
+
+            statusLabel.setText("إجمالي المرضى: 0");
+        }
         setupColumns();
         setupActions();
         setupDepartmentFilter();
