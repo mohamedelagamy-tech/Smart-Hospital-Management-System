@@ -31,3 +31,36 @@
 .text-field, .password-field, .text-area { -fx-background-color: #0F2A0F; -fx-text-fill: #A0D4A0; -fx-border-color: #1A4A1A; }
 .top-bar { -fx-background-color: #061506; }
 .user-avatar { -fx-background-color: #1A6A1A; -fx-background-radius: 13; }
+.settings-scroll { -fx-background-color: #0A1F0A; -fx-background: #0A1F0A; }
+.settings-content { -fx-background-color: #0A1F0A; -fx-padding: 24; }
+.settings-row-title { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #A0D4A0; }
+.primary-button { -fx-background-color: #1A6A1A; -fx-text-fill: white; -fx-font-size: 12px; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 8 16; }
+.toggle-left { -fx-background-color: #0A3A0A; -fx-text-fill: #00CC66; -fx-font-size: 12px; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16; }
+.toggle-left:selected { -fx-background-color: #1A6A1A; -fx-text-fill: white; }
+.toggle-mid { -fx-background-color: #0F2A0F; -fx-text-fill: #A0D4A0; -fx-font-size: 12px; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #1A4A1A; -fx-border-width: 0 1 0 1; }
+.toggle-mid:selected { -fx-background-color: #1A6A1A; -fx-text-fill: white; }
+.toggle-right { -fx-background-color: #0F2A0F; -fx-text-fill: #A0D4A0; -fx-font-size: 12px; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16; }
+.toggle-right:selected { -fx-background-color: #1A6A1A; -fx-text-fill: white; }
+.toggle-2fa { -fx-background-color: #0F2A0F; -fx-text-fill: #A0D4A0; -fx-font-size: 12px; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #1A4A1A; -fx-border-width: 1; }
+.toggle-2fa:selected { -fx-background-color: #0A3A0A; -fx-text-fill: #00FF88; -fx-border-color: #4CAF50; }
+.top-bar-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-underline: true;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-padding: 14 20;
+}
+.combo-box {
+    -fx-background-color: #0F2A0F;
+    -fx-border-color: #1A4A1A;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-mark-color: #7ACC7A;
+}
+.combo-box .list-cell { -fx-text-fill: #A0D4A0; -fx-background-color: transparent; }

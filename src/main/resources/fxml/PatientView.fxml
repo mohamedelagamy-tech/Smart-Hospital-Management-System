@@ -5,16 +5,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PatientController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="app-background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PatientController">
     <center>
-        <VBox prefHeight="249.0" prefWidth="880.0" spacing="10.0" style="-fx-background-color: white; -fx-border-color: #D6DEE8; -fx-border-radius: 12;" BorderPane.alignment="CENTER">
+        <VBox prefHeight="249.0" prefWidth="880.0" spacing="10.0" styleClass="card" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
             <children>
                 <HBox prefHeight="40.0" prefWidth="879.0" spacing="10.0">
                     <children>
-                        <TextField fx:id="searchField" prefHeight="26.0" prefWidth="163.0" promptText="🔍 Search by name or ID..." style="-fx-background-radius: 8;" />
+                        <TextField fx:id="searchField" prefHeight="26.0" prefWidth="163.0" promptText="🔍 Search by name or ID..." style="-fx-background-radius: 8;" styleClass="text-field" />
                         <ComboBox fx:id="departmentFilter" prefHeight="26.0" prefWidth="157.0" promptText="Filter by Department" HBox.hgrow="ALWAYS" />
                         <Button fx:id="allBtn" mnemonicParsing="false" onAction="#handleAll" prefWidth="60.0" text="All" />
                         <Button fx:id="emergencyBtn" onAction="#handleEmergency" prefWidth="90.0" style="-fx-background-color: red;" text="Emergency" textFill="#fafafa">
@@ -33,8 +33,8 @@
                         <Button fx:id="resetBtn" onAction="#handleReset" prefWidth="60.0" text="Reset" />
                     </children>
                 </HBox>
-                <Button fx:id="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddPatient" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: #3B82F6; -fx-background-radius: 8;" text="+ Add Patient" textAlignment="CENTER" textFill="WHITE" />
-                <TableView fx:id="patientTable" prefHeight="425.0" prefWidth="878.0" style="-fx-background-color: white; -fx-background-radius: 10;" tableMenuButtonVisible="true">
+                <Button fx:id="addBtn" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddPatient" prefHeight="26.0" prefWidth="116.0" styleClass="primary-button" text="+ Add Patient" textAlignment="CENTER" />
+                <TableView fx:id="patientTable" prefHeight="425.0" prefWidth="878.0" tableMenuButtonVisible="true">
                     <columns>
                         <TableColumn fx:id="idCol" prefWidth="60.0" text="ID" />
                         <TableColumn fx:id="nameCol" prefWidth="160.0" text="Name" />
@@ -49,17 +49,10 @@
         </VBox>
     </center>
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="600.0" styleClass="top-bar" BorderPane.alignment="CENTER">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
-                </Button>
-                <Label text="Patient Management" textFill="#fffafa">
-                    <font>
-                        <Font name="Arial Bold" size="24.0" />
-                    </font>
+                <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back" />
+                <Label style="-fx-font-size: 24px;" styleClass="top-bar-title" text="Patient Management">
                     <HBox.margin>
                         <Insets left="10.0" />
                     </HBox.margin>
@@ -68,10 +61,10 @@
         </HBox>
     </top>
     <bottom>
-        <HBox prefHeight="33.0" prefWidth="900.0" style="-fx-background-color: #F4F7FA;" BorderPane.alignment="CENTER">
+        <HBox prefHeight="33.0" prefWidth="900.0">
             <children>
-                <Label fx:id="statusLabel" alignment="BOTTOM_RIGHT" prefHeight="18.0" prefWidth="199.0" text="Total Patients: 0" textFill="#374151" />
-             </children>
+                <Label fx:id="statusLabel" alignment="BOTTOM_RIGHT" prefHeight="18.0" prefWidth="199.0" styleClass="muted-text" text="Total Patients: 0" />
+            </children>
         </HBox>
     </bottom>
 </BorderPane>

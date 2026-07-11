@@ -3,65 +3,64 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PatientBillsController">
+<BorderPane prefHeight="700.0" prefWidth="1200.0" styleClass="app-background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PatientBillsController">
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
+        <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" styleClass="top-bar" style="-fx-padding: 0 20;">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE">
-                </Button>
-                <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="📄 My Bills" />
+                <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+                <Label styleClass="top-bar-title" text="📄 My Bills" />
                 <HBox HBox.hgrow="ALWAYS" />
                 <Label fx:id="userLabel" style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.8);" text="Mohamed" />
             </children>
         </HBox>
     </top>
     <center>
-        <ScrollPane fitToWidth="true" style="-fx-background-color: #F4F6F9; -fx-background: #F4F6F9;">
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
             <content>
-                <VBox spacing="14" style="-fx-background-color: #F4F6F9; -fx-padding: 20;">
+                <VBox spacing="14" style="-fx-padding: 20;">
                     <children>
                         <HBox spacing="14">
                             <children>
-                                <VBox spacing="0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" HBox.hgrow="ALWAYS">
+                                <VBox spacing="0" styleClass="card" style="-fx-padding: 16 20;" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 8 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" text="📋  Current Bill" />
+                                        <Label styleClass="card-title" style="-fx-padding: 0 0 8 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" text="📋  Current Bill" />
                                         <VBox spacing="0" style="-fx-padding: 8 0 0 0;">
                                             <children>
                                                 <HBox style="-fx-padding: 7 0; -fx-border-color: #F8F8F8; -fx-border-width: 0 0 1 0;">
-                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Bill ID " HBox.hgrow="ALWAYS" />
-                                                    <Label fx:id="billIdLabel" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="—" />
+                                                    <Label styleClass="muted-text" text="Bill ID " HBox.hgrow="ALWAYS" />
+                                                    <Label fx:id="billIdLabel" styleClass="body-text" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="—" />
                                                 </HBox>
                                                 <HBox style="-fx-padding: 7 0; -fx-border-color: #F8F8F8; -fx-border-width: 0 0 1 0;">
-                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Doctor " HBox.hgrow="ALWAYS" />
-                                                    <Label fx:id="billDoctorLabel" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="—" />
+                                                    <Label styleClass="muted-text" text="Doctor " HBox.hgrow="ALWAYS" />
+                                                    <Label fx:id="billDoctorLabel" styleClass="body-text" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="—" />
                                                 </HBox>
                                                 <HBox style="-fx-padding: 7 0; -fx-border-color: #F8F8F8; -fx-border-width: 0 0 1 0;">
-                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Treatment " HBox.hgrow="ALWAYS" />
-                                                    <Label fx:id="billTreatmentLabel" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="—" />
+                                                    <Label styleClass="muted-text" text="Treatment " HBox.hgrow="ALWAYS" />
+                                                    <Label fx:id="billTreatmentLabel" styleClass="body-text" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="—" />
                                                 </HBox>
                                                 <HBox style="-fx-padding: 7 0; -fx-border-color: #F8F8F8; -fx-border-width: 0 0 1 0;">
-                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="Status " HBox.hgrow="ALWAYS" />
+                                                    <Label styleClass="muted-text" text="Status " HBox.hgrow="ALWAYS" />
                                                     <Label fx:id="billStatusLabel" style="-fx-font-size: 11px; -fx-background-color: #FCEBEB; -fx-text-fill: #A32D2D; -fx-background-radius: 99; -fx-padding: 2 8;" text="—" />
                                                 </HBox>
                                                 <HBox style="-fx-padding: 10 0 4 0;">
-                                                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Total " HBox.hgrow="ALWAYS" />
-                                                    <Label fx:id="billTotalLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text=" EGP 0" />
+                                                    <Label styleClass="card-title" style="-fx-font-size: 14px;" text="Total " HBox.hgrow="ALWAYS" />
+                                                    <Label fx:id="billTotalLabel" styleClass="card-title" style="-fx-font-size: 14px;" text=" EGP 0" />
                                                 </HBox>
                                             </children>
                                         </VBox>
                                     </children>
                                 </VBox>
-                                <VBox prefHeight="351.0" prefWidth="320.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" HBox.hgrow="ALWAYS">
+                                <VBox prefHeight="351.0" prefWidth="320.0" spacing="10" styleClass="card" style="-fx-padding: 16 20;" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 8 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" text="💳  Pay Now" />
-                                        <Label style="-fx-font-size: 11px; -fx-text-fill: #666;" text="Select payment method" />
+                                        <Label styleClass="card-title" style="-fx-padding: 0 0 8 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" text="💳  Pay Now" />
+                                        <Label styleClass="muted-text" text="Select payment method" />
                                         <ComboBox fx:id="paymentMethodCombo" maxWidth="Infinity" promptText="Choose payment method" style="-fx-pref-height: 36px;" />
-                                        <Label style="-fx-font-size: 11px; -fx-text-fill: #666;" text="Amount to pay" />
+                                        <Label styleClass="muted-text" text="Amount to pay" />
                                         <Slider fx:id="paymentSlider" max="100" min="0" showTickLabels="false" style="-fx-pref-width: 100%; -fx-accent: #1F4E79;" value="100" />
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label style="-fx-font-size: 10px; -fx-text-fill: #888;" text="0 EGP to " HBox.hgrow="ALWAYS" />
-                                                <Label fx:id="sliderMaxLabel" style="-fx-font-size: 10px; -fx-text-fill: #888;" text=" 525 EGP (Full)" />
+                                                <Label styleClass="muted-text" text="0 EGP to " HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="sliderMaxLabel" styleClass="muted-text" text=" 525 EGP (Full)" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" style="-fx-background-color: #E6F1FB; -fx-background-radius: 8; -fx-padding: 10 14;">
@@ -70,15 +69,15 @@
                                                 <Label fx:id="amountDueLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text=" 525 EGP" />
                                             </children>
                                         </HBox>
-                                        <Button fx:id="payButton" maxWidth="Infinity" onAction="#handlePayment" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-pref-height: 42px; -fx-background-radius: 8; -fx-cursor: hand;" text="Pay 525 EGP" />
+                                        <Button fx:id="payButton" maxWidth="Infinity" onAction="#handlePayment" styleClass="primary-button" style="-fx-pref-height: 42px;" text="Pay 525 EGP" />
                                         <Label fx:id="paymentMessage" style="-fx-font-size: 11px; -fx-text-fill: #1D6A2E;" text="" />
                                     </children>
                                 </VBox>
                             </children>
                         </HBox>
-                        <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;">
+                        <VBox spacing="10" styleClass="card" style="-fx-padding: 16 20;">
                             <children>
-                                <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1F4E79; -fx-padding: 0 0 8 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" text="🕐  Payment History" />
+                                <Label styleClass="card-title" style="-fx-padding: 0 0 8 0; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;" text="🕐  Payment History" />
                                 <ListView fx:id="historyList" prefHeight="200" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
                             </children>
                         </VBox>

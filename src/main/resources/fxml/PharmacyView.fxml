@@ -2,33 +2,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="0" style="-fx-background-color:#EEF2FF;"
+<VBox spacing="0" styleClass="app-background"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.shms.controller.PharmacyController">
 
-    <HBox alignment="CENTER_LEFT" spacing="16"
-          style="-fx-background-color:#185FA5; -fx-padding:14 20;">
-        <Button text="← Back" onAction="#handleBack"
-                style="-fx-background-color:transparent; -fx-text-fill:white;
-                       -fx-font-weight:bold; -fx-underline:true;
-                       -fx-border-width:0; -fx-cursor:hand;"/>
-        <Label text="Pharmacy Management"
-               style="-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:white;"/>
+    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="top-bar" style="-fx-padding:14 20;">
+        <Button text="← Back" onAction="#handleBack" styleClass="back-button"/>
+        <Label text="Pharmacy Management" styleClass="top-bar-title" style="-fx-font-size:18;"/>
     </HBox>
 
-    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
-                style="-fx-background-color:#EEF2FF; -fx-background:#EEF2FF;">
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
         <VBox spacing="16" style="-fx-padding:16 20 20 20;">
 
-            <!-- Stats -->
             <HBox spacing="12">
-                <VBox alignment="CENTER_LEFT" spacing="4" HBox.hgrow="ALWAYS"
-                      style="-fx-background-color:white; -fx-background-radius:12;
-                             -fx-border-color:#e0e0e0; -fx-border-width:0.5;
-                             -fx-border-radius:12; -fx-padding:12 16;">
-                    <Label text="Total Medications" style="-fx-font-size:11; -fx-text-fill:#888;"/>
-                    <Label fx:id="totalMedsLabel" text="0"
-                           style="-fx-font-size:20; -fx-font-weight:bold; -fx-text-fill:#185FA5;"/>
+                <VBox alignment="CENTER_LEFT" spacing="4" HBox.hgrow="ALWAYS" styleClass="card" style="-fx-padding:12 16;">
+                    <Label styleClass="muted-text" text="Total Medications"/>
+                    <Label fx:id="totalMedsLabel" text="0" styleClass="card-title" style="-fx-font-size:20;"/>
                 </VBox>
                 <VBox alignment="CENTER_LEFT" spacing="4" HBox.hgrow="ALWAYS"
                       style="-fx-background-color:#FAEEDA; -fx-background-radius:12;
@@ -53,7 +42,6 @@
                 </VBox>
             </HBox>
 
-            <!-- Toolbar -->
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <TextField fx:id="searchField" promptText="Search medications..."
                            onAction="#handleSearch" HBox.hgrow="ALWAYS"
@@ -86,13 +74,8 @@
                                -fx-background-radius:20; -fx-padding:7 14; -fx-border-width:0;"/>
             </HBox>
 
-            <!-- Medications Table -->
-            <VBox style="-fx-background-color:white; -fx-background-radius:12;
-                         -fx-border-color:#e0e0e0; -fx-border-width:0.5;
-                         -fx-border-radius:12;" VBox.vgrow="ALWAYS">
-                <Label text="Medications Inventory"
-                       style="-fx-font-size:13; -fx-font-weight:bold;
-                              -fx-text-fill:#185FA5; -fx-padding:12 16 8 16;"/>
+            <VBox styleClass="card" VBox.vgrow="ALWAYS">
+                <Label text="Medications Inventory" styleClass="card-title" style="-fx-padding:12 16 8 16;"/>
                 <TableView fx:id="medicationTable" prefHeight="280">
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
@@ -109,13 +92,8 @@
                 </TableView>
             </VBox>
 
-            <!-- Reorder Requests -->
-            <VBox style="-fx-background-color:white; -fx-background-radius:12;
-                         -fx-border-color:#e0e0e0; -fx-border-width:0.5;
-                         -fx-border-radius:12;">
-                <Label text="Reorder Requests"
-                       style="-fx-font-size:13; -fx-font-weight:bold;
-                              -fx-text-fill:#185FA5; -fx-padding:12 16 8 16;"/>
+            <VBox styleClass="card">
+                <Label text="Reorder Requests" styleClass="card-title" style="-fx-padding:12 16 8 16;"/>
                 <TableView fx:id="reorderTable" prefHeight="200">
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
@@ -130,8 +108,6 @@
                     </columns>
                 </TableView>
             </VBox>
-
         </VBox>
     </ScrollPane>
-
 </VBox>

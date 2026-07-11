@@ -190,3 +190,11 @@
     -fx-background-color: #1F4E79;
 }
 .user-avatar { -fx-background-color: #2E75B6; -fx-background-radius: 13; }
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #E0E0E0;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-mark-color: #555555;
+}
+.combo-box .list-cell { -fx-text-fill: #333333; -fx-background-color: transparent; }

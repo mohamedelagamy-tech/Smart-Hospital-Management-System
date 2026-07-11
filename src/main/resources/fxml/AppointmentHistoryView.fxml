@@ -1,24 +1,35 @@
-<?xml verison="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox spacing="12" style="-fx-paddinf=20;"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.shms.controller.AppointmentHistoryController">
-    <Label text="Appointment History"
-           style="-fx-font-size:16; -fx-weight-bold;"/>
-    <HBox spacing ="10" alignment="CENTER_LEFT">
-        <Label text="Select Patient"  minWidth="100"/>
-        <ComboBox fx:id="patientCombo" prefWidth="200"/>
-        <Button text="Search" onAction="#handleSearch"/>
-    </HBox>
-    <TableView fx:id="historyTable" VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn fx:id="colDate" text="Date" prefWidth="100"/>
-            <TableColumn fx:id="colTime" text="Time" prefWidth="80"/>
-            <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="120"/>
-            <TableColumn fx:id="colSatus" text="Status" prefWidth="100"/>
-            <TableColumn fx:id="colNotes" text="Notes" prefWidth="150"/>
-        </columns>
-    </TableView>
 
+<VBox spacing="0" styleClass="app-background"
+      xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.shms.controller.AppointmentHistoryController">
+
+    <HBox alignment="CENTER_LEFT" prefHeight="72.0" spacing="10" styleClass="top-bar">
+        <Button onAction="#handleBack" styleClass="back-button" text="← Back" />
+        <Label styleClass="top-bar-title" text="Appointment History" />
+    </HBox>
+
+    <VBox spacing="12" style="-fx-padding: 20;">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Select Patient" minWidth="100" styleClass="body-text" />
+            <ComboBox fx:id="patientCombo" prefWidth="200" />
+            <Button text="Search" onAction="#handleSearch" styleClass="primary-button" />
+        </HBox>
+
+        <VBox VBox.vgrow="ALWAYS" styleClass="card">
+            <TableView fx:id="historyTable" VBox.vgrow="ALWAYS"
+                       style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                <columns>
+                    <TableColumn fx:id="colDate" text="Date" prefWidth="100" />
+                    <TableColumn fx:id="colTime" text="Time" prefWidth="80" />
+                    <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="120" />
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="100" />
+                    <TableColumn fx:id="colNotes" text="Notes" prefWidth="150" />
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
 </VBox>

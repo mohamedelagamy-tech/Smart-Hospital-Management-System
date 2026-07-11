@@ -4,12 +4,12 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PatientDashboardController">
+<BorderPane prefHeight="700.0" prefWidth="1200.0" styleClass="app-background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PatientDashboardController">
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-background-color: #1F4E79; -fx-padding: 0 20;">
+        <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" styleClass="top-bar" style="-fx-padding: 0 20;">
             <children>
                 <javafx.scene.image.ImageView fx:id="logoView" fitHeight="59.0" fitWidth="61.0" preserveRatio="true" />
-                <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" text="SHMS" />
+                <Label styleClass="top-bar-title" text="SHMS" />
                 <Label style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 14px;" text="|" />
                 <Label style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.6); -fx-font-family: 'Georgia'; -fx-font-style: italic;" text="Patient Portal" />
                 <HBox HBox.hgrow="ALWAYS" />
@@ -17,7 +17,7 @@
                 <Label style="-fx-text-fill: rgba(255,255,255,0.2);" text="|" />
                 <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-background-color: rgba(255,255,255,0.1); -fx-background-radius: 20; -fx-padding: 4 12 4 4;">
                     <children>
-                        <StackPane maxHeight="26" maxWidth="26" prefHeight="26" prefWidth="26" style="-fx-background-color: #2E75B6; -fx-background-radius: 13;">
+                        <StackPane maxHeight="26" maxWidth="26" prefHeight="26" prefWidth="26" styleClass="user-avatar">
                             <children>
                                 <Label fx:id="userInitials" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: white;" text="MO" />
                             </children>
@@ -30,35 +30,35 @@
                         </VBox>
                     </children>
                 </HBox>
+                <Button onAction="#showSettings" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 10;" text="⚙" />
                 <Button onAction="#handleLogout" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="➜] Logout" />
             </children>
         </HBox>
     </top>
 
     <left>
-        <VBox prefWidth="200" spacing="2" style="-fx-background-color: #F8FAFC; -fx-border-color: #EEEEEE; -fx-border-width: 0 1 0 0; -fx-padding: 14 8;">
+        <VBox prefWidth="200" spacing="2" styleClass="sidebar" style="-fx-padding: 14 8;">
             <children>
-                <Label style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #AAAAAA; -fx-padding: 8 8 4 8;" text="MY PORTAL" />
-                <Button fx:id="btnHome" maxWidth="Infinity" onAction="#showHome" style="-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;" text="🏠  Home" />
-                <Button fx:id="btnAppointments" maxWidth="Infinity" onAction="#showAppointments" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="📅  My Appointments" />
-                <Button fx:id="btnPrescriptions" maxWidth="Infinity" onAction="#showPrescriptions" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💊  My Prescriptions" />
-                <Button fx:id="btnBills" maxWidth="Infinity" onAction="#showBills" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="💰  My Bills" />
-                <Button fx:id="btnSettings" maxWidth="Infinity" onAction="#showSettings" style="-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 12px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;" text="⚙️  Settings" />
+                <Label styleClass="section-label" text="MY PORTAL" />
+                <Button fx:id="btnHome" maxWidth="Infinity" onAction="#showHome" styleClass="nav-button-active" text="🏠  Home" />
+                <Button fx:id="btnAppointments" maxWidth="Infinity" onAction="#showAppointments" styleClass="nav-button" text="📅  My Appointments" />
+                <Button fx:id="btnPrescriptions" maxWidth="Infinity" onAction="#showPrescriptions" styleClass="nav-button" text="💊  My Prescriptions" />
+                <Button fx:id="btnBills" maxWidth="Infinity" onAction="#showBills" styleClass="nav-button" text="💰  My Bills" />
             </children>
         </VBox>
     </left>
 
     <center>
-        <ScrollPane fitToWidth="true" style="-fx-background-color: #F4F6F9; -fx-background: #F4F6F9;">
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
             <content>
-                <VBox spacing="14" style="-fx-background-color: #F4F6F9; -fx-padding: 20;">
+                <VBox spacing="14" style="-fx-padding: 20;">
                     <children>
 
-                        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #1F4E79; -fx-background-radius: 12; -fx-padding: 20 24;">
+                        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar" style="-fx-background-radius: 12; -fx-padding: 20 24;">
                             <children>
                                 <VBox spacing="6" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <Label fx:id="welcomeLabel" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Welcome back, Mohamed 👋" />
+                                        <Label fx:id="welcomeLabel" styleClass="top-bar-title" style="-fx-font-size: 18px;" text="Welcome back, Mohamed 👋" />
                                         <Label style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.7);" text="Here's your personal health summary" />
                                         <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 8; -fx-padding: 8 14; -fx-margin: 4 0 0 0;">
                                             <children>
@@ -80,26 +80,26 @@
                         <HBox spacing="14">
                             <children>
 
-                                <VBox alignment="CENTER" prefWidth="260" spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 20;">
+                                <VBox alignment="CENTER" prefWidth="260" spacing="10" styleClass="card" style="-fx-padding: 20;">
                                     <children>
-                                        <StackPane maxHeight="64" maxWidth="64" prefHeight="64" prefWidth="64" style="-fx-background-color: #1F4E79; -fx-background-radius: 32;">
+                                        <StackPane maxHeight="64" maxWidth="64" prefHeight="64" prefWidth="64" styleClass="user-avatar">
                                             <children>
                                                 <Label fx:id="profileInitials" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;" text="MO" />
                                             </children>
                                         </StackPane>
-                                        <Label fx:id="profileName" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F4E79;" text="Mohamed Mazen" />
+                                        <Label fx:id="profileName" styleClass="card-title" text="Mohamed Mazen" />
                                         <Label fx:id="profileStatus" style="-fx-font-size: 11px; -fx-background-color: #E8F5E9; -fx-text-fill: #2E7D32; -fx-background-radius: 99; -fx-padding: 3 10;" text="✓ Active Patient" />
                                         <Separator />
                                         <GridPane hgap="10" maxWidth="220" vgap="8">
                                             <children>
-                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text="Blood Type" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                                <Label fx:id="profileBlood" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="A-" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text="Department" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                                <Label fx:id="profileDept" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Oncology" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text="Phone" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                                <Label fx:id="profilePhone" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="01558887707" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text="Address" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                                                <Label fx:id="profileAddress" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Alexandria" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label styleClass="muted-text" text="Blood Type" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                                <Label fx:id="profileBlood" styleClass="body-text" style="-fx-font-weight: bold;" text="A-" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                                <Label styleClass="muted-text" text="Department" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                                <Label fx:id="profileDept" styleClass="body-text" style="-fx-font-weight: bold;" text="Oncology" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label styleClass="muted-text" text="Phone" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                                <Label fx:id="profilePhone" styleClass="body-text" style="-fx-font-weight: bold;" text="01558887707" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label styleClass="muted-text" text="Address" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                                <Label fx:id="profileAddress" styleClass="body-text" style="-fx-font-weight: bold;" text="Alexandria" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                             </children>
                                             <columnConstraints>
                                                 <ColumnConstraints />
@@ -117,12 +117,12 @@
                                     </children>
                                 </VBox>
 
-                                <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;" HBox.hgrow="ALWAYS">
+                                <VBox spacing="10" styleClass="card" style="-fx-padding: 16 20;" HBox.hgrow="ALWAYS">
                                     <children>
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Upcoming Appointments" HBox.hgrow="ALWAYS" />
-                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text=" Next 30 days" />
+                                                <Label styleClass="card-title" text="Upcoming Appointments" HBox.hgrow="ALWAYS" />
+                                                <Label styleClass="muted-text" text=" Next 30 days" />
                                             </children>
                                         </HBox>
                                         <ListView fx:id="appointmentsList" prefHeight="200" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS" />
@@ -132,12 +132,12 @@
                             </children>
                         </HBox>
 
-                        <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;">
+                        <VBox spacing="10" styleClass="card" style="-fx-padding: 16 20;">
                             <children>
                                 <HBox alignment="CENTER_LEFT">
                                     <children>
-                                        <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" text="My Bills" HBox.hgrow="ALWAYS" />
-                                        <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text=" Payment history" />
+                                        <Label styleClass="card-title" text="My Bills" HBox.hgrow="ALWAYS" />
+                                        <Label styleClass="muted-text" text=" Payment history" />
                                     </children>
                                 </HBox>
                                 <HBox spacing="10">
@@ -166,12 +166,12 @@
                             </children>
                         </VBox>
 
-                        <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #EEEEEE; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 16 20;">
+                        <VBox spacing="10" styleClass="card" style="-fx-padding: 16 20;">
                             <children>
                                 <HBox alignment="CENTER_LEFT">
                                     <children>
-                                        <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Patient History Timeline" HBox.hgrow="ALWAYS" />
-                                        <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text=" All activity" />
+                                        <Label styleClass="card-title" text="Patient History Timeline" HBox.hgrow="ALWAYS" />
+                                        <Label styleClass="muted-text" text=" All activity" />
                                     </children>
                                 </HBox>
                                 <ListView fx:id="timelineList" prefHeight="180" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
@@ -183,5 +183,4 @@
             </content>
         </ScrollPane>
     </center>
-
 </BorderPane>

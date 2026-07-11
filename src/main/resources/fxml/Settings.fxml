@@ -54,7 +54,7 @@
                               <ToggleGroup fx:id="themeGroup" />
                            </toggleGroup>
                                 </ToggleButton>
-                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="☀️ Light" />
+                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="☀  Light" />
                             </VBox>
                             <VBox alignment="CENTER" spacing="6">
                                 <ToggleButton fx:id="btnDark" onAction="#handleThemeChange" prefHeight="60" prefWidth="100" style="-fx-background-color: #1A2535; -fx-border-color: #DDDDDD; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10; -fx-cursor: hand;" toggleGroup="$themeGroup">
@@ -70,7 +70,7 @@
                                         </VBox>
                                     </graphic>
                                 </ToggleButton>
-                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🌙 Dark" />
+                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🌙  Dark" />
                             </VBox>
                             <VBox alignment="CENTER" spacing="6">
                                 <ToggleButton fx:id="btnHighContrast" onAction="#handleThemeChange" prefHeight="60" prefWidth="100" style="-fx-background-color: #000000; -fx-border-color: #DDDDDD; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10; -fx-cursor: hand;" toggleGroup="$themeGroup">
@@ -86,7 +86,7 @@
                                         </VBox>
                                     </graphic>
                                 </ToggleButton>
-                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="⬛ High Contrast" />
+                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="⬛  High Contrast" />
                             </VBox>
                             <VBox alignment="CENTER" spacing="6">
                                 <ToggleButton fx:id="btnOcean" onAction="#handleThemeChange" prefHeight="60" prefWidth="100" style="-fx-background-color: #0A1628; -fx-border-color: #DDDDDD; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10; -fx-cursor: hand;" toggleGroup="$themeGroup">
@@ -102,7 +102,7 @@
                                         </VBox>
                                     </graphic>
                                 </ToggleButton>
-                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🌊 Ocean" />
+                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🌊  Ocean" />
                             </VBox>
                             <VBox alignment="CENTER" spacing="6">
                                 <ToggleButton fx:id="btnForest" onAction="#handleThemeChange" prefHeight="60" prefWidth="100" style="-fx-background-color: #0A1F0A; -fx-border-color: #DDDDDD; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10; -fx-cursor: hand;" toggleGroup="$themeGroup">
@@ -118,7 +118,7 @@
                                         </VBox>
                                     </graphic>
                                 </ToggleButton>
-                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🌲 Forest" />
+                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🌲  Forest" />
                             </VBox>
                             <VBox alignment="CENTER" spacing="6">
                                 <ToggleButton fx:id="btnPurple" onAction="#handleThemeChange" prefHeight="60" prefWidth="100" style="-fx-background-color: #0F0A1F; -fx-border-color: #DDDDDD; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10; -fx-cursor: hand;" toggleGroup="$themeGroup">
@@ -134,7 +134,7 @@
                                         </VBox>
                                     </graphic>
                                 </ToggleButton>
-                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="💜 Purple" />
+                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="💜  Purple" />
                             </VBox>
                             <VBox alignment="CENTER" spacing="6">
                                 <ToggleButton fx:id="btnRose" onAction="#handleThemeChange" prefHeight="60" prefWidth="100" style="-fx-background-color: #FFF5F7; -fx-border-color: #DDDDDD; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10; -fx-cursor: hand;" toggleGroup="$themeGroup">
@@ -150,7 +150,7 @@
                                         </VBox>
                                     </graphic>
                                 </ToggleButton>
-                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🌸 Rose" />
+                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🌸  Rose" />
                             </VBox>
                             <VBox alignment="CENTER" spacing="6">
                                 <ToggleButton fx:id="btnSand" onAction="#handleThemeChange" prefHeight="60" prefWidth="100" style="-fx-background-color: #F5F0E8; -fx-border-color: #DDDDDD; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10; -fx-cursor: hand;" toggleGroup="$themeGroup">
@@ -166,7 +166,7 @@
                                         </VBox>
                                     </graphic>
                                 </ToggleButton>
-                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🏜️ Sand" />
+                                <Label style="-fx-font-size: 11px;" styleClass="muted-text" text="🏜   Sand" />
                             </VBox>
 
                         </HBox>

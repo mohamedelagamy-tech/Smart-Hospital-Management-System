@@ -191,3 +191,11 @@
 }
 .top-bar { -fx-background-color: #0A1520; }
 .user-avatar { -fx-background-color: #1A4A7A; -fx-background-radius: 13; }
+.combo-box {
+    -fx-background-color: #1A3A2A;
+    -fx-border-color: #2A3545;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-mark-color: #AABBCC;
+}
+.combo-box .list-cell { -fx-text-fill: #4CAF50; -fx-background-color: transparent; }

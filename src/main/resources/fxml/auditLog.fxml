@@ -4,25 +4,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.AuditLogController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.AuditLogController"
+            styleClass="app-background">
 
     <top>
         <VBox style="-fx-background-color: white; -fx-border-color: #EEEEEE; -fx-border-width: 0 0 1 0;">
             <children>
-                <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 16 20; -fx-background-color: #1E3A5F;">
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar" style="-fx-padding: 16 20;">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: Transparent; -fx-underline:true;" text="← Back" textFill="WHITE">
-                            <font>
-                                <Font size="13.0" />
-                            </font>
-                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back" />
                         <VBox prefHeight="54.0" prefWidth="378.0" spacing="2" HBox.hgrow="ALWAYS">
                             <children>
-                                <Label text="Audit Log" textFill="SNOW">
-                                    <font>
-                                        <Font name="System Bold" size="24.0" />
-                                    </font></Label>
-                                <Label style="-fx-font-size: 11px; -fx-text-fill: #888888;" text="All login attempts — Admin access only" />
+                                <Label styleClass="top-bar-title" text="Audit Log" style="-fx-font-size: 24px;" />
+                                <Label style="-fx-font-size: 11px; -fx-text-fill: #cfd8e3;" text="All login attempts — Admin access only" />
                             </children>
                         </VBox>
                         <TextField fx:id="searchField" promptText="🔍 Search by username..." style="-fx-pref-width: 180px; -fx-pref-height: 34px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #E0E0E0; -fx-background-color: #FAFAFA; -fx-font-size: 12px;" />
@@ -35,17 +30,20 @@
     </top>
 
     <center>
-        <VBox style="-fx-background-color: #F4F6F9; -fx-padding: 16;">
+        <VBox style="-fx-padding: 16;">
             <children>
-                <TableView fx:id="auditTable" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #EEEEEE; -fx-border-radius: 8;" VBox.vgrow="ALWAYS">
-                    <columns>
-                        <TableColumn fx:id="colId" prefWidth="60" text="#" />
-                        <TableColumn fx:id="colUsername" prefWidth="160" text="Username" />
-                        <TableColumn fx:id="colRole" prefWidth="130" text="Role" />
-                        <TableColumn fx:id="colStatus" prefWidth="100" text="Status" />
-                        <TableColumn fx:id="colTimestamp" prefWidth="200" text="Timestamp" />
-                    </columns>
-                </TableView>
+                <VBox VBox.vgrow="ALWAYS" styleClass="card">
+                    <TableView fx:id="auditTable" VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                        <columns>
+                            <TableColumn fx:id="colId" prefWidth="60" text="#" />
+                            <TableColumn fx:id="colUsername" prefWidth="160" text="Username" />
+                            <TableColumn fx:id="colRole" prefWidth="130" text="Role" />
+                            <TableColumn fx:id="colStatus" prefWidth="100" text="Status" />
+                            <TableColumn fx:id="colTimestamp" prefWidth="200" text="Timestamp" />
+                        </columns>
+                    </TableView>
+                </VBox>
             </children>
         </VBox>
     </center>
@@ -53,7 +51,7 @@
     <bottom>
         <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: white; -fx-border-color: #EEEEEE; -fx-border-width: 1 0 0 0; -fx-padding: 10 20;">
             <children>
-                <Label fx:id="recordCountLabel" style="-fx-font-size: 11px; -fx-text-fill: #888888;" text="Showing 0 records" HBox.hgrow="ALWAYS" />
+                <Label fx:id="recordCountLabel" styleClass="muted-text" text="Showing 0 records" HBox.hgrow="ALWAYS" />
                 <Button onAction="#handleExport" style="-fx-background-color: #F0F4F8; -fx-text-fill: #1F4E79; -fx-font-size: 11px; -fx-pref-height: 30px; -fx-background-radius: 6; -fx-border-color: #D0DFF0; -fx-border-radius: 6; -fx-cursor: hand;" text="Export to File" />
             </children>
         </HBox>

@@ -31,3 +31,25 @@
 .text-field, .password-field, .text-area { -fx-background-color: #FFFDF8; -fx-text-fill: #4A3A2A; -fx-border-color: #D4C4A0; }
 .top-bar { -fx-background-color: #6A3A0A; }
 .user-avatar { -fx-background-color: #8A5A2A; -fx-background-radius: 13; }
+.settings-scroll { -fx-background-color: #F5F0E8; -fx-background: #F5F0E8; }
+.settings-content { -fx-background-color: #F5F0E8; -fx-padding: 24; }
+.settings-row-title { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #4A3A2A; }
+.primary-button { -fx-background-color: #8A5A2A; -fx-text-fill: white; -fx-font-size: 12px; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 8 16; }
+.toggle-left { -fx-background-color: #E0D4B8; -fx-text-fill: #6A3A0A; -fx-font-size: 12px; -fx-background-radius: 8 0 0 8; -fx-cursor: hand; -fx-padding: 8 16; }
+.toggle-left:selected { -fx-background-color: #8A5A2A; -fx-text-fill: white; }
+.toggle-mid { -fx-background-color: #FFFDF8; -fx-text-fill: #4A3A2A; -fx-font-size: 12px; -fx-background-radius: 0; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #D4C4A0; -fx-border-width: 0 1 0 1; }
+.toggle-mid:selected { -fx-background-color: #8A5A2A; -fx-text-fill: white; }
+.toggle-right { -fx-background-color: #FFFDF8; -fx-text-fill: #4A3A2A; -fx-font-size: 12px; -fx-background-radius: 0 8 8 0; -fx-cursor: hand; -fx-padding: 8 16; }
+.toggle-right:selected { -fx-background-color: #8A5A2A; -fx-text-fill: white; }
+.toggle-2fa { -fx-background-color: #FFFDF8; -fx-text-fill: #4A3A2A; -fx-font-size: 12px; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #D4C4A0; -fx-border-width: 1; }
+.toggle-2fa:selected { -fx-background-color: #E8F5E9; -fx-text-fill: #2E7D32; -fx-border-color: #4CAF50; }
+.top-bar-title { -fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white; }
+.back-button { -fx-background-color: transparent; -fx-text-fill: white; -fx-underline: true; -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 14 20; }
+.combo-box {
+    -fx-background-color: #FFFDF8;
+    -fx-border-color: #D4C4A0;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-mark-color: #6A4A2A;
+}
+.combo-box .list-cell { -fx-text-fill: #4A3A2A; -fx-background-color: transparent; }

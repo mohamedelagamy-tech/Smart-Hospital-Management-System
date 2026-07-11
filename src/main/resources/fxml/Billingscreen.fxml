@@ -8,24 +8,20 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.shms.controller.BillingController"
             prefHeight="700" prefWidth="1200"
-            style="-fx-background-color: #f4f6f9;">
+            styleClass="app-background">
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0"
-              spacing="10" style="-fx-background-color:#1E3A5F;">
-            <Button onAction="#handleBack"
-                    style="-fx-background-color: transparent; -fx-underline: true;
-                -fx-font-size:13px ; -fx-cursor: hand; -fx-padding:14 20;"
-                    text="← Back" textFill="WHITE"/>
-            <Label style="-fx-font-size:24; -fx-font-weight:bold; -fx-text-fill:white;" text=" 💰Billing Management" />
+              spacing="10" styleClass="top-bar">
+            <Button onAction="#handleBack" styleClass="back-button" text="← Back" />
+            <Label styleClass="top-bar-title" text=" 💰Billing Management" />
         </HBox>
     </top>
     <center>
-        <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f4f6f9;">
+        <VBox spacing="16" style="-fx-padding: 24;">
             <HBox spacing="12" alignment="CENTER_LEFT">
                 <HBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS"
-                      style="-fx-background-color: white; -fx-border-color: #dde1e7;
-                             -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 0 16;">
-                    <Label text="🔍" style="-fx-font-size: 14px; -fx-text-fill: #aaa;"/>
+                      styleClass="card" style="-fx-padding: 0 16;">
+                    <Label text="🔍" styleClass="muted-text" />
                     <TextField fx:id="searchField"
                                promptText="Search by patient name or bill number..."
                                prefHeight="42" HBox.hgrow="ALWAYS"
@@ -65,14 +61,9 @@
                               onAction="#applyFilters"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button fx:id="newBillBtn" text="+ New Bill" onAction="#openNewBillForm"
-                        style="-fx-background-color: #1F4E79; -fx-text-fill: white;
-                               -fx-font-size: 13px; -fx-font-weight: bold;
-                               -fx-background-radius: 8; -fx-cursor: hand;
-                               -fx-padding: 8 20;"/>
+                        styleClass="primary-button"/>
             </HBox>
-            <VBox VBox.vgrow="ALWAYS"
-                  style="-fx-background-color: white; -fx-background-radius: 12;
-                         -fx-border-color: #eeeeee; -fx-border-radius: 12; -fx-border-width: 1;">
+            <VBox VBox.vgrow="ALWAYS" styleClass="card">
                 <TableView fx:id="billingTable" VBox.vgrow="ALWAYS"
                            style="-fx-background-color: transparent; -fx-border-color: transparent;">
                     <columns>

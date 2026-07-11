@@ -2,21 +2,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<VBox spacing="0" style="-fx-background-color:#EEF2FF;"
+<VBox spacing="0" styleClass="app-background"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.shms.controller.CalendarController">
 
-    <HBox alignment="CENTER_LEFT" spacing="16"
-          style="-fx-background-color:#1E3A5F;-fx-padding:14 20;
-                 -fx-background-radius:12 12 0 0;">
-        <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE"/>
-        <Label text="Appointment Calendar"
-               style="-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:white;"
+    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="top-bar"
+          style="-fx-padding:14 20; -fx-background-radius:12 12 0 0;">
+        <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+        <Label text="Appointment Calendar" styleClass="top-bar-title" style="-fx-font-size:18;"
                HBox.hgrow="ALWAYS"/>
         <Button text="&lt;" onAction="#handlePrevMonth"
                 style="-fx-background-color:rgba(255,255,255,0.2);
                 -fx-text-fill:white; -fx-font-size:16;
-                -fxpbackground-radius:8; -fx-padding:6 14; -fx-border-width:0;"/>
+                -fx-background-radius:8; -fx-padding:6 14; -fx-border-width:0;"/>
         <Label fx:id="monthLabel"
                style="-fx-font-size:15; -fx-font-weight:bold;
                       -fx-text-fill:white; -fx-min-width:140;
@@ -24,12 +22,10 @@
         <Button text="&gt;" onAction="#handleNextMonth"
                 style="-fx-background-color:rgba(255,255,255,0.2);
                 -fx-text-fill:white; -fx-font-size:16;
-                -fxpbackground-radius:8; -fx-padding:6 14; -fx-border-width:0;"/>
+                -fx-background-radius:8; -fx-padding:6 14; -fx-border-width:0;"/>
     </HBox>
-    <HBox spacing="20" alignment="CENTER_LEFT"
-          style="-fx-padding:12 20 ;-fx-background-color:#EEF2FF;">
-        <Label text="Status"
-               style="-fx-font-size:12; -fx-font-weight:bold; -fx-text-fill:#666;"/>
+    <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding:12 20 ;">
+        <Label text="Status" styleClass="body-text" style="-fx-font-size:12; -fx-font-weight:bold;"/>
         <Button text="All" onAction="#handleFilterAll"
                 style="-fx-background-color:#E8EAF6;-fx-text-fill:#3949AB;
                    -fx-background-radius:99; -fx-padding:3 10;
@@ -47,52 +43,25 @@
                   -fx-background-radius:99; -fx-padding:3 10 ;
                   -fx-font-size:12; -fx-font-weight:bold; -fx-cursor:hand;"/>
     </HBox>
-    <VBox VBox.vgrow="ALWAYS"
-          style="-fx-padding:0 20 20 20 ; -fx-background-color:#EEF2FF;">
-        <VBox style="-fx-background-color:white; -fx-background-radius:12;
-                     -fx-border-radius:12 ; -fx-border-color:#e0e0e0;
-                     -fx-border-width:0.5;" VBox.vgrow="ALWAYS">
-            <HBox style="-fx-background-color:#1E3A5F;
-                         -fx-background-radius:12 12 0 0;">
-                <Label text="Sun" HBox.hgrow="ALWAYS"
-                       maxWidth="1.7976932348623157E308"
-                       style="-fx-text-fill:white; -fx-font-size:12;
-                              -fx-font-weight:bold; -fx-padding:8;
-                              -fx-alignment:CENTER;"/>
-                <Label text="Mon" HBox.hgrow="ALWAYS"
-                       maxWidth="1.7976932348623157E308"
-                       style="-fx-text-fill:white; -fx-font-size:12;
-                              -fx-font-weight:bold; -fx-padding:8;
-                              -fx-alignment:CENTER;"/>
-                <Label text="Tue" HBox.hgrow="ALWAYS"
-                       maxWidth="1.7976932348623157E308"
-                       style="-fx-text-fill:white; -fx-font-size:12;
-                              -fx-font-weight:bold; -fx-padding:8;
-                              -fx-alignment:CENTER;"/>
-                <Label text="Wed" HBox.hgrow="ALWAYS"
-                       maxWidth="1.7976932348623157E308"
-                       style="-fx-text-fill:white; -fx-font-size:12;
-                              -fx-font-weight:bold; -fx-padding:8;
-                              -fx-alignment:CENTER;"/>
-                <Label text="Thu" HBox.hgrow="ALWAYS"
-                       maxWidth="1.7976932348623157E308"
-                       style="-fx-text-fill:white; -fx-font-size:12;
-                              -fx-font-weight:bold; -fx-padding:8;
-                              -fx-alignment:CENTER;"/>
-                <Label text="Fri" HBox.hgrow="ALWAYS"
-                       maxWidth="1.7976932348623157E308"
-                       style="-fx-text-fill:white; -fx-font-size:12;
-                              -fx-font-weight:bold; -fx-padding:8;
-                              -fx-alignment:CENTER;"/>
-                <Label text="Sat" HBox.hgrow="ALWAYS"
-                       maxWidth="1.7976932348623157E308"
-                       style="-fx-text-fill:white; -fx-font-size:12;
-                              -fx-font-weight:bold; -fx-padding:8;
-                              -fx-alignment:CENTER;"/>
+    <VBox VBox.vgrow="ALWAYS" style="-fx-padding:0 20 20 20 ;">
+        <VBox styleClass="card" VBox.vgrow="ALWAYS">
+            <HBox styleClass="top-bar" style="-fx-background-radius:12 12 0 0;">
+                <Label text="Sun" HBox.hgrow="ALWAYS" maxWidth="1.7976932348623157E308"
+                       style="-fx-text-fill:white; -fx-font-size:12; -fx-font-weight:bold; -fx-padding:8; -fx-alignment:CENTER;"/>
+                <Label text="Mon" HBox.hgrow="ALWAYS" maxWidth="1.7976932348623157E308"
+                       style="-fx-text-fill:white; -fx-font-size:12; -fx-font-weight:bold; -fx-padding:8; -fx-alignment:CENTER;"/>
+                <Label text="Tue" HBox.hgrow="ALWAYS" maxWidth="1.7976932348623157E308"
+                       style="-fx-text-fill:white; -fx-font-size:12; -fx-font-weight:bold; -fx-padding:8; -fx-alignment:CENTER;"/>
+                <Label text="Wed" HBox.hgrow="ALWAYS" maxWidth="1.7976932348623157E308"
+                       style="-fx-text-fill:white; -fx-font-size:12; -fx-font-weight:bold; -fx-padding:8; -fx-alignment:CENTER;"/>
+                <Label text="Thu" HBox.hgrow="ALWAYS" maxWidth="1.7976932348623157E308"
+                       style="-fx-text-fill:white; -fx-font-size:12; -fx-font-weight:bold; -fx-padding:8; -fx-alignment:CENTER;"/>
+                <Label text="Fri" HBox.hgrow="ALWAYS" maxWidth="1.7976932348623157E308"
+                       style="-fx-text-fill:white; -fx-font-size:12; -fx-font-weight:bold; -fx-padding:8; -fx-alignment:CENTER;"/>
+                <Label text="Sat" HBox.hgrow="ALWAYS" maxWidth="1.7976932348623157E308"
+                       style="-fx-text-fill:white; -fx-font-size:12; -fx-font-weight:bold; -fx-padding:8; -fx-alignment:CENTER;"/>
             </HBox>
-            <GridPane fx:id="calendarGrid" hgap="0" vgap="0"
-                      VBox.vgrow="ALWAYS"
-                      style="-fx-background-color:white;">
+            <GridPane fx:id="calendarGrid" hgap="0" vgap="0" VBox.vgrow="ALWAYS">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="14.28"/>
                     <ColumnConstraints percentWidth="14.28"/>

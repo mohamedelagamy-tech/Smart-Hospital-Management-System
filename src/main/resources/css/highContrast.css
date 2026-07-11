@@ -173,3 +173,11 @@
 }
 .top-bar { -fx-background-color: #000000; -fx-border-color: #FFFF00; -fx-border-width: 0 0 2 0; }
 .user-avatar { -fx-background-color: #FFFF00; -fx-background-radius: 13; }
+.combo-box {
+    -fx-background-color: #FFFF00;
+    -fx-border-color: #FFFF00;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-mark-color: #FFFFFF;
+}
+.combo-box .list-cell { -fx-text-fill: #000000; -fx-background-color: transparent; }

@@ -4,61 +4,58 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="700" prefWidth="1200" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.StatisticsController">
+<BorderPane prefHeight="700" prefWidth="1200" styleClass="app-background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.StatisticsController">
 
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0"
-              spacing="10" style="-fx-background-color:#1E3A5F;">
-            <Button onAction="#handleBack"
-                    style="-fx-background-color: transparent; -fx-underline: true;
-                -fx-font-size:13px ; -fx-cursor: hand; -fx-padding:14 20;"
-                    text="← Back" textFill="WHITE"/>
-            <Label style="-fx-font-size:24; -fx-font-weight:bold; -fx-text-fill:white;" text="📊 Statistics and Analytics " />
+              spacing="10" styleClass="top-bar">
+            <Button onAction="#handleBack" styleClass="back-button" text="← Back"/>
+            <Label styleClass="top-bar-title" style="-fx-font-size:24;" text="📊 Statistics and Analytics " />
         </HBox>
     </top>
     <center>
         <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-border-color: transparent;">
-            <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f4f6f9;">
+            <VBox spacing="16" style="-fx-padding: 24;">
 
                 <HBox spacing="16">
-                    <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12;                                  -fx-border-color: #eeeeee; -fx-border-radius: 12;                                  -fx-border-width: 1; -fx-padding: 16;" HBox.hgrow="ALWAYS">
-                        <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;" text="📊  Appointments by Status" />
+                    <VBox spacing="10" styleClass="card" style="-fx-padding: 16;" HBox.hgrow="ALWAYS">
+                        <Label styleClass="card-title" text="📊  Appointments by Status" />
                         <BarChart fx:id="appointmentsChart" animated="true" prefHeight="220">
                             <xAxis><CategoryAxis label="Status" /></xAxis>
                             <yAxis><NumberAxis label="Count" /></yAxis>
                         </BarChart>
                     </VBox>
-                    <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12;                                  -fx-border-color: #eeeeee; -fx-border-radius: 12;                                  -fx-border-width: 1; -fx-padding: 16;" HBox.hgrow="ALWAYS">
-                        <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;" text="🏥  Room Occupancy" />
+                    <VBox spacing="10" styleClass="card" style="-fx-padding: 16;" HBox.hgrow="ALWAYS">
+                        <Label styleClass="card-title" text="🏥  Room Occupancy" />
                         <PieChart fx:id="occupancyChart" animated="true" prefHeight="220" />
                     </VBox>
                 </HBox>
 
                 <HBox spacing="16">
-                    <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12;                                  -fx-border-color: #eeeeee; -fx-border-radius: 12;                                  -fx-border-width: 1; -fx-padding: 16;" HBox.hgrow="ALWAYS">
-                        <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;" text="💰  Revenue Over Time (Paid Bills)" />
+                    <VBox spacing="10" styleClass="card" style="-fx-padding: 16;" HBox.hgrow="ALWAYS">
+                        <Label styleClass="card-title" text="💰  Revenue Over Time (Paid Bills)" />
                         <LineChart fx:id="revenueChart" animated="true" prefHeight="220">
                             <xAxis><CategoryAxis label="Date" /></xAxis>
                             <yAxis><NumberAxis label="EGP" /></yAxis>
                         </LineChart>
                     </VBox>
-                    <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12;                                  -fx-border-color: #eeeeee; -fx-border-radius: 12;                                  -fx-border-width: 1; -fx-padding: 16;" HBox.hgrow="ALWAYS">
-                        <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;" text="💳  Bill Status Breakdown" />
+                    <VBox spacing="10" styleClass="card" style="-fx-padding: 16;" HBox.hgrow="ALWAYS">
+                        <Label styleClass="card-title" text="💳  Bill Status Breakdown" />
                         <PieChart fx:id="billStatusChart" animated="true" prefHeight="220" />
                     </VBox>
                 </HBox>
 
-                <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12;                              -fx-border-color: #eeeeee; -fx-border-radius: 12;                              -fx-border-width: 1; -fx-padding: 16;">
-                    <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;" text="🏥  Patients by Department" />
+                <VBox spacing="10" styleClass="card" style="-fx-padding: 16;">
+                    <Label styleClass="card-title" text="🏥  Patients by Department" />
                     <BarChart fx:id="doctorsChart" animated="true" prefHeight="220">
                         <xAxis><CategoryAxis label="Department" /></xAxis>
                         <yAxis><NumberAxis label="Patients" /></yAxis>
                     </BarChart>
                 </VBox>
 
-                <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12;                              -fx-border-color: #eeeeee; -fx-border-radius: 12;                              -fx-border-width: 1; -fx-padding: 16;">
-                    <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #1F4E79;" text="🔔  Live Activity Feed" />
-                    <ListView fx:id="notificationsList" prefHeight="130" style="-fx-background-color: #f9fafb; -fx-border-color: #eeeeee;                                      -fx-border-radius: 6; -fx-font-size: 13px;" />
+                <VBox spacing="10" styleClass="card" style="-fx-padding: 16;">
+                    <Label styleClass="card-title" text="🔔  Live Activity Feed" />
+                    <ListView fx:id="notificationsList" prefHeight="130" styleClass="list-view" />
                 </VBox>
 
             </VBox>

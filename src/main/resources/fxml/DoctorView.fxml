@@ -5,25 +5,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DoctorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DoctorController" styleClass="app-background">
    <top>
-     <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
-        <children>
-           <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline: true;" text="← Back" textFill="WHITE">
-              <font>
-                 <Font size="13.0" />
-              </font>
-           </Button>
-           <Label text=" Doctor Management" textFill="WHITE">
-              <font>
-                 <Font name="System Bold" size="24.0" />
-              </font>
-              <HBox.margin>
-                 <Insets left="10.0" />
-              </HBox.margin>
-           </Label>
-        </children>
-     </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0" styleClass="top-bar" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+            <Label text=" Doctor Management" styleClass="top-bar-title">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
    </top>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 12;" BorderPane.alignment="CENTER">
@@ -37,10 +33,10 @@
                      <children>
                         <Pane prefHeight="34.0" prefWidth="196.0">
                            <children>
-                              <TextField fx:id="searchField" layoutX="-2.0" layoutY="1.0" prefHeight="25.0" prefWidth="191.0" promptText="🔍Search by name or ID. . ." />
+                              <TextField fx:id="searchField" layoutX="-2.0" layoutY="1.0" prefHeight="25.0" prefWidth="191.0" promptText="🔍Search by name or ID. . ." styleClass="text-field"/>
                            </children>
                         </Pane>
-                        <Button fx:id="addBtn" mnemonicParsing="false" onAction="#handleAddDoctor" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #3B82F6;" text="+ Add Doctor" textFill="WHITE">
+                        <Button fx:id="addBtn" mnemonicParsing="false" onAction="#handleAddDoctor" prefHeight="26.0" prefWidth="120.0" styleClass="primary-button" text="+ Add Doctor">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -79,12 +75,11 @@
                   <TableColumn fx:id="ratingCol" prefWidth="46.0" text="Rating" />
                   <TableColumn fx:id="statusCol" prefWidth="73.0" text="Status" />
                   <TableColumn fx:id="actionsCol" prefWidth="230.20001220703125" text="Actions" />
-
                </columns>
             </TableView>
-            <HBox prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #F4F7FA;">
+            <HBox prefHeight="40.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="statusLabel" prefHeight="22.0" prefWidth="138.0" text="Total Doctors : 0" />
+                  <Label fx:id="statusLabel" prefHeight="22.0" prefWidth="138.0" text="Total Doctors : 0" styleClass="muted-text"/>
                </children>
             </HBox>
          </children>

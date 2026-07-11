@@ -14,37 +14,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DepartmentController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.DepartmentController" styleClass="app-background">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0" spacing="16.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0" spacing="16.0" styleClass="top-bar" BorderPane.alignment="CENTER">
          <padding>
             <Insets left="20.0" right="20.0" />
          </padding>
          <children>
-            <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline:true;" text="← Back" textFill="WHITE">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
-            <Label text="Department Management" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-            </Label>
+            <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+            <Label text="Department Management" styleClass="top-bar-title" style="-fx-font-size: 22px;"/>
          </children>
       </HBox>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0" style="-fx-background-color: #F4F7FA;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="16.0" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
          </padding>
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="200.0" spacing="12.0">
                <children>
-                  <TextField fx:id="searchField" prefHeight="36.0" prefWidth="280.0" promptText="Search departments..." />
+                  <TextField fx:id="searchField" prefHeight="36.0" prefWidth="280.0" promptText="Search departments..." styleClass="text-field"/>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="statsLabel" text="Label" textFill="#64748b">
+                  <Label fx:id="statsLabel" text="Label" styleClass="muted-text">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -53,12 +45,12 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="400.0" spacing="10.0" style="-fx-background-color: WHITE; -fx-background-radius: 12; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-border-width: 1;">
+                  <VBox prefHeight="200.0" prefWidth="400.0" spacing="10.0" styleClass="card">
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
                      <children>
-                        <Label text="Departments" textFill="#1e3a5f">
+                        <Label text="Departments" styleClass="card-title">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -72,23 +64,23 @@
                         </TableView>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="14.0" style="-fx-background-color: WHITE; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E2E8F0; -fx-border-width: 1;" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="14.0" styleClass="card" HBox.hgrow="ALWAYS">
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
                      <children>
-                        <Label fx:id="detailNameLabel" text="← Select a department" textFill="#1e3a5f">
+                        <Label fx:id="detailNameLabel" text="← Select a department" styleClass="card-title">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <Separator prefWidth="200.0" />
-                        <Label text="Doctors in this Department" textFill="#1e3a5f">
+                        <Label text="Doctors in this Department" styleClass="card-title">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="doctorListView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F8FAFC; -fx-border-color: #E2E8F0; -fx-border-radius: 8;" VBox.vgrow="ALWAYS" />
+                        <ListView fx:id="doctorListView" prefHeight="200.0" prefWidth="200.0" styleClass="list-view" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </children>
