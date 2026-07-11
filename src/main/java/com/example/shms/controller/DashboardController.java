@@ -68,6 +68,29 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url,ResourceBundle rb){
+        if (com.example.shms.utils.LanguageManager.isArabic()) {
+
+            labelMain.setText("الرئيسية");
+            labelMedical.setText("طبي");
+            labelAdmin.setText("إدارة");
+
+            btnDashboard.setText("🏠  لوحة التحكم");
+            btnPatients.setText("👥  المرضى");
+            btnDoctors.setText("👨‍⚕️  الأطباء");
+            btnAppointments.setText("📅  المواعيد");
+            btnCalendar.setText("🗓️  التقويم");
+            btnRecords.setText("📋  السجلات الطبية");
+            btnPrescriptions.setText("💊  الوصفات");
+            btnEmergency.setText("🚨  طوارئ");
+            btnPharmacy.setText("🧪  الصيدلية");
+            btnBilling.setText("💰  الفواتير");
+            btnRooms.setText("🛏  الغرف");
+            btnDepartments.setText("🏥  الأقسام");
+            btnAuditLog.setText("📝  سجل المراجعة");
+            btnStatistics.setText("📊  الإحصائيات");
+
+            welcomeLabel.setText("مرحباً 👋");
+        }
         Image logo = new Image(getClass().getResourceAsStream("/images/logo.png"));
         logoView.setImage(logo);
 

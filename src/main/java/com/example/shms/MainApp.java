@@ -27,23 +27,29 @@ public class MainApp extends Application {
         MedicineReminderUtil.showReminders();
     }
     public static void navigateTo(String fxmlFile, int width, int height) {
-        try{
-            if (primaryStage==null){
+        try {
+            if (primaryStage == null) {
                 System.out.println("Stage is null");
                 return;
             }
-            FXMLLoader loader=new FXMLLoader(MainApp.class.getResource("/fxml/"+fxmlFile +".fxml"));
-            Scene scene=new Scene(loader.load(),width,height);
+            FXMLLoader loader = new FXMLLoader(
+                    MainApp.class.getResource("/fxml/" + fxmlFile + ".fxml"));
+            Scene scene = new Scene(loader.load(), width, height);
             ThemeManager.applyCurrentPreferences(scene);
+
+            // Apply language orientation
+            scene.getRoot().setNodeOrientation(
+                    com.example.shms.utils.LanguageManager.getOrientation());
+
             primaryStage.setScene(scene);
 
-            FadeTransition fade= new FadeTransition(Duration.millis(300),scene.getRoot());
+            FadeTransition fade = new FadeTransition(Duration.millis(300), scene.getRoot());
             fade.setFromValue(0.0);
             fade.setToValue(1.0);
             fade.play();
-        }catch(Exception e){
-            System.out.println("Error navigating to "+fxmlFile+": "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error navigating to " + fxmlFile + ": " + e.getMessage());
             e.printStackTrace();
         }
     }
-}
+    }
