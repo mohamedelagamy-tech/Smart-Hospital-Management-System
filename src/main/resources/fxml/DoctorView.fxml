@@ -9,8 +9,8 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0" styleClass="top-bar" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back"/>
-            <Label style="-fx-font-size: 24px;" text=" Doctor Management" styleClass="top-bar-title">
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+            <Label fx:id="pageTitle" style="-fx-font-size: 24px;" text=" Doctor Management" styleClass="top-bar-title">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

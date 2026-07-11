@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class DoctorController {
+    @FXML private javafx.scene.control.Button backBtn;
+    @FXML private javafx.scene.control.Label pageTitle;
 
     @FXML private TableView<Doctor> doctorTable;
     @FXML private TableColumn<Doctor, Integer> idCol;
@@ -45,6 +47,32 @@ public class DoctorController {
 
     @FXML
     private void initialize() {
+        if (com.example.shms.utils.LanguageManager.isArabic()) {
+            backBtn.setText("→ رجوع");
+            pageTitle.setText("إدارة الأطباء");
+
+            searchField.setPromptText("🔍 ابحث بالاسم أو الرقم...");
+            departmentFilter.setPromptText("تصفية حسب القسم");
+
+            addBtn.setText("+ إضافة طبيب");
+            allBtn.setText("الكل");
+            availableBtn.setText("متاح");
+            busyBtn.setText("مشغول");
+            inSurgeryBtn.setText("في العملية");
+            resetBtn.setText("إعادة");
+
+            idCol.setText("الرقم");
+            nameCol.setText("الاسم");
+            departmentCol.setText("القسم");
+            salaryCol.setText("الراتب");
+            workingDaysCol.setText("أيام العمل");
+            workingHoursCol.setText("ساعات العمل");
+            ratingCol.setText("التقييم");
+            statusCol.setText("الحالة");
+            actionsCol.setText("الإجراءات");
+
+            statusLabel.setText("إجمالي الأطباء: 0");
+        }
         setupColumns();
         setupActions();
         setupDepartmentFilter();
