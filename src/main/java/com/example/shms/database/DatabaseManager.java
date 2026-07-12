@@ -683,6 +683,18 @@ public class DatabaseManager {
                     "expectedDate TEXT," +
                     "status TEXT DEFAULT 'Pending')");
 
+            st.execute("CREATE TABLE IF NOT EXISTS twoFactorCodes (" +
+                    "username TEXT PRIMARY KEY," +
+                    "code TEXT NOT NULL," +
+                    "expiresAt TEXT NOT NULL)");
+
+            st.execute("CREATE TABLE IF NOT EXISTS settings (" +
+                    "username TEXT PRIMARY KEY," +
+                    "twoFactorEnabled INTEGER DEFAULT 0," +
+                    "theme TEXT DEFAULT 'light'," +
+                    "language TEXT DEFAULT 'en'," +
+                    "fontSize TEXT DEFAULT 'medium')");
+
             st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Amoxicillin 500mg','Antibiotic','Capsules',320,50,12.50,'2027-03-15','In Stock')");
             st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Metformin 850mg','Diabetes','Tablets',18,50,8.00,'2026-08-20','Low Stock')");
             st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Amlodipine 5mg','Cardiology','Tablets',12,40,15.75,'2026-07-01','Expiring Soon')");
@@ -1311,6 +1323,64 @@ public class DatabaseManager {
             st.execute("UPDATE rooms SET status='Cleaning',assignedPatientID=NULL WHERE id="+roomId);
         }catch(SQLException e){
             System.out.println("Discharge failed: "+e.getMessage());
+        }
+    }
+    public void saveTwoFactorCode(String username,String code,String expiresAt){
+        try(PreparedStatement ps=connection.prepareStatement("INSERT OR REPLACE INTO twoFactorCodes (username,code,expiresAt) VALUES (?,?,?)")){
+            ps.setString(1,username);
+            ps.setString(2,code);
+            ps.setString(3,expiresAt);
+            ps.executeUpdate();
+        } catch(SQLException e){
+            System.out.println("Save 2FA code failed: "+e.getMessage());
+        }
+    }
+
+    public String getTwoFactorCode(String username){
+        try(PreparedStatement ps=connection.prepareStatement("SELECT code,expiresAt FROM twoFactorCodes WHERE username = ?")){
+            ps.setString(1,username);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                String expiresAt=rs.getString("expiresAt");
+                if (java.time.LocalDateTime.now().isBefore(java.time.LocalDateTime.parse(expiresAt))){
+                    return rs.getString("code");
+                }
+            }
+        }catch (SQLException e){
+            System.out.println("Get 2FA code failed: "+e.getMessage());
+        }
+        return null;
+    }
+
+    public void deleteTwoFactorCode(String username){
+        try(PreparedStatement ps = connection.prepareStatement("DELETE FROM twoFactorCodes WHERE username = ?")){
+            ps.setString(1,username);
+            ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("Delete 2FA code failed: "+e.getMessage());
+        }
+    }
+
+    public boolean isTwoFactorEnabled(String username){
+        try(PreparedStatement ps=connection.prepareStatement("SELECT twoFactorEnabled FROM settings WHERE username = ?")){
+            ps.setString(1,username);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt("twoFactorEnabled")==1;
+            }
+        }catch(SQLException e){
+            System.out.println("2FA check failed: "+e.getMessage());
+        }
+        return false;
+    }
+
+    public void setTwoFactorEnabled(String username,boolean enabled){
+        try(PreparedStatement ps=connection.prepareStatement("INSERT OR REPLACE INTO settings (username,twoFactorEnabled) VALUES (?,?)")){
+            ps.setString(1,username);
+            ps.setInt(2,enabled ? 1 : 0);
+            ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("Set 2FA failed: "+e.getMessage());
         }
     }
 }

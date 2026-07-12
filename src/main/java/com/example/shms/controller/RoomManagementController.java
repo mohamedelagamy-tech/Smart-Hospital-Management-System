@@ -110,6 +110,20 @@ public class RoomManagementController implements Initializable {
             assignBtn.setOnAction(e->showAssignDialog(room));
             content.getChildren().add(assignBtn);
         }
+        if(room.getRoomStatus().equalsIgnoreCase("Available")){
+            Button maintBtn=new Button("🔧 Mark as Maintenance");
+            maintBtn.setStyle("-fx-background-color: #757575; -fx-text-fill: white;" +
+                    "-fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand; -fx-padding: 5 12;");
+            maintBtn.setOnAction(e -> setRoomMaintenance(room));
+            content.getChildren().add(maintBtn);
+        }
+        if(room.getRoomStatus().equalsIgnoreCase("Maintenance")){
+            Button availBtn=new Button("Mark as Available");
+            availBtn.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white;" +
+                    "-fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand; -fx-padding: 5 12;");
+            availBtn.setOnAction(e -> setRoomAvailable(room));
+            content.getChildren().add(availBtn);
+        }
         if(isOccupied(room.getRoomStatus())){
             Button dischargeBtn=new Button("Discharge");
             dischargeBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white;"+
@@ -151,6 +165,15 @@ public class RoomManagementController implements Initializable {
             System.out.println("Set available failed: "+e.getMessage());
         }
     }
+    private void setRoomMaintenance(Room room){
+        try(java.sql.Statement st=db.getConnection().createStatement()){
+            st.execute("UPDATE rooms SET status='Maintenance' WHERE id="+room.getId());
+            loadRoomsFromDatabase();
+            buildAllCards();
+        }catch(Exception e){
+            System.out.println("Set maintenance failed: "+e.getMessage());
+        }
+    }
     private void openDischargeSummary(Room room){
         try{
             FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/DischargeSummary.fxml"));
@@ -174,6 +197,7 @@ public class RoomManagementController implements Initializable {
             case "occupied"->"#e74c3c";
             case "available"->"#27ae60";
             case "cleaning"->"#f97316";
+            case "maintenance" -> "#9E9E9E";
             default->"#9aa5b4";
         };
     }

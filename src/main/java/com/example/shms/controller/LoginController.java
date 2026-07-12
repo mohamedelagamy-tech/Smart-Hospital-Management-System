@@ -3,6 +3,7 @@ package com.example.shms.controller;
 import com.example.shms.database.DatabaseManager;
 import com.example.shms.utils.PasswordEncryption;
 import com.example.shms.utils.SessionManager;
+import com.example.shms.utils.TwoFactorService;
 import com.example.shms.utils.Validator;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -74,32 +75,59 @@ public class LoginController {
             ps.setString(2,PasswordEncryption.hash(password));
             ResultSet rs=ps.executeQuery();
 
-            if(rs.next()){
-                String role =rs.getString("role");
-                session.login(username,role);
-                logAudit(username , role , "SUCCESS");
-                showError("Login successful!","success");
+            if (rs.next()) {
+                String role = rs.getString("role");
+                logAudit(username, role, "SUCCESS");
+                showError("Login successful!", "success");
 
-                session.startSessionTimer(new Runnable(){
-                    @Override
-                    public void run(){
-                        session.logout();
-                        Platform.runLater(new Runnable(){
-                            @Override
-                            public void run(){
-                                MainApp.navigateTo("login", 900, 650);
-                            }
-                        });
+                // Get user email
+                String email = getUserEmail(username, role);
+
+                // Check if 2FA required
+                TwoFactorService twoFactorService = new TwoFactorService();
+                if (twoFactorService.requiresTwoFactor(username, role) && email != null) {
+                    // Store pending login
+                    session.setPendingLogin(username, role, email);
+                    // Generate and send code
+                    twoFactorService.generateAndSendCode(username, email);
+                    // Start session timer
+                    session.startSessionTimer(new Runnable() {
+                        @Override
+                        public void run() {
+                            session.logout();
+                            javafx.application.Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    MainApp.navigateTo("login", 900, 650);
+                                }
+                            });
+                        }
+                    });
+                    // Navigate to 2FA screen
+                    MainApp.navigateTo("twoFactor", 900, 650);
+                } else {
+                    // No 2FA needed — go straight to dashboard
+                    session.login(username, role);
+                    session.startSessionTimer(new Runnable() {
+                        @Override
+                        public void run() {
+                            session.logout();
+                            javafx.application.Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    MainApp.navigateTo("login", 900, 650);
+                                }
+                            });
+                        }
+                    });
+                    switch (role) {
+                        case "PATIENT":
+                            MainApp.navigateTo("patientDashboard", 1200, 700);
+                            break;
+                        default:
+                            MainApp.navigateTo("dashboard", 1200, 700);
+                            break;
                     }
-                });
-
-                switch(role){
-                    case "ADMIN":
-                    case "DOCTOR":
-                    case "NURSE":
-                    case "RECEPTIONIST":MainApp.navigateTo("dashboard",1200,700);break;
-                    case "PATIENT": MainApp.navigateTo("patientDashboard",1200,700);break;
-                    default:showError("Unknown role detected.","error");
                 }
             }else{
                 session.addAttempts();
@@ -188,5 +216,19 @@ public class LoginController {
             }
         });
         fade.play();
+    }
+    private String getUserEmail(String username,String role){
+        try (java.sql.Statement st=db.getConnection().createStatement()){
+            if(role.equals("PATIENT")){
+                ResultSet rs=st.executeQuery("SELECT email FROM patients WHERE username = '"+username+"' LIMIT 1");
+                if(rs.next()) return rs.getString("email");
+            }else {
+                ResultSet rs=st.executeQuery("SELECT email FROM doctors WHERE name LIKE '%"+username+"%' LIMIT 1");
+                if(rs.next()) return rs.getString("email");
+            }
+        }catch(Exception e){
+            System.out.println("Email lookup failed: "+e.getMessage());
+        }
+        return null;
     }
 }

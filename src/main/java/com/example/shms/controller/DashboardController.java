@@ -338,4 +338,7 @@ public class DashboardController implements Initializable {
     private void showPharmacy(){
         MainApp.navigateTo("PharmacyView",1200,700);
     }
+    @FXML private void showMap(){
+        MainApp.navigateTo("hospitalMap",1200,700);
+    }
 }

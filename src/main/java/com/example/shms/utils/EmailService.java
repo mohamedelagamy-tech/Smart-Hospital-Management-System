@@ -62,4 +62,15 @@ public class EmailService {
                 +"Every patient matters, every moment counts.";
         sendEmail(to,subject,body);
     }
+    public static void sendTwoFactorCode(String to,String username,String code){
+        String subject = "SHMS — Your Verification Code";
+        String body = "Dear "+username +",\n\n"
+                + "Your SHMS verification code is:\n\n"
+                + "        "+code+"\n\n"
+                + "This code expires in 10 minutes.\n"
+                + "If you did not request this code, please contact your administrator immediately.\n\n"
+                + "Smart Hospital Management System\n"
+                + "Every patient matters, every moment counts.";
+        sendEmail(to,subject,body);
+    }
 }

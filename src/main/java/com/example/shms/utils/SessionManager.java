@@ -7,6 +7,9 @@ public class SessionManager {
     private String loggedInUser;
     private String loggedInRole;
     private int loginAttempts;
+    private String pendingUsername;
+    private String pendingRole;
+    private String pendingEmail;
 
     private SessionManager(){
         loginAttempts=0;
@@ -103,5 +106,32 @@ public class SessionManager {
         startSessionTimer(onTimeout);
 
     }
+    public void setPendingLogin(String username,String role,String email){
+        this.pendingUsername=username;
+        this.pendingRole=role;
+        this.pendingEmail=email;
+    }
 
+    public String getPendingUsername(){
+        return pendingUsername;
+    }
+    public String getPendingRole(){
+        return pendingRole;
+    }
+    public String getPendingEmail(){
+        return pendingEmail;
+    }
+
+    public void completePendingLogin(){
+        login(pendingUsername,pendingRole);
+        pendingUsername=null;
+        pendingRole=null;
+        pendingEmail=null;
+    }
+
+    public void clearPendingLogin(){
+        pendingUsername=null;
+        pendingRole=null;
+        pendingEmail=null;
+    }
 }

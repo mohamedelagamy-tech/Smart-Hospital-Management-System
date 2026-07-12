@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.shms.controller.HospitalMapController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10"
+              styleClass="top-bar" style="-fx-padding: 0 20;">
+            <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+            <Label fx:id="mapTitleLabel" text="🛏  Hospital Map"
+                   style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <HBox HBox.hgrow="ALWAYS" />
+            <Label fx:id="liveLabel" text="⬤ Live"
+                   style="-fx-font-size: 11px; -fx-text-fill: #4CAF50;" />
+            <Button onAction="#handleRefresh" text="🔄 Refresh"
+                    style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" />
+        </HBox>
+    </top>
+
+    <center>
+        <HBox styleClass="app-background">
+
+            <VBox fx:id="floorSidebar" prefWidth="160" spacing="4"
+                  styleClass="sidebar" style="-fx-padding: 14 8;" />
+
+            <VBox HBox.hgrow="ALWAYS" spacing="14" style="-fx-padding: 20;">
+
+                <HBox spacing="10">
+                    <HBox prefHeight="60" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT"
+                          spacing="12" style="-fx-background-color: #E8F5E9; -fx-background-radius: 10; -fx-padding: 12 16;">
+                        <Label text="🟢" style="-fx-font-size: 16px;" />
+                        <VBox spacing="1">
+                            <Label fx:id="statAvailable" text="0"
+                                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;" />
+                            <Label text="Available" style="-fx-font-size: 10px; -fx-text-fill: #4CAF50;" />
+                        </VBox>
+                    </HBox>
+                    <HBox prefHeight="60" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT"
+                          spacing="12" style="-fx-background-color: #FCEBEB; -fx-background-radius: 10; -fx-padding: 12 16;">
+                        <Label text="🔴" style="-fx-font-size: 16px;" />
+                        <VBox spacing="1">
+                            <Label fx:id="statOccupied" text="0"
+                                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #C62828;" />
+                            <Label text="Occupied" style="-fx-font-size: 10px; -fx-text-fill: #EF5350;" />
+                        </VBox>
+                    </HBox>
+                    <HBox prefHeight="60" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT"
+                          spacing="12" style="-fx-background-color: #FFF3E0; -fx-background-radius: 10; -fx-padding: 12 16;">
+                        <Label text="🟡" style="-fx-font-size: 16px;" />
+                        <VBox spacing="1">
+                            <Label fx:id="statCleaning" text="0"
+                                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #E65100;" />
+                            <Label text="Cleaning" style="-fx-font-size: 10px; -fx-text-fill: #FFA726;" />
+                        </VBox>
+                    </HBox>
+                    <HBox prefHeight="60" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT"
+                          spacing="12" style="-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 12 16;">
+                        <Label text="⚫" style="-fx-font-size: 16px;" />
+                        <VBox spacing="1">
+                            <Label fx:id="statMaintenance" text="0"
+                                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #424242;" />
+                            <Label text="Maintenance" style="-fx-font-size: 10px; -fx-text-fill: #9E9E9E;" />
+                        </VBox>
+                    </HBox>
+                </HBox>
+
+                <HBox spacing="16" alignment="CENTER_LEFT">
+                    <Label text="Legend:" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #888;" />
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="🟢" style="-fx-font-size: 12px;" />
+                        <Label text="Available" style="-fx-font-size: 11px; -fx-text-fill: #555;" />
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="🔴" style="-fx-font-size: 12px;" />
+                        <Label text="Occupied" style="-fx-font-size: 11px; -fx-text-fill: #555;" />
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="🟡" style="-fx-font-size: 12px;" />
+                        <Label text="Cleaning" style="-fx-font-size: 11px; -fx-text-fill: #555;" />
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="⚫" style="-fx-font-size: 12px;" />
+                        <Label text="Maintenance" style="-fx-font-size: 11px; -fx-text-fill: #555;" />
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="🔵" style="-fx-font-size: 12px;" />
+                        <Label text="Facility" style="-fx-font-size: 11px; -fx-text-fill: #555;" />
+                    </HBox>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                            style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                    <content>
+                        <FlowPane fx:id="roomsPane" hgap="10" vgap="10"
+                                  style="-fx-background-color: transparent; -fx-padding: 4;" />
+                    </content>
+                </ScrollPane>
+
+            </VBox>
+        </HBox>
+    </center>
+
+</BorderPane>
