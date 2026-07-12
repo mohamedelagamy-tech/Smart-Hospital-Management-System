@@ -6,7 +6,7 @@
 }
 
 .label {
-    -fx-text-fill: #E8EDF2 !important;
+    -fx-text-fill: #E8EDF2;
 }
 
 .vbox, .hbox, .border-pane, .scroll-pane, .anchor-pane {
@@ -69,16 +69,16 @@
 }
 
 .list-view {
-    -fx-background-color: #1A2535 !important;
+    -fx-background-color: #1A2535;
 }
 
 .list-cell {
-    -fx-background-color: #1A2535 !important;
-    -fx-text-fill: #E8EDF2 !important;
+    -fx-background-color: #1A2535;
+    -fx-text-fill: #E8EDF2;
 }
 
 .list-cell:odd {
-    -fx-background-color: #1E2D3F !important;
+    -fx-background-color: #1E2D3F;
 }
 
 .separator {
@@ -240,3 +240,8 @@
 .combo-box-popup .list-cell:hover {
     -fx-background-color: #2E75B6;
 }
+.emergency-stat-number { -fx-text-fill: #dc2626; }
+.emergency-stat-label  { -fx-text-fill: #dc3c3c; }
+.urgent-stat-text      { -fx-text-fill: #F59E0B; }
+.normal-stat-text      { -fx-text-fill: #10b981; }
+.emergency-banner-text { -fx-text-fill: #1d4ed8; }
