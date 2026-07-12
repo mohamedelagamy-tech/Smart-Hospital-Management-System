@@ -13,6 +13,14 @@ public class AppointmentHistoryController {
 
     private com.example.shms.database.DatabaseManager db = com.example.shms.database.DatabaseManager.getInstance();
     @FXML public void initialize(){
+        if (com.example.shms.utils.LanguageManager.isArabic()) {
+            patientCombo.setPromptText("اختر المريض");
+            colDate.setText("التاريخ");
+            colTime.setText("الوقت");
+            colDoctor.setText("الطبيب");
+            colStatus.setText("الحالة");
+            colNotes.setText("ملاحظات");
+        }
         colDate.setCellValueFactory(d-> new javafx.beans.property.SimpleStringProperty(d.getValue().getDate().toString()));
         colTime.setCellValueFactory(d-> new javafx.beans.property.SimpleStringProperty(d.getValue().getTime().toString()));
         colDoctor.setCellValueFactory(d-> new javafx.beans.property.SimpleStringProperty("Doctor"+d.getValue().getDoctorId()));

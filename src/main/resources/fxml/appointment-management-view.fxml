@@ -9,8 +9,8 @@
 
     <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0"
           spacing="10" styleClass="top-bar">
-        <Button onAction="#handleBack" styleClass="back-button" text="← Back" />
-        <Label style="-fx-font-size: 24px;" styleClass="top-bar-title" text="Appointment Management" />
+        <Button fx:id="backBtn" onAction="#handleBack" styleClass="back-button" text="← Back" />
+        <Label fx:id="pageTitle" style="-fx-font-size: 24px;" styleClass="top-bar-title" text="Appointment Management" />
     </HBox>
 
     <HBox fx:id="summaryBar" spacing="12" style="-fx-padding:16 20 8 20;" />
@@ -37,25 +37,25 @@
                        -fx-font-size: 12px; -fx-font-weight: bold;
                        -fx-background-radius: 20; -fx-padding: 6 16;
                        -fx-border-width: 0; -fx-cursor: hand;" />
-        <Button onAction="#handleRefresh" text="↻ Refresh"
+        <Button fx:id="refreshBtn" onAction="#handleRefresh" text="↻ Refresh"
                 style="-fx-background-color: #27ae60; -fx-text-fill: white;
                        -fx-font-size: 12px; -fx-font-weight: bold;
                        -fx-background-radius: 20; -fx-padding: 6 16;
                        -fx-border-width: 0; -fx-cursor: hand;" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button onAction="#filterAll" text="All"
+        <Button fx:id="filterAllBtn" onAction="#filterAll" text="All"
                 style="-fx-background-color: #185FA5; -fx-text-fill: white;
                        -fx-background-radius: 20; -fx-padding: 6 16;
                        -fx-font-size: 12px; -fx-cursor: hand; -fx-border-width: 0;" />
-        <Button onAction="#filterScheduled" text="Scheduled"
+        <Button fx:id="filterScheduledBtn" onAction="#filterScheduled" text="Scheduled"
                 style="-fx-background-color: #534AB7; -fx-text-fill: white;
                        -fx-background-radius: 20; -fx-padding: 6 16;
                        -fx-font-size: 12px; -fx-cursor: hand; -fx-border-width: 0;" />
-        <Button onAction="#filterCompleted" text="Completed"
+        <Button fx:id="filterCompletedBtn" onAction="#filterCompleted" text="Completed"
                 style="-fx-background-color: #27ae60; -fx-text-fill: white;
                        -fx-background-radius: 20; -fx-padding: 6 16;
                        -fx-font-size: 12px; -fx-cursor: hand; -fx-border-width: 0;" />
-        <Button onAction="#filterCancelled" text="Cancelled"
+        <Button fx:id="filterCancelledBtn" onAction="#filterCancelled" text="Cancelled"
                 style="-fx-background-color: #7f8c8d; -fx-text-fill: white;
                        -fx-background-radius: 20; -fx-padding: 6 16;
                        -fx-font-size: 12px; -fx-cursor: hand; -fx-border-width: 0;" />

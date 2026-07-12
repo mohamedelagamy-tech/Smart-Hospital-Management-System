@@ -20,6 +20,11 @@ import java.util.stream.Collectors;
 
 public class AppointmentManagementController {
 
+    @FXML private javafx.scene.control.Button refreshBtn;
+    @FXML private javafx.scene.control.Button filterAllBtn;
+    @FXML private javafx.scene.control.Button filterScheduledBtn;
+    @FXML private javafx.scene.control.Button filterCompletedBtn;
+    @FXML private javafx.scene.control.Button filterCancelledBtn;
     @FXML private TableView<Appointment> appointmentTable;
     @FXML private TableColumn<Appointment, Integer> colId;
     @FXML private TableColumn<Appointment, String> colPatient;
@@ -33,12 +38,33 @@ public class AppointmentManagementController {
     @FXML private Button cancelBtn;
     @FXML private Label patientHeaderLabel;
     @FXML private HBox summaryBar;
+    @FXML private javafx.scene.control.Button backBtn;
+    @FXML private javafx.scene.control.Label pageTitle;
 
     private DatabaseManager db = DatabaseManager.getInstance();
 
 
     @FXML
     public void initialize(){
+        if (com.example.shms.utils.LanguageManager.isArabic()) {
+            refreshBtn.setText("↻ تحديث");
+            filterAllBtn.setText("الكل");
+            filterScheduledBtn.setText("مجدول");
+            filterCompletedBtn.setText("مكتمل");
+            filterCancelledBtn.setText("ملغي");
+            backBtn.setText("→ رجوع");
+            pageTitle.setText("إدارة المواعيد");
+            colId.setText("الرقم");
+            colPatient.setText("المريض");
+            colDoctor.setText("الطبيب");
+            colDate.setText("التاريخ");
+            colTime.setText("الوقت");
+            colStatus.setText("الحالة");
+            colNotes.setText("ملاحظات");
+            bookBtn.setText("+ حجز");
+            cancelBtn.setText("✕ إلغاء");
+            searchField.setPromptText("بحث في المواعيد...");
+        }
         colId.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getAppointmentId()).asObject());
         colPatient.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(db.getPatientName(d.getValue().getPatientId())));
         colDoctor.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(db.getDoctorName(d.getValue().getDoctorId())));
