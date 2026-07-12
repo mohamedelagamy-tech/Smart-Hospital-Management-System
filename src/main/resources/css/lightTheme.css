@@ -198,3 +198,7 @@
     -fx-mark-color: #555555;
 }
 .combo-box .list-cell { -fx-text-fill: #333333; -fx-background-color: transparent; }
+.emergency-stat-number { -fx-text-fill: #dc2626; }
+.emergency-stat-label  { -fx-text-fill: #dc3c3c; }
+.urgent-stat-text      { -fx-text-fill: #F59E0B; }
+.normal-stat-text      { -fx-text-fill: #10b981; }

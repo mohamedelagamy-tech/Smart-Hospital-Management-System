@@ -5,31 +5,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="680.0" prefWidth="960.0" style="-fx-background-color: #F1F5F9;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.EmergencyQueueController">
+<BorderPane prefHeight="680.0" prefWidth="960.0" styleClass="app-background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.EmergencyQueueController">
     <top>
-        <HBox prefHeight="80.0" prefWidth="200.0" spacing="14.0" style="-fx-background-color: #1E3A5F;" BorderPane.alignment="CENTER_LEFT">
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
+        <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0" styleClass="top-bar" BorderPane.alignment="CENTER">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: transparent; -fx-underline:true;" text="←Back" textFill="WHITE">
+                <Button mnemonicParsing="false" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+                <Label style="-fx-font-size: 24px;" text=" Emergency Queue" styleClass="top-bar-title">
                     <font>
-                        <Font size="13.0" />
+                        <Font name="System Bold" size="24.0" />
                     </font>
-                </Button>
-                <VBox prefHeight="200.0" prefWidth="200.0" spacing="3.0">
-                    <children>
-                        <Label prefHeight="31.0" prefWidth="182.0" text="Emergency Queue" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="21.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </VBox>
-            </children></HBox>
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
     </top>
     <center>
-        <VBox prefHeight="600.0" prefWidth="876.0" spacing="16.0" style="-fx-background-color: #F1F5F9;" BorderPane.alignment="CENTER">
+        <VBox prefHeight="600.0" prefWidth="876.0" spacing="16.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
@@ -41,29 +34,29 @@
                                 <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
                             </padding>
                             <children>
-                                <Label fx:id="emergencyCountLabel" text="0" textFill="#dc2626">
+                                <Label fx:id="emergencyCountLabel" text="0" styleClass="emergency-stat-number">
                                     <font>
                                         <Font name="System Bold" size="30.0" />
                                     </font>
                                 </Label>
-                                <Label text="Emergency" textFill="#dc3c3c">
+                                <Label text="Emergency" styleClass="emergency-stat-label">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
                             </children>
                         </VBox>
-                        <VBox prefHeight="117.0" prefWidth="166.0" spacing="10.0" style="-fx-background-color: #FEF3C7#FEF3C7; -fx-border-color: #F59E0B; -fx-background-radius: 14; -fx-border-radius: 14;" HBox.hgrow="ALWAYS">
+                        <VBox prefHeight="117.0" prefWidth="166.0" spacing="10.0" style="-fx-background-color: #FEF3C7; -fx-border-color: #F59E0B; -fx-background-radius: 14; -fx-border-radius: 14;" HBox.hgrow="ALWAYS">
                             <padding>
                                 <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
                             </padding>
                             <children>
-                                <Label fx:id="urgentCountLabel" text="0" textFill="#F59E0B">
+                                <Label fx:id="urgentCountLabel" text="0" styleClass="urgent-stat-text">
                                     <font>
                                         <Font name="System Bold" size="30.0" />
                                     </font>
                                 </Label>
-                                <Label text="Urgent" textFill="#F59E0B">
+                                <Label text="Urgent" styleClass="urgent-stat-text">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
@@ -75,12 +68,12 @@
                                 <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
                             </padding>
                             <children>
-                                <Label fx:id="normalCountLabel" text="0" textFill="#10b981">
+                                <Label fx:id="normalCountLabel" text="0" styleClass="normal-stat-text">
                                     <font>
                                         <Font name="System Bold" size="30.0" />
                                     </font>
                                 </Label>
-                                <Label text="Normal" textFill="#10b981">
+                                <Label text="Normal" styleClass="normal-stat-text">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
@@ -89,7 +82,7 @@
                         </VBox>
                     </children>
                 </HBox>
-                <Label fx:id="messageLabel" maxWidth="1.7976931348623157E308" style="-fx-background-color: #EFF6FF; -fx-border-color: #BFDBFE; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-width: 1;" textFill="#1d4ed8">
+                <Label fx:id="messageLabel" maxWidth="1.7976931348623157E308" styleClass="emergency-banner-text" style="-fx-background-color: #EFF6FF; -fx-border-color: #BFDBFE; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-width: 1;" textFill="#1d4ed8">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
@@ -99,24 +92,21 @@
                 </Label>
                 <HBox prefHeight="36.0" prefWidth="920.0" spacing="20.0">
                     <children>
-                        <Label fx:id="queueCountLabel" text="Waiting Queue (0)" textFill="#64748b">
+                        <Label fx:id="queueCountLabel" text="Waiting Queue (0)" styleClass="card-title" style="-fx-font-size: 18px;">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
                         <Pane prefHeight="38.0" prefWidth="312.0" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="nextPatient" prefHeight="22.0" prefWidth="203.0" text="Next: None" textFill="#60a5fa" HBox.hgrow="ALWAYS">
+                        <Label fx:id="nextPatient" prefHeight="22.0" prefWidth="203.0" text="Next: None" styleClass="card-title" style="-fx-font-size: 15px;" HBox.hgrow="ALWAYS">
                             <font>
                                 <Font name="System Bold" size="15.0" />
                             </font>
                         </Label>
-                        <Button fx:id="callNextBtn" mnemonicParsing="false" onAction="#handleCallNext" style="-fx-background-color: #2563EB; -fx-background-radius: 10;" text="Call Next" textFill="WHITE">
+                        <Button fx:id="callNextBtn" mnemonicParsing="false" onAction="#handleCallNext" styleClass="primary-button" text="Call Next">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
-                            <padding>
-                                <Insets bottom="8.0" left="18.0" right="18.0" top="8.0" />
-                            </padding>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleReset" style="-fx-background-color: transparent; -fx-border-color: #CBD5E1; -fx-background-radius: 8; -fx-border-radius: 8;" text="Reset" textFill="#40359e">
                             <padding>
@@ -128,19 +118,19 @@
                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0" VBox.vgrow="ALWAYS">
                     <children>
                         <ListView fx:id="waitingListView" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" HBox.hgrow="ALWAYS" />
-                        <VBox prefHeight="200.0" prefWidth="260.0" spacing="10.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #E2E8F0; -fx-border-width: 1; -fx-background-radius: 10; -fx-border-radius: 10;">
+                        <VBox prefHeight="200.0" prefWidth="260.0" spacing="10.0" styleClass="card">
                             <padding>
                                 <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                             </padding>
                             <children>
-                                <Label fx:id="calledHeading" text="Called (0)" textFill="#64748b">
+                                <Label fx:id="calledHeading" text="Called (0)" styleClass="muted-text" style="-fx-font-size: 13px; -fx-font-weight: bold;">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
                                 <Separator prefWidth="200.0" />
                                 <ListView fx:id="calledListView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS" />
-                                <Label fx:id="calledEmptyLabel" text="No patients called yet" textFill="#94a3b8" />
+                                <Label fx:id="calledEmptyLabel" text="No patients called yet" styleClass="muted-text" />
                             </children>
                         </VBox>
                     </children>
