@@ -172,19 +172,6 @@
                         </HBox>
 
                         <Separator />
-
-                        <HBox alignment="CENTER_LEFT" spacing="12">
-                            <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="settings-row-title" text="Font Size" />
-                                <Label styleClass="muted-text" text="Adjust text size across the app" />
-                            </VBox>
-                            <ToggleButton fx:id="btnSmall" onAction="#handleFontChange" styleClass="toggle-left" text="A-">
-                        <toggleGroup>
-                           <ToggleGroup fx:id="fontGroup" />
-                        </toggleGroup></ToggleButton>
-                            <ToggleButton fx:id="btnMedium" onAction="#handleFontChange" styleClass="toggle-mid" text="A" toggleGroup="$fontGroup" />
-                            <ToggleButton fx:id="btnLarge" onAction="#handleFontChange" styleClass="toggle-right" text="A+" toggleGroup="$fontGroup" />
-                        </HBox>
                     </VBox>
 
                     <VBox spacing="14" style="-fx-padding: 20;" styleClass="card">
