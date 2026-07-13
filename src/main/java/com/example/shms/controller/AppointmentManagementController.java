@@ -18,8 +18,7 @@ import javafx.scene.layout.HBox;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AppointmentManagementController {
-
+public class AppointmentManagementController implements com.example.shms.utils.Translatable {
     @FXML private javafx.scene.control.Button refreshBtn;
     @FXML private javafx.scene.control.Button filterAllBtn;
     @FXML private javafx.scene.control.Button filterScheduledBtn;
@@ -46,25 +45,6 @@ public class AppointmentManagementController {
 
     @FXML
     public void initialize(){
-        if (com.example.shms.utils.LanguageManager.isArabic()) {
-            refreshBtn.setText("↻ تحديث");
-            filterAllBtn.setText("الكل");
-            filterScheduledBtn.setText("مجدول");
-            filterCompletedBtn.setText("مكتمل");
-            filterCancelledBtn.setText("ملغي");
-            backBtn.setText("→ رجوع");
-            pageTitle.setText("إدارة المواعيد");
-            colId.setText("الرقم");
-            colPatient.setText("المريض");
-            colDoctor.setText("الطبيب");
-            colDate.setText("التاريخ");
-            colTime.setText("الوقت");
-            colStatus.setText("الحالة");
-            colNotes.setText("ملاحظات");
-            bookBtn.setText("+ حجز");
-            cancelBtn.setText("✕ إلغاء");
-            searchField.setPromptText("بحث في المواعيد...");
-        }
         colId.setCellValueFactory(d -> new SimpleIntegerProperty(d.getValue().getAppointmentId()).asObject());
         colPatient.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(db.getPatientName(d.getValue().getPatientId())));
         colDoctor.setCellValueFactory(d -> new javafx.beans.property.SimpleStringProperty(db.getDoctorName(d.getValue().getDoctorId())));
@@ -218,5 +198,26 @@ public class AppointmentManagementController {
     }
     @FXML private void handleRefresh(){
         loadAppointments();
+    }
+    @Override
+    public void applyTranslations() {
+        if (!com.example.shms.utils.LanguageManager.isArabic()) return;
+        colId.setText("الرقم");
+        colPatient.setText("المريض");
+        colDoctor.setText("الطبيب");
+        colDate.setText("التاريخ");
+        colTime.setText("الوقت");
+        colStatus.setText("الحالة");
+        colNotes.setText("ملاحظات");
+        bookBtn.setText("+ حجز");
+        cancelBtn.setText("✕ إلغاء");
+        refreshBtn.setText("↻ تحديث");
+        filterAllBtn.setText("الكل");
+        filterScheduledBtn.setText("مجدول");
+        filterCompletedBtn.setText("مكتمل");
+        filterCancelledBtn.setText("ملغي");
+        searchField.setPromptText("بحث في المواعيد...");
+        if (backBtn != null) backBtn.setText("→ رجوع");
+        if (pageTitle != null) pageTitle.setText("إدارة المواعيد");
     }
 }
