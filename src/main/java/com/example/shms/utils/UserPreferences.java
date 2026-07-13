@@ -34,9 +34,6 @@ public class UserPreferences {
     public static String getLanguage(){
         return props.getProperty("language","English");
     }
-    public static String getFontSize(){
-        return props.getProperty("fontSize","medium");
-    }
 
     public static void setTheme(String theme){
         props.setProperty("theme", theme);
@@ -44,10 +41,6 @@ public class UserPreferences {
     }
     public static void setLanguage(String lang){
         props.setProperty("language", lang);
-        save();
-    }
-    public static void setFontSize(String size){
-        props.setProperty("fontSize", size);
         save();
     }
 }

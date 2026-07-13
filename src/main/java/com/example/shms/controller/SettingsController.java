@@ -20,9 +20,6 @@ public class SettingsController {
     @FXML private ToggleButton btnPurple;
     @FXML private ToggleButton btnRose;
     @FXML private ToggleButton btnSand;
-    @FXML private ToggleButton btnSmall;
-    @FXML private ToggleButton btnMedium;
-    @FXML private ToggleButton btnLarge;
     @FXML private ToggleButton btnEnglish;
     @FXML private ToggleButton btnArabic;
     @FXML private ToggleButton btn2FA;
@@ -57,12 +54,6 @@ public class SettingsController {
             case "rose": btnRose.setSelected(true);highlightTheme(btnRose);break;
             case "sand": btnSand.setSelected(true);highlightTheme(btnSand);break;
             default: btnLight.setSelected(true);highlightTheme(btnLight);break;
-        }
-
-        switch(UserPreferences.getFontSize()){
-            case "small": btnSmall.setSelected(true);break;
-            case "large": btnLarge.setSelected(true);break;
-            default: btnMedium.setSelected(true);break;
         }
 
         if(UserPreferences.getLanguage().equals("Arabic")){
@@ -150,16 +141,6 @@ public class SettingsController {
             highlightTheme(btnLight);
         }
         ThemeManager.applyTheme(theme);
-    }
-
-    @FXML private void handleFontChange(){
-        String size="medium";
-        if(btnSmall.isSelected()){
-            size="small";
-        }else if(btnLarge.isSelected()){
-            size="large";
-        }
-        ThemeManager.applyFontSize(size);
     }
 
     @FXML

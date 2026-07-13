@@ -42,7 +42,7 @@ public class HospitalMapController implements Initializable {
     private Timeline autoRefresh;
 
     private static final String[] FLOOR_NAMES={
-            "Ground — Emergency",
+            "Ground Floor",
             "Floor 1 — ICU",
             "Floor 2 — General",
             "Floor 3 — Private",
@@ -92,14 +92,14 @@ public class HospitalMapController implements Initializable {
             floorSidebar.getChildren().add(btn);
         }
 
-        Button emergencyBtn = new Button("🚨 Emergency\nGround Floor");
+        Button emergencyBtn = new Button("Ground Floor");
         emergencyBtn.setId("floorBtn0");
         emergencyBtn.setMaxWidth(Double.MAX_VALUE);
-        emergencyBtn.setStyle("-fx-background-color: #FCEBEB; -fx-text-fill: #A32D2D; -fx-font-size: 11px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;");
+        emergencyBtn.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 11px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;");
         emergencyBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                selectFloor(4);
+                selectFloor(0);
             }
         });
         floorSidebar.getChildren().add(emergencyBtn);
@@ -112,9 +112,10 @@ public class HospitalMapController implements Initializable {
             if (node instanceof Button) {
                 Button btn = (Button) node;
                 if (btn.getId() != null && btn.getId().equals("floorBtn" + floor)) {
+                        btn.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 11px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;");
+                }
+                if (btn.getId() != null && btn.getId().equals("floorBtn" + floor)) {
                     btn.setStyle("-fx-background-color: #1F4E79; -fx-text-fill: white; -fx-font-size: 11px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;");
-                } else if (btn.getId() != null && btn.getId().equals("floorBtn0")) {
-                    btn.setStyle("-fx-background-color: #FCEBEB; -fx-text-fill: #A32D2D; -fx-font-size: 11px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-weight: bold;");
                 } else {
                     btn.setStyle("-fx-background-color: transparent; -fx-text-fill: #555555; -fx-font-size: 11px; -fx-alignment: CENTER_LEFT; -fx-padding: 9 12; -fx-background-radius: 8; -fx-cursor: hand;");
                 }
@@ -125,6 +126,11 @@ public class HospitalMapController implements Initializable {
 
     private void loadFloor(int floor) {
         roomsPane.getChildren().clear();
+
+        if (floor == 0) {
+            loadGroundFloor();
+            return;
+        }
 
         int minRoom = floor * 100;
         int maxRoom = floor * 100 + 99;
@@ -166,16 +172,15 @@ public class HospitalMapController implements Initializable {
         statOccupied.setText(String.valueOf(occupied));
         statCleaning.setText(String.valueOf(cleaning));
         statMaintenance.setText(String.valueOf(maintenance));
-
-        String floorName = floor <= 10 ? "Floor " + floor : "Floor " + floor;
         mapTitleLabel.setText("🛏  Hospital Map — Floor " + floor);
 
-        addFacilityCard("🛗","ELEVATOR","Lift","#E3F2FD","#42A5F5");
-        addFacilityCard("👩‍⚕️","NURSES\nSTATION","Station", "#E8F5E9","#4CAF50");
-        addFacilityCard("🚻","BATHROOM","Facility","#F3E5F5","#AB47BC");
-        addFacilityCard("🍽️","PANTRY","Facility","#FFF8E1","#FFB300");
+        // Facilities first
+        addFacilityCard("🛗", "ELEVATOR", "#E3F2FD", "#42A5F5");
+        addFacilityCard("👩‍⚕️", "NURSES\nSTATION", "#E8F5E9", "#4CAF50");
+        addFacilityCard("🚻", "BATHROOM", "#F3E5F5", "#AB47BC");
+        addFacilityCard("🍽️", "PANTRY", "#FFF8E1", "#FFB300");
 
-        for(RoomData room : rooms){
+        for (RoomData room : rooms) {
             addRoomCard(room);
         }
 
@@ -185,23 +190,89 @@ public class HospitalMapController implements Initializable {
         fade.play();
     }
 
-    private void addFacilityCard(String icon, String name, String type, String bg, String border){
-        VBox card=new VBox(4);
+    private void loadGroundFloor() {
+        mapTitleLabel.setText("🏛️  Hospital Map — Ground Floor");
+        statAvailable.setText("—");
+        statOccupied.setText("—");
+        statCleaning.setText("—");
+        statMaintenance.setText("—");
+
+        // Ground floor facilities
+        addGroundCard("🚑", "Emergency\nEntrance", "#FCEBEB", "#EF5350");
+        addGroundCard("🏛️", "Main\nLobby", "#E3F2FD", "#42A5F5");
+        addGroundCard("🏥", "Reception &\nAdmissions", "#E8F5E9", "#4CAF50");
+        addGroundCard("💊", "Pharmacy", "#F3E5F5", "#AB47BC");
+        addGroundCard("🧪", "Laboratory", "#FFF8E1", "#FFB300");
+        addGroundCard("📷", "Radiology\n& X-Ray", "#E8EAF6", "#5C6BC0");
+        addGroundCard("🍽️", "Cafeteria", "#FFF3E0", "#FFA726");
+        addGroundCard("🌿", "Waiting\nArea", "#E8F5E9", "#66BB6A");
+        addGroundCard("🛗", "Elevators", "#E3F2FD", "#42A5F5");
+        addGroundCard("🚻", "Bathrooms", "#F3E5F5", "#AB47BC");
+        addGroundCard("🔒", "Security\nDesk", "#FFEBEE", "#EF5350");
+        addGroundCard("🏧", "ATM", "#F5F5F5", "#9E9E9E");
+        addGroundCard("🧹", "Janitor\nRoom", "#FFF8E1", "#FFB300");
+        addGroundCard("📦", "Storage\nRoom", "#EFEBE9", "#795548");
+        addGroundCard("🚪", "Emergency\nExit", "#FFEBEE", "#FF5252");
+        addGroundCard("🌐", "Information\nDesk", "#E8F5E9", "#4CAF50");
+
+        FadeTransition fade = new FadeTransition(Duration.millis(200), roomsPane);
+        fade.setFromValue(0.6);
+        fade.setToValue(1.0);
+        fade.play();
+    }
+
+    private void addGroundCard(String icon, String name, String bg, String border) {
+        VBox card = new VBox(4);
+        card.setAlignment(Pos.CENTER);
+        card.setPrefSize(110, 90);
+        card.setPadding(new Insets(10));
+        card.setStyle("-fx-background-color: " + bg + "; -fx-background-radius: 10; " +
+                "-fx-border-color: " + border + "; -fx-border-radius: 10; -fx-border-width: 2; -fx-cursor: hand;");
+
+        Label iconLabel = new Label(icon);
+        iconLabel.setStyle("-fx-font-size: 22px;");
+
+        Label nameLabel = new Label(name);
+        nameLabel.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-text-alignment: center;");
+        nameLabel.setAlignment(Pos.CENTER);
+        nameLabel.setWrapText(true);
+
+        card.getChildren().addAll(iconLabel, nameLabel);
+
+        card.setOnMouseEntered(e -> {
+            card.setScaleX(1.05);
+            card.setScaleY(1.05);
+            card.setStyle("-fx-background-color: " + bg + "; -fx-background-radius: 10; " +
+                    "-fx-border-color: " + border + "; -fx-border-radius: 10; -fx-border-width: 2; " +
+                    "-fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);");
+        });
+        card.setOnMouseExited(e -> {
+            card.setScaleX(1.0);
+            card.setScaleY(1.0);
+            card.setStyle("-fx-background-color: " + bg + "; -fx-background-radius: 10; " +
+                    "-fx-border-color: " + border + "; -fx-border-radius: 10; -fx-border-width: 2; -fx-cursor: hand;");
+        });
+
+        roomsPane.getChildren().add(card);
+    }
+
+    private void addFacilityCard(String icon, String name, String bg, String border){
+        VBox card = new VBox(4);
         card.setAlignment(Pos.CENTER);
         card.setPrefSize(90, 80);
         card.setPadding(new Insets(8));
-        card.setStyle("-fx-background-color: "+bg+"; -fx-background-radius: 8; " +
-                "-fx-border-color: "+border+"; -fx-border-radius: 8; -fx-border-width: 2;");
+        card.setStyle("-fx-background-color: " + bg + "; -fx-background-radius: 8; " +
+                "-fx-border-color: " + border + "; -fx-border-radius: 8; -fx-border-width: 2;");
 
-        Label iconLabel=new Label(icon);
+        Label iconLabel = new Label(icon);
         iconLabel.setStyle("-fx-font-size: 18px;");
 
-        Label nameLabel=new Label(name);
+        Label nameLabel = new Label(name);
         nameLabel.setStyle("-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-text-alignment: center;");
         nameLabel.setAlignment(Pos.CENTER);
         nameLabel.setWrapText(true);
 
-        card.getChildren().addAll(iconLabel,nameLabel);
+        card.getChildren().addAll(iconLabel, nameLabel);
         roomsPane.getChildren().add(card);
     }
 
