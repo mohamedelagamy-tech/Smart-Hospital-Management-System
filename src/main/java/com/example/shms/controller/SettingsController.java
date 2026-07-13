@@ -6,8 +6,10 @@ import com.example.shms.utils.ThemeManager;
 import com.example.shms.utils.UserPreferences;
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
-
+import com.example.shms.utils.LanguageManager;
+import javafx.scene.control.Label;
 public class SettingsController {
 
     @FXML private ToggleButton btnLight;
@@ -24,6 +26,26 @@ public class SettingsController {
     @FXML private ToggleButton btnEnglish;
     @FXML private ToggleButton btnArabic;
     @FXML private ToggleButton btn2FA;
+    @FXML private Button backBtn;
+    @FXML private Button changePasswordBtn;
+    @FXML private Label settingsTitle;
+    @FXML private Label titleLabel;
+    @FXML private Label themeLabel;
+    @FXML private Label appearanceLabel;
+    @FXML private Label themeDescLabel;
+    @FXML private Label fontSizeLabel;
+    @FXML private Label fontDescLabel;
+    @FXML private Label languageLabel;
+    @FXML private Label displayLanguageLabel;
+    @FXML private Label languageDescLabel ;
+    @FXML private Label accountLabel;
+    @FXML private Label changePasswordLabel;
+    @FXML private Label changePasswordDescLabel;
+    @FXML private Label twoFactorLabel;
+    @FXML private Label twoFactorDescLabel;
+
+
+
 
     @FXML public void initialize() {
         switch(UserPreferences.getTheme()){
@@ -44,11 +66,49 @@ public class SettingsController {
         }
 
         if(UserPreferences.getLanguage().equals("Arabic")){
+            titleLabel.setText("⚙ الإعدادات");
+
+            appearanceLabel.setText("🎨 المظهر");
+            themeLabel.setText("السمة");
+            themeDescLabel.setText("اختر مظهر النظام في جميع الصفحات");
+
+            fontSizeLabel.setText("حجم الخط");
+            fontDescLabel.setText("تغيير حجم الخط في النظام");
+
+            languageLabel.setText("🌐 اللغة");
+            displayLanguageLabel.setText("لغة العرض");
+            languageDescLabel.setText("سيتم إعادة تحميل النظام بعد تغيير اللغة");
+
+            accountLabel.setText("👤 الحساب");
+
+            changePasswordLabel.setText("تغيير كلمة المرور");
+            changePasswordDescLabel.setText("تحديث كلمة مرور الحساب");
+
+            twoFactorLabel.setText("التحقق بخطوتين");
+            twoFactorDescLabel.setText("إرسال رمز تحقق إلى بريدك الإلكتروني عند تسجيل الدخول");
+
+            backBtn.setText("→ رجوع");
+            changePasswordBtn.setText("تغيير ←");
+
+            btnEnglish.setText("English");
+            btnArabic.setText("العربية");
+
+            btn2FA.setText("تفعيل");
             btnArabic.setSelected(true);
         }else {
             btnEnglish.setSelected(true);
         }
+        if (LanguageManager.isArabic()) {
+            titleLabel.setText("⚙ الإعدادات");
+        }
+        if (LanguageManager.isArabic()) {
+            backBtn.setText("→ رجوع");
+        }
+        if (LanguageManager.isArabic()) {
 
+            btn2FA.setText("تفعيل");
+
+        }
     }
 
     private void highlightTheme(ToggleButton selected){

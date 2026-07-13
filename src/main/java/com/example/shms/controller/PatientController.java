@@ -300,4 +300,5 @@ public class PatientController {
     private void handleBack() {
         MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
     }
+
 }

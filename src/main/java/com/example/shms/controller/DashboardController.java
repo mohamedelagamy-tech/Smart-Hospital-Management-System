@@ -23,9 +23,12 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
+import com.example.shms.utils.LanguageManager;
 public class DashboardController implements Initializable {
-
+    @FXML private Label systemTitle;
+    @FXML private Label subtitleLabel;
+    @FXML private Button logoutBtn;
+    @FXML private Button btnMap;
     @FXML private Label welcomeLabel;
     @FXML private Label userLabel;
     @FXML private Label roleLabel;
@@ -70,6 +73,13 @@ public class DashboardController implements Initializable {
     public void initialize(URL url,ResourceBundle rb){
 
         if (com.example.shms.utils.LanguageManager.isArabic()) {
+            systemTitle.setText("نظام إدارة المستشفى الذكي");
+
+            subtitleLabel.setText("إليك آخر المستجدات في المستشفى اليوم");
+
+            logoutBtn.setText("→ تسجيل الخروج");
+
+            btnMap.setText("🗺 خريطة المستشفى");
 
             labelMain.setText("الرئيسية");
             labelMedical.setText("طبي");
@@ -125,26 +135,59 @@ public class DashboardController implements Initializable {
         refreshThread.setDaemon(true);
         refreshThread.start();
     }
+    private void setupUserInfo() {
 
-    private void setupUserInfo(){
         String user = session.getLoggedInUser();
         String role = session.getLoggedInRole();
-        String initials = user.substring(0, Math.min(2, user.length())).toUpperCase();
+
         userLabel.setText(user);
-        roleLabel.setText(role);
-        int hour=LocalDateTime.now().getHour();
+
+        int hour = LocalDateTime.now().getHour();
+
         String greeting;
-        if(hour<12){
-            greeting="Good morning";
-        }else if(hour<17){
-            greeting="Good afternoon";
-        }else{
-            greeting="Good evening";
+
+        if (LanguageManager.isArabic()) {
+
+            if (hour < 12)
+                greeting = "صباح الخير";
+            else if (hour < 17)
+                greeting = "مساء الخير";
+            else
+                greeting = "مساء الخير";
+
+        } else {
+
+            if (hour < 12)
+                greeting = "Good morning";
+            else if (hour < 17)
+                greeting = "Good afternoon";
+            else
+                greeting = "Good evening";
         }
-        welcomeLabel.setText(greeting+", "+user+" 👋");
+
+        welcomeLabel.setText(greeting + ", " + user + " 👋");
+
+        if (LanguageManager.isArabic()) {
+            switch (role) {
+                case "ADMIN" -> roleLabel.setText("مدير");
+                case "DOCTOR" -> roleLabel.setText("طبيب");
+                case "NURSE" -> roleLabel.setText("ممرض");
+                case "RECEPTIONIST" -> roleLabel.setText("موظف استقبال");
+                default -> roleLabel.setText(role);
+            }
+        } else {
+            roleLabel.setText(role);
+        }
+
+        String[] parts = user.split(" ");
+        String initials = "";
+        for (String p : parts) {
+            if (!p.isEmpty()) {
+                initials += Character.toUpperCase(p.charAt(0));
+            }
+        }
         userInitials.setText(initials);
     }
-
     private void setupClock(){
         Timeline clock = new Timeline(new KeyFrame(Duration.seconds(1),new EventHandler<ActionEvent>() {
             @Override

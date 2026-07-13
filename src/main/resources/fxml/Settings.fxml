@@ -14,8 +14,8 @@
 
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-padding: 0 20;" styleClass="top-bar">
-            <Button onAction="#handleBack" styleClass="back-button" text="← Back"/>
-            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;" text="⚙  Settings" />
+            <Button fx:id="backBtn" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+            <Label fx:id="titleLabel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;" text="⚙  Settings" />
         </HBox>
     </top>
 
@@ -25,13 +25,13 @@
                 <VBox spacing="16" styleClass="settings-content">
 
                     <VBox spacing="16" style="-fx-padding: 20;" styleClass="card">
-                        <Label style="-fx-font-size: 14px;" styleClass="card-title" text="🎨  Appearance" />
+                        <Label fx:id="appearanceLabel" style="-fx-font-size: 14px;" styleClass="card-title" text="🎨  Appearance" />
                         <Separator />
 
                         <HBox alignment="CENTER_LEFT">
                             <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="settings-row-title" text="Theme" />
-                                <Label styleClass="muted-text" text="Choose how SHMS looks across all screens" />
+                                <Label fx:id="themeLabel" styleClass="settings-row-title" text="Theme" />
+                                <Label fx:id="themeDescLabel" styleClass="muted-text" text="Choose how SHMS looks across all screens" />
                             </VBox>
                         </HBox>
 
@@ -175,8 +175,8 @@
 
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="settings-row-title" text="Font Size" />
-                                <Label styleClass="muted-text" text="Adjust text size across the app" />
+                                <Label fx:id="fontSizeLabel" styleClass="settings-row-title" text="Font Size" />
+                                <Label fx:id="fontDescLabel" styleClass="muted-text" text="Adjust text size across the app" />
                             </VBox>
                             <ToggleButton fx:id="btnSmall" onAction="#handleFontChange" styleClass="toggle-left" text="A-">
                         <toggleGroup>
@@ -188,12 +188,12 @@
                     </VBox>
 
                     <VBox spacing="14" style="-fx-padding: 20;" styleClass="card">
-                        <Label style="-fx-font-size: 14px;" styleClass="card-title" text="🌐  Language" />
+                        <Label fx:id="languageLabel" style="-fx-font-size: 14px;" styleClass="card-title" text="🌐  Language" />
                         <Separator />
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="settings-row-title" text="Display Language" />
-                                <Label styleClass="muted-text" text="The app will reload when language changes" />
+                                <Label fx:id="displayLanguageLabel" styleClass="settings-row-title" text="Display Language" />
+                                <Label fx:id="languageDescLabel" styleClass="muted-text" text="The app will reload when language changes" />
                             </VBox>
                             <ToggleButton fx:id="btnEnglish" onAction="#handleLanguageChange" styleClass="toggle-left" text="English">
                         <toggleGroup>
@@ -204,23 +204,23 @@
                     </VBox>
 
                     <VBox spacing="14" style="-fx-padding: 20;" styleClass="card">
-                        <Label style="-fx-font-size: 14px;" styleClass="card-title" text="👤  Account" />
+                        <Label fx:id="accountLabel" style="-fx-font-size: 14px;" styleClass="card-title" text="👤  Account" />
                         <Separator />
 
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="settings-row-title" text="Change Password" />
-                                <Label styleClass="muted-text" text="Update your account password" />
+                                <Label fx:id="changePasswordLabel" styleClass="settings-row-title" text="Change Password" />
+                                <Label fx:id="changePasswordDescLabel" styleClass="muted-text" text="Update your account password" />
                             </VBox>
-                            <Button onAction="#handleChangePassword" styleClass="primary-button" text="Change →" />
+                            <Button fx:id="changePasswordBtn" onAction="#handleChangePassword" styleClass="primary-button" text="Change →" />
                         </HBox>
 
                         <Separator />
 
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="settings-row-title" text="Two-Factor Authentication" />
-                                <Label styleClass="muted-text" text="Send a verification code to your email on login" />
+                                <Label fx:id="twoFactorLabel" styleClass="settings-row-title" text="Two-Factor Authentication" />
+                                <Label fx:id="twoFactorDescLabel" styleClass="muted-text" text="Send a verification code to your email on login" />
                             </VBox>
                             <ToggleButton fx:id="btn2FA" onAction="#handle2FAToggle" styleClass="toggle-2fa" text="Enable" />
                         </HBox>

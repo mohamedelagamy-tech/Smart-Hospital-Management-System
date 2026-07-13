@@ -10,7 +10,7 @@
         <HBox alignment="CENTER_LEFT" prefHeight="54" spacing="10" style="-fx-padding: 0 20;" styleClass="top-bar">
             <ImageView fx:id="logoView" fitHeight="120" fitWidth="120" preserveRatio="true" />
             <Label style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 14px;" text="|" />
-            <Label style="-fx-font-size: 22px; -fx-text-fill: rgba(255,255,255,0.6);" text="Smart Hospital Management System" />
+            <Label fx:id="systemTitle" style="-fx-font-size: 22px; -fx-text-fill: rgba(255,255,255,0.6);" text="Smart Hospital Management System" />
             <HBox HBox.hgrow="ALWAYS" />
             <Label fx:id="clockLabel" style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.7);" />
             <Label style="-fx-text-fill: rgba(255,255,255,0.2);" text="|" />
@@ -24,7 +24,7 @@
                 </VBox>
             </HBox>
             <Button onAction="#showSettings" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 10;" text="⚙" />
-            <Button onAction="#handleLogout" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="→] Logout" />
+            <Button fx:id="logoutBtn" onAction="#handleLogout" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 5 12;" text="→] Logout" />
         </HBox>
     </top>
 
@@ -54,7 +54,7 @@
         <VBox spacing="20" style="-fx-padding: 24;" styleClass="app-background">
             <VBox spacing="3">
                 <Label fx:id="welcomeLabel" styleClass="welcome-label" text="Good morning 👋" />
-                <Label styleClass="muted-text" text="Here's what's happening at SHMS today" />
+                <Label fx:id="subtitleLabel" styleClass="muted-text" text="Here's what's happening at SHMS today" />
             </VBox>
             <HBox spacing="12">
                 <HBox alignment="CENTER_LEFT" prefHeight="86" spacing="14" style="-fx-padding: 16;" styleClass="card" HBox.hgrow="ALWAYS">

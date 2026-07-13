@@ -10,6 +10,11 @@ import javafx.scene.layout.VBox;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.TextStyle;
+import java.util.Locale;
+import com.example.shms.utils.LanguageManager;
+import javafx.scene.control.Button;
+
 
 public class CalendarController {
     @FXML
@@ -20,15 +25,63 @@ public class CalendarController {
     private com.example.shms.database.DatabaseManager db = com.example.shms.database.DatabaseManager.getInstance();
     private java.time.LocalDate currentMonth = java.time.LocalDate.now().withDayOfMonth(1);
     private String currentFilter="All";
+    @FXML private Button backBtn;
+
+    @FXML private Label titleLabel;
+    @FXML private Label statusLabel;
+
+    @FXML private Button allBtn;
+    @FXML private Button scheduledBtn;
+    @FXML private Button completedBtn;
+    @FXML private Button cancelledBtn;
+
+    @FXML private Label sunLabel;
+    @FXML private Label monLabel;
+    @FXML private Label tueLabel;
+    @FXML private Label wedLabel;
+    @FXML private Label thuLabel;
+    @FXML private Label friLabel;
+    @FXML private Label satLabel;
+
     @FXML
     public void initialize() {
+
+        if (LanguageManager.isArabic()) {
+
+            backBtn.setText("→ رجوع");
+
+            titleLabel.setText("تقويم المواعيد");
+
+            statusLabel.setText("الحالة");
+
+            allBtn.setText("الكل");
+            scheduledBtn.setText("مجدول");
+            completedBtn.setText("مكتمل");
+            cancelledBtn.setText("ملغي");
+
+            sunLabel.setText("الأحد");
+            monLabel.setText("الاثنين");
+            tueLabel.setText("الثلاثاء");
+            wedLabel.setText("الأربعاء");
+            thuLabel.setText("الخميس");
+            friLabel.setText("الجمعة");
+            satLabel.setText("السبت");
+        }
+
         loadCalendar();
     }
 
     private void loadCalendar() {
         calendarGrid.getChildren().clear();
-        String month = currentMonth.getMonth().toString();
-        monthLabel.setText(month.charAt(0) + month.substring(1).toLowerCase() + " " + currentMonth.getYear());
+
+        Locale locale = LanguageManager.isArabic()
+                ? new Locale("ar")
+                : Locale.ENGLISH;
+
+        String month = currentMonth.getMonth()
+                .getDisplayName(TextStyle.FULL, locale);
+
+        monthLabel.setText(month + " " + currentMonth.getYear());
         int dow = currentMonth.withDayOfMonth(1).getDayOfWeek().getValue();
         int firstDay = dow == 7 ? 0 : dow;
         int daysInMonth = currentMonth.lengthOfMonth();
@@ -83,7 +136,27 @@ public class CalendarController {
                         color = "#FCEBEB";
                         textColor = "#791F1F";
                     }
-                    Label pill = new Label(a.getTime().toString().substring(0, 5) + " " + a.getStatus());
+                    String status = a.getStatus();
+
+                    if (com.example.shms.utils.LanguageManager.isArabic()) {
+                        switch (status) {
+                            case "Scheduled":
+                                status = "مجدول";
+                                break;
+                            case "Completed":
+                                status = "مكتمل";
+                                break;
+                            case "Cancelled":
+                                status = "ملغي";
+                                break;
+                        }
+                    }
+
+                    Label pill = new Label(
+                            a.getTime().toString().substring(0, 5)
+                                    + " "
+                                    + translateStatus(a.getStatus())
+                    );
                     pill.setStyle("-fx-background-color:" + color + "; -fx-text-fill:" + textColor + ";-fx-background-radius:99; -fx-padding:2 6;" + "-fx-font-size:10; -fx-font-weight:bold;");
                     cell.getChildren().add(pill);
                 }
@@ -126,7 +199,19 @@ public class CalendarController {
         currentMonth = currentMonth.plusMonths(1);
         loadCalendar();
     }
+    private String translateStatus(String status) {
 
+        if (!LanguageManager.isArabic()) {
+            return status;
+        }
+
+        return switch (status) {
+            case "Scheduled" -> "مجدول";
+            case "Completed" -> "مكتمل";
+            case "Cancelled" -> "ملغي";
+            default -> status;
+        };
+    }
     @FXML
     private void handleBack() {
         MainApp.navigateTo(SessionManager.getInstance().getDashboardName(),1200,700);
