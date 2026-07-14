@@ -12,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import java.util.List;
+import com.example.shms.utils.LanguageManager;
+import javafx.scene.control.Button;
 
 public class PrescriptionController {
 
@@ -32,6 +34,10 @@ public class PrescriptionController {
     @FXML private VBox patientViewPane;
     @FXML private TextField patientSearchField;
     @FXML private VBox addFormPane;
+    @FXML private Button backBtn;
+    @FXML private Label titleLabel;
+    @FXML private Label addPrescriptionLabel;
+    @FXML private Button addPrescriptionBtn;
 
     private final ObservableList<Prescription> allPrescriptions = FXCollections.observableArrayList();
     private final DatabaseManager db = DatabaseManager.getInstance();
@@ -48,17 +54,58 @@ public class PrescriptionController {
             showDoctorView();
             loadFromDatabase();
         }
+if (LanguageManager.isArabic()) {
+    titleLabel.setText("الوصفات الطبية");
+
+    backBtn.setText("→ رجوع");
+
+    addPrescriptionLabel.setText("إضافة وصفة جديدة");
+
+    patientIdField.setPromptText("رقم المريض");
+
+    medicineNameField.setPromptText("اسم الدواء");
+
+    dosageField.setPromptText("الجرعة");
+
+    durationField.setPromptText("مدة العلاج");
+
+    instructionsField.setPromptText("التعليمات");
+
+    addPrescriptionBtn.setText("➕ إضافة الوصفة");
+
+    colId.setText("الرقم");
+
+    colPatient.setText("المريض");
+
+    colDoctor.setText("الطبيب");
+
+    colMedicine.setText("الدواء");
+
+    colDosage.setText("الجرعة");
+
+    colDuration.setText("المدة");
+
+    colInstructions.setText("التعليمات");
+}
     }
     private void setupTableColumns() {
         colId.setCellValueFactory(cell ->
                 new SimpleStringProperty("RX-" + String.format("%03d", cell.getValue().getId())));
         colPatient.setCellValueFactory(cell -> {
             String name = db.getPatientName(cell.getValue().getPatientId());
-            return new SimpleStringProperty(name != null ? name : "Unknown");
+            return new SimpleStringProperty(
+                    name != null
+                            ? name
+                            : (LanguageManager.isArabic() ? "غير معروف" : "Unknown")
+            );
         });
         colDoctor.setCellValueFactory(cell -> {
             String name = db.getDoctorName(cell.getValue().getDoctorId());
-            return new SimpleStringProperty(name != null ? name : "—");
+            return new SimpleStringProperty(
+                    name != null
+                            ? name
+                            : (LanguageManager.isArabic() ? "—" : "—")
+            );
         });
         colMedicine.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getMedicineName()));
         colDosage.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getDosage()));
@@ -80,16 +127,28 @@ public class PrescriptionController {
         List<Prescription> list = db.getAllPrescriptions();
         if(list != null) allPrescriptions.addAll(list);
     }
-    private void loadPatientPrescriptions(){
-        String username = SessionManager.getInstance().getLoggedInUser();
-        try(java.sql.Statement st=db.getConnection().createStatement()){
-            java.sql.ResultSet rs=st.executeQuery("SELECT id, name FROM patients WHERE username = '"+username+"' LIMIT 1");
-            if(!rs.next()) return;
-            int patientId = rs.getInt("id");
-            String name = rs.getString("name");
-            patientNameLabel.setText("Showing prescriptions for: "+name);
-            prescriptionTable.setItems(FXCollections.observableArrayList(db.getPrescriptionsByPatient(patientId)));
-        }catch(Exception e){
+    private void loadPatientPrescriptions() {
+        try {
+            int patientId = com.example.shms.utils.SessionManager
+                    .getInstance().getLoggedInPatientId();
+
+            if (patientId == -1) {
+                System.out.println("No patient ID in session");
+                return;
+            }
+
+            String name = db.getPatientName(patientId);
+            if (com.example.shms.utils.LanguageManager.isArabic()) {
+                patientNameLabel.setText("الوصفات الخاصة بالمريض: " + name);
+            } else {
+                patientNameLabel.setText("Showing prescriptions for: " + name);
+            }
+
+            prescriptionTable.setItems(
+                    FXCollections.observableArrayList(
+                            db.getPrescriptionsByPatient(patientId)));
+
+        } catch (Exception e) {
             System.out.println("Patient prescriptions load failed: " + e.getMessage());
         }
     }
@@ -101,14 +160,30 @@ public class PrescriptionController {
         String duration = durationField.getText().trim();
         String instructions = instructionsField.getText().trim();
         if(patientIdText.isEmpty() || medicine.isEmpty() || dosage.isEmpty() || duration.isEmpty() || instructions.isEmpty()){
-            showAlert(Alert.AlertType.WARNING, "Missing Fields","All fields are required.");
+            if (LanguageManager.isArabic()) {
+                showAlert(Alert.AlertType.WARNING,
+                        "حقول ناقصة",
+                        "يرجى إدخال جميع البيانات.");
+            } else {
+                showAlert(Alert.AlertType.WARNING,
+                        "Missing Fields",
+                        "All fields are required.");
+            }
             return;
         }
         int patientId;
         try{
             patientId = Integer.parseInt(patientIdText);
         }catch(NumberFormatException e){
-            showAlert(Alert.AlertType.ERROR, "Invalid Input","Patient ID must be a number.");
+            if (LanguageManager.isArabic()) {
+                showAlert(Alert.AlertType.ERROR,
+                        "بيانات غير صحيحة",
+                        "رقم المريض يجب أن يكون رقماً.");
+            } else {
+                showAlert(Alert.AlertType.ERROR,
+                        "Invalid Input",
+                        "Patient ID must be a number.");
+            }
             return;
         }
         int doctorId=0;

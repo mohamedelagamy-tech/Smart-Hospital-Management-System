@@ -10,11 +10,18 @@ public class SessionManager {
     private String pendingUsername;
     private String pendingRole;
     private String pendingEmail;
+    private int loggedInPatientId = -1;
 
     private SessionManager(){
         loginAttempts=0;
     }
+    public int getLoggedInPatientId() {
+        return loggedInPatientId;
+    }
 
+    public void setLoggedInPatientId(int patientId) {
+        this.loggedInPatientId = patientId;
+    }
     public static SessionManager getInstance(){
         if(instance==null){
             instance=new SessionManager();

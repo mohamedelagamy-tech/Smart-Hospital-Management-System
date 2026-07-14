@@ -3,43 +3,58 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="700" prefWidth="1200" styleClass="app-background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PrescriptionController">
+<BorderPane prefHeight="700" prefWidth="1200" styleClass="app-background" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shms.controller.PrescriptionController">
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0"
               spacing="10" styleClass="top-bar">
-            <Button onAction="#handleBack" styleClass="back-button" text="← Back"/>
-            <Label styleClass="top-bar-title" style="-fx-font-size:24;" text="Prescriptions " />
+            <Button fx:id="backBtn" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+            <Label fx:id="titleLabel" styleClass="top-bar-title" style="-fx-font-size:24;" text="Prescriptions "/>
         </HBox>
     </top>
     <center>
         <VBox spacing="16" style="-fx-padding: 24;">
             <VBox fx:id="addFormPane" spacing="12" styleClass="card" style="-fx-padding: 20;">
-                <Label styleClass="card-title" text="Add New Prescription" />
+                <Label fx:id="addPrescriptionLabel" styleClass="card-title" text="Add New Prescription"/>
                 <HBox spacing="12">
-                    <TextField fx:id="patientIdField" prefHeight="38" promptText="Patient ID" styleClass="text-field" style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;" HBox.hgrow="ALWAYS" />
-                    <TextField fx:id="medicineNameField" prefHeight="38" promptText="Medicine Name" styleClass="text-field" style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;" HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="patientIdField" prefHeight="38" promptText="Patient ID" styleClass="text-field"
+                               style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;"
+                               HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="medicineNameField" prefHeight="38" promptText="Medicine Name"
+                               styleClass="text-field"
+                               style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;"
+                               HBox.hgrow="ALWAYS"/>
                 </HBox>
                 <HBox spacing="12">
-                    <TextField fx:id="dosageField" prefHeight="38" promptText="Dosage" styleClass="text-field" style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;" HBox.hgrow="ALWAYS" />
-                    <TextField fx:id="durationField" prefHeight="38" promptText="Duration" styleClass="text-field" style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;" HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="dosageField" prefHeight="38" promptText="Dosage" styleClass="text-field"
+                               style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;"
+                               HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="durationField" prefHeight="38" promptText="Duration" styleClass="text-field"
+                               style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;"
+                               HBox.hgrow="ALWAYS"/>
                 </HBox>
-                <TextArea fx:id="instructionsField" prefHeight="70" promptText="Instructions" styleClass="text-field" style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;" />
-                <Button onAction="#handleAddPrescription" prefHeight="38" styleClass="primary-button" style="-fx-padding: 0 20;" text="➕  Add Prescription" />
+                <TextArea fx:id="instructionsField" prefHeight="70" promptText="Instructions" styleClass="text-field"
+                          style="-fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px;"/>
+                <Button fx:id="addPrescriptionBtn" onAction="#handleAddPrescription" prefHeight="38"
+                        styleClass="primary-button" style="-fx-padding: 0 20;" text="➕  Add Prescription"/>
             </VBox>
-            <VBox fx:id="patientViewPane" managed="false" spacing="6" styleClass="card" style="-fx-padding: 20;" visible="false">
-                <Label styleClass="card-title" text="Your Prescriptions" />
-                <Label fx:id="patientNameLabel" styleClass="muted-text" />
+            <VBox fx:id="patientViewPane" managed="false" spacing="6" styleClass="card" style="-fx-padding: 20;"
+                  visible="false">
+                <Label styleClass="card-title" text="Your Prescriptions"/>
+                <Label fx:id="patientNameLabel" styleClass="muted-text"/>
             </VBox>
             <VBox styleClass="card" VBox.vgrow="ALWAYS">
-                <TableView fx:id="prescriptionTable" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                <TableView fx:id="prescriptionTable"
+                           style="-fx-background-color: transparent; -fx-border-color: transparent;"
+                           VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colId" prefWidth="90" text="ID" />
-                        <TableColumn fx:id="colPatient" prefWidth="160" text="Patient" />
-                        <TableColumn fx:id="colDoctor" prefWidth="150" text="Doctor" />
-                        <TableColumn fx:id="colMedicine" prefWidth="140" text="Medicine" />
-                        <TableColumn fx:id="colDosage" prefWidth="90" text="Dosage" />
-                        <TableColumn fx:id="colDuration" prefWidth="90" text="Duration" />
-                        <TableColumn fx:id="colInstructions" prefWidth="260" text="Instructions" />
+                        <TableColumn fx:id="colId" prefWidth="90" text="ID"/>
+                        <TableColumn fx:id="colPatient" prefWidth="160" text="Patient"/>
+                        <TableColumn fx:id="colDoctor" prefWidth="150" text="Doctor"/>
+                        <TableColumn fx:id="colMedicine" prefWidth="140" text="Medicine"/>
+                        <TableColumn fx:id="colDosage" prefWidth="90" text="Dosage"/>
+                        <TableColumn fx:id="colDuration" prefWidth="90" text="Duration"/>
+                        <TableColumn fx:id="colInstructions" prefWidth="260" text="Instructions"/>
                     </columns>
                 </TableView>
             </VBox>

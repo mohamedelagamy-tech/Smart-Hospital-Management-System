@@ -400,7 +400,7 @@ public class DashboardController implements Initializable {
     @FXML
     private void showPrescriptions(){
         setActiveButton(btnPrescriptions);
-        MainApp.navigateTo("Prescription",1200,700);
+        MainApp.navigateTo("PrescriptionScreen",1200,700);
     }
     @FXML
     private void showEmergency(){
