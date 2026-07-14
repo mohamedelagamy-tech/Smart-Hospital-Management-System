@@ -692,8 +692,7 @@ public class DatabaseManager {
                     "username TEXT PRIMARY KEY," +
                     "twoFactorEnabled INTEGER DEFAULT 0," +
                     "theme TEXT DEFAULT 'light'," +
-                    "language TEXT DEFAULT 'en'," +
-                    "fontSize TEXT DEFAULT 'medium')");
+                    "language TEXT DEFAULT 'en')");
 
             st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Amoxicillin 500mg','Antibiotic','Capsules',320,50,12.50,'2027-03-15','In Stock')");
             st.execute("INSERT OR IGNORE INTO medications (name,category,form,stock,minStock,unitPrice,expiryDate,status) VALUES ('Metformin 850mg','Diabetes','Tablets',18,50,8.00,'2026-08-20','Low Stock')");

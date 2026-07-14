@@ -37,13 +37,11 @@ public class MainApp extends Application {
             Scene scene = new Scene(loader.load(), width, height);
             ThemeManager.applyCurrentPreferences(scene);
 
-            // Apply RTL if Arabic
             if ("Arabic".equals(com.example.shms.utils.UserPreferences.getLanguage())) {
                 scene.getRoot().setNodeOrientation(
                         javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
             }
 
-            // Apply translations
             Object controller = loader.getController();
             if (controller instanceof com.example.shms.utils.Translatable) {
                 ((com.example.shms.utils.Translatable) controller).applyTranslations();

@@ -34,8 +34,8 @@
             <Button fx:id="btnDashboard" maxWidth="Infinity" onAction="#showDashboard" styleClass="nav-button-active" text="🏠  Dashboard" />
             <Button fx:id="btnPatients" maxWidth="Infinity" onAction="#showPatients" styleClass="nav-button" text="👥  Patients" />
             <Button fx:id="btnDoctors" maxWidth="Infinity" onAction="#showDoctors" styleClass="nav-button" text="👨‍⚕️  Doctors" />
-            <Button fx:id="btnAppointments" maxWidth="Infinity" onAction="#showAppointments" styleClass="nav-button" text="📅  Appointments" />
-            <Button fx:id="btnCalendar" maxWidth="Infinity" onAction="#showCalendar" styleClass="nav-button" text="🗓️  Calendar" />
+            <Button fx:id="btnAppointments" maxWidth="Infinity" onAction="#showAppointments" styleClass="nav-button" text="📅   Appointments" />
+            <Button fx:id="btnCalendar" maxWidth="Infinity" onAction="#showCalendar" styleClass="nav-button" text="🗓   Calendar" />
             <Label fx:id="labelMedical" styleClass="section-label" text="MEDICAL" />
             <Button fx:id="btnRecords" maxWidth="Infinity" onAction="#showRecords" styleClass="nav-button" text="📋  Medical Records" />
             <Button fx:id="btnPrescriptions" maxWidth="Infinity" onAction="#showPrescriptions" styleClass="nav-button" text="💊  Prescriptions" />

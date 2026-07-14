@@ -34,15 +34,7 @@ public class UserPreferences {
     public static String getLanguage(){
         return props.getProperty("language","English");
     }
-    private static String fontSize = "medium";
 
-    public static String getFontSize() {
-        return fontSize;
-    }
-
-    public static void setFontSize(String size) {
-        fontSize = size;
-    }
     public static void setTheme(String theme){
         props.setProperty("theme", theme);
         save();

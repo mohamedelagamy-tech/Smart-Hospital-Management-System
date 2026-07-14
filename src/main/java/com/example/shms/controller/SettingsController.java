@@ -1,6 +1,7 @@
 package com.example.shms.controller;
 
 import com.example.shms.MainApp;
+import com.example.shms.database.DatabaseManager;
 import com.example.shms.utils.SessionManager;
 import com.example.shms.utils.ThemeManager;
 import com.example.shms.utils.UserPreferences;
@@ -12,9 +13,6 @@ import com.example.shms.utils.LanguageManager;
 import javafx.scene.control.Label;
 public class SettingsController {
 
-    @FXML private ToggleButton btnSmall;
-    @FXML private ToggleButton btnMedium;
-    @FXML private ToggleButton btnLarge;
     @FXML private ToggleButton btnLight;
     @FXML private ToggleButton btnDark;
     @FXML private ToggleButton btnHighContrast;
@@ -33,8 +31,6 @@ public class SettingsController {
     @FXML private Label themeLabel;
     @FXML private Label appearanceLabel;
     @FXML private Label themeDescLabel;
-    @FXML private Label fontSizeLabel;
-    @FXML private Label fontDescLabel;
     @FXML private Label languageLabel;
     @FXML private Label displayLanguageLabel;
     @FXML private Label languageDescLabel ;
@@ -44,7 +40,7 @@ public class SettingsController {
     @FXML private Label twoFactorLabel;
     @FXML private Label twoFactorDescLabel;
 
-
+    private final DatabaseManager db = DatabaseManager.getInstance();
 
 
     @FXML public void initialize() {
@@ -58,28 +54,13 @@ public class SettingsController {
             case "sand": btnSand.setSelected(true);highlightTheme(btnSand);break;
             default: btnLight.setSelected(true);highlightTheme(btnLight);break;
         }
-        switch(UserPreferences.getFontSize()){
-            case "small":
-                btnSmall.setSelected(true);
-                break;
 
-            case "large":
-                btnLarge.setSelected(true);
-                break;
-
-            default:
-                btnMedium.setSelected(true);
-                break;
-        }
         if(UserPreferences.getLanguage().equals("Arabic")){
             titleLabel.setText("⚙ الإعدادات");
 
             appearanceLabel.setText("🎨 المظهر");
             themeLabel.setText("السمة");
             themeDescLabel.setText("اختر مظهر النظام في جميع الصفحات");
-
-            fontSizeLabel.setText("حجم الخط");
-            fontDescLabel.setText("تغيير حجم الخط في النظام");
 
             languageLabel.setText("🌐 اللغة");
             displayLanguageLabel.setText("لغة العرض");
@@ -114,6 +95,19 @@ public class SettingsController {
 
             btn2FA.setText("تفعيل");
 
+        }
+        String username=SessionManager.getInstance().getLoggedInUser();
+        boolean twoFAEnabled=db.isTwoFactorEnabled(username);
+        btn2FA.setSelected(twoFAEnabled);
+        if(twoFAEnabled){
+            btn2FA.setText("Enabled ✓");
+            btn2FA.setStyle("-fx-background-color: #E8F5E9; -fx-text-fill: #2E7D32; -fx-font-size: 12px; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #4CAF50; -fx-border-width: 1;");
+        }
+
+        String role=SessionManager.getInstance().getLoggedInRole();
+        if(!role.equals("PATIENT")){
+            btn2FA.setVisible(false);
+            btn2FA.setManaged(false);
         }
     }
 
@@ -157,19 +151,7 @@ public class SettingsController {
         }
         ThemeManager.applyTheme(theme);
     }
-    @FXML
-    private void handleFontChange() {
 
-        String size = "medium";
-
-        if (btnSmall.isSelected()) {
-            size = "small";
-        } else if (btnLarge.isSelected()) {
-            size = "large";
-        }
-
-        ThemeManager.applyFontSize(size);
-    }
     @FXML
     private void handleLanguageChange() {
         boolean isArabic = btnArabic.isSelected();
@@ -192,10 +174,15 @@ public class SettingsController {
     }
 
     @FXML private void handle2FAToggle() {
-        if(btn2FA.isSelected()){
+        String username=SessionManager.getInstance().getLoggedInUser();
+        boolean enabled=btn2FA.isSelected();
+        db.setTwoFactorEnabled(username, enabled);
+        if(enabled){
             btn2FA.setText("Enabled ✓");
+            btn2FA.setStyle("-fx-background-color: #E8F5E9; -fx-text-fill: #2E7D32; -fx-font-size: 12px; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #4CAF50; -fx-border-width: 1;");
         }else {
             btn2FA.setText("Enable");
+            btn2FA.setStyle("-fx-background-color: white; -fx-text-fill: #555; -fx-font-size: 12px; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 8 16; -fx-border-color: #EEEEEE; -fx-border-width: 1;");
         }
     }
 
