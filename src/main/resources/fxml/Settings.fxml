@@ -204,7 +204,7 @@
 
                         <Separator />
 
-                        <HBox alignment="CENTER_LEFT" spacing="12">
+                        <HBox fx:id="twoFARow" alignment="CENTER_LEFT" spacing="12">
                             <VBox spacing="3" HBox.hgrow="ALWAYS">
                                 <Label fx:id="twoFactorLabel" styleClass="settings-row-title" text="Two-Factor Authentication" />
                                 <Label fx:id="twoFactorDescLabel" styleClass="muted-text" text="Send a verification code to your email on login" />

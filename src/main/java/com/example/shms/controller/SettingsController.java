@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import com.example.shms.utils.LanguageManager;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+
 public class SettingsController {
 
     @FXML private ToggleButton btnLight;
@@ -39,6 +41,7 @@ public class SettingsController {
     @FXML private Label changePasswordDescLabel;
     @FXML private Label twoFactorLabel;
     @FXML private Label twoFactorDescLabel;
+    @FXML private HBox twoFARow;
 
     private final DatabaseManager db = DatabaseManager.getInstance();
 
@@ -105,9 +108,9 @@ public class SettingsController {
         }
 
         String role=SessionManager.getInstance().getLoggedInRole();
-        if(!role.equals("PATIENT")){
-            btn2FA.setVisible(false);
-            btn2FA.setManaged(false);
+        if (!role.equals("PATIENT")) {
+            twoFARow.setVisible(false);
+            twoFARow.setManaged(false);
         }
     }
 
