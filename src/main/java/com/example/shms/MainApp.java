@@ -22,11 +22,10 @@ public class MainApp extends Application {
         com.example.shms.utils.LanguageManager.setLanguage(
                 com.example.shms.utils.UserPreferences.getLanguage());
         stage.setTitle("Hospital management system");
-        navigateTo("login", 900, 600);
+        navigateTo("login",900,600);
         stage.show();
         MedicineReminderUtil.showReminders();
     }
-
     public static void navigateTo(String fxmlFile, int width, int height) {
         try {
             if (primaryStage == null) {
@@ -38,11 +37,13 @@ public class MainApp extends Application {
             Scene scene = new Scene(loader.load(), width, height);
             ThemeManager.applyCurrentPreferences(scene);
 
+            // Apply RTL if Arabic
             if ("Arabic".equals(com.example.shms.utils.UserPreferences.getLanguage())) {
                 scene.getRoot().setNodeOrientation(
                         javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
             }
 
+            // Apply translations
             Object controller = loader.getController();
             if (controller instanceof com.example.shms.utils.Translatable) {
                 ((com.example.shms.utils.Translatable) controller).applyTranslations();
@@ -57,5 +58,4 @@ public class MainApp extends Application {
             System.out.println("Error navigating to " + fxmlFile + ": " + e.getMessage());
             e.printStackTrace();
         }
-    }
-}
+    }}

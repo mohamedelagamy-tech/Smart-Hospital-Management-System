@@ -12,6 +12,9 @@ import com.example.shms.utils.LanguageManager;
 import javafx.scene.control.Label;
 public class SettingsController {
 
+    @FXML private ToggleButton btnSmall;
+    @FXML private ToggleButton btnMedium;
+    @FXML private ToggleButton btnLarge;
     @FXML private ToggleButton btnLight;
     @FXML private ToggleButton btnDark;
     @FXML private ToggleButton btnHighContrast;
@@ -55,7 +58,19 @@ public class SettingsController {
             case "sand": btnSand.setSelected(true);highlightTheme(btnSand);break;
             default: btnLight.setSelected(true);highlightTheme(btnLight);break;
         }
+        switch(UserPreferences.getFontSize()){
+            case "small":
+                btnSmall.setSelected(true);
+                break;
 
+            case "large":
+                btnLarge.setSelected(true);
+                break;
+
+            default:
+                btnMedium.setSelected(true);
+                break;
+        }
         if(UserPreferences.getLanguage().equals("Arabic")){
             titleLabel.setText("⚙ الإعدادات");
 
@@ -142,7 +157,19 @@ public class SettingsController {
         }
         ThemeManager.applyTheme(theme);
     }
+    @FXML
+    private void handleFontChange() {
 
+        String size = "medium";
+
+        if (btnSmall.isSelected()) {
+            size = "small";
+        } else if (btnLarge.isSelected()) {
+            size = "large";
+        }
+
+        ThemeManager.applyFontSize(size);
+    }
     @FXML
     private void handleLanguageChange() {
         boolean isArabic = btnArabic.isSelected();

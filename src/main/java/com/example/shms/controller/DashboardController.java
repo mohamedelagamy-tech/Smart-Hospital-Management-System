@@ -24,6 +24,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import com.example.shms.utils.LanguageManager;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class DashboardController implements Initializable {
     @FXML private Label systemTitle;
     @FXML private Label subtitleLabel;
@@ -61,6 +66,15 @@ public class DashboardController implements Initializable {
     @FXML private Button btnCalendar;
     @FXML private ImageView logoView;
     @FXML private Button btnStatistics;
+    @FXML private Label lblPatients;
+    @FXML private Label lblDoctors;
+    @FXML private Label lblAppointments;
+    @FXML private Label lblRooms;
+
+    @FXML private Label lblRevenue;
+    @FXML private Label lblOutstanding;
+    @FXML private Label lblEmergency;
+    @FXML private Label lblPrescriptions;
     @FXML
     private void handleBack() {
         MainApp.navigateTo("dashboard", 1200, 700);
@@ -73,6 +87,15 @@ public class DashboardController implements Initializable {
     public void initialize(URL url,ResourceBundle rb){
 
         if (com.example.shms.utils.LanguageManager.isArabic()) {
+            lblPatients.setText("إجمالي المرضى");
+            lblDoctors.setText("الأطباء المناوبون");
+            lblAppointments.setText("المواعيد المجدولة");
+            lblRooms.setText("الغرف المتاحة");
+
+            lblRevenue.setText("إجمالي الإيرادات");
+            lblOutstanding.setText("المبالغ المستحقة");
+            lblEmergency.setText("حالات الطوارئ");
+            lblPrescriptions.setText("الوصفات النشطة");
             systemTitle.setText("نظام إدارة المستشفى الذكي");
 
             subtitleLabel.setText("إليك آخر المستجدات في المستشفى اليوم");
@@ -188,15 +211,52 @@ public class DashboardController implements Initializable {
         }
         userInitials.setText(initials);
     }
-    private void setupClock(){
-        Timeline clock = new Timeline(new KeyFrame(Duration.seconds(1),new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String time = LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("EEE dd MMM  •  hh:mm a"));
-                clockLabel.setText(time);
-            }
-        }));
+    private void setupClock() {
+
+        Timeline clock = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> {
+
+                    LocalDateTime now = LocalDateTime.now();
+
+                    DateTimeFormatter formatter;
+
+                    if (LanguageManager.isArabic()) {
+
+                        formatter = DateTimeFormatter.ofPattern(
+                                "EEEE dd MMMM • hh:mm a",
+                                new Locale("ar")
+                        );
+
+                    } else {
+
+                        formatter = DateTimeFormatter.ofPattern(
+                                "EEE dd MMM • hh:mm a",
+                                Locale.ENGLISH
+                        );
+                    }
+
+                    String text = now.format(formatter);
+
+                    if (LanguageManager.isArabic()) {
+                        text = text
+                                .replace("0","٠")
+                                .replace("1","١")
+                                .replace("2","٢")
+                                .replace("3","٣")
+                                .replace("4","٤")
+                                .replace("5","٥")
+                                .replace("6","٦")
+                                .replace("7","٧")
+                                .replace("8","٨")
+                                .replace("9","٩")
+                                .replace("AM"," ص ")
+                                .replace("PM"," م ");
+                    }
+
+                    clockLabel.setText(text);
+                })
+        );
+
         clock.setCycleCount(Timeline.INDEFINITE);
         clock.play();
     }
@@ -340,7 +400,7 @@ public class DashboardController implements Initializable {
     @FXML
     private void showPrescriptions(){
         setActiveButton(btnPrescriptions);
-        MainApp.navigateTo("PrescriptionScreen",1200,700);
+        MainApp.navigateTo("Prescription",1200,700);
     }
     @FXML
     private void showEmergency(){

@@ -13,10 +13,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import java.util.List;
+import com.example.shms.utils.LanguageManager;
 
 public class MedicalRecordsController {
 
     @FXML private TextField searchField;
+    @FXML private Button backBtn;
+    @FXML private Label titleLabel;
     @FXML private TableView<MedicalRecord> recordsTable;
     @FXML private TableColumn<MedicalRecord,String> colNumber;
     @FXML private TableColumn<MedicalRecord,String> colPatient;
@@ -30,9 +33,29 @@ public class MedicalRecordsController {
     private final DatabaseManager db=DatabaseManager.getInstance();
 
     @FXML
-    private void initialize(){
+    private void initialize() {
+
+        if (LanguageManager.isArabic()) {
+
+            titleLabel.setText("السجلات الطبية");
+            backBtn.setText("→ رجوع");
+
+            searchField.setPromptText(
+                    "ابحث باسم المريض أو الطبيب أو التشخيص..."
+            );
+
+            colNumber.setText("#");
+            colPatient.setText("المريض");
+            colDoctor.setText("الطبيب");
+            colDate.setText("التاريخ");
+            colDiagnosis.setText("التشخيص");
+            colTreatment.setText("العلاج");
+            colStatus.setText("الحالة");
+        }
+
         setupColumns();
         loadFromDatabase();
+
         recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         recordsTable.setFixedCellSize(52);
     }
@@ -62,7 +85,26 @@ public class MedicalRecordsController {
                     setGraphic(null);
                     return;
                 }
-                Label badge=new Label(status);
+                String text = status;
+
+                if (LanguageManager.isArabic()) {
+
+                    switch (status) {
+                        case "Active":
+                            text = "نشط";
+                            break;
+
+                        case "Completed":
+                            text = "مكتمل";
+                            break;
+
+                        case "Follow-up":
+                            text = "متابعة";
+                            break;
+                    }
+                }
+
+                Label badge = new Label(text);
                 badge.setPadding(new Insets(3,10,3,10));
                 badge.setStyle(badgeStyle(status));
                 setGraphic(badge);

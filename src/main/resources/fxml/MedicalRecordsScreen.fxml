@@ -8,8 +8,8 @@
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="900.0"
               spacing="10" styleClass="top-bar">
-            <Button onAction="#handleBack" styleClass="back-button" text="← Back"/>
-            <Label styleClass="top-bar-title" style="-fx-font-size:24;" text="Medical Records" />
+            <Button fx:id="backBtn" onAction="#handleBack" styleClass="back-button" text="← Back"/>
+            <Label fx:id="titleLabel" styleClass="top-bar-title" style="-fx-font-size:24;" text="Medical Records" />
         </HBox>
     </top>
 

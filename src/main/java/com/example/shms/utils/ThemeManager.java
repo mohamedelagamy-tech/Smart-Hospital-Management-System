@@ -35,7 +35,10 @@ public class ThemeManager {
 
         UserPreferences.setTheme(theme);
     }
+    public static void applyFontSize(String size) {
+        UserPreferences.setFontSize(size);
 
+    }
     public static void applyCurrentPreferences(Scene scene){
         currentScene = scene;
         applyTheme(UserPreferences.getTheme());
